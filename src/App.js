@@ -34,8 +34,8 @@ class App extends Component {
       });
   }
   axiosConvert(amount, fromRate, toRate) {
-    const fromRateValue = this.state[fromRate];
-    const toRateValue = this.state.rate[toRate];
+    const fromRateValue = this.state.rates[fromRate];
+    const toRateValue = this.state.rates[toRate];
     console.log("fromRateValue:" + fromRateValue);
     console.log("toRateValue:" + toRateValue);
     if (fromRate === "EUR") {
