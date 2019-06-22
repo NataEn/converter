@@ -15,6 +15,8 @@ class App extends Component {
     this.axios = axios.create({
       baseURL: "http://data.fixer.io/api/"
     });
+
+    this.axiosConvert = this.axiosConvert.bind(this);
   }
 
   componentDidMount() {
