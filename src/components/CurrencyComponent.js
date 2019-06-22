@@ -23,10 +23,10 @@ class Currency extends Component {
       this.state.toRate
     );
     console.log("calculated currency is:" + answer);
-    if (+answer) {
-      this.setState({ converted: answer });
+    if (+answer < 0) {
+      this.setState({ converted: "not a valid convertion" });
     } else {
-      this.setState({ converted: "" });
+      this.setState({ converted: answer });
     }
   }
 
@@ -52,38 +52,45 @@ class Currency extends Component {
     return (
       <div>
         <form onSubmit={values => this.onFormSubmit(values)}>
-          <label htmlFor="baseAmount">convert </label>
-          <input
-            type="number"
-            onChange={this.handleInputChange}
-            id="baseAmount"
-            name="baseAmount"
-          />{" "}
-          <label htmlFor="baseRate">from rate </label>
+          <label htmlFor="baseRate">Base Rate </label>
           <select
             id="baseRate"
             name="baseRate"
             onChange={this.handleInputChange}
             value={this.state.baseRate}
           >
-            <option value="" />
+            <option value="">I Have</option>
             {this.props.rates.map(rate => (
               <option key={rate}>{rate}</option>
             ))}
           </select>
-          <label htmlFor="toRate">to rate </label>
+          <label htmlFor="toRate">Convertion Rate </label>
           <select
             id="toRate"
             name="toRate"
             onChange={this.handleInputChange}
             value={this.state.toRate}
           >
-            <option value="" />
+            <option value="">I Want</option>
             {this.props.rates.map(rate => (
               <option key={rate}>{rate}</option>
             ))}
           </select>
-          <p>result = {this.state.converted}</p>
+          <br />
+          <label htmlFor="baseAmount">convert </label>
+          <input
+            type="number"
+            min="0"
+            max="1000"
+            onChange={this.handleInputChange}
+            id="baseAmount"
+            name="baseAmount"
+          />{" "}
+          {this.state.baseRate}
+          <span>
+            {" "}
+            to {this.state.toRate}is= {this.state.converted} {this.state.toRate}
+          </span>
           <br />
           <button type="submit">Calculate</button>
         </form>
