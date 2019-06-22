@@ -66,6 +66,7 @@ class Currency extends Component {
             onChange={this.handleInputChange}
             value={this.state.baseRate}
           >
+            <option value="" />
             {this.props.rates.map(rate => (
               <option key={rate}>{rate}</option>
             ))}
@@ -77,6 +78,7 @@ class Currency extends Component {
             onChange={this.handleInputChange}
             value={this.state.toRate}
           >
+            <option value="" />
             {this.props.rates.map(rate => (
               <option key={rate}>{rate}</option>
             ))}
