@@ -38,11 +38,7 @@ class App extends Component {
     const toRateValue = this.state.rates[toRate];
     console.log("fromRateValue:" + fromRateValue);
     console.log("toRateValue:" + toRateValue);
-    if (fromRate === "EUR") {
-      return console.log(amount * fromRateValue);
-    } else {
-      return console.log((1 / fromRateValue) * toRateValue * amount);
-    }
+    return amount * (toRateValue / fromRateValue);
   }
 
   render() {
