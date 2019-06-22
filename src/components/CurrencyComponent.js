@@ -13,6 +13,7 @@ class Currency extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
   onFormSubmit(event, values) {
+    event.preventDefault();
     console.log("from form:" + event.target);
     console.log("from form:" + values);
     const answer = this.props.axiosConvert(
