@@ -1,67 +1,80 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-function RenderState({ states }) {
-  if (states != null) {
-    const stateList = Object.keys(states);
-    return (
-      <select>
-        {stateList.map(state => (
-          <option>{state}</option>
-        ))}
-      </select>
-    );
-  } else {
-    return <p>not found state</p>;
-  }
-}
-
 class Currency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      base: "dollar",
-      rates: { a: 123, b: 456 }
+      baseRate: "",
+      baseAmount: "",
+      toRate: ""
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.handleBaseInputChange = this.handleBaseInputChange.bind(this);
-    this.handleRateInputChange = this.handleRateInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
-  componentDidMount() {
-    axios
-      .get(
-        "http://data.fixer.io/api/latest?access_key=7213b9a7b8b59ce8e6087fe3ba8243c2"
-      )
-      .then(response => {
-        console.log("from response" + response.data);
-        this.setState({ rates: response.data.rates });
-        console.log(this.props.rates);
-      });
-  }
-
-  onFormSubmit(event) {
+  onFormSubmit(event, values) {
+    console.log("from form:" + event.target);
+    console.log("from form:" + values);
+    const answer = this.props.axiosConvert(
+      this.state.baseAmount,
+      this.state.baseRate,
+      this.state.toRate
+    );
+    console.log("calculated currency is:" + answer);
     event.preventDefault();
   }
-  handleBaseInputChange(event) {
-    this.setState({ base: event.target.value });
-  }
-  handleRateInputChange(event) {
-    this.setState({ rate: event.target.value });
+
+  handleInputChange(event) {
+    const target = event.target;
+    console.log(event.target);
+    const value = target.value;
+    console.log(event.target.value);
+    const name = target.name;
+    console.log(event.target.name);
+    console.log(
+      " baseRate " +
+        this.state.baseRate +
+        " baseAmount " +
+        this.state.baseAmount +
+        " torate " +
+        this.state.toRate
+    );
+    this.setState({ [name]: value });
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit}>
-          <label htmlFor="coine">convert </label>
+        <form onSubmit={values => this.onFormSubmit(values)}>
+          <label htmlFor="baseAmount">convert </label>
           <input
             type="number"
             onChange={this.handleInputChange}
-            id="coine"
-            name="base"
+            id="baseAmount"
+            name="baseAmount"
           />{" "}
-          <label htmlFor="rate">rate </label>
-          <RenderState states={this.props.rates} />
+          <label htmlFor="baseRate">from rate </label>
+          <select
+            id="baseRate"
+            name="baseRate"
+            onChange={this.handleInputChange}
+            value={this.state.baseRate}
+          >
+            {this.props.rates.map(rate => (
+              <option key={rate}>{rate}</option>
+            ))}
+          </select>
+          <label htmlFor="toRate">to rate </label>
+          <select
+            id="toRate"
+            name="toRate"
+            onChange={this.handleInputChange}
+            value={this.state.toRate}
+          >
+            {this.props.rates.map(rate => (
+              <option key={rate}>{rate}</option>
+            ))}
+          </select>
           <p>result = {20}</p>
           <br />
           <button type="submit">Calculate</button>
