@@ -7,7 +7,8 @@ class Currency extends Component {
     this.state = {
       baseRate: "",
       baseAmount: "",
-      toRate: ""
+      toRate: "",
+      converted: ""
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,7 +23,11 @@ class Currency extends Component {
       this.state.toRate
     );
     console.log("calculated currency is:" + answer);
-    event.preventDefault();
+    if (+answer) {
+      this.setState({ converted: answer });
+    } else {
+      this.setState({ converted: "" });
+    }
   }
 
   handleInputChange(event) {
@@ -76,7 +81,7 @@ class Currency extends Component {
               <option key={rate}>{rate}</option>
             ))}
           </select>
-          <p>result = {20}</p>
+          <p>result = {this.state.converted}</p>
           <br />
           <button type="submit">Calculate</button>
         </form>
