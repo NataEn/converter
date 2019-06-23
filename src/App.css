@@ -1,9 +1,7 @@
 .App {
   text-align: center;
 }
-
-
-
-
-
-
+/* adding images to background this way doesn't work */
+.bkgImage {
+  background-image: url(../src/shared/flags/ad.png);
+}

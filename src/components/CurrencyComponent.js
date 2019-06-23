@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+
+import { Media } from "reactstrap";
+import image from "../shared/flags/ad.png";
 
 class Currency extends Component {
   constructor(props) {
@@ -28,6 +30,8 @@ class Currency extends Component {
     } else {
       this.setState({ converted: answer });
     }
+    // let objectB = a();
+    // console.log(objectB);
   }
 
   handleInputChange(event) {
@@ -64,7 +68,24 @@ class Currency extends Component {
               <option key={rate}>{rate}</option>
             ))}
           </select>
-          <label htmlFor="toRate">Convertion Rate </label>
+          {/* <img src={image} alt="image" height="10%" width="10%" /> */}
+          <select
+            id="baseRate"
+            name="baseRate"
+            onChange={this.handleInputChange}
+            value={this.state.baseRate}
+          >
+            <option value="" className="bkgImage">
+              I am At
+            </option>
+            {this.props.rates.map(rate => (
+              <option className="bkgImage" key={rate}>
+                {rate}
+              </option>
+            ))}
+          </select>
+          <div className="col-1 mt-1" />
+          <label htmlFor="toRate"> Convertion Rate </label>
           <select
             id="toRate"
             name="toRate"
@@ -94,6 +115,9 @@ class Currency extends Component {
           <br />
           <button type="submit">Calculate</button>
         </form>
+        <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
+          google map
+        </a>
       </div>
     );
   }
