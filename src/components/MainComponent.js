@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PersonList from "./PersonListComponents";
 import axios from "axios";
-import { Header } from "./HeaderComponent";
+import Header from "./HeaderComponent";
 import Currency from "./CurrencyComponent";
 
 class Main extends Component {

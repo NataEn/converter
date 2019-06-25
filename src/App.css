@@ -1,7 +1,44 @@
+.container {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  max-width: 100%;
+}
 .App {
   text-align: center;
+  margin: 0px 0px;
+  padding: 0px 0px;
 }
-/* adding images to background this way doesn't work */
-.bkgImage {
-  background-image: url(../src/shared/flags/ad.png);
+.navbar {
+  background-color: #22520cfd;
+  color: floralwhite;
+  margin: 0px auto;
+  padding: 0px auto;
+}
+.nav {
+  background-color: #22520cf8;
+  color: #50c01cf8;
+  margin: 0px auto;
+  margin-right: 0px;
+  padding: 0px auto;
+}
+
+a.nav-link > span:hover {
+  color: #e5d80e;
+}
+.jumbotron {
+  padding: 70px 30px 70px 30px;
+  background: #22520c7a;
+  color: floralwhite;
+  margin: 0px auto;
+  padding: 0px auto;
+}
+.row-header {
+  margin: 0px auto;
+  padding: 0px auto;
+}
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
 }
