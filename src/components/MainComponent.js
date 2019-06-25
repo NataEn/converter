@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PersonList from "./PersonListComponents";
 import axios from "axios";
 import Header from "./HeaderComponent";
+import {Footer} from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 
 class Main extends Component {
@@ -49,6 +50,7 @@ class Main extends Component {
           axiosConvert={this.axiosConvert}
         />
         <PersonList />
+        <Footer/>
       </div>
     );
   }
