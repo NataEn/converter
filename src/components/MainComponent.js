@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PersonList from "./PersonListComponents";
 import axios from "axios";
 import Header from "./HeaderComponent";
-import {Footer} from "./FooterComponent";
+import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
+import { SpiningRates } from "./SpiningRatesComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -49,8 +50,8 @@ class Main extends Component {
           rates={this.state.ratesCurrencies}
           axiosConvert={this.axiosConvert}
         />
-        <PersonList />
-        <Footer/>
+        <SpiningRates />
+        <Footer />
       </div>
     );
   }

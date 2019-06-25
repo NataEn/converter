@@ -47,8 +47,8 @@ export const Footer = props => {
           </a>
         </div>
         <div className="col-3">
-          <a type="button" class="terms btn btn-success" href="./">
-            <h3 >Terms of Use</h3>
+          <a type="button" className="terms btn btn-success" href="./">
+            <h3>Terms of Use</h3>
           </a>
         </div>
       </div>

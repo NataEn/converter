@@ -11,7 +11,7 @@ import {
   NavbarToggler
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logo from "../shared/logo/Logo_smaller.png";
+import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 
 class Header extends Component {
   constructor(props) {
@@ -30,7 +30,8 @@ class Header extends Component {
       <React.Fragment>
         <Navbar dark className="navbar" expand="md">
           <NavbarBrand className="mr-auto navbar-default" href="/">
-            <img src={Logo} height="35" width="120" alt="Converter" />
+            <img src={Logo} height="40" width="40" alt="Converter" />{" "}
+            <strong>Coverter</strong>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} />
           <Collapse isOpen={this.state.isNavOpen} navbar>

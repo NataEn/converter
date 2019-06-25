@@ -9,14 +9,13 @@
   padding: 0px 0px;
 }
 .navbar {
-  background-color: #22520cfd;
+  background-color: #22520c7a;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
 }
 .nav {
-  background-color: #22520cf8;
-  color: #50c01cf8;
+  color: floralwhite;
   margin: 0px auto;
   margin-right: 0px;
   padding: 0px auto;
@@ -26,14 +25,15 @@ a.nav-link > span:hover {
   color: #e5d80e;
 }
 .jumbotron {
-  padding: 70px 30px 70px 30px;
+  padding: 10px 15px 10px 15px;
   background: #22520c7a;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
 }
 
-.footer {
+.footer,
+.form {
   background: #133503e0;
   color: floralwhite;
   margin: 0px auto;
