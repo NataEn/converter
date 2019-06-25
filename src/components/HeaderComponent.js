@@ -9,6 +9,7 @@ import {
   Button
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Logo from "../shared/logo/Logo_color_angle_200x200.png";
 
 export const Header = props => {
   return (
@@ -16,8 +17,7 @@ export const Header = props => {
       <Navbar className="navbar navbar-expand navbar-default">
         <div className="container">
           <NavbarBrand className="mr-auto navbar-default" href="/">
-            <img src="" height="50" width="50" alt="Converter" />
-            <strong>Converter</strong>
+            <img src={Logo} height="100" width="100" alt="Converter" />
           </NavbarBrand>
           <Collapse isOpen="true">
             <Nav>
