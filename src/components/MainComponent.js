@@ -46,7 +46,7 @@ class Main extends Component {
       <div className="container">
         <Header />
         <h1> Currency Converter</h1>
-        <Currency
+        <Currency {...this.props}
           rates={this.state.ratesCurrencies}
           axiosConvert={this.axiosConvert}
         />

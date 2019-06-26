@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Media } from "reactstrap";
 import image from "../shared/flags/ad.png";
-import { convertionLine } from "./ConvertionLineComponent";
+import SelectComponent from "./ConvertionLineComponent";
 
 class Currency extends Component {
   constructor(props) {
@@ -43,71 +43,59 @@ class Currency extends Component {
       <p>I was added</p>
     </div>
   );
-  convertingList = [];
-  addConvertingLine(event) {
-    return <div>Convertion line</div>;
-  }
 
   render() {
     return (
       <div>
-        <addConvertingLine />
         <div className="row">
           <form className="form" onSubmit={values => this.onFormSubmit(values)}>
             <div className="col-12 col-auto">
-              <ul>
-                <li>
-                  <label htmlFor="baseRate">Base Rate </label>
-                  <select
-                    id="baseRate"
-                    name="baseRate"
-                    onChange={this.handleInputChange}
-                    value={this.state.baseRate}
-                  >
-                    <option value="">I Have</option>
-                    {this.props.rates.map(rate => (
-                      <option key={rate}>
-                        <img src={image} alt="someimage" />
-                        {this.state.rateState}
-                        {rate}
-                      </option>
-                    ))}
-                  </select>
-                  <label htmlFor="toRate"> Convertion Rate </label>
-                  <select
-                    id="toRate"
-                    name="toRate"
-                    onChange={this.handleInputChange}
-                    value={this.state.toRate}
-                  >
-                    <option value="">I Want</option>
-                    {this.props.rates.map(rate => (
-                      <option key={rate}>
-                        {this.state.rateState}
-                        {rate}
-                      </option>
-                    ))}
-                  </select>
-                  <label htmlFor="baseAmount">convert </label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="1000"
-                    onChange={this.handleInputChange}
-                    id="baseAmount"
-                    name="baseAmount"
-                  />{" "}
-                  {this.state.baseRate}
-                  <span>
-                    {" "}
-                    to {this.state.toRate}is= {this.state.converted}{" "}
-                    {this.state.toRate}
-                  </span>
-                </li>
-                <li>
-                  <convertionLine />
-                </li>
-              </ul>
+              <SelectComponent {...this.props} rates={this.props.rates} />
+              <label htmlFor="baseRate">Base Rate </label>
+              <select
+                id="baseRate"
+                name="baseRate"
+                onChange={this.handleInputChange}
+                value={this.state.baseRate}
+              >
+                <option value="">I Have</option>
+                {this.props.rates.map(rate => (
+                  <option key={rate}>
+                    {this.state.rateState}
+                    {rate}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="toRate"> Convertion Rate </label>
+              <select
+                id="toRate"
+                name="toRate"
+                onChange={this.handleInputChange}
+                value={this.state.toRate}
+              >
+                <option value="">I Want</option>
+                {this.props.rates.map(rate => (
+                  <option key={rate}>
+                    {this.state.rateState}
+                    {rate}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="baseAmount">convert </label>
+              <input
+                type="number"
+                min="0"
+                max="1000"
+                onChange={this.handleInputChange}
+                id="baseAmount"
+                name="baseAmount"
+              />{" "}
+              {this.state.baseRate}
+              <span>
+                {" "}
+                to {this.state.toRate}is= {this.state.converted}{" "}
+                {this.state.toRate}
+              </span>
             </div>
             <button className="btn btn-outline-success" type="submit">
               Calculate

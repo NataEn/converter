@@ -29,6 +29,7 @@ class Header extends Component {
     return (
       <React.Fragment>
         <Navbar dark className="navbar" expand="md">
+          <div className='container'>
           <NavbarBrand className="mr-auto navbar-default" href="/">
             <img src={Logo} height="30" width="30" alt="Converter" />{" "}
             <strong>Coverter</strong>
@@ -63,6 +64,7 @@ class Header extends Component {
               </NavItem>
             </Nav>
           </Collapse>
+          </div>
         </Navbar>
         <Jumbotron>
           <div className="container">
