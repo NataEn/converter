@@ -1,28 +1,54 @@
 import React, { Component } from "react";
-import image from "../shared/flags/ad.png";
+import CountryObject from "../shared/CountryObjectMaker";
 import Select, { components } from "react-select";
+import { Media } from "reactstrap";
 
 const { Option } = components;
 
 const IconOption = props => (
   <Option {...props}>
-    <img src={image} width={50} height={30} />
+    <img
+      src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
+      width={50}
+      height={30}
+      alt={props.data.lable}
+    />
     {props.data.label}
   </Option>
 );
+
 class SelectComponent extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    console.log("this is the country object" + JSON.stringify(CountryObject));
     const rates = this.props.rates;
-    console.log(rates);
-    let options2 = rates.map(opt => ({ label: opt, value: opt }));
+    const rates2 = CountryObject;
+    let options2 = rates2.map(opt => ({
+      label: opt.country,
+      value: opt.countryCode,
+      flagpath: opt.image
+    }));
     console.log(options2);
     return (
       <div>
-        <Select options={options2} components={{ Option: IconOption }} />
+        <Select
+          options={options2}
+          components={{ Option: IconOption }}
+          placeholder="Select Rate"
+          styles={{
+            option: base => ({
+              ...base,
+              borderRadius: 5,
+              color: "black",
+              background: "white",
+              display: "flex",
+              "text-align": "justify"
+            })
+          }}
+        />
       </div>
     );
   }
