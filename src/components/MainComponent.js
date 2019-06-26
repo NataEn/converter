@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PersonList from "./PersonListComponents";
+//import PersonList from "./PersonListComponents";
 import axios from "axios";
 import Header from "./HeaderComponent";
 import { Footer } from "./FooterComponent";
@@ -17,7 +17,7 @@ class Main extends Component {
     this.axios = axios.create({
       baseURL: "http://data.fixer.io/api/"
     });
-
+    console.log(JSON.stringify(this.state.rates));
     this.axiosConvert = this.axiosConvert.bind(this);
   }
   componentDidMount() {
@@ -31,7 +31,8 @@ class Main extends Component {
         console.log("from response" + response.data);
         this.setState({ rates: response.data.rates });
         this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
-        console.log(this.state.ratesCurrencies);
+        //console.log(this.state.ratesCurrencies);
+        //console.log(JSON.stringify(this.state.rates));
       });
   }
   axiosConvert(amount, fromRate, toRate) {
@@ -46,11 +47,13 @@ class Main extends Component {
       <div className="container">
         <Header />
         <h1> Currency Converter</h1>
-        <Currency {...this.props}
+        <Currency
+          {...this.props}
           rates={this.state.ratesCurrencies}
+          ratesObject={this.state.rates}
           axiosConvert={this.axiosConvert}
         />
-        <SpiningRates />
+        <SpiningRates ratesObject={this.state.rates} />
         <Footer />
       </div>
     );

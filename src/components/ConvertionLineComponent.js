@@ -1,43 +1,52 @@
 import React, { Component } from "react";
 import CountryObject from "../shared/CountryObjectMaker";
 import Select, { components } from "react-select";
-import { Media } from "reactstrap";
 
 const { Option } = components;
 
-const IconOption = props => (
-  <Option {...props}>
-    <img
-      src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
-      width={50}
-      height={30}
-      alt={props.data.lable}
-    />
-    {props.data.label}
-  </Option>
-);
+const IconOption = props => {
+  //console.log("from IconOption:" + JSON.stringify(props));
+  return (
+    <Option {...props}>
+      <img
+        className="option-image"
+        src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
+        width={30}
+        height={20}
+        alt={props.data.lable}
+      />
+      <strong>{" " + props.data.currency}</strong>
+      {" " + props.data.label}
+    </Option>
+  );
+};
 
 class SelectComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  state = {
+    selectedOption: null
+  };
+  handleChange = selectedOption => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  };
   render() {
-    console.log("this is the country object" + JSON.stringify(CountryObject));
-    const rates = this.props.rates;
-    const rates2 = CountryObject;
-    let options2 = rates2.map(opt => ({
+    const { selectedOption } = this.state;
+    //console.log("this is the country object" + JSON.stringify(CountryObject));
+    const ratesObject = this.props.ratesObject;
+    const countryObject = CountryObject;
+    let options = countryObject.map(opt => ({
       label: opt.country,
       value: opt.countryCode,
+      currency: opt.currencyCode,
       flagpath: opt.image
     }));
-    console.log(options2);
     return (
       <div>
         <Select
-          options={options2}
+          options={options}
           components={{ Option: IconOption }}
           placeholder="Select Rate"
+          ratesObject={ratesObject}
           styles={{
             option: base => ({
               ...base,
@@ -45,9 +54,11 @@ class SelectComponent extends Component {
               color: "black",
               background: "white",
               display: "flex",
-              "text-align": "justify"
+              "font-size": "0.8em"
             })
           }}
+          value={selectedOption}
+          onChange={this.handleChange}
         />
       </div>
     );
@@ -55,55 +66,3 @@ class SelectComponent extends Component {
 }
 
 export default SelectComponent;
-
-// export const convertionLine = props => {
-//   return (
-//     <div>
-//       <label htmlFor="baseRate">Base Rate </label>
-//       <select
-//         id="baseRate"
-//         name="baseRate"
-//         onChange={this.props.handleInputChange}
-//         value={this.props.state.baseRate}
-//       >
-//         <option value="">I Have</option>
-//         {this.props.rates.map(rate => (
-//           <option key={rate}>
-//             <img src={image} alt="someimage" />
-//             {this.props.rateState}
-//             {rate}
-//           </option>
-//         ))}
-//       </select>
-//       <label htmlFor="toRate"> Convertion Rate </label>
-//       <select
-//         id="toRate"
-//         name="toRate"
-//         onChange={this.props.handleInputChange}
-//         value={this.props.toRate}
-//       >
-//         <option value="">I Want</option>
-//         {this.props.rates.map(rate => (
-//           <option key={rate}>
-//             {this.props.rateState}
-//             {rate}
-//           </option>
-//         ))}
-//       </select>
-//       <label htmlFor="baseAmount">convert </label>
-//       <input
-//         type="number"
-//         min="0"
-//         max="1000"
-//         onChange={this.props.handleInputChange}
-//         id="baseAmount"
-//         name="baseAmount"
-//       />{" "}
-//       {this.props.baseRate}
-//       <span>
-//         {" "}
-//         to {this.props.toRate}is= {this.props.converted} {this.props.toRate}
-//       </span>
-//     </div>
-//   );
-//};

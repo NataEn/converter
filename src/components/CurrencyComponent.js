@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Media } from "reactstrap";
-import image from "../shared/flags/ad.png";
 import SelectComponent from "./ConvertionLineComponent";
 
 class Currency extends Component {
@@ -18,13 +16,13 @@ class Currency extends Component {
   }
   onFormSubmit(event, values) {
     event.preventDefault();
-    console.log("from form:" + values);
+    //console.log("from form:" + values);
     const answer = this.props.axiosConvert(
       this.state.baseAmount,
       this.state.baseRate,
       this.state.toRate
     );
-    console.log("calculated currency is:" + answer);
+    //console.log("calculated currency is:" + answer);
     if (+answer < 0) {
       this.setState({ converted: "not a valid convertion" });
     } else {
@@ -38,19 +36,33 @@ class Currency extends Component {
     const name = target.name;
     this.setState({ [name]: value });
   }
-  convertingLine = (
-    <div>
-      <p>I was added</p>
-    </div>
-  );
-
+  // ratesObject- object that contains the rates object from promise
   render() {
     return (
-      <div>
+      <div className="container">
+        <div className="row form">
+          <div className="col-3 col-auto">
+            <p>I have:</p>
+            <SelectComponent
+              className="select-span"
+              {...this.props}
+              rates={this.props.rates}
+              ratesObject={this.props.ratesObject}
+            />
+            <p>I want:</p>
+            <SelectComponent
+              className="select-span"
+              {...this.props}
+              rates={this.props.rates}
+              ratesObject={this.props.ratesObject}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+
         <div className="row">
           <form className="form" onSubmit={values => this.onFormSubmit(values)}>
-            <div className="col-12 col-auto">
-              <SelectComponent {...this.props} rates={this.props.rates} />
+            <div className="col-5 col-auto">
               <label htmlFor="baseRate">Base Rate </label>
               <select
                 id="baseRate"
@@ -60,10 +72,7 @@ class Currency extends Component {
               >
                 <option value="">I Have</option>
                 {this.props.rates.map(rate => (
-                  <option key={rate}>
-                    {this.state.rateState}
-                    {rate}
-                  </option>
+                  <option key={rate}>{rate}</option>
                 ))}
               </select>
               <label htmlFor="toRate"> Convertion Rate </label>
@@ -75,10 +84,7 @@ class Currency extends Component {
               >
                 <option value="">I Want</option>
                 {this.props.rates.map(rate => (
-                  <option key={rate}>
-                    {this.state.rateState}
-                    {rate}
-                  </option>
+                  <option key={rate}>{rate}</option>
                 ))}
               </select>
               <label htmlFor="baseAmount">convert </label>
