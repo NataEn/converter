@@ -30,7 +30,7 @@ class Header extends Component {
       <React.Fragment>
         <Navbar dark className="navbar" expand="md">
           <NavbarBrand className="mr-auto navbar-default" href="/">
-            <img src={Logo} height="40" width="40" alt="Converter" />{" "}
+            <img src={Logo} height="30" width="30" alt="Converter" />{" "}
             <strong>Coverter</strong>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} />
@@ -38,7 +38,7 @@ class Header extends Component {
             <Nav>
               <NavItem>
                 <NavLink className="nav-link" to="/home">
-                  <span className="fa fa-home fa-lg"> Home</span>
+                  <i className="fa fa-home fa-lg" /> Home
                 </NavLink>
               </NavItem>
               {/* <NavItem>
@@ -48,18 +48,17 @@ class Header extends Component {
             </NavItem> */}
               <NavItem>
                 <NavLink className="nav-link" to="/home">
-                  <span className="fa fa-info fa-lg"> About Us</span>
+                  <i className="fa fa-info fa-lg" /> About Us
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className="nav-link" to="/contactus">
-                  <span className="fa fa-address-card fa-lg"> Contact Us</span>
+                  <i className="fa fa-address-card fa-lg" /> Contact Us
                 </NavLink>
               </NavItem>
               <NavItem>
-                <Button outline>
-                  <span className="fa fa-sign-in fa-lg" />
-                  Login
+                <Button className="login" outline>
+                  <i className="fa fa-sign-in fa-lg" /> Login
                 </Button>
               </NavItem>
             </Nav>
@@ -67,9 +66,12 @@ class Header extends Component {
         </Navbar>
         <Jumbotron>
           <div className="container">
-            <div className="row row-header">
-              <div className="col-12 col-sm-6">
-                <h1>Converter</h1>
+            <div className="row row-header row-no-gutters">
+              <div className="col-2 offset-1">
+                <img src={Logo} height="80" width="80" alt="Converter" />
+              </div>
+              <div className="col-6 col-sm-3 col-offset-right">
+                <h1 className='header-align-middle'>Converter</h1>
               </div>
             </div>
           </div>

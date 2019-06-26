@@ -1,3 +1,9 @@
+body {
+  font-family: "Roboto Slab", serif !important;
+  font-size: 0.7em;
+  line-height: 1;
+}
+
 .container {
   margin: 0px 0px;
   padding: 0px 0px;
@@ -7,18 +13,28 @@
   text-align: center;
   margin: 0px 0px;
   padding: 0px 0px;
+  font-size: 1.25em;
+  line-height: 1.4;
 }
 .navbar {
-  background-color: #22520c7a;
+  background-color: #22520cb7;
   color: floralwhite;
   margin: 0px auto;
-  padding: 0px auto;
+  padding: 0px 5px;
+  border-bottom: 1px solid #1335033b;
 }
 .nav {
   color: floralwhite;
   margin: 0px auto;
   margin-right: 0px;
   padding: 0px auto;
+}
+button.login {
+  color: floralwhite;
+  font-size: 1em;
+}
+button.login:hover {
+  background-color: #54c81e;
 }
 
 a.nav-link > span:hover {
@@ -30,14 +46,24 @@ a.nav-link > span:hover {
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
+  border-radius: 0%;
+  border-top: 1px solid #a8a608be;
+  border-bottom: 1px solid #a8a608be;
+  background-image: linear-gradient(140deg, #54c81e 0%, #22520c7a 100%);
 }
-
+.col-offset-right {
+  margin-left: -20px;
+  align-self: center;
+}
 .footer,
 .form {
   background: #133503e0;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
+}
+.form {
+  border-radius: 15px;
 }
 .terms,
 .terms:hover {

@@ -7,7 +7,7 @@ export const Footer = props => {
     <div className="container footer">
       <div className="row align-items-center">
         <div className="col-3 col-xs-2 col-auto">
-          <h3>Navigate</h3>
+          <h4>Navigate</h4>
           <ul className="list-unstyled">
             <li>Home</li>
             <li>About Us</li>
@@ -15,7 +15,7 @@ export const Footer = props => {
           </ul>
         </div>
         <div className="col-3 col-xs-2 col-auto">
-          <h3>Useful Links</h3>
+          <h4>Useful Links</h4>
           <ul className="list-unstyled">
             <li>Traveling</li>
             <li>Finance</li>
@@ -23,7 +23,7 @@ export const Footer = props => {
           </ul>
         </div>
         <div className="col-3 col-xs-2 col-auto">
-          <h3>Contact Us</h3>
+          <h4>Contact Us</h4>
           <a
             className="btn btn-social-icon btn-google"
             href="mailto:converter@example.com"
@@ -48,7 +48,7 @@ export const Footer = props => {
         </div>
         <div className="col-3">
           <a type="button" className="terms btn btn-success" href="./">
-            <h3>Terms of Use</h3>
+            <h4>Terms of Use</h4>
           </a>
         </div>
       </div>
