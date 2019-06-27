@@ -40,6 +40,7 @@ class Main extends Component {
     const toRateValue = this.state.rates[toRate];
     console.log("fromRateValue:" + fromRateValue);
     console.log("toRateValue:" + toRateValue);
+    console.log("amountValue:" + amount);
     return amount * (toRateValue / fromRateValue);
   }
   render() {
