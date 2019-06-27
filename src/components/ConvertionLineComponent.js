@@ -33,13 +33,36 @@ const SingleValue = ({ ...props }) => (
   </components.SingleValue>
 );
 
+const colourStyles = {
+  option: base => ({
+    ...base,
+    borderRadius: 5,
+    color: "black",
+    background: "white",
+    display: "flex",
+    alignContent: "right",
+    justifyContent: "space-between",
+    "font-size": "0.8em",
+    ":hover": { background: "#dde0d8" }
+  })
+};
+
 class SelectComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.selectName = React.createRef();
+  }
+
   state = {
-    selectedOption: null,
-    view: null
+    selectedOption: null
   };
   handleChange = selectedOption => {
     this.setState({ selectedOption: selectedOption });
+    console.log(`Option selected:`, selectedOption.value);
+    return this.props.onChange({
+      value: selectedOption.value,
+      name: this.props.selectName
+    });
   };
   render() {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
@@ -47,35 +70,22 @@ class SelectComponent extends Component {
     const countryObject = CountryObject;
     let options = countryObject.map(opt => ({
       label: opt.country,
-      value: opt.countryCode,
+      value: opt.currencyCode,
       currency: opt.currencyCode,
       flagpath: opt.image
     }));
     return (
-      <div>
-        <Select
-          options={options}
-          components={{ Option: IconOption, SingleValue: SingleValue }}
-          placeholder="Select Rate"
-          ratesObject={ratesObject}
-          getOptionValue={option => option["flagpath"]}
-          styles={{
-            option: base => ({
-              ...base,
-              borderRadius: 5,
-              color: "black",
-              background: "white",
-              display: "flex",
-              alignContent: "right",
-              alignItems: "center",
-              justifyContent: "space-between",
-              "font-size": "0.8em"
-            })
-          }}
-          value={this.state.selectedOption}
-          onChange={this.handleChange}
-        />
-      </div>
+      <Select
+        options={options}
+        components={{ Option: IconOption, SingleValue: SingleValue }}
+        placeholder="Select Rate"
+        ratesObject={ratesObject}
+        getOptionValue={option => option["flagpath"]}
+        styles={colourStyles}
+        value={this.state.selectedOption}
+        onChange={this.handleChange}
+        // ref={this.selectName}
+      />
     );
   }
 }

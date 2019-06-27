@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
 
-
 class Currency extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +13,7 @@ class Currency extends Component {
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   onFormSubmit(event, values) {
     event.preventDefault();
@@ -37,26 +37,47 @@ class Currency extends Component {
     const name = target.name;
     this.setState({ [name]: value });
   }
+  handleSelectChange(value) {
+    console.log("from handleselectchange" + JSON.stringify(value));
+    // this.setState({ [name]: value });
+  }
   // ratesObject- object that contains the rates object from promise
   render() {
     return (
       <div className="container">
         <div className="row form">
           <div className="col-4 col-auto">
-            <p>I have:</p>
+            <span>I have:</span>
             <SelectComponent
               className="select-span"
               {...this.props}
               rates={this.props.rates}
               ratesObject={this.props.ratesObject}
+              name="baseRate"
+              onChange={this.handleSelectChange}
             />
-            <p>I want:</p>
+          </div>
+          <div className="col-4 col-auto">
+            <span>I want:</span>
             <SelectComponent
               className="select-span"
               {...this.props}
               rates={this.props.rates}
               ratesObject={this.props.ratesObject}
+              name="toRate"
+              onChange={this.handleSelectChange}
+            />
+          </div>
+          <div className="col-4 col-auto">
+            {" "}
+            <label htmlFor="baseAmount">Amount </label>
+            <input
+              type="number"
+              min="0"
+              max="1000"
               onChange={this.handleInputChange}
+              id="baseAmount"
+              name="baseAmount"
             />
           </div>
         </div>
