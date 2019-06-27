@@ -5,7 +5,6 @@ import Select, { components } from "react-select";
 const { Option } = components;
 
 const IconOption = props => {
-  //console.log("from IconOption:" + JSON.stringify(props));
   return (
     <Option {...props}>
       <img
@@ -16,21 +15,33 @@ const IconOption = props => {
         alt={props.data.lable}
       />
       <strong>{" " + props.data.currency}</strong>
-      {" " + props.data.label}
+      <span>{" " + props.data.label}</span>
     </Option>
   );
 };
+const SingleValue = ({ ...props }) => (
+  <components.SingleValue {...props}>
+    <img
+      className="option-image"
+      src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
+      width={30}
+      height={20}
+      alt={props.data.lable}
+    />
+    <strong>{" " + props.data.currency}</strong>
+    <span>{" " + props.data.label}</span>
+  </components.SingleValue>
+);
 
 class SelectComponent extends Component {
   state = {
-    selectedOption: null
+    selectedOption: null,
+    view: null
   };
   handleChange = selectedOption => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    this.setState({ selectedOption: selectedOption });
   };
   render() {
-    const { selectedOption } = this.state;
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
     const countryObject = CountryObject;
@@ -44,9 +55,10 @@ class SelectComponent extends Component {
       <div>
         <Select
           options={options}
-          components={{ Option: IconOption }}
+          components={{ Option: IconOption, SingleValue: SingleValue }}
           placeholder="Select Rate"
           ratesObject={ratesObject}
+          getOptionValue={option => option["flagpath"]}
           styles={{
             option: base => ({
               ...base,
@@ -54,10 +66,13 @@ class SelectComponent extends Component {
               color: "black",
               background: "white",
               display: "flex",
+              alignContent: "right",
+              alignItems: "center",
+              justifyContent: "space-between",
               "font-size": "0.8em"
             })
           }}
-          value={selectedOption}
+          value={this.state.selectedOption}
           onChange={this.handleChange}
         />
       </div>

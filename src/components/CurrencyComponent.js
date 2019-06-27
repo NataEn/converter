@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
 
+
 class Currency extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,7 @@ class Currency extends Component {
     return (
       <div className="container">
         <div className="row form">
-          <div className="col-3 col-auto">
+          <div className="col-4 col-auto">
             <p>I have:</p>
             <SelectComponent
               className="select-span"
