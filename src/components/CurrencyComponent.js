@@ -9,12 +9,23 @@ class Currency extends Component {
       baseAmount: "",
       toRate: "",
       converted: "",
-      rateState: "State"
+      rateState: "State",
+      ConvertionPanel: "",
+      ConvertionContainerArray: []
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
+  addConvertingLine = e => {
+    let panel = new Object();
+    panel = this.state.ConvertionPanel;
+    this.state.ConvertionContainerArray.push(panel);
+    console.log(e);
+  };
+  deleteConvertingLine = index => {
+    this.state.ConvertionContainerArray.slice(index + 1);
+  };
   onFormSubmit(event) {
     event.preventDefault();
     const base = this.state.baseRate;
@@ -53,52 +64,69 @@ class Currency extends Component {
     //console.log("from handleselectchange" + JSON.stringify(name));
     this.setState({ [name]: value });
   }
+
+  renderConvertionContainer = props => {
+    const convertionPanel = (
+      <div className="container">
+        <div className="row form">
+          <div className="col-4 col-auto select-div">
+            <span>I have:</span>
+            <SelectComponent
+              className="select-span"
+              {...this.props}
+              rates={this.props.rates}
+              ratesObject={this.props.ratesObject}
+              name="baseRate"
+              onChange={this.handleSelectChange}
+            />
+          </div>
+          <div className="col-4 col-auto">
+            <span>I want:</span>
+            <SelectComponent
+              className="select-span"
+              {...this.props}
+              rates={this.props.rates}
+              ratesObject={this.props.ratesObject}
+              name="toRate"
+              onChange={this.handleSelectChange}
+            />
+          </div>
+          <div className="col-4 col-auto">
+            {" "}
+            <label htmlFor="baseAmount">Amount: </label>
+            <br />
+            <input
+              className="amount-to-convert"
+              type="number"
+              min="0"
+              max="100000000"
+              onChange={this.handleInputChange}
+              id="baseAmount"
+              name="baseAmount"
+            />
+          </div>
+          <div className="col-4 col-auto">
+            <span className="converted-amount">
+              {" "}
+              {this.state.baseRate} to {this.state.toRate}is={" "}
+              {this.state.converted}{" "}
+              {this.state.converted === "" ? "" : this.state.toRate}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+    this.setState.ConvertionPanel = convertionPanel;
+    this.state.ConvertionContainerArray[0] = convertionPanel;
+    return this.state.ConvertionContainerArray.map(panel => panel);
+  };
   // ratesObject- object that contains the rates object from promise
   render() {
     return (
       <div className="container">
         <form className="form" onSubmit={values => this.onFormSubmit(values)}>
-          <div className="row form">
-            <div className="col-4 col-auto select-div">
-              <span>I have:</span>
-              <SelectComponent
-                className="select-span"
-                {...this.props}
-                rates={this.props.rates}
-                ratesObject={this.props.ratesObject}
-                name="baseRate"
-                onChange={this.handleSelectChange}
-              />
-            </div>
-            <div className="col-4 col-auto">
-              <span>I want:</span>
-              <SelectComponent
-                className="select-span"
-                {...this.props}
-                rates={this.props.rates}
-                ratesObject={this.props.ratesObject}
-                name="toRate"
-                onChange={this.handleSelectChange}
-              />
-            </div>
-            <div className="col-4 col-auto">
-              {" "}
-              <label htmlFor="baseAmount">Amount </label>
-              <input
-                type="number"
-                min="0"
-                max="1000"
-                onChange={this.handleInputChange}
-                id="baseAmount"
-                name="baseAmount"
-              />
-            </div>
-          </div>
-          <span>
-            {" "}
-            {this.state.baseRate} to {this.state.toRate}is={" "}
-            {this.state.converted} {this.state.toRate}
-          </span>
+          {this.renderConvertionContainer()}
+          {/* end of convertion container */}
           <button className="btn btn-outline-success" type="submit">
             Calculate
           </button>{" "}
@@ -110,62 +138,6 @@ class Currency extends Component {
             <i className="fa fa-plus fa-lg" /> Add line
           </button>
         </form>
-
-        <div className="row">
-          <form className="form" onSubmit={values => this.onFormSubmit(values)}>
-            <div className="col-5 col-auto">
-              <label htmlFor="baseRate">Base Rate </label>
-              <select
-                id="baseRate"
-                name="baseRate"
-                onChange={this.handleInputChange}
-                value={this.state.baseRate}
-              >
-                <option value="">I Have</option>
-                {this.props.rates.map(rate => (
-                  <option key={rate}>{rate}</option>
-                ))}
-              </select>
-              <label htmlFor="toRate"> Convertion Rate </label>
-              <select
-                id="toRate"
-                name="toRate"
-                onChange={this.handleInputChange}
-                value={this.state.toRate}
-              >
-                <option value="">I Want</option>
-                {this.props.rates.map(rate => (
-                  <option key={rate}>{rate}</option>
-                ))}
-              </select>
-              <label htmlFor="baseAmount">convert </label>
-              <input
-                type="number"
-                min="0"
-                max="1000"
-                onChange={this.handleInputChange}
-                id="baseAmount"
-                name="baseAmount"
-              />{" "}
-              {this.state.baseRate}
-              <span>
-                {" "}
-                to {this.state.toRate}is= {this.state.converted}{" "}
-                {this.state.toRate}
-              </span>
-            </div>
-            <button className="btn btn-outline-success" type="submit">
-              Calculate
-            </button>{" "}
-            <button
-              className="btn btn-outline-warning"
-              type="button"
-              onClick={this.addConvertingLine}
-            >
-              <i className="fa fa-plus fa-lg" /> Add line
-            </button>
-          </form>
-        </div>
 
         <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
           google map
