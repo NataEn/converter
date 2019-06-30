@@ -3,11 +3,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
+import About from "./AboutComponent";
+import Contact from "./ContactComponent";
 import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import { Container, Row, Col } from "reactstrap";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 class Main extends Component {
   constructor(props) {
@@ -58,19 +61,31 @@ class Main extends Component {
           <Col md="auto">
             <Sidebar />
           </Col>
+
           <Col xs={11} sm={9}>
             <h1> Currency Converter</h1>
-            <Currency
-              {...this.props}
-              rates={this.state.ratesCurrencies}
-              ratesObject={this.state.rates}
-              axiosConvert={this.axiosConvert}
-            />
-            <MyMap />
-          </Col>
+            <Switch>
+              <Route
+                path="/home"
+                component={() => (
+                  <Currency
+                    {...this.props}
+                    rates={this.state.ratesCurrencies}
+                    ratesObject={this.state.rates}
+                    axiosConvert={this.axiosConvert}
+                  />
+                )}
+              />
+              <Route exact path="/about" component={() => <About />} />
+              <Route exact path="/contact" component={() => <Contact />} />
+              {/*  add routs from side bar */}
+              <Redirect to="/home" />
+            </Switch>
 
-          <Col sm={12}>
+            <MyMap />
             <SpiningRates ratesObject={this.state.rates} />
+          </Col>
+          <Col sm={12}>
             <Footer />
           </Col>
         </Row>
@@ -78,4 +93,4 @@ class Main extends Component {
     );
   }
 }
-export default Main;
+export default withRouter(Main);

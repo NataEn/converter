@@ -88,11 +88,11 @@ button.login:hover {
 
 div .SelectComponent span .select-span {
   text-align: center;
-  color: blue;
+  color: 22520cc0;
   font-size: 0.7em;
 }
 .option-image {
-  border: 1px solid blue;
+  border: 1px solid #22520cc0;
   border-radius: 2px 2px;
 }
 div .Select-value {
@@ -106,7 +106,7 @@ div .Select-value {
 }
 div.sidebar,
 .col-md-auto {
-  background: rgb(231, 228, 228);
+  background: rgb(168, 167, 167);
   margin: 0px;
   padding: 0px;
   color: black;
@@ -115,18 +115,27 @@ div.sidebar,
   margin: 0px;
   padding: 0px;
 }
-.navlink {
-  color: black;
-  margin-left: 15%;
-  margin-right: 15%;
-  padding: 3px 2px;
+.nav-link {
+  color: white;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2px 2px;
+}
+.nav-link:hover {
+  color: white;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2px 2px;
+  background: #54c81e;
+  border-radius: 2px 2px;
+  border-radius: 5px;
 }
 
 .navlink:hover {
   color: #22520cc0;
   background: rgb(252, 248, 248);
   border-radius: 2px 2px;
-  border-radius: 15px;
+  border-radius: 5px;
   margin-left: 15%;
   margin-right: 15%;
   padding: 3px 2px;

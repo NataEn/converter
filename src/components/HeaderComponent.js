@@ -4,7 +4,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Collapse,
   Button,
   Jumbotron,
@@ -12,6 +11,7 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../shared/logo/Logo_for_page_title200x200.png";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -39,27 +39,23 @@ class Header extends Component {
               <Nav>
                 <NavItem>
                   <NavLink className="nav-link" to="/home">
-                    <i className="fa fa-home fa-lg" /> Home
-                  </NavLink>
-                </NavItem>
-                {/* <NavItem>
-              <NavLink className="nav-link" to="/home">
-                <span className="fa fa-bell fa-lg"> What's New?</span>
-              </NavLink>
-            </NavItem> */}
-                <NavItem>
-                  <NavLink className="nav-link" to="/home">
-                    <i className="fa fa-info fa-lg" /> About Us
+                    <span className="fa fa-home fa-lg" /> Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/contactus">
-                    <i className="fa fa-address-card fa-lg" /> Contact Us
+                  <NavLink className="nav-link" to="/about">
+                    <span className="fa fa-info fa-lg" /> About
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/contact">
+                    <span className="fa fa-address-card fa-lg" />{" "}
+                    <span> Contact</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <Button className="login" outline>
-                    <i className="fa fa-sign-in fa-lg" /> Login
+                    <span className="fa fa-sign-in fa-lg" /> Login
                   </Button>
                 </NavItem>
               </Nav>
