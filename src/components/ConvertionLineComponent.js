@@ -82,6 +82,7 @@ class SelectComponent extends Component {
         styles={colourStyles}
         value={this.state.selectedOption}
         onChange={this.handleChange}
+        // isClearable
         // ref={this.selectName}
         captureMenuScroll={true}
       />

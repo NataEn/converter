@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
+import { Button } from "reactstrap";
 
 class Currency extends Component {
   constructor(props) {
@@ -9,6 +10,8 @@ class Currency extends Component {
       baseAmount: "",
       toRate: "",
       converted: "",
+      changed: true,
+      message: "Please select convertion values",
       rateState: "State",
       ConvertionPanel: "",
       ConvertionContainerArray: []
@@ -16,6 +19,7 @@ class Currency extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.renderAnswer = this.renderAnswer.bind(this);
   }
   addConvertingLine = e => {
     let panel = new Object();
@@ -34,7 +38,7 @@ class Currency extends Component {
     let answer = "";
     //console.log("from form:" + values);
     if (base === "" && rate === "" && amount === "") {
-      answer = "dont do anything";
+      return;
     } else if (base !== "" && rate === "" && amount !== "") {
       answer = this.props.axiosConvert(amount, base, base);
     } else if (base === "" && rate !== "" && amount !== "") {
@@ -50,6 +54,8 @@ class Currency extends Component {
     } else {
       this.setState({ converted: answer });
     }
+    this.setState({ changed: false });
+    return answer;
   }
 
   handleInputChange(event) {
@@ -57,12 +63,27 @@ class Currency extends Component {
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value });
-    console.log("amount" + this.state.baseAmount);
+    this.setState({ changed: true });
+    //console.log("amount" + this.state.baseAmount);
   }
   handleSelectChange(value, name) {
     //console.log("from handleselectchange" + JSON.stringify(value));
     //console.log("from handleselectchange" + JSON.stringify(name));
     this.setState({ [name]: value });
+    this.setState({ changed: true });
+  }
+  renderAnswer() {
+    if (this.state.changed) {
+      return <React.Fragment>{`${this.state.message}`}</React.Fragment>;
+    } else {
+      return (
+        <React.Fragment>
+          {`${this.state.baseAmount} ${this.state.baseRate} to ${
+            this.state.toRate
+          } is ${this.state.converted} ${this.state.toRate}`}
+        </React.Fragment>
+      );
+    }
   }
 
   renderConvertionContainer = props => {
@@ -107,10 +128,7 @@ class Currency extends Component {
           </div>
           <div className="col-4 col-auto">
             <span className="converted-amount">
-              {" "}
-              {this.state.baseRate} to {this.state.toRate}is={" "}
-              {this.state.converted}{" "}
-              {this.state.converted === "" ? "" : this.state.toRate}
+              <this.renderAnswer />
             </span>
           </div>
         </div>
@@ -127,16 +145,20 @@ class Currency extends Component {
         <form className="form" onSubmit={values => this.onFormSubmit(values)}>
           {this.renderConvertionContainer()}
           {/* end of convertion container */}
-          <button className="btn btn-outline-success" type="submit">
+          <Button
+            className="btn btn-outline-success"
+            type="submit"
+            onClick={this.onFormSubmit}
+          >
             Calculate
-          </button>{" "}
-          <button
+          </Button>{" "}
+          <Button
             className="btn btn-outline-warning"
             type="button"
             onClick={this.addConvertingLine}
           >
             <i className="fa fa-plus fa-lg" /> Add line
-          </button>
+          </Button>
         </form>
 
         <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">

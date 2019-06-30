@@ -11,7 +11,8 @@ class Main extends Component {
     super(props);
     this.state = {
       rates: {},
-      ratesCurrencies: []
+      ratesCurrencies: [],
+      converterPanel: []
     };
 
     this.axios = axios.create({
