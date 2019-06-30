@@ -9,8 +9,10 @@ import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
+import SavingTips from "./SavingTipsComponent";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import CurrencyGallery from "./CurrencyGalleryComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -78,6 +80,12 @@ class Main extends Component {
               />
               <Route exact path="/about" component={() => <About />} />
               <Route exact path="/contact" component={() => <Contact />} />
+              <Route
+                exact
+                path="/gallery"
+                component={() => <CurrencyGallery />}
+              />
+              <Route exact path="/saving" component={() => <SavingTips />} />
               {/*  add routs from side bar */}
               <Redirect to="/home" />
             </Switch>

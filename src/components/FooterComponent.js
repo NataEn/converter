@@ -1,6 +1,13 @@
 import React from "react";
 import { SocialIcon } from "react-social-icons";
-//import { Link } from "react-router-dom";
+import {Nav} from 'react-social-icons'
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faInfo,
+  faAddressCard
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Footer = props => {
   return (
@@ -9,9 +16,24 @@ export const Footer = props => {
         <div className="col-3 col-xs-2 col-auto">
           <h4>Navigate</h4>
           <ul className="list-unstyled">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Contact Us</li>
+            <li>
+              <NavLink className="nav-link" to="/home">
+                <FontAwesomeIcon icon={faHome} /> {"  "}Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-link " to="/about">
+                <FontAwesomeIcon icon={faInfo} />
+                {"  "} About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-link" to="/contact">
+                <FontAwesomeIcon icon={faAddressCard} />
+                {"  "}
+                Contact
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="col-3 col-xs-2 col-auto">
@@ -48,7 +70,7 @@ export const Footer = props => {
         </div>
         <div className="col-3">
           <a type="button" className="terms btn btn-success" href="./">
-            <h4>Terms of Use</h4>
+            <span>Terms of Use</span>
           </a>
         </div>
       </div>

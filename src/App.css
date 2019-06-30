@@ -22,7 +22,7 @@ p {
   background-color: #22520cb7;
   color: floralwhite;
   margin: 0px auto;
-  padding: 0px 5px;
+  padding: 0px 10px;
   border-bottom: 1px solid #1335033b;
 }
 .nav {
@@ -72,8 +72,11 @@ button.login:hover {
 .terms,
 .terms:hover {
   color: inherit;
-  border: 2px solid #22520c7a;
+  border: 1px solid #22520c7a;
   border-radius: 10px 10px;
+  padding: 0px auto;
+  margin: 0px auto;
+  font-size: 1em;
 }
 .row-header {
   margin: 0px auto;
@@ -117,21 +120,17 @@ div.sidebar,
 }
 .nav-link {
   color: white;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 2px 2px;
+  border-radius: 2px 2px;
+  border-radius: 5px;
 }
 .nav-link:hover {
   color: white;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 2px 2px;
   background: #54c81e;
   border-radius: 2px 2px;
   border-radius: 5px;
 }
 
-.navlink:hover {
+.nav-link-sidebar:hover {
   color: #22520cc0;
   background: rgb(252, 248, 248);
   border-radius: 2px 2px;

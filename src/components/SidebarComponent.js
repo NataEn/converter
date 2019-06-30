@@ -15,31 +15,31 @@ class Sidebar extends Component {
     return (
       <Nav className="sidebar" vertical>
         <NavItem>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link nav-link-sidebar" to="/home">
             <FontAwesomeIcon icon={faSyncAlt} />
             <p>Currency Converter</p>
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-link" to="/map">
+          <NavLink className="nav-link nav-link-sidebar" to="/map">
             <FontAwesomeIcon icon={faMapMarkedAlt} />
             <p>Currency Map</p>
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-link" to="/gallery">
+          <NavLink className="nav-link nav-link-sidebar" to="/gallery">
             <FontAwesomeIcon icon={faTh} />
             <p>Currency Gallery</p>
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-link" to="/savingtips">
+          <NavLink className="nav-link nav-link-sidebar" to="/saving">
             <FontAwesomeIcon icon={faPiggyBank} />
             <p>Saving Tips</p>
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-link" to="/managesaving">
+          <NavLink className="nav-link nav-link-sidebar" to="/managesaving">
             <FontAwesomeIcon icon={faHandHoldingUsd} /> <p>Manage Expenses</p>
           </NavLink>
         </NavItem>
