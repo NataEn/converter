@@ -29,41 +29,41 @@ class Header extends Component {
     return (
       <React.Fragment>
         <Navbar dark className="navbar" expand="md">
-          <div className='container'>
-          <NavbarBrand className="mr-auto navbar-default" href="/">
-            <img src={Logo} height="30" width="30" alt="Converter" />{" "}
-            <strong>Coverter</strong>
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggleNav} />
-          <Collapse isOpen={this.state.isNavOpen} navbar>
-            <Nav>
-              <NavItem>
-                <NavLink className="nav-link" to="/home">
-                  <i className="fa fa-home fa-lg" /> Home
-                </NavLink>
-              </NavItem>
-              {/* <NavItem>
+          <div className="container">
+            <NavbarBrand className="mr-auto navbar-default" href="/">
+              <img src={Logo} height="30" width="30" alt="Converter" />{" "}
+              <strong>Coverter</strong>
+            </NavbarBrand>
+            <NavbarToggler onClick={this.toggleNav} />
+            <Collapse isOpen={this.state.isNavOpen} navbar>
+              <Nav>
+                <NavItem>
+                  <NavLink className="nav-link" to="/home">
+                    <i className="fa fa-home fa-lg" /> Home
+                  </NavLink>
+                </NavItem>
+                {/* <NavItem>
               <NavLink className="nav-link" to="/home">
                 <span className="fa fa-bell fa-lg"> What's New?</span>
               </NavLink>
             </NavItem> */}
-              <NavItem>
-                <NavLink className="nav-link" to="/home">
-                  <i className="fa fa-info fa-lg" /> About Us
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link" to="/contactus">
-                  <i className="fa fa-address-card fa-lg" /> Contact Us
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <Button className="login" outline>
-                  <i className="fa fa-sign-in fa-lg" /> Login
-                </Button>
-              </NavItem>
-            </Nav>
-          </Collapse>
+                <NavItem>
+                  <NavLink className="nav-link" to="/home">
+                    <i className="fa fa-info fa-lg" /> About Us
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/contactus">
+                    <i className="fa fa-address-card fa-lg" /> Contact Us
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <Button className="login" outline>
+                    <i className="fa fa-sign-in fa-lg" /> Login
+                  </Button>
+                </NavItem>
+              </Nav>
+            </Collapse>
           </div>
         </Navbar>
         <Jumbotron>
@@ -73,7 +73,7 @@ class Header extends Component {
                 <img src={Logo} height="80" width="80" alt="Converter" />
               </div>
               <div className="col-6 col-sm-3 col-offset-right">
-                <h1 className='header-align-middle'>Converter</h1>
+                <h1 className="header-align-middle">Converter</h1>
               </div>
             </div>
           </div>

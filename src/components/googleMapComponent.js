@@ -6,7 +6,7 @@ class MyMap extends Component {
     return (
       <LoadScript
         id="script-loader"
-        googleMapsApiKey="AIzaSyBeRL5nDOgcWsvub_FHmFr5l1SCUHcjQ4w"
+        googleMapsApiKey="AIzaSyAXe3-XgAkqI0uN9D_UTt00KUppm3zwC4w "
       >
         <GoogleMap id="example-map">...Your map components</GoogleMap>
       </LoadScript>

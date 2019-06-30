@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 //import PersonList from "./PersonListComponents";
 import axios from "axios";
+import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
 import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
+import MyMap from "./googleMapComponent";
+import { Container, Row, Col } from "reactstrap";
 
 class Main extends Component {
   constructor(props) {
@@ -46,18 +49,32 @@ class Main extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <Header />
-        <h1> Currency Converter</h1>
-        <Currency
-          {...this.props}
-          rates={this.state.ratesCurrencies}
-          ratesObject={this.state.rates}
-          axiosConvert={this.axiosConvert}
-        />
-        <SpiningRates ratesObject={this.state.rates} />
-        <Footer />
-      </div>
+      <Container>
+        <Row>
+          <Col sm={12}>
+            <Header />
+          </Col>
+
+          <Col md="auto">
+            <Sidebar />
+          </Col>
+          <Col xs={11} sm={9}>
+            <h1> Currency Converter</h1>
+            <Currency
+              {...this.props}
+              rates={this.state.ratesCurrencies}
+              ratesObject={this.state.rates}
+              axiosConvert={this.axiosConvert}
+            />
+            <MyMap />
+          </Col>
+
+          <Col sm={12}>
+            <SpiningRates ratesObject={this.state.rates} />
+            <Footer />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

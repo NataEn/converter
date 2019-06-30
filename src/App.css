@@ -10,6 +10,9 @@ body {
   font-size: 1.25em;
   line-height: 1.4;
 }
+p {
+  margin: 0px;
+}
 .container {
   margin: 0px 0px;
   padding: 0px 0px;
@@ -58,9 +61,9 @@ button.login:hover {
   padding: 0px auto;
 }
 .form {
-  background: #bbbdbae0;
-  color: floralwhite;
-  border: 2px solid #838b0e7a;
+  background: rgb(231, 228, 228);
+  color: black;
+  border: 2px solid rgba(131, 139, 14, 0.478);
   border-radius: 15px;
   max-width: 90%;
   margin: 1% auto;
@@ -93,11 +96,38 @@ div .SelectComponent span .select-span {
   border-radius: 2px 2px;
 }
 div .Select-value {
-  border: 1px solid darkgray !important;
+  border: 1px solid rgb(231, 228, 228) !important;
 }
 .input-label {
   margin: 0px;
 }
 .btn-outline-success {
   margin: 1%;
+}
+div.sidebar,
+.col-md-auto {
+  background: rgb(231, 228, 228);
+  margin: 0px;
+  padding: 0px;
+  color: black;
+}
+.row div.col {
+  margin: 0px;
+  padding: 0px;
+}
+.navlink {
+  color: black;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 3px 2px;
+}
+
+.navlink:hover {
+  color: #22520cc0;
+  background: rgb(252, 248, 248);
+  border-radius: 2px 2px;
+  border-radius: 15px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 3px 2px;
 }
