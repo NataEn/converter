@@ -51,15 +51,20 @@ button.login:hover {
   margin-left: -6%;
   align-self: center;
 }
-.footer,
-.form {
+.footer {
   background: #133503e0;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
 }
 .form {
+  background: #bbbdbae0;
+  color: floralwhite;
+  border: 2px solid #838b0e7a;
   border-radius: 15px;
+  max-width: 90%;
+  margin: 1% auto;
+  padding: 1%;
 }
 .terms,
 .terms:hover {
@@ -89,4 +94,10 @@ div .SelectComponent span .select-span {
 }
 div .Select-value {
   border: 1px solid darkgray !important;
+}
+.input-label {
+  margin: 0px;
+}
+.btn-outline-success {
+  margin: 1%;
 }

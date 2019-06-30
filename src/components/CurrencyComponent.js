@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
-import { Button } from "reactstrap";
+import { Button, Input } from "reactstrap";
 
 class Currency extends Component {
   constructor(props) {
@@ -88,49 +88,45 @@ class Currency extends Component {
 
   renderConvertionContainer = props => {
     const convertionPanel = (
-      <div className="container">
-        <div className="row form">
-          <div className="col-4 col-auto select-div">
-            <span>I have:</span>
-            <SelectComponent
-              className="select-span"
-              {...this.props}
-              rates={this.props.rates}
-              ratesObject={this.props.ratesObject}
-              name="baseRate"
-              onChange={this.handleSelectChange}
-            />
-          </div>
-          <div className="col-4 col-auto">
-            <span>I want:</span>
-            <SelectComponent
-              className="select-span"
-              {...this.props}
-              rates={this.props.rates}
-              ratesObject={this.props.ratesObject}
-              name="toRate"
-              onChange={this.handleSelectChange}
-            />
-          </div>
-          <div className="col-4 col-auto">
-            {" "}
-            <label htmlFor="baseAmount">Amount: </label>
-            <br />
-            <input
-              className="amount-to-convert"
-              type="number"
-              min="0"
-              max="100000000"
-              onChange={this.handleInputChange}
-              id="baseAmount"
-              name="baseAmount"
-            />
-          </div>
-          <div className="col-4 col-auto">
-            <span className="converted-amount">
-              <this.renderAnswer />
-            </span>
-          </div>
+      <div className="row d-flex justify-content-center align-items-center">
+        <div className="col-4 col-auto select-div">
+          <span>I have:</span>
+          <SelectComponent
+            className="select-span"
+            {...this.props}
+            rates={this.props.rates}
+            ratesObject={this.props.ratesObject}
+            name="baseRate"
+            onChange={this.handleSelectChange}
+          />
+        </div>
+        <div className="col-4 col-auto">
+          <span>I want:</span>
+          <SelectComponent
+            className="select-span"
+            {...this.props}
+            rates={this.props.rates}
+            ratesObject={this.props.ratesObject}
+            name="toRate"
+            onChange={this.handleSelectChange}
+          />
+        </div>
+        <div className="col-4 col-auto">
+          {" "}
+          <label className="input-label" htmlFor="baseAmount">
+            Amount:{" "}
+          </label>
+          <Input
+            className="amount-to-convert"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            type="number"
+            min="0"
+            max="100000000"
+            onChange={this.handleInputChange}
+            id="baseAmount"
+            name="baseAmount"
+          />
         </div>
       </div>
     );
@@ -145,20 +141,18 @@ class Currency extends Component {
         <form className="form" onSubmit={values => this.onFormSubmit(values)}>
           {this.renderConvertionContainer()}
           {/* end of convertion container */}
-          <Button
-            className="btn btn-outline-success"
-            type="submit"
-            onClick={this.onFormSubmit}
-          >
-            Calculate
-          </Button>{" "}
-          <Button
-            className="btn btn-outline-warning"
-            type="button"
-            onClick={this.addConvertingLine}
-          >
-            <i className="fa fa-plus fa-lg" /> Add line
-          </Button>
+          <div className="row d-flex justify-content-around align-items-center">
+            <span className="converted-amount">
+              <this.renderAnswer />
+            </span>
+            <Button
+              className="btn btn-outline-success"
+              type="submit"
+              onClick={this.onFormSubmit}
+            >
+              Calculate
+            </Button>{" "}
+          </div>
         </form>
 
         <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
