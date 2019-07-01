@@ -133,9 +133,14 @@ div.sidebar,
 .nav-link-sidebar:hover {
   color: #22520cc0;
   background: rgb(252, 248, 248);
-  border-radius: 2px 2px;
   border-radius: 5px;
   margin-left: 15%;
   margin-right: 15%;
-  padding: 3px 2px;
+  padding: 2px 0px;
+}
+.nav-link-sidebar {
+  border-radius: 5px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 2px 0px;
 }

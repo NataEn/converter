@@ -39,8 +39,9 @@ class Sidebar extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-link nav-link-sidebar" to="/managesaving">
-            <FontAwesomeIcon icon={faHandHoldingUsd} /> <p>Manage Expenses</p>
+          <NavLink className="nav-link nav-link-sidebar" to="/manage">
+            <FontAwesomeIcon icon={faHandHoldingUsd} />
+            <p>Manage Expenses</p>
           </NavLink>
         </NavItem>
       </Nav>

@@ -5,6 +5,7 @@ import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
 import About from "./AboutComponent";
 import Contact from "./ContactComponent";
+import ManageExpenses from "./ManageEspensesComponent";
 import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
@@ -86,7 +87,11 @@ class Main extends Component {
                 component={() => <CurrencyGallery />}
               />
               <Route exact path="/saving" component={() => <SavingTips />} />
-              {/*  add routs from side bar */}
+              <Route
+                exact
+                path="/manage"
+                component={() => <ManageExpenses />}
+              />
               <Redirect to="/home" />
             </Switch>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { SocialIcon } from "react-social-icons";
-import {Nav} from 'react-social-icons'
-import { NavLink } from "react-router-dom";
+import { Nav } from "react-social-icons";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -17,22 +17,22 @@ export const Footer = props => {
           <h4>Navigate</h4>
           <ul className="list-unstyled">
             <li>
-              <NavLink className="nav-link" to="/home">
+              <Link className="nav-link" to="/home">
                 <FontAwesomeIcon icon={faHome} /> {"  "}Home
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink className="nav-link " to="/about">
+              <Link className="nav-link " to="/about">
                 <FontAwesomeIcon icon={faInfo} />
                 {"  "} About
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink className="nav-link" to="/contact">
+              <Link className="nav-link" to="/contact">
                 <FontAwesomeIcon icon={faAddressCard} />
                 {"  "}
                 Contact
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </div>
