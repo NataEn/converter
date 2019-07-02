@@ -144,3 +144,7 @@ div.sidebar,
   margin-right: 15%;
   padding: 2px 0px;
 }
+.currency_image {
+  width: 100%;
+  height: 100%;
+}

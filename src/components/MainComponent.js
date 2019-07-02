@@ -11,6 +11,7 @@ import Currency from "./CurrencyComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
+import { CORRENCY } from "../shared/currenciesData";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import CurrencyGallery from "./CurrencyGalleryComponent";
@@ -66,7 +67,6 @@ class Main extends Component {
           </Col>
 
           <Col xs={11} sm={9}>
-            <h1> Currency Converter</h1>
             <Switch>
               <Route
                 path="/home"
@@ -84,7 +84,7 @@ class Main extends Component {
               <Route
                 exact
                 path="/gallery"
-                component={() => <CurrencyGallery />}
+                component={() => <CurrencyGallery currencies={{ CORRENCY }} />}
               />
               <Route exact path="/saving" component={() => <SavingTips />} />
               <Route
