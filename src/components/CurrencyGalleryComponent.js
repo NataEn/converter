@@ -13,7 +13,11 @@ import {
   ButtonDropdown,
   DropdownMenu,
   DropdownToggle,
-  DropdownItem
+  DropdownItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter
 } from "reactstrap";
 import Currency from "./CurrencyComponent";
 import { Link } from "react-router-dom";
@@ -38,18 +42,38 @@ function RenderCurrencyImage({ currency }) {
 class CurrencyGallery extends Component {
   constructor(props) {
     super(props);
-
+this toggleModal=this.toggleModal.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      modal:false
     };
   }
-
+  AddCurrency = () => {
+    return (
+      <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
+        <ModalBody>
+          <ModalHeader>Add Currency Image</ModalHeader>
+          <ModalFooter>
+            Full Disclosure: we are counting on your personal integrity to Post
+            authentic images and appropriate data and texts
+          </ModalFooter>
+          <Button color='secondary' onClick={this.toggleModal}>close</Button>
+        </ModalBody>
+      </Modal>
+    );
+  };
   toggle() {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
+  toggleModal(){
+    this.setState(prevState => ({
+      modal: !prevState.dropdownOpen
+    }));
+  }
+
   render() {
     // const currencies = this.props.currencies.CURRENCY;
     // console.log("from gallery" + JSON.stringify(gallery));
@@ -86,6 +110,7 @@ class CurrencyGallery extends Component {
               </ButtonDropdown>
               <Button>Strength</Button>
               <Button> Country</Button>
+              <Button>Add Curreccy Image</Button>
             </ButtonGroup>
           </Col>
         </Row>

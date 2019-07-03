@@ -5,7 +5,9 @@ import {
   CardBody,
   CardImg,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText
 } from "reactstrap";
 
 class CurrencyDetail extends Component {
@@ -17,7 +19,7 @@ class CurrencyDetail extends Component {
           top
           width="80%"
           src={this.props.currency[0].image_url}
-          alt={this.props.currency[0].name}
+          alt={this.props.currency[0].image_alt}
         />
         <small> attribute: {this.props.currency[0].attribution}</small>
         <CardBody>
@@ -26,7 +28,10 @@ class CurrencyDetail extends Component {
             <ListGroupItem>type: {this.props.currency[0].type}</ListGroupItem>
             <ListGroupItem>value: {this.props.currency[0].value}</ListGroupItem>
             <ListGroupItem>
-              History: {this.props.currency[0].notes}
+              <ListGroupItemHeading>History</ListGroupItemHeading>
+              <ListGroupItemText>
+                {this.props.currency[0].notes}
+              </ListGroupItemText>
             </ListGroupItem>
           </ListGroup>
         </CardBody>
