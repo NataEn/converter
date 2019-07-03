@@ -22,7 +22,7 @@ import Select, { components } from "react-select";
 function RenderCurrencyImage({ currency }) {
   return (
     <Card>
-      <Link to={`/gallery/`}>
+      <Link to={`/gallery/${currency.id}`}>
         <CardImg
           className="currency_image"
           src={currency.image_url}
@@ -55,7 +55,7 @@ class CurrencyGallery extends Component {
     // console.log("from gallery" + JSON.stringify(gallery));
     const gallery = this.props.currencies.CORRENCY.map(currency => {
       return (
-        <Col key={currency.id} className="col-12 col-md-4 m-1">
+        <Col key={currency.id} sm="4" className="col-12 m-1">
           <RenderCurrencyImage currency={currency} />
         </Col>
       ); //end of return
@@ -72,33 +72,49 @@ class CurrencyGallery extends Component {
           </Col>
         </Row>
         <Row>
-          <ButtonGroup>
-            <ButtonDropdown
-              isOpen={this.state.dropdownOpen}
-              toggle={this.toggle}
-            >
-              <DropdownToggle caret>ABC</DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>A</DropdownItem>
-                <DropdownItem>B</DropdownItem>
-              </DropdownMenu>
-            </ButtonDropdown>
-            <Button>Strongest to Weakest</Button>
-            <Button> Weakest to Strongest</Button>
-            <Button> Country</Button>
-          </ButtonGroup>
+          <Col>
+            <ButtonGroup>
+              <ButtonDropdown
+                isOpen={this.state.dropdownOpen}
+                toggle={this.toggle}
+              >
+                <DropdownToggle caret>ABC</DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>A</DropdownItem>
+                  <DropdownItem>B</DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+              <Button>Strength</Button>
+              <Button> Country</Button>
+            </ButtonGroup>
+          </Col>
         </Row>
         <Row>
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/home">Home</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>
-              <Link to="#">Currency Image Gallery</Link>
-            </BreadcrumbItem>
-          </Breadcrumb>
+          <Col>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/home">Home</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
+                <Link to="#">Currency Image Gallery</Link>
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Col>
         </Row>
+
         {gallery}
+        <Row>
+          <Col>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/home">Home</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
+                <Link to="#">Currency Image Gallery</Link>
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Col>
+        </Row>
       </div>
     );
   }

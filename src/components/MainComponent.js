@@ -8,6 +8,7 @@ import Contact from "./ContactComponent";
 import ManageExpenses from "./ManageEspensesComponent";
 import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
+import CurrencyDetail from "./CurrencyDetailComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
@@ -54,6 +55,12 @@ class Main extends Component {
     console.log("amountValue:" + amount);
     return amount * (toRateValue / fromRateValue);
   }
+  GalleryImage({ match }) {
+    let selectedCurrency = CORRENCY.filter(
+      currency => parseInt(match.params.id, 10) === currency.id
+    );
+    return <CurrencyDetail currency={selectedCurrency} />;
+  }
   render() {
     return (
       <Container>
@@ -70,7 +77,7 @@ class Main extends Component {
             <Switch>
               <Route
                 path="/home"
-                component={() => (
+                render={() => (
                   <Currency
                     {...this.props}
                     rates={this.state.ratesCurrencies}
@@ -79,19 +86,17 @@ class Main extends Component {
                   />
                 )}
               />
-              <Route exact path="/about" component={() => <About />} />
-              <Route exact path="/contact" component={() => <Contact />} />
+              <Route exact path="/about" render={() => <About />} />
+              <Route exact path="/contact" render={() => <Contact />} />
               <Route
                 exact
                 path="/gallery"
-                component={() => <CurrencyGallery currencies={{ CORRENCY }} />}
+                render={() => <CurrencyGallery currencies={{ CORRENCY }} />}
               />
-              <Route exact path="/saving" component={() => <SavingTips />} />
-              <Route
-                exact
-                path="/manage"
-                component={() => <ManageExpenses />}
-              />
+              <Route exact path="/gallery/:id" component={this.GalleryImage} />
+              <Route exact path="/saving" render={() => <SavingTips />} />
+              <Route exact path="/manage" render={() => <ManageExpenses />} />
+
               <Redirect to="/home" />
             </Switch>
 
