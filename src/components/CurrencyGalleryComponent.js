@@ -17,7 +17,13 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  ModalFooter
+  ModalFooter,
+  Form,
+  FormFeedback,
+  Label,
+  Input,
+  FormGroup,
+  FormText
 } from "reactstrap";
 import Currency from "./CurrencyComponent";
 import { Link } from "react-router-dom";
@@ -42,35 +48,22 @@ function RenderCurrencyImage({ currency }) {
 class CurrencyGallery extends Component {
   constructor(props) {
     super(props);
-this toggleModal=this.toggleModal.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.state = {
       dropdownOpen: false,
-      modal:false
+      modal: false
     };
   }
-  AddCurrency = () => {
-    return (
-      <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
-        <ModalBody>
-          <ModalHeader>Add Currency Image</ModalHeader>
-          <ModalFooter>
-            Full Disclosure: we are counting on your personal integrity to Post
-            authentic images and appropriate data and texts
-          </ModalFooter>
-          <Button color='secondary' onClick={this.toggleModal}>close</Button>
-        </ModalBody>
-      </Modal>
-    );
-  };
-  toggle() {
+
+  toggleDropdown() {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-  toggleModal(){
+  toggleModal() {
     this.setState(prevState => ({
-      modal: !prevState.dropdownOpen
+      modal: !prevState.modal
     }));
   }
 
@@ -84,9 +77,40 @@ this toggleModal=this.toggleModal.bind(this);
         </Col>
       ); //end of return
     }); //end of gallery
-    const AddImage = () => {
-      return <div>Model Form for adding image</div>;
-    };
+    const AddCurrency = (
+      <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
+        {console.log("modal was opened")}
+        <ModalBody>
+          <ModalHeader>Add Currency Image</ModalHeader>
+          <Form>
+            <FormGroup>
+              <Label for="exampleEmail">Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="exampleEmail"
+                placeholder="with a placeholder"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleFile">File</Label>
+              <Input type="file" name="file" id="exampleFile" />
+              <FormText color="muted">
+                This is some placeholder block-level help text for the above
+                input. It's a bit lighter and easily wraps to a new line.
+              </FormText>
+            </FormGroup>
+          </Form>
+          <ModalFooter>
+            Full Disclosure: we are counting on your personal integrity to Post
+            authentic images and appropriate data.
+          </ModalFooter>
+          <Button color="secondary" onClick={this.toggleModal}>
+            close
+          </Button>
+        </ModalBody>
+      </Modal>
+    );
 
     return (
       <div className="container">
@@ -95,12 +119,13 @@ this toggleModal=this.toggleModal.bind(this);
             <h1>Currency Gallery</h1>
           </Col>
         </Row>
+
         <Row>
           <Col>
             <ButtonGroup>
               <ButtonDropdown
                 isOpen={this.state.dropdownOpen}
-                toggle={this.toggle}
+                toggle={this.toggleDropdown}
               >
                 <DropdownToggle caret>ABC</DropdownToggle>
                 <DropdownMenu>
@@ -110,7 +135,7 @@ this toggleModal=this.toggleModal.bind(this);
               </ButtonDropdown>
               <Button>Strength</Button>
               <Button> Country</Button>
-              <Button>Add Curreccy Image</Button>
+              <Button onClick={this.toggleModal}>Add Curreccy Image</Button>
             </ButtonGroup>
           </Col>
         </Row>
@@ -126,7 +151,7 @@ this toggleModal=this.toggleModal.bind(this);
             </Breadcrumb>
           </Col>
         </Row>
-
+        {AddCurrency}
         {gallery}
         <Row>
           <Col>
