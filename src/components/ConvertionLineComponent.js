@@ -14,22 +14,25 @@ const IconOption = props => {
         height={20}
         alt={props.data.lable}
       />
-      <strong>{" " + props.data.currency}</strong>
       <span>{" " + props.data.label}</span>
+
+      <strong>{" " + props.data.currency}</strong>
     </Option>
   );
 };
 const SingleValue = ({ ...props }) => (
   <components.SingleValue {...props}>
-    <img
-      className="option-image"
-      src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
-      width={30}
-      height={20}
-      alt={props.data.lable}
-    />
+    <span>
+      <img
+        className="option-image"
+        src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
+        width={30}
+        height={20}
+        alt={props.data.lable}
+      />
+      <span>{" " + props.data.label}</span>
+    </span>
     <strong>{" " + props.data.currency}</strong>
-    <span>{" " + props.data.label}</span>
   </components.SingleValue>
 );
 
@@ -39,7 +42,7 @@ const colourStyles = {
     borderRadius: 5,
     color: "black",
     background: "white",
-    display: "block",
+    display: "flex",
     "font-size": "0.8em",
     ":hover": { background: "#dde0d8" }
   })

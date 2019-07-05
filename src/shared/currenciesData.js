@@ -1,7 +1,8 @@
 export const CORRENCY = [
   {
     id: 1,
-    name: "euro",
+    name: "aeuro",
+    country: "",
     type: "coin",
     value: "1",
     inuse: true,
@@ -15,7 +16,8 @@ export const CORRENCY = [
   },
   {
     id: 2,
-    name: "euro",
+    name: "beuro",
+    country: "",
     type: "bill",
     value: "5,10,20,50,100,200,",
     inuse: true,
@@ -30,7 +32,8 @@ export const CORRENCY = [
   },
   {
     id: 3,
-    name: "euro",
+    name: "ceuro",
+    country: "",
     type: "bill",
     value: "5,10,20,50,100,200,",
     inuse: true,

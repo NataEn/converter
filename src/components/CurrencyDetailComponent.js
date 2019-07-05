@@ -14,7 +14,7 @@ class CurrencyDetail extends Component {
   render() {
     console.log("from currency detail" + JSON.stringify(this.props.currency));
     return (
-      <Card>
+      <Card key={this.props.currency[0].id}>
         <CardImg
           top
           width="80%"
