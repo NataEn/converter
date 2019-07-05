@@ -13,6 +13,7 @@ import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { CORRENCY } from "../shared/currenciesData";
+import CurrencyAccordingtoABC from "../shared/CurrencyGalleryArrange";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import CurrencyGallery from "./CurrencyGalleryComponent";
@@ -91,7 +92,12 @@ class Main extends Component {
               <Route
                 exact
                 path="/gallery"
-                render={() => <CurrencyGallery currencies={{ CORRENCY }} />}
+                render={() => (
+                  <CurrencyGallery
+                    currencies={{ CORRENCY }}
+                    currenciesABC={CurrencyAccordingtoABC}
+                  />
+                )}
               />
               <Route exact path="/gallery/:id" component={this.GalleryImage} />
               <Route exact path="/saving" render={() => <SavingTips />} />

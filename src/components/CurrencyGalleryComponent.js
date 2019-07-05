@@ -9,7 +9,6 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
-  ButtonGroup,
   ButtonDropdown,
   DropdownMenu,
   DropdownToggle,
@@ -80,7 +79,9 @@ class CurrencyGallery extends Component {
       }
       return n;
     };
-    console.log(abcd());
+    //console.log(abcd());
+    const galleryABC = this.props.currenciesABC;
+
     const gallery = this.props.currencies.CORRENCY.map(currency => {
       return (
         <Col key={currency.id} sm="4" className="col-12 m-1">
@@ -192,6 +193,7 @@ class CurrencyGallery extends Component {
                 })}
               </DropdownMenu>
             </ButtonDropdown>
+            {"  "}
             <ButtonDropdown
               isOpen={this.state.dropdownOpen}
               toggle={this.toggleDropdown}
@@ -204,7 +206,9 @@ class CurrencyGallery extends Component {
                 <DropdownItem>Weekest to Strongest</DropdownItem>
               </DropdownMenu>
             </ButtonDropdown>
+            {"  "}
             <Button size="sm"> Country</Button>
+            {"  "}
             <Button size="sm" onClick={this.toggleModal}>
               Add Image
             </Button>
@@ -224,6 +228,7 @@ class CurrencyGallery extends Component {
         </Row>
         {AddCurrency}
         {gallery}
+        {galleryABC}
         <Row>
           <Col>
             <Breadcrumb>
