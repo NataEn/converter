@@ -1,4 +1,4 @@
-export const CORRENCY = [
+export const IMAGE = [
   {
     id: 1,
     name: "beuro",

@@ -8,15 +8,15 @@ import Contact from "./ContactComponent";
 import ManageExpenses from "./ManageEspensesComponent";
 import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
-import CurrencyDetail from "./CurrencyDetailComponent";
+import ImageDetail from "./ImageDetailComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
-import { CORRENCY } from "../shared/currenciesData";
-import CurrencyAccordingtoABC from "../shared/CurrencyGalleryArrange";
+import { IMAGE } from "../shared/ImagesData";
+import GalleryAccordingtoABC from "../shared/CurrencyGalleryArrange";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import CurrencyGallery from "./CurrencyGalleryComponent";
+import ImageGallery from "./ImageGalleryComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -28,9 +28,9 @@ class Main extends Component {
     };
 
     this.axios = axios.create({
-      baseURL: "http://data.fixer.io/api/"
+      // baseURL: "http://data.fixer.io/api/"
     });
-    console.log(JSON.stringify(this.state.rates));
+    //console.log(JSON.stringify(this.state.rates));
     this.axiosConvert = this.axiosConvert.bind(this);
   }
   componentDidMount() {
@@ -51,16 +51,18 @@ class Main extends Component {
   axiosConvert(amount, fromRate, toRate) {
     const fromRateValue = this.state.rates[fromRate];
     const toRateValue = this.state.rates[toRate];
-    console.log("fromRateValue:" + fromRateValue);
-    console.log("toRateValue:" + toRateValue);
-    console.log("amountValue:" + amount);
+    //console.log("fromRateValue:" + fromRateValue);
+    //console.log("toRateValue:" + toRateValue);
+    //console.log("amountValue:" + amount);
     return amount * (toRateValue / fromRateValue);
   }
   GalleryImage({ match }) {
-    let selectedCurrency = CORRENCY.filter(
-      currency => parseInt(match.params.id, 10) === currency.id
+    let selectedImage = IMAGE.filter(
+      image => parseInt(match.params.id, 10) === image.id
     );
-    return <CurrencyDetail currency={selectedCurrency} />;
+    return (
+      <ImageDetail key={parseInt(match.params.id, 10)} image={selectedImage} />
+    );
   }
   render() {
     return (
@@ -93,9 +95,9 @@ class Main extends Component {
                 exact
                 path="/gallery"
                 render={() => (
-                  <CurrencyGallery
-                    currencies={{ CORRENCY }}
-                    currenciesABC={CurrencyAccordingtoABC}
+                  <ImageGallery
+                    images={{ IMAGE }}
+                    //imagesABC={{ GalleryAccordingtoABC }}
                   />
                 )}
               />

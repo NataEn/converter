@@ -25,33 +25,48 @@ import {
   FormText,
   Badge
 } from "reactstrap";
-import Currency from "./CurrencyComponent";
+//import Currency from "./CurrencyComponent";
 import { Link } from "react-router-dom";
-import Select, { components } from "react-select";
+//import Select, { components } from "react-select";
+import { ArrayAccordingtoLetterF } from "../shared/CurrencyGalleryArrange";
 
-function RenderCurrencyImage({ currency }) {
+function RenderCurrencyImage({ image }) {
   return (
     <Card>
-      <Link to={`/gallery/${currency.id}`}>
+      <Link to={`/gallery/${image.id}`}>
         <CardImg
           className="currency_image"
-          src={currency.image_url}
-          alt={currency.image_alt}
+          src={image.image_url}
+          alt={image.image_alt}
         />
 
-        <CardTitle>{currency.image_alt}</CardTitle>
+        <CardTitle>{image.image_alt}</CardTitle>
       </Link>
     </Card>
   );
 }
+//should be send to main component:
+// function RenderGalleryView(identifier){
+//   if(identifier==0){
+//     return (this.props.images.map(image => {
+//       return (
+//         <Col key={image.id} sm="4" className="col-12 m-1">
+//           <RenderCurrencyImage image={image} />
+//         </Col>
+//       );
+//   }))
+// }
 
-class CurrencyGallery extends Component {
+class ImageGallery extends Component {
   constructor(props) {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDropdownABC = this.toggleDropdownABC.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.onLetterSelect = this.onLetterSelect.bind(this);
     this.state = {
       dropdownOpen: false,
+      dropdownABCOpen: false,
       modal: false
     };
   }
@@ -61,15 +76,22 @@ class CurrencyGallery extends Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
+  toggleDropdownABC() {
+    this.setState(prevState => ({
+      dropdownABCOpen: !prevState.dropdownABCOpen
+    }));
+  }
   toggleModal() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
+  onLetterSelect(letter) {
+    console.log(letter);
+    let array = ArrayAccordingtoLetterF(letter);
+  }
 
   render() {
-    // const currencies = this.props.currencies.CURRENCY;
-    // console.log("from gallery" + JSON.stringify(gallery));
     const abcd = () => {
       let n = [];
       var letter = "";
@@ -79,13 +101,13 @@ class CurrencyGallery extends Component {
       }
       return n;
     };
-    //console.log(abcd());
-    const galleryABC = this.props.currenciesABC;
 
-    const gallery = this.props.currencies.CORRENCY.map(currency => {
+    const galleryABC = this.props.imagesABC;
+
+    const gallery = this.props.images.IMAGE.map(image => {
       return (
-        <Col key={currency.id} sm="4" className="col-12 m-1">
-          <RenderCurrencyImage currency={currency} />
+        <Col key={image.id} sm="4" className="col-12 m-1">
+          <RenderCurrencyImage image={image} />
         </Col>
       ); //end of return
     }); //end of gallery
@@ -160,8 +182,9 @@ class CurrencyGallery extends Component {
         <Row>
           <Col>
             <ButtonDropdown
-              isOpen={this.state.dropdownOpen}
-              toggle={this.toggleDropdown}
+              isOpen={this.state.dropdownABCOpen}
+              toggle={this.toggleDropdownABC}
+              onClick={this.selectLetter}
               size="sm"
             >
               <Button id="caret">ABC</Button>
@@ -186,7 +209,10 @@ class CurrencyGallery extends Component {
               >
                 {abcd().map(letter => {
                   return (
-                    <DropdownItem>
+                    <DropdownItem
+                      key={letter}
+                      onClick={() => this.onLetterSelect({ letter })}
+                    >
                       {letter} <Badge pill>2</Badge>
                     </DropdownItem>
                   );
@@ -227,6 +253,7 @@ class CurrencyGallery extends Component {
           </Col>
         </Row>
         {AddCurrency}
+
         {gallery}
         {galleryABC}
         <Row>
@@ -245,4 +272,4 @@ class CurrencyGallery extends Component {
     );
   }
 }
-export default CurrencyGallery;
+export default ImageGallery;
