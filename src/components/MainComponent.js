@@ -13,7 +13,7 @@ import { SpiningRates } from "./SpiningRatesComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { IMAGE } from "../shared/ImagesData";
-import GalleryAccordingtoABC from "../shared/CurrencyGalleryArrange";
+import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import ImageGallery from "./ImageGalleryComponent";
@@ -56,6 +56,8 @@ class Main extends Component {
     //console.log("amountValue:" + amount);
     return amount * (toRateValue / fromRateValue);
   }
+
+  //match object coming from the selected gallery image
   GalleryImage({ match }) {
     let selectedImage = IMAGE.filter(
       image => parseInt(match.params.id, 10) === image.id
@@ -97,7 +99,7 @@ class Main extends Component {
                 render={() => (
                   <ImageGallery
                     images={{ IMAGE }}
-                    //imagesABC={{ GalleryAccordingtoABC }}
+                    abcview={{ GalleryAccordingtoABC }}
                   />
                 )}
               />

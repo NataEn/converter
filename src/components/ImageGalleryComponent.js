@@ -28,7 +28,8 @@ import {
 //import Currency from "./CurrencyComponent";
 import { Link } from "react-router-dom";
 //import Select, { components } from "react-select";
-import { ArrayAccordingtoLetterF } from "../shared/CurrencyGalleryArrange";
+import { IMAGE } from "../shared/ImagesData";
+import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
 
 function RenderCurrencyImage({ image }) {
   return (
@@ -45,17 +46,45 @@ function RenderCurrencyImage({ image }) {
     </Card>
   );
 }
-//should be send to main component:
-// function RenderGalleryView(identifier){
-//   if(identifier==0){
-//     return (this.props.images.map(image => {
-//       return (
-//         <Col key={image.id} sm="4" className="col-12 m-1">
-//           <RenderCurrencyImage image={image} />
-//         </Col>
-//       );
-//   }))
-// }
+
+function RenderGalleryView(selectedView) {
+  var view = <div>view</div>;
+  console.log("entered RenderGalleryView" + selectedView);
+  if (selectedView === "none") {
+    console.log("selected none");
+    view = IMAGE.map(image => {
+      return (
+        <Col key={image.id} sm="4" className="col-12 m-1">
+          <RenderCurrencyImage image={image} />
+        </Col>
+      ); //end of return
+    });
+  } else if (selectedView === "ABC") {
+    console.log("selected ABC");
+    view = Object.keys(GalleryAccordingtoABC).map(letter => {
+      const viewinner = GalleryAccordingtoABC[letter].map(image => {
+        console.log("from inner map " + JSON.stringify(image));
+        return (
+          <Col key={image.id} sm="4" className="col-12 m-1">
+            <RenderCurrencyImage image={image} />
+          </Col>
+        ); //ende of map return
+      }); //end of view
+      return viewinner;
+    });
+  } else {
+    Object.keys(GalleryAccordingtoABC).filter(letter => {
+      if (letter == selectedView) {
+        return (
+          <Col key={letter.image.id} sm="4" className="col-12 m-1">
+            <RenderCurrencyImage image={GalleryAccordingtoABC[letter].image} />
+          </Col>
+        );
+      }
+    });
+  }
+  return console.log("view" + JSON.stringify(view));
+}
 
 class ImageGallery extends Component {
   constructor(props) {
@@ -64,10 +93,12 @@ class ImageGallery extends Component {
     this.toggleDropdownABC = this.toggleDropdownABC.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.onLetterSelect = this.onLetterSelect.bind(this);
+
     this.state = {
       dropdownOpen: false,
       dropdownABCOpen: false,
-      modal: false
+      modal: false,
+      abcImages: GalleryAccordingtoABC
     };
   }
 
@@ -88,7 +119,22 @@ class ImageGallery extends Component {
   }
   onLetterSelect(letter) {
     console.log(letter);
-    let array = ArrayAccordingtoLetterF(letter);
+    RenderGalleryView(letter);
+    return;
+  }
+  onLetterSelectArray(letter, array) {
+    return (
+      <React.Fragment>
+        <h1>{letter}</h1>
+        {array.map(image => {
+          return (
+            <Col key={image.id} sm="4" className="col-12 m-1">
+              <RenderCurrencyImage image={image} />
+            </Col>
+          );
+        })}
+      </React.Fragment>
+    );
   }
 
   render() {
@@ -101,16 +147,25 @@ class ImageGallery extends Component {
       }
       return n;
     };
-
-    const galleryABC = this.props.imagesABC;
-
-    const gallery = this.props.images.IMAGE.map(image => {
+    let abc = Object.keys(this.state.abcImages);
+    let galleryLetter = abc.map(arrayLetter => {
+      return (
+        <Col key={arrayLetter} sm="4" className="col-12 m-1">
+          {this.onLetterSelectArray(
+            { arrayLetter },
+            this.state.abcImages[arrayLetter]
+          )}
+        </Col>
+      );
+    });
+    let galleryView = this.props.images.IMAGE.map(image => {
       return (
         <Col key={image.id} sm="4" className="col-12 m-1">
           <RenderCurrencyImage image={image} />
         </Col>
       ); //end of return
     }); //end of gallery
+    let view = () => <RenderGalleryView />;
     const AddCurrency = (
       <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
         <ModalBody>
@@ -184,7 +239,7 @@ class ImageGallery extends Component {
             <ButtonDropdown
               isOpen={this.state.dropdownABCOpen}
               toggle={this.toggleDropdownABC}
-              onClick={this.selectLetter}
+              onClick={this.renderSelectView}
               size="sm"
             >
               <Button id="caret">ABC</Button>
@@ -207,11 +262,17 @@ class ImageGallery extends Component {
                   }
                 }}
               >
+                <DropdownItem onClick={() => this.onLetterSelect("none")}>
+                  none <Badge pill>2</Badge>
+                </DropdownItem>
+                <DropdownItem onClick={() => this.onLetterSelect("ABC")}>
+                  ABC <Badge pill>2</Badge>
+                </DropdownItem>
                 {abcd().map(letter => {
                   return (
                     <DropdownItem
                       key={letter}
-                      onClick={() => this.onLetterSelect({ letter })}
+                      onClick={() => this.onLetterSelect(letter)}
                     >
                       {letter} <Badge pill>2</Badge>
                     </DropdownItem>
@@ -223,6 +284,7 @@ class ImageGallery extends Component {
             <ButtonDropdown
               isOpen={this.state.dropdownOpen}
               toggle={this.toggleDropdown}
+              onClick={this.renderSelectView}
               size="sm"
             >
               <Button id="caret">Strength</Button>
@@ -233,7 +295,11 @@ class ImageGallery extends Component {
               </DropdownMenu>
             </ButtonDropdown>
             {"  "}
-            <Button size="sm"> Country</Button>
+
+            <Button size="sm" onClick={this.renderSelectView}>
+              {" "}
+              Country
+            </Button>
             {"  "}
             <Button size="sm" onClick={this.toggleModal}>
               Add Image
@@ -254,8 +320,12 @@ class ImageGallery extends Component {
         </Row>
         {AddCurrency}
 
-        {gallery}
-        {galleryABC}
+        {galleryView}
+        <h1>Selected view</h1>
+        {RenderGalleryView}
+        {galleryLetter}
+        {view}
+
         <Row>
           <Col>
             <Breadcrumb>

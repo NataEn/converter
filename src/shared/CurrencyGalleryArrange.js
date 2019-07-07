@@ -45,5 +45,5 @@ const GalleryAccordingtoABCF = () => {
 let array = GalleryAccordingtoABCF();
 console.log("GalleryAccordingtoABCF" + ["a", "b", "c", "d"] + array);
 console.log("GalleryAccordingtoABCF" + JSON.stringify(array));
-const GalleryAccordingtoABC = GalleryAccordingtoABCF();
-export default GalleryAccordingtoABC;
+export const GalleryAccordingtoABC = GalleryAccordingtoABCF();
+
