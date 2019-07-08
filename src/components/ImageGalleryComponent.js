@@ -46,44 +46,58 @@ function RenderCurrencyImage({ image }) {
     </Card>
   );
 }
-
-function RenderGalleryView(selectedView) {
-  var view = <div>view</div>;
-  console.log("entered RenderGalleryView" + selectedView);
-  if (selectedView === "none") {
-    console.log("selected none");
-    view = IMAGE.map(image => {
-      return (
-        <Col key={image.id} sm="4" className="col-12 m-1">
-          <RenderCurrencyImage image={image} />
-        </Col>
-      ); //end of return
-    });
+function RenderGalleryView({ selectedView, imagesSource }) {
+  //console.log("entered RenderGalleryView" + selectedView);
+  if (selectedView === "none" || selectedView === "") {
+    //console.log("selected none");
+    return (
+      <div>
+        <h4>{selectedView}</h4>
+        {imagesSource.map(image => {
+          return (
+            <Col key={image.id} sm="4" className="col-12 m-1">
+              <RenderCurrencyImage image={image} />
+            </Col>
+          );
+        })}
+      </div>
+    );
   } else if (selectedView === "ABC") {
-    console.log("selected ABC");
-    view = Object.keys(GalleryAccordingtoABC).map(letter => {
-      const viewinner = GalleryAccordingtoABC[letter].map(image => {
-        console.log("from inner map " + JSON.stringify(image));
-        return (
-          <Col key={image.id} sm="4" className="col-12 m-1">
-            <RenderCurrencyImage image={image} />
-          </Col>
-        ); //ende of map return
-      }); //end of view
-      return viewinner;
-    });
+    return (
+      <div>
+        <h4>{selectedView}</h4>
+        {Object.keys(imagesSource).map(letter => {
+          return (
+            <div key={letter}>
+              <h3>{letter}</h3>
+              {imagesSource[`${letter}`].map(image => {
+                console.log("from inner map " + selectedView);
+                return (
+                  <Col key={image.id} sm="6" className="col-12 m-1">
+                    <RenderCurrencyImage image={image} />
+                  </Col>
+                ); //ende of map return
+              })}
+            </div>
+          );
+        })}
+      </div>
+    );
   } else {
-    Object.keys(GalleryAccordingtoABC).filter(letter => {
-      if (letter == selectedView) {
-        return (
-          <Col key={letter.image.id} sm="4" className="col-12 m-1">
-            <RenderCurrencyImage image={GalleryAccordingtoABC[letter].image} />
-          </Col>
-        );
-      }
-    });
+    return (
+      <div>
+        <h4>{selectedView}</h4>
+        {imagesSource[`${selectedView.toLowerCase()}`].map(image => {
+          //console.log("from inner map " + selectedView);
+          return (
+            <Col key={image.id} sm="4" className="col-12 m-1">
+              <RenderCurrencyImage image={image} />
+            </Col>
+          ); //ende of map return
+        })}
+      </div>
+    );
   }
-  return console.log("view" + JSON.stringify(view));
 }
 
 class ImageGallery extends Component {
@@ -98,7 +112,8 @@ class ImageGallery extends Component {
       dropdownOpen: false,
       dropdownABCOpen: false,
       modal: false,
-      abcImages: GalleryAccordingtoABC
+      imagesSource: IMAGE,
+      selectedView: ""
     };
   }
 
@@ -117,47 +132,28 @@ class ImageGallery extends Component {
       modal: !prevState.modal
     }));
   }
-  onLetterSelect(letter) {
-    console.log(letter);
-    RenderGalleryView(letter);
+  onLetterSelect(view) {
+    //console.log("view" + view);
+    this.setState({ selectedView: view });
+    if (view === "none") {
+      this.setState({ imagesSource: IMAGE });
+    } else {
+      this.setState({ imagesSource: GalleryAccordingtoABC });
+    }
     return;
-  }
-  onLetterSelectArray(letter, array) {
-    return (
-      <React.Fragment>
-        <h1>{letter}</h1>
-        {array.map(image => {
-          return (
-            <Col key={image.id} sm="4" className="col-12 m-1">
-              <RenderCurrencyImage image={image} />
-            </Col>
-          );
-        })}
-      </React.Fragment>
-    );
   }
 
   render() {
     const abcd = () => {
-      let n = [];
+      let abc = [];
       var letter = "";
       for (var i = 0; i < 26; i++) {
         letter = String.fromCharCode(65 + i);
-        n.push(letter);
+        abc.push(letter);
       }
-      return n;
+      return abc;
     };
-    let abc = Object.keys(this.state.abcImages);
-    let galleryLetter = abc.map(arrayLetter => {
-      return (
-        <Col key={arrayLetter} sm="4" className="col-12 m-1">
-          {this.onLetterSelectArray(
-            { arrayLetter },
-            this.state.abcImages[arrayLetter]
-          )}
-        </Col>
-      );
-    });
+
     let galleryView = this.props.images.IMAGE.map(image => {
       return (
         <Col key={image.id} sm="4" className="col-12 m-1">
@@ -165,7 +161,14 @@ class ImageGallery extends Component {
         </Col>
       ); //end of return
     }); //end of gallery
-    let view = () => <RenderGalleryView />;
+
+    const galleryView2 = (
+      <RenderGalleryView
+        selectedView={this.state.selectedView}
+        imagesSource={this.state.imagesSource}
+      /> //end of return
+    ); //end of gallery
+
     const AddCurrency = (
       <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
         <ModalBody>
@@ -322,9 +325,7 @@ class ImageGallery extends Component {
 
         {galleryView}
         <h1>Selected view</h1>
-        {RenderGalleryView}
-        {galleryLetter}
-        {view}
+        {galleryView2}
 
         <Row>
           <Col>
