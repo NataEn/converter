@@ -100,6 +100,8 @@ class Main extends Component {
                   <ImageGallery
                     images={{ IMAGE }}
                     abcview={{ GalleryAccordingtoABC }}
+                    rates={this.state.ratesCurrencies}
+                    ratesObject={this.state.rates}
                   />
                 )}
               />

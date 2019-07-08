@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 //import Select, { components } from "react-select";
 import { IMAGE } from "../shared/ImagesData";
 import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
+import SelectCountry from "./SelectCountryComponent";
 
 function RenderCurrencyImage({ image }) {
   return (
@@ -107,12 +108,14 @@ class ImageGallery extends Component {
     this.toggleDropdownABC = this.toggleDropdownABC.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.onLetterSelect = this.onLetterSelect.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
 
     this.state = {
       dropdownOpen: false,
       dropdownABCOpen: false,
       modal: false,
       imagesSource: IMAGE,
+      country: "",
       selectedView: ""
     };
   }
@@ -131,6 +134,11 @@ class ImageGallery extends Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
+  }
+  handleSelectChange(value, name) {
+    //console.log("from handleselectchange" + JSON.stringify(value));
+    //console.log("from handleselectchange" + JSON.stringify(name));
+    this.setState({ [name]: value });
   }
   onLetterSelect(view) {
     //console.log("view" + view);
@@ -153,6 +161,16 @@ class ImageGallery extends Component {
       }
       return abc;
     };
+    const stateSelect = (
+      <SelectCountry
+        className="select-span"
+        {...this.props}
+        rates={this.props.rates}
+        ratesObject={this.props.ratesObject}
+        name="country"
+        onChange={this.handleSelectChange}
+      />
+    );
 
     const galleryView = (
       <RenderGalleryView
@@ -291,10 +309,8 @@ class ImageGallery extends Component {
             </ButtonDropdown>
             {"  "}
 
-            <Button size="sm" onClick={this.renderSelectView}>
-              {" "}
-              Country
-            </Button>
+            {stateSelect}
+
             {"  "}
             <Button size="sm" onClick={this.toggleModal}>
               Add Image

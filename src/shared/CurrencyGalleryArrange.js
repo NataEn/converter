@@ -14,22 +14,6 @@ export const ArrayAccordingtoLetterF = letter => {
   return letterArray;
 };
 
-//arrange array according to the abc
-const ABCArrange = array => {
-  let newArray = [];
-  let i = 0;
-
-  while (array.length > 0) {
-    if (array[i].name.localeCompare(array[i + 1].name) === 0) {
-      newArray.push(array[i].name);
-    } else if (array[i].name.localeCompare(array[i + 1].name) < 0) {
-      newArray.push(array[i + 1]);
-    } else {
-      newArray.push(array[i]);
-    }
-    i++;
-  }
-};
 //arrange Gallery according to ABC
 const GalleryAccordingtoABCF = () => {
   var abcArray = new Object();
@@ -43,7 +27,5 @@ const GalleryAccordingtoABCF = () => {
   return abcArray;
 };
 let array = GalleryAccordingtoABCF();
-console.log("GalleryAccordingtoABCF" + ["a", "b", "c", "d"] + array);
 console.log("GalleryAccordingtoABCF" + JSON.stringify(array));
 export const GalleryAccordingtoABC = GalleryAccordingtoABCF();
-

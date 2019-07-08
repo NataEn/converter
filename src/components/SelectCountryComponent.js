@@ -23,17 +23,17 @@ const IconOption = props => {
 };
 const SingleValue = ({ ...props }) => (
   <components.SingleValue {...props}>
-    <div>
+    <span>
       <img
         className="option-image"
         src={process.env.PUBLIC_URL + `/flags/${props.data.flagpath}`}
         width={30}
         height={20}
         alt={props.data.lable}
-      />{" "}
-      {props.data.label}{" "}
-      <strong style={{ fontSize: "0.8em" }}>{props.data.currency}</strong>
-    </div>
+      />
+      <span>{" " + props.data.label}</span>
+    </span>
+    <strong>{" " + props.data.currency}</strong>
   </components.SingleValue>
 );
 
@@ -49,10 +49,10 @@ const colourStyles = {
   })
 };
 
-class SelectComponent extends Component {
+class SelectCountry extends Component {
   constructor(props) {
     super(props);
-    this.selectName = React.createRef();
+    //this.selectName = React.createRef();
     this.state = {
       selectedOption: null,
       name: ""
@@ -62,6 +62,7 @@ class SelectComponent extends Component {
   handleChange = selectedOption => {
     this.setState({ selectedOption: selectedOption });
     console.log(`Option selected:`, selectedOption.value);
+    console.log(`Option selected:`, selectedOption);
     const value = selectedOption.value;
     const name = this.props.name;
     return this.props.onChange(value, name);
@@ -72,7 +73,7 @@ class SelectComponent extends Component {
     const countryObject = CountryObject;
     let options = countryObject.map(opt => ({
       label: opt.country,
-      value: opt.currencyCode,
+      value: opt.country,
       currency: opt.currencyCode,
       flagpath: opt.image
     }));
@@ -80,7 +81,7 @@ class SelectComponent extends Component {
       <Select
         options={options}
         components={{ Option: IconOption, SingleValue: SingleValue }}
-        placeholder="Select Rate"
+        placeholder="Select Country"
         ratesObject={ratesObject}
         getOptionValue={option => option["flagpath"]}
         styles={colourStyles}
@@ -94,4 +95,4 @@ class SelectComponent extends Component {
   }
 }
 
-export default SelectComponent;
+export default SelectCountry;
