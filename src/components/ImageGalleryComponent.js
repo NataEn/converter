@@ -154,15 +154,7 @@ class ImageGallery extends Component {
       return abc;
     };
 
-    let galleryView = this.props.images.IMAGE.map(image => {
-      return (
-        <Col key={image.id} sm="4" className="col-12 m-1">
-          <RenderCurrencyImage image={image} />
-        </Col>
-      ); //end of return
-    }); //end of gallery
-
-    const galleryView2 = (
+    const galleryView = (
       <RenderGalleryView
         selectedView={this.state.selectedView}
         imagesSource={this.state.imagesSource}
@@ -322,10 +314,8 @@ class ImageGallery extends Component {
           </Col>
         </Row>
         {AddCurrency}
-
-        {galleryView}
         <h1>Selected view</h1>
-        {galleryView2}
+        {galleryView}
 
         <Row>
           <Col>
