@@ -38,7 +38,7 @@ class SelectABC extends Component {
   handleChange = selectedOption => {
     if (selectedOption) {
       this.setState({ selectedOption: selectedOption });
-      //console.log(`Option selected array:`, selectedOption);
+      console.log(`Option selected array:`, selectedOption);
       const value = selectedOption;
       const name = this.props.name;
       return this.props.onChange(value, name);
@@ -49,8 +49,7 @@ class SelectABC extends Component {
   render() {
     const abcd = () => {
       let abc = [];
-      abc.push("none");
-      abc.push("ABC");
+
       var letter = "";
       for (var i = 0; i < 26; i++) {
         letter = String.fromCharCode(65 + i);

@@ -1,4 +1,5 @@
 import { IMAGE } from "./ImagesData";
+import { IMAGES } from "./ImagesData.1";
 
 //makeup array with name startimg from the same letter
 export const ArrayAccordingtoLetterF = letter => {
@@ -26,6 +27,37 @@ const GalleryAccordingtoABCF = () => {
   }
   return abcArray;
 };
-let array = GalleryAccordingtoABCF();
-//console.log("GalleryAccordingtoABCF" + JSON.stringify(array));
+
 export const GalleryAccordingtoABC = GalleryAccordingtoABCF();
+
+// export function imagesByLetter(letter) {
+//   //console.log("IMAGES[0][letter]" + JSON.stringify(IMAGES[0][letter]));
+//   return IMAGES[0][letter];
+// }
+// //export function imagesByCountry(country) {
+//   let keys = Object.keys(IMAGES);
+//   //console.log("IMAGES[0][letter]" + JSON.stringify(IMAGES[0][letter]));
+
+//   keys.map(letter => {
+//     return imagesByLetter(letter).filter(image => {
+//       return image.country === country;
+//     });
+//   });
+// }
+// imagesByLetter("a");
+// imagesByCountry("Germany");
+
+// let data = {
+//   'a': {
+//     'algeria': [1],
+//     'albania': [2],
+//     'australia': [3]
+//   },
+//   'b': {
+//     'bulgaria': [4],
+//     'bolivia': [5]
+//   }
+// };
+
+// let country = 'bolivia';
+// let cdata = data[country[0]][country];

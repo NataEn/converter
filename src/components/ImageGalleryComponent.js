@@ -29,7 +29,12 @@ import {
 import { Link } from "react-router-dom";
 //import Select, { components } from "react-select";
 import { IMAGE } from "../shared/ImagesData";
-import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
+import { IMAGES } from "../shared/ImagesData.1";
+// import {
+//   GalleryAccordingtoABC,
+//   imagesByLetter,
+//   imagesByCountry
+// } from "../shared/CurrencyGalleryArrange";
 import SelectCountry from "./SelectCountryComponent";
 import SelectLetter from "./SelectABCComponent";
 
@@ -48,63 +53,106 @@ function RenderCurrencyImage({ image }) {
     </Card>
   );
 }
-function RenderGalleryView({ selectedView, imagesSource }) {
-  console.log("entered RenderGalleryView" + selectedView);
-  if (typeof selectedView === "object") {
-    selectedView.map(optionSelected => selectedView[optionSelected].value);
-  }
 
-  if (selectedView === "none" || selectedView === "") {
-    //console.log("selected none");
-    return (
-      <div>
-        {imagesSource.map(image => {
-          return (
-            <Col key={image.id} sm="4" className="col-12 m-1">
-              <RenderCurrencyImage image={image} />
-            </Col>
-          );
-        })}
-      </div>
-    );
-  } else if (selectedView === "ABC") {
-    return (
-      <div>
-        <h4>{selectedView}</h4>
-        {Object.keys(imagesSource).map(letter => {
-          return (
-            <div key={letter}>
-              <h3>{letter}</h3>
-              {imagesSource[`${letter}`].map(image => {
-                console.log("from inner map " + selectedView);
-                return (
-                  <Col key={image.id} sm="6" className="col-12 m-1">
-                    <RenderCurrencyImage image={image} />
-                  </Col>
-                ); //ende of map return
-              })}
-            </div>
-          );
-        })}
-      </div>
-    );
+function RenderGalleryViewIMAGES({ selectedViewType, value }) {
+  const selectedvalueArray = value.map(item => item.value.toLowerCase());
+  console.log(
+    "from render function the selected values are:" + selectedvalueArray
+  );
+  // imagesSource = IMAGES;
+  // let IMAGESKEys = Object.keys(imagesSource);
+  // let ImagesInCountry;
+  const BaseView = props => {};
+
+  if (selectedViewType === "ABC") {
+    return selectedvalueArray.map(value => {
+      return Object.keys(IMAGES).map(letter => {
+        return (
+          <div key={letter}>
+            <h4>{letter}</h4>
+            {Object.keys(IMAGES[letter]).map(country => {
+              return (
+                <div key={country}>
+                  <h5>{country}</h5>
+                  {IMAGES[letter][country].map(image => {
+                    return (
+                      <Col key={image.id} sm="4" className="col-12 m-1">
+                        <RenderCurrencyImage image={image} />
+                      </Col>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        );
+      });
+    });
+  } else if (selectedViewType === "letter") {
+    return selectedvalueArray.map(value => {
+      console.log(value + "the images of value are");
+      if (value in IMAGES) {
+        return (
+          <div key={value}>
+            <h4>{value}</h4>
+            {Object.keys(IMAGES[value]).map(country => {
+              return (
+                <div key={country}>
+                  <h5>{country}</h5>
+                  {IMAGES[value][country].map(image => {
+                    return (
+                      <Col key={image.id} sm="4" className="col-12 m-1">
+                        <RenderCurrencyImage image={image} />
+                      </Col>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        );
+      } else {
+        return (
+          <div key={value}>
+            <h4>No images were found for: {value}</h4>
+          </div>
+        );
+      }
+    });
+  } else if (selectedViewType === "country") {
+    return selectedvalueArray.map(value => {
+      if (value in IMAGES[value[0]]) {
+        return (
+          <div key={value}>
+            <h4>{value}</h4>
+
+            {IMAGES[value[0]][value].map(image => {
+              return (
+                <Col key={image.id} sm="4" className="col-12 m-1">
+                  <RenderCurrencyImage image={image} />
+                </Col>
+              );
+            })}
+          </div>
+        );
+      } else {
+        return (
+          <div key={value}>
+            <h4>No images were found for: {value}</h4>
+          </div>
+        );
+      }
+    });
   } else {
-    return (
-      <div>
-        <h4>{selectedView}</h4>
-        {imagesSource[`${selectedView.toLowerCase()}`].map(image => {
-          //console.log("from inner map " + selectedView);
-          return (
-            <Col key={image.id} sm="4" className="col-12 m-1">
-              <RenderCurrencyImage image={image} />
-            </Col>
-          ); //ende of map return
-        })}
-      </div>
-    );
+    return selectedvalueArray.map(value => {
+      return BaseView;
+    });
   }
-}
 
+  //
+  //   let strengthView;
+  //   console.log("entered RenderGalleryView" + selectedViewType);
+}
 class ImageGallery extends Component {
   constructor(props) {
     super(props);
@@ -119,10 +167,8 @@ class ImageGallery extends Component {
       dropdownABCOpen: false,
       modal: false,
       imagesSource: IMAGE,
-      country: "",
-      letter: "",
-      selectedView: "",
-      selectedViewA: []
+      selectedViewType: "ABC",
+      selectedValue: [{ label: "ABC", value: "ABC" }]
     };
   }
 
@@ -144,8 +190,13 @@ class ImageGallery extends Component {
   handleSelectChange(value, name) {
     console.log("entered handle change of select react");
     if (value || name) {
-      this.setState({ [name]: value });
-      console.log("from gallery component");
+      this.setState({ selectedViewType: name });
+      this.setState({ selectedValue: value });
+      console.log(
+        "from gallery component - handleSelectChange value and name are not null" +
+          JSON.stringify(this.state.selectedValue) +
+          JSON.stringify(this.state.selectedViewType)
+      );
     } else {
       return;
     }
@@ -157,9 +208,9 @@ class ImageGallery extends Component {
     //console.log("view" + view);
     this.setState({ selectedView: view });
     if (view === "none") {
-      this.setState({ imagesSource: IMAGE });
+      this.setState({ imagesSource: IMAGES });
     } else {
-      this.setState({ imagesSource: GalleryAccordingtoABC });
+      this.setState({ imagesSource: IMAGES });
     }
     return;
   }
@@ -180,7 +231,7 @@ class ImageGallery extends Component {
         {...this.props}
         rates={this.props.rates}
         ratesObject={this.props.ratesObject}
-        name="selectedViewA"
+        name="country"
         onChange={this.handleSelectChange}
       />
     );
@@ -188,32 +239,16 @@ class ImageGallery extends Component {
       <SelectLetter
         className="select-span"
         {...this.props}
-        name="selectedViewA"
+        name="letter"
         onChange={this.handleSelectChange}
         isMulti
       />
     );
-    const galleryViewA = this.state.selectedViewA.map(opt => {
-      console.log("from galleryViewA " + opt.value);
 
-      return (
-        <div>
-          <span>
-            {"in selected view Array- option value: " + opt.value}
-            {"selected view Array: " + JSON.stringify(this.state.selectedViewA)}
-            {"selected view: " + this.state.selectedView}
-          </span>
-          <RenderGalleryView
-            selectedView={opt.value}
-            imagesSource={this.state.imagesSource}
-          />
-        </div>
-      );
-    }); //end of gallery
     const galleryView = (
-      <RenderGalleryView
-        selectedView={this.state.selectedView}
-        imagesSource={this.state.imagesSource}
+      <RenderGalleryViewIMAGES
+        selectedViewType={this.state.selectedViewType}
+        value={this.state.selectedValue}
       /> //end of return
     ); //end of gallery
 
@@ -286,71 +321,8 @@ class ImageGallery extends Component {
         </Row>
 
         <Row>
-          <div className="col-6 col-auto">
-            <ButtonDropdown
-              isOpen={this.state.dropdownABCOpen}
-              toggle={this.toggleDropdownABC}
-              onClick={this.renderSelectView}
-              size="sm"
-            >
-              <Button id="caret">ABC</Button>
-              <DropdownToggle caret />
-              <DropdownMenu
-                modifiers={{
-                  setMaxHeight: {
-                    enabled: true,
-                    order: 890,
-                    fn: data => {
-                      return {
-                        ...data,
-                        styles: {
-                          ...data.styles,
-                          overflow: "auto",
-                          maxHeight: 200
-                        }
-                      };
-                    }
-                  }
-                }}
-              >
-                <DropdownItem onClick={() => this.onLetterSelect("none")}>
-                  none <Badge pill>2</Badge>
-                </DropdownItem>
-                <DropdownItem onClick={() => this.onLetterSelect("ABC")}>
-                  ABC <Badge pill>2</Badge>
-                </DropdownItem>
-                {abcd().map(letter => {
-                  return (
-                    <DropdownItem
-                      key={letter}
-                      onClick={() => this.onLetterSelect(letter)}
-                    >
-                      {letter} <Badge pill>2</Badge>
-                    </DropdownItem>
-                  );
-                })}
-              </DropdownMenu>
-            </ButtonDropdown>
-            {"  "}
-            <ButtonDropdown
-              isOpen={this.state.dropdownOpen}
-              toggle={this.toggleDropdown}
-              onClick={this.renderSelectView}
-              size="sm"
-            >
-              <Button id="caret">Strength</Button>
-              <DropdownToggle caret />
-              <DropdownMenu>
-                <DropdownItem>Strongest to Weekest</DropdownItem>
-                <DropdownItem>Weekest to Strongest</DropdownItem>
-              </DropdownMenu>
-            </ButtonDropdown>
-            {"  "}
-          </div>
           <div className="col-3 col-auto">{stateSelect}</div>
           <div className="col-3 col-auto">{selectLetter}</div>
-
-          {"  "}
           <div className="col-3 col-auto">
             <Button size="sm" onClick={this.toggleModal}>
               Add Image
@@ -370,9 +342,7 @@ class ImageGallery extends Component {
           </Col>
         </Row>
         {AddCurrency}
-
         {galleryView}
-        {galleryViewA}
 
         <Row>
           <Col>
@@ -390,4 +360,5 @@ class ImageGallery extends Component {
     );
   }
 }
+
 export default ImageGallery;
