@@ -27,5 +27,5 @@ const GalleryAccordingtoABCF = () => {
   return abcArray;
 };
 let array = GalleryAccordingtoABCF();
-console.log("GalleryAccordingtoABCF" + JSON.stringify(array));
+//console.log("GalleryAccordingtoABCF" + JSON.stringify(array));
 export const GalleryAccordingtoABC = GalleryAccordingtoABCF();

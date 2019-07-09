@@ -73,12 +73,13 @@ class Main extends Component {
           <Col sm={12}>
             <Header />
           </Col>
-
-          <Col md="auto">
+        </Row>
+        <Row>
+          <Col sm={2}>
             <Sidebar />
           </Col>
 
-          <Col xs={11} sm={9}>
+          <Col sm={8}>
             <Switch>
               <Route
                 path="/home"

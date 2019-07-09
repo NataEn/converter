@@ -31,6 +31,7 @@ import { Link } from "react-router-dom";
 import { IMAGE } from "../shared/ImagesData";
 import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
 import SelectCountry from "./SelectCountryComponent";
+import SelectLetter from "./SelectABCComponent";
 
 function RenderCurrencyImage({ image }) {
   return (
@@ -48,12 +49,15 @@ function RenderCurrencyImage({ image }) {
   );
 }
 function RenderGalleryView({ selectedView, imagesSource }) {
-  //console.log("entered RenderGalleryView" + selectedView);
+  console.log("entered RenderGalleryView" + selectedView);
+  if (typeof selectedView === "object") {
+    selectedView.map(optionSelected => selectedView[optionSelected].value);
+  }
+
   if (selectedView === "none" || selectedView === "") {
     //console.log("selected none");
     return (
       <div>
-        <h4>{selectedView}</h4>
         {imagesSource.map(image => {
           return (
             <Col key={image.id} sm="4" className="col-12 m-1">
@@ -116,7 +120,9 @@ class ImageGallery extends Component {
       modal: false,
       imagesSource: IMAGE,
       country: "",
-      selectedView: ""
+      letter: "",
+      selectedView: "",
+      selectedViewA: []
     };
   }
 
@@ -136,10 +142,17 @@ class ImageGallery extends Component {
     }));
   }
   handleSelectChange(value, name) {
+    console.log("entered handle change of select react");
+    if (value || name) {
+      this.setState({ [name]: value });
+      console.log("from gallery component");
+    } else {
+      return;
+    }
     //console.log("from handleselectchange" + JSON.stringify(value));
     //console.log("from handleselectchange" + JSON.stringify(name));
-    this.setState({ [name]: value });
   }
+  //handeling the source of the images
   onLetterSelect(view) {
     //console.log("view" + view);
     this.setState({ selectedView: view });
@@ -167,11 +180,36 @@ class ImageGallery extends Component {
         {...this.props}
         rates={this.props.rates}
         ratesObject={this.props.ratesObject}
-        name="country"
+        name="selectedViewA"
         onChange={this.handleSelectChange}
       />
     );
+    const selectLetter = (
+      <SelectLetter
+        className="select-span"
+        {...this.props}
+        name="selectedViewA"
+        onChange={this.handleSelectChange}
+        isMulti
+      />
+    );
+    const galleryViewA = this.state.selectedViewA.map(opt => {
+      console.log("from galleryViewA " + opt.value);
 
+      return (
+        <div>
+          <span>
+            {"in selected view Array- option value: " + opt.value}
+            {"selected view Array: " + JSON.stringify(this.state.selectedViewA)}
+            {"selected view: " + this.state.selectedView}
+          </span>
+          <RenderGalleryView
+            selectedView={opt.value}
+            imagesSource={this.state.imagesSource}
+          />
+        </div>
+      );
+    }); //end of gallery
     const galleryView = (
       <RenderGalleryView
         selectedView={this.state.selectedView}
@@ -248,7 +286,7 @@ class ImageGallery extends Component {
         </Row>
 
         <Row>
-          <Col>
+          <div className="col-6 col-auto">
             <ButtonDropdown
               isOpen={this.state.dropdownABCOpen}
               toggle={this.toggleDropdownABC}
@@ -308,14 +346,16 @@ class ImageGallery extends Component {
               </DropdownMenu>
             </ButtonDropdown>
             {"  "}
+          </div>
+          <div className="col-3 col-auto">{stateSelect}</div>
+          <div className="col-3 col-auto">{selectLetter}</div>
 
-            {stateSelect}
-
-            {"  "}
+          {"  "}
+          <div className="col-3 col-auto">
             <Button size="sm" onClick={this.toggleModal}>
               Add Image
             </Button>
-          </Col>
+          </div>
         </Row>
         <Row>
           <Col>
@@ -330,8 +370,9 @@ class ImageGallery extends Component {
           </Col>
         </Row>
         {AddCurrency}
-        <h1>Selected view</h1>
+
         {galleryView}
+        {galleryViewA}
 
         <Row>
           <Col>

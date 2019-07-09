@@ -109,7 +109,7 @@ div .Select-value {
 }
 div.sidebar,
 .col-md-auto {
-  background: rgb(168, 167, 167);
+  /* background: rgb(168, 167, 167); */
   margin: 0px;
   padding: 0px;
   color: black;
@@ -131,18 +131,20 @@ div.sidebar,
 }
 
 .nav-link-sidebar:hover {
-  color: #22520cc0;
-  background: rgb(252, 248, 248);
+  background: #22520c7a;
   border-radius: 5px;
   margin-left: 15%;
-  margin-right: 15%;
-  padding: 2px 0px;
+  margin-right: 2%;
+  padding: 0px 0px;
+  margin-top: 10%;
 }
 .nav-link-sidebar {
   border-radius: 5px;
   margin-left: 15%;
-  margin-right: 15%;
-  padding: 2px 0px;
+  margin-right: 2%;
+  margin-top: 10%;
+  padding: 0px 0px;
+  color: #22520cc0;
 }
 .currency_image {
   width: 100%;

@@ -63,13 +63,9 @@ class SelectCountry extends Component {
     this.setState({ selectedOption: selectedOption });
     //console.log(`Option selected:`, selectedOption.value);
     //console.log(`Option selected:`, selectedOption);
-    if (selectedOption) {
-      const value = selectedOption.value;
-      const name = this.props.name;
-      return this.props.onChange(value, name);
-    } else {
-      return;
-    }
+    const value = selectedOption.value;
+    const name = this.props.name;
+    return this.props.onChange(value, name);
   };
   render() {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
@@ -91,7 +87,7 @@ class SelectCountry extends Component {
         styles={colourStyles}
         value={this.state.selectedOption}
         onChange={this.handleChange}
-        isClearable
+        // isClearable
         // ref={this.selectName}
         captureMenuScroll={true}
       />
