@@ -41,7 +41,11 @@ class SelectABC extends Component {
       console.log(`Option selected array:`, selectedOption);
       const value = selectedOption;
       const name = this.props.name;
-      return this.props.onChange(value, name);
+      if (value.length === 0) {
+        return this.props.onChange([{ label: "ABC", value: "ABC" }], "ABC");
+      } else {
+        return this.props.onChange(value, name);
+      }
     } else {
       return;
     }

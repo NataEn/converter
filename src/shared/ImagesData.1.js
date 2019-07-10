@@ -21,7 +21,7 @@ export const IMAGES = {
     australia: []
   },
   b: {
-    " bolivia": [
+    bolivia: [
       {
         id: 1,
         name: "euro",
@@ -53,5 +53,6 @@ export const IMAGES = {
         date: "New Date()"
       }
     ]
-  },c:{}
+  },
+  c: { country: [] }
 };

@@ -54,26 +54,37 @@ function RenderCurrencyImage({ image }) {
   );
 }
 
-function RenderGalleryViewIMAGES({ selectedViewType, value }) {
-  const selectedvalueArray = value.map(item => item.value.toLowerCase());
-  console.log(
-    "from render function the selected values are:" + selectedvalueArray
-  );
+function RenderGalleryViewIMAGES({ selectedViewType, value, handleFunction }) {
+  let selectedvalueArray;
+  if ((selectedViewType === "letter") | (selectedViewType === "ABC")) {
+    selectedvalueArray = value.map(item => item.value.toLowerCase());
+  } else if (selectedViewType === "country") {
+    console.log("selectedViewType is country and value is " + value);
+    selectedvalueArray = value.map(item => item.value.toLowerCase());
+  }
+
+  //console.log(
+  // "from render function the selected values are:" +
+  //   JSON.stringify(selectedvalueArray)
+  //);
   // imagesSource = IMAGES;
   // let IMAGESKEys = Object.keys(imagesSource);
   // let ImagesInCountry;
-  const BaseView = props => {};
 
+  // if (selectedvalueArray.length === 0) {
+  //   console.log("en ampty value arrray was sent");
+  //   handleFunction("ABC", [{ label: "ABC", value: "A" }]);
+  // }
   if (selectedViewType === "ABC") {
     return selectedvalueArray.map(value => {
       return Object.keys(IMAGES).map(letter => {
         return (
           <div key={letter}>
-            <h4>{letter}</h4>
+            <h4>{letter.toUpperCase()}</h4>
             {Object.keys(IMAGES[letter]).map(country => {
               return (
                 <div key={country}>
-                  <h5>{country}</h5>
+                  <h5>{country.charAt(0).toUpperCase() + country.slice(1)}</h5>
                   {IMAGES[letter][country].map(image => {
                     return (
                       <Col key={image.id} sm="4" className="col-12 m-1">
@@ -90,15 +101,16 @@ function RenderGalleryViewIMAGES({ selectedViewType, value }) {
     });
   } else if (selectedViewType === "letter") {
     return selectedvalueArray.map(value => {
-      console.log(value + "the images of value are");
+      //console.log(value + "the images of value are");
       if (value in IMAGES) {
         return (
           <div key={value}>
-            <h4>{value}</h4>
+            <h4>{value.toUpperCase()}</h4>
+
             {Object.keys(IMAGES[value]).map(country => {
               return (
                 <div key={country}>
-                  <h5>{country}</h5>
+                  <h5>{country.charAt(0).toUpperCase() + country.slice(1)}</h5>
                   {IMAGES[value][country].map(image => {
                     return (
                       <Col key={image.id} sm="4" className="col-12 m-1">
@@ -114,38 +126,59 @@ function RenderGalleryViewIMAGES({ selectedViewType, value }) {
       } else {
         return (
           <div key={value}>
-            <h4>No images were found for: {value}</h4>
+            <h4>No images were found for {value[0].toUpperCase()}</h4>
           </div>
         );
       }
     });
   } else if (selectedViewType === "country") {
     return selectedvalueArray.map(value => {
-      if (value in IMAGES[value[0]]) {
-        return (
-          <div key={value}>
-            <h4>{value}</h4>
+      // console.log(
+      //   "from country select to map value " +
+      //     value +
+      //     " checking IMAGES[value[0]]" +
+      //     IMAGES[value[0]] +
+      //     value[0]
+      // );
+      if (value[0] in IMAGES) {
+        if (value in IMAGES[value[0]]) {
+          return (
+            <div key={value}>
+              <h4>{value}</h4>
 
-            {IMAGES[value[0]][value].map(image => {
-              return (
-                <Col key={image.id} sm="4" className="col-12 m-1">
-                  <RenderCurrencyImage image={image} />
-                </Col>
-              );
-            })}
-          </div>
-        );
+              {IMAGES[value[0]][value].map(image => {
+                if (IMAGES[value[0]][value].length !== 0) {
+                  return (
+                    <Col key={image.id} sm="4" className="col-12 m-1">
+                      <RenderCurrencyImage image={image} />
+                    </Col>
+                  );
+                } else {
+                  return (
+                    <Col>
+                      <h6>No images for {value}</h6>
+                    </Col>
+                  );
+                }
+              })}
+            </div>
+          );
+        } else {
+          return (
+            <Col>
+              <h6>
+                No images for {value.charAt(0).toUpperCase() + value.slice(1)}
+              </h6>
+            </Col>
+          );
+        }
       } else {
         return (
           <div key={value}>
-            <h4>No images were found for: {value}</h4>
+            <h4>No images were found for {value[0].toUpperCase()}</h4>
           </div>
         );
       }
-    });
-  } else {
-    return selectedvalueArray.map(value => {
-      return BaseView;
     });
   }
 
@@ -197,11 +230,7 @@ class ImageGallery extends Component {
           JSON.stringify(this.state.selectedValue) +
           JSON.stringify(this.state.selectedViewType)
       );
-    } else {
-      return;
     }
-    //console.log("from handleselectchange" + JSON.stringify(value));
-    //console.log("from handleselectchange" + JSON.stringify(name));
   }
   //handeling the source of the images
   onLetterSelect(view) {
@@ -249,6 +278,7 @@ class ImageGallery extends Component {
       <RenderGalleryViewIMAGES
         selectedViewType={this.state.selectedViewType}
         value={this.state.selectedValue}
+        handleFunction={this.handleSelectChange}
       /> //end of return
     ); //end of gallery
 

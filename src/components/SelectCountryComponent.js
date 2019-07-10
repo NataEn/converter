@@ -54,23 +54,30 @@ class SelectCountry extends Component {
     super(props);
     //this.selectName = React.createRef();
     this.state = {
-      selectedOption: null,
+      selectedOption: [],
       name: ""
     };
   }
 
   handleChange = selectedOption => {
-    this.setState({ selectedOption: selectedOption });
-    //console.log(`Option selected:`, selectedOption.value);
-    //console.log(`Option selected:`, selectedOption);
     if (selectedOption) {
-      const value = selectedOption.value;
+      this.setState({ selectedOption: selectedOption });
+      console.log(
+        `in country select country Option selected array:`,
+        selectedOption
+      );
+      const value = selectedOption;
       const name = this.props.name;
-      return this.props.onChange(value, name);
+      if (value.length === 0) {
+        return this.props.onChange([{ label: "ABC", value: "ABC" }], "ABC");
+      } else {
+        return this.props.onChange(value, name);
+      }
     } else {
       return;
     }
   };
+  //
   render() {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
@@ -92,6 +99,7 @@ class SelectCountry extends Component {
         value={this.state.selectedOption}
         onChange={this.handleChange}
         isClearable
+        isMulti
         // ref={this.selectName}
         captureMenuScroll={true}
       />
