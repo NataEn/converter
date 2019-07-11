@@ -69,7 +69,7 @@ export const Footer = props => {
           </a>
         </div>
         <div className="col-3">
-          <a type="button" className="terms btn btn-success" href="./">
+          <a type="button" className="terms btn " href="./">
             <span>Terms of Use</span>
           </a>
         </div>

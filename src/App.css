@@ -18,8 +18,14 @@ p {
   padding: 0px 0px;
   max-width: 100%;
 }
+.container.footer {
+  background-color: #463cb0;
+}
+.main-spacer-header-hr {
+  box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
+}
 .navbar {
-  background-color: #22520cb7;
+  background-color: #463cb0;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px 10px;
@@ -36,26 +42,30 @@ button.login {
   font-size: 1em;
 }
 button.login:hover {
-  background-color: #54c81e;
+  background-color: #ff6026;
+}
+a.nav-link.header:hover {
+  color: #f09777;
+  background: none;
 }
 
 .jumbotron {
   padding: 10px 15px 10px 15px;
-  background: #22520c7a;
+
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
   border-radius: 0%;
   border-top: 1px solid #a8a608be;
   border-bottom: 1px solid #a8a608be;
-  background-image: linear-gradient(140deg, #54c81e 0%, #22520c7a 100%);
+  background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);
 }
 .jumbotron .col-offset-right {
   margin-left: -6%;
   align-self: center;
 }
 .footer {
-  background: #133503e0;
+  background: #463cb0;
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
@@ -63,7 +73,7 @@ button.login:hover {
 .form {
   background: rgb(231, 228, 228);
   color: black;
-  border: 2px solid rgba(131, 139, 14, 0.478);
+  border: 2px solid #463cb041;
   border-radius: 15px;
   max-width: 90%;
   margin: 1% auto;
@@ -72,12 +82,14 @@ button.login:hover {
 .terms,
 .terms:hover {
   color: inherit;
-  border: 1px solid #22520c7a;
+  background: #ff6026;
+  border: 1px solid #463cb0;
   border-radius: 10px 10px;
   padding: 0px auto;
   margin: 0px auto;
   font-size: 1em;
 }
+
 .row-header {
   margin: 0px auto;
   padding: 0px auto;
@@ -95,7 +107,7 @@ div .SelectComponent span .select-span {
   font-size: 0.7em;
 }
 .option-image {
-  border: 1px solid #22520cc0;
+  border: 1px solid #463cb0;
   border-radius: 2px 2px;
 }
 div .Select-value {
@@ -107,12 +119,13 @@ div .Select-value {
 .btn-outline-success {
   margin: 1%;
 }
-div.sidebar,
-.col-md-auto {
-  /* background: rgb(168, 167, 167); */
-  margin: 0px;
-  padding: 0px;
-  color: black;
+div.sidebar {
+  background: rgba(228, 226, 226, 0.363);
+  margin-right: 0.5%;
+  padding-left: 3%;
+  /* border-right: 1px solid rgb(192, 192, 197); */
+  box-shadow: 3px 1px 8px -5px rgba(0, 0, 0, 0.38);
+  text-align: left;
 }
 .row div.col {
   margin: 0px;
@@ -125,17 +138,19 @@ div.sidebar,
 }
 .nav-link:hover {
   color: white;
-  background: #54c81e;
+  color: #f09777;
+  background: none;
   border-radius: 2px 2px;
   border-radius: 5px;
 }
 
 .nav-link-sidebar:hover {
-  background: #22520c7a;
+  color: #f09777;
+  background: none;
   border-radius: 5px;
   margin-left: 15%;
   margin-right: 2%;
-  padding: 0px 0px;
+  padding: 0px 10px;
   margin-top: 10%;
 }
 .nav-link-sidebar {
@@ -143,8 +158,8 @@ div.sidebar,
   margin-left: 15%;
   margin-right: 2%;
   margin-top: 10%;
-  padding: 0px 0px;
-  color: #22520cc0;
+  padding: 0px 10px;
+  color: #463cb0;
 }
 .currency_image {
   width: 100%;
@@ -153,4 +168,15 @@ div.sidebar,
 .textLeft {
   text-align: left;
   line-height: 1.5;
+}
+.budget svg > path {
+  color: blue;
+}
+.budget svg {
+  margin-left: 3%;
+}
+div.budget.input-group {
+  display: flex !important;
+  align-items: center !important;
+  align-content: space-between;
 }

@@ -69,18 +69,19 @@ class Main extends Component {
   render() {
     return (
       <Container>
-        <Row>
+        <Row className="main-spacer-header-hr">
           <Col sm={12}>
             <Header />
+            
           </Col>
         </Row>
         <Row>
-          <Col sm={2}>
+          <Col sm={2} className="sidebar">
             <Sidebar />
           </Col>
 
           <Col sm={8}>
-            <Switch>
+            <Switch className="mainContainer">
               <Route
                 path="/home"
                 render={() => (

@@ -16,32 +16,29 @@ class Sidebar extends Component {
       <Nav className="sidebar" vertical>
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/home">
-            <FontAwesomeIcon icon={faSyncAlt} />
-            <p>Currency Converter</p>
+            <FontAwesomeIcon icon={faSyncAlt} /> <span>Converter</span>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/map">
-            <FontAwesomeIcon icon={faMapMarkedAlt} />
-            <p>Currency Map</p>
+            <FontAwesomeIcon icon={faMapMarkedAlt} /> <span>Map</span>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/gallery">
             <FontAwesomeIcon icon={faTh} />
-            <p>Currency Gallery</p>
+            {"  "}
+            <span> Gallery</span>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/saving">
-            <FontAwesomeIcon icon={faPiggyBank} />
-            <p>Saving Tips</p>
+            <FontAwesomeIcon icon={faPiggyBank} /> <span>Saving Tips</span>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/manage">
-            <FontAwesomeIcon icon={faHandHoldingUsd} />
-            <p>Manage Expenses</p>
+            <FontAwesomeIcon icon={faHandHoldingUsd} /> <span>My Expenses</span>
           </NavLink>
         </NavItem>
       </Nav>
