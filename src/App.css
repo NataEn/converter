@@ -180,3 +180,6 @@ div.budget.input-group {
   align-items: center !important;
   align-content: space-between;
 }
+div.expenseDescription{
+  display:none;
+}
