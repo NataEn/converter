@@ -180,6 +180,11 @@ div.budget.input-group {
   align-items: center !important;
   align-content: space-between;
 }
-div.expenseDescription{
-  display:none;
+div.expenseDescription {
+  display: none;
+}
+/*dont know is this works*/
+.Select-control {
+  padding: 0px !important;
+  margin: 0px !important;
 }

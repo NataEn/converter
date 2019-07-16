@@ -44,7 +44,10 @@ class SelectExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: ""
+      selectedOption: {
+        label: this.props.defaultValue,
+        value: this.props.defaultValue
+      }
     };
   }
 
@@ -60,12 +63,6 @@ class SelectExpense extends Component {
         return this.props.onChange(name, value);
       }
     } else {
-      this.setState({
-        selectedOption: {
-          label: this.props.defaultValue,
-          value: this.props.defaultValue
-        }
-      });
       return;
     }
   };
