@@ -8,7 +8,7 @@ const IconOption = props => {
   return (
     <Option {...props}>
       <div>
-        <strong style={{ fontSize: "1em" }}>{props.data.label}</strong>
+        <strong style={{ fontSize: "0.7em" }}>{props.data.label}</strong>
       </div>
     </Option>
   );
@@ -21,7 +21,7 @@ const colourStyles = {
     color: "black",
     background: "white",
     display: "flex",
-    "font-size": "0.8em",
+    "font-size": "0.7em",
     ":hover": { background: "#dde0d8" }
   }),
   control: (base, state) => ({

@@ -55,7 +55,7 @@ class ManageExpenses extends Component {
         console.log("from inner row" + selected[number - 1].expense_type);
         InnerRow.push(
           <React.Fragment key={1}>
-            <Col md={8}>
+            <Col md={12}>
               <SelectExpense
                 onChange={this.expenseTypeSelect}
                 onClick={this.addInnerRows}
@@ -77,13 +77,12 @@ class ManageExpenses extends Component {
     }
     return InnerRow;
   };
-  addRows = () => {
+  addRows = table => {
     let tablerows = [];
 
-    for (let [key, value] of Object.entries(EXPENSE.table_A.rows)) {
-      console.log("from row loop" + value.date);
-      console.log(`${key}: ${value}`);
-      console.log("from adding rows" + JSON.stringify(value.expenses));
+    for (let [key, value] of Object.entries(EXPENSE[table].rows)) {
+      //console.log(`${key}: ${value}`);
+      //console.log("from adding rows" + JSON.stringify(value.expenses));
       tablerows.push(
         <tr key={value}>
           <th scope="row">
@@ -102,23 +101,63 @@ class ManageExpenses extends Component {
     return tablerows;
   };
   renderExpenseTable = () => {
-    return (
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Expense Type</th>
-            <th>Amount</th>
-            <th>Sum</th>
-          </tr>
-        </thead>
-        <tbody>{this.addRows()}</tbody>
-      </Table>
-    );
+    let tables = [];
+    for (let [key, value] of Object.entries(EXPENSE)) {
+      console.log(key + " is of table" + EXPENSE[key].tableName);
+      tables.push(
+        <React.Fragment>
+          <div className="expense-table">
+            <h4>{EXPENSE[key].tableName}</h4>{" "}
+            <Row>
+              <Col sm={4}>
+                <InputGroup
+                  className="budget"
+                  onChange={alert("value has been change")}
+                >
+                  <InputGroupAddon addonType="prepend">Budget</InputGroupAddon>
+                  <Input
+                    placeholder="my budget"
+                    value={EXPENSE[key].budget}
+                    onChange={alert("value has been change")}
+                  />
+                  <FontAwesomeIcon
+                    className="budget"
+                    icon={faSmile}
+                    size="2x"
+                  />
+                </InputGroup>
+
+                <span>Start budget:</span>
+              </Col>
+              <Col sm={{ size: 6, offset: 2 }}>
+                <Button color="light">Save</Button>{" "}
+                <Button color="light">New</Button>{" "}
+                <Button color="light">Delete</Button>
+              </Col>
+              <Col sm={12}>
+                <Table hover>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Expense Type</th>
+                      <th>Amount</th>
+                      <th>Sum</th>
+                    </tr>
+                  </thead>
+                  <tbody>{this.addRows(key)}</tbody>
+                </Table>
+              </Col>
+            </Row>
+          </div>{" "}
+          <br />
+        </React.Fragment>
+      );
+    }
+    return tables;
   };
 
   expenseTypeSelect = (name, value) => {
-    alert("the expense" + name + "eas selected");
+    alert("the expense" + name + "was selected");
   };
   render() {
     return (
@@ -126,31 +165,9 @@ class ManageExpenses extends Component {
         <h1>Manage Expenses</h1>
         <div className="tableContainer">
           {" "}
-          <h4>{EXPENSE.table_A.tableName}</h4>
           <Row>
-            <Col sm={4}>
-              <InputGroup
-                className="budget"
-                onChange={alert("value has been change")}
-              >
-                <InputGroupAddon addonType="prepend">Budget</InputGroupAddon>
-                <Input
-                  placeholder="my budget"
-                  value={EXPENSE.table_A.budget}
-                  onChange={alert("value has been change")}
-                />
-                <FontAwesomeIcon className="budget" icon={faSmile} size="2x" />
-              </InputGroup>
-
-              <span>Start budget:</span>
-            </Col>
-            <Col sm={{ size: 6, offset: 2 }}>
-              <Button color="light">Save</Button>{" "}
-              <Button color="light">New</Button>{" "}
-              <Button color="light">Delete</Button>
-            </Col>
+            <Col sm={{ size: 11, offset: 1 }}>{this.renderExpenseTable()}</Col>
           </Row>
-          {this.renderExpenseTable()}
         </div>
       </div>
     );
