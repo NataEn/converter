@@ -19,13 +19,13 @@ p {
   max-width: 100%;
 }
 .container.footer {
-  background-color: #463cb0;
+  background-color: rgb(24, 34, 101);
 }
 .main-spacer-header-hr {
   box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
 }
 .navbar {
-  background-color: #463cb0;
+  background-color: rgb(24, 34, 101);
   color: floralwhite;
   margin: 0px auto;
   padding: 0px 10px;
@@ -42,10 +42,11 @@ button.login {
   font-size: 1em;
 }
 button.login:hover {
-  background-color: #ff6026;
+  background-color: rgba(86, 189, 162, 1);
+  box-shadow: 3px 5px 3px -5px rgba(240, 202, 100, 0.5);
 }
 a.nav-link.header:hover {
-  color: #f09777;
+  color: rgba(86, 189, 162, 1);
   background: none;
 }
 
@@ -56,16 +57,17 @@ a.nav-link.header:hover {
   margin: 0px auto;
   padding: 0px auto;
   border-radius: 0%;
-  border-top: 1px solid #a8a608be;
-  border-bottom: 1px solid #a8a608be;
-  background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);
+  border-top: 1px solid rgba(225, 189, 94, 0.8);
+  border-bottom: 1px solid rgba(225, 189, 94, 0.8);
+  /*background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);*/
+  background: rgb(36, 148, 162);
 }
 .jumbotron .col-offset-right {
   margin-left: -6%;
   align-self: center;
 }
 .footer {
-  background: #463cb0;
+  background: rgb(24, 34, 101);
   color: floralwhite;
   margin: 0px auto;
   padding: 0px auto;
@@ -82,9 +84,9 @@ a.nav-link.header:hover {
 .terms,
 .terms:hover {
   color: inherit;
-  background: #ff6026;
-  border: 1px solid #463cb0;
-  border-radius: 10px 10px;
+  background: rgba(86, 189, 162, 0.8);
+  border: 1px solid rgb(24, 34, 101);
+  border-radius: 10% 2% !important;
   padding: 0px auto;
   margin: 0px auto;
   font-size: 1em;
@@ -107,7 +109,7 @@ div .SelectComponent span .select-span {
   font-size: 0.7em;
 }
 .option-image {
-  border: 1px solid #463cb0;
+  border: 1px solid rgb(24, 34, 101);
   border-radius: 2px 2px;
 }
 div .Select-value {
@@ -138,14 +140,14 @@ div.sidebar {
 }
 .nav-link:hover {
   color: white;
-  color: #f09777;
+  color: rgba(225, 189, 94, 1);
   background: none;
   border-radius: 2px 2px;
   border-radius: 5px;
 }
 
 .nav-link-sidebar:hover {
-  color: #f09777;
+  color: rgba(225, 189, 94, 1);
   background: none;
   border-radius: 5px;
   margin-left: 15%;
@@ -159,7 +161,7 @@ div.sidebar {
   margin-right: 2%;
   margin-top: 10%;
   padding: 0px 10px;
-  color: #463cb0;
+  color: rgb(24, 34, 101);
 }
 .currency_image {
   width: 100%;
@@ -180,8 +182,14 @@ div.budget.input-group {
   align-items: center !important;
   align-content: space-between;
 }
-div.expenseDescription {
-  display: none;
+div.expense-description {
+  /* display: none; */
+}
+textarea.form-control {
+  outline: none;
+  font-size: 0.8em;
+  padding: none;
+  border-radius: 5px 5px 5px 5px !important;
 }
 /*dont know is this works*/
 .Select-control {

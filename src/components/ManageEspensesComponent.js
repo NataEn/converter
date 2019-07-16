@@ -17,7 +17,10 @@ import {
   faSadCry,
   faSmileBeam,
   faSmile,
-  faColumns
+  faColumns,
+  faPenAlt,
+  faPen,
+  faPencilAlt
 } from "@fortawesome/free-solid-svg-icons";
 import SelectExpense from "./SelectExpenseComponent";
 import { EXPENSE } from "../shared/ExpenseData";
@@ -30,7 +33,7 @@ class ManageExpenses extends Component {
       tableColumns: 4,
       selectRows: 1
     };
-    this.addInnerRows = this.addInnerRows.bind(this);
+    this.addInnerSelectRows = this.addInnerSelectRows.bind(this);
     this.addRows = this.addRows.bind(this);
     this.renderExpenseTable = this.renderExpenseTable.bind(this);
   }
@@ -45,30 +48,57 @@ class ManageExpenses extends Component {
     }
   }
   handleAddingSelectExpense = event => {
-    this.addInnerRows(3);
+    this.addSelectInnerRows(3);
   };
+  addExpenseDescription = (number, selected) => {
+    let DescriptionInnerRow = [];
+    if (number) {
+      console.log("from inner expense row" + selected[number - 1].notes);
 
-  addInnerRows = (number, selected) => {
+      while (number > 0) {
+        DescriptionInnerRow.push(
+          <Col className="input-group expense-description" key={number}>
+            <lable>
+              <i class="fas fa-pencil-alt prefix" />
+            </lable>
+            <textarea
+              size="small"
+              className="form-control"
+              aria-label="With textarea"
+              cols="5"
+              rows="3"
+              wrap="off"
+            >
+              {selected[number - 1].notes}
+            </textarea>
+          </Col>
+        );
+        number--;
+      }
+      return DescriptionInnerRow;
+    } else {
+      return <p>didn't find description</p>;
+    }
+  };
+  addInnerSelectRows = (number, selected) => {
     let InnerRow = [];
     if (number) {
       while (number > 0) {
-        console.log("from inner row" + selected[number - 1].expense_type);
+        //console.log("from inner row" + selected[number - 1].expense_type);
         InnerRow.push(
-          <React.Fragment key={1}>
+          <React.Fragment key={number}>
             <Col md={12}>
               <SelectExpense
                 onChange={this.expenseTypeSelect}
-                onClick={this.addInnerRows}
+                onClick={this.addInnerSelectRows}
                 defaultValue={selected[number - 1].expense_type}
               />
             </Col>
-            <div className="input-group expenseDescription">
-              <textarea
-                size="small"
-                className="form-control"
-                aria-label="With textarea"
-              />
-            </div>
+            <FontAwesomeIcon
+              className="budget"
+              icon={faPencilAlt}
+              size="0.5x"
+            />
             <br />
           </React.Fragment>
         );
@@ -91,7 +121,12 @@ class ManageExpenses extends Component {
               Add Expense
             </Button>
           </th>
-          <td>{this.addInnerRows(value.expenses.length, value.expenses)}</td>
+          <td>
+            {this.addInnerSelectRows(value.expenses.length, value.expenses)}
+          </td>
+          <td>
+            {this.addExpenseDescription(value.expenses.length, value.expenses)}
+          </td>
           <td>amount to spend</td>
           <td>sum</td>
         </tr>
@@ -103,7 +138,7 @@ class ManageExpenses extends Component {
   renderExpenseTable = () => {
     let tables = [];
     for (let [key, value] of Object.entries(EXPENSE)) {
-      console.log(key + " is of table" + EXPENSE[key].tableName);
+      //console.log(key + " is of table" + EXPENSE[key].tableName);
       tables.push(
         <React.Fragment>
           <div className="expense-table">
@@ -140,6 +175,7 @@ class ManageExpenses extends Component {
                     <tr>
                       <th>Date</th>
                       <th>Expense Type</th>
+                      <th>Expense Description</th>
                       <th>Amount</th>
                       <th>Sum</th>
                     </tr>
