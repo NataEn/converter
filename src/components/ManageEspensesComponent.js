@@ -23,7 +23,11 @@ import {
   faPencilAlt
 } from "@fortawesome/free-solid-svg-icons";
 import SelectExpense from "./SelectExpenseComponent";
-import { EXPENSE } from "../shared/ExpenseData";
+import {
+  EXPENSE,
+  calculateSpendSum,
+  spenedInAday
+} from "../shared/ExpenseData";
 
 class ManageExpenses extends Component {
   constructor(props) {
@@ -31,80 +35,178 @@ class ManageExpenses extends Component {
     this.state = {
       tablerows: 2,
       tableColumns: 4,
-      selectRows: 1
+      textareaVisible: []
     };
     this.addInnerSelectRows = this.addInnerSelectRows.bind(this);
     this.addRows = this.addRows.bind(this);
     this.renderExpenseTable = this.renderExpenseTable.bind(this);
+    // this.toggleTextarea = this.toggleTextarea.bind(this);
   }
 
   renderFace(sum, budget) {
+    let face = {};
+    console.log("from render face sum is" + sum + "budget is" + budget);
     if (sum < budget) {
-      return faSmile; //still some left-> if 20% left then ->faGrin and if found incom->faSmileBeam
+      face = (
+        <FontAwesomeIcon
+          className="good"
+          style={{ color: "rgba(86, 169, 1825, 1)" }}
+          icon={faSmile}
+          size="2x"
+          data-toggle="tooltip"
+          data-placement="left"
+          title="Yey! You still have some money to spend!"
+        />
+      );
+      //still some left-> if 20% left then ->faGrin and if found incom->faSmileBeam
     } else if (sum > budget) {
-      return faFrown; //over spend budget or too overspend-> faSadTear
+      face = (
+        <FontAwesomeIcon
+          className="bad"
+          style={{ color: "rgba(221, 43,73, 1)" }}
+          icon={faFrown}
+          size="2x"
+          data-toggle="tooltip"
+          data-placement="left"
+          title="Oh No! You spend too much!"
+        />
+      ); //over spend budget or too overspend-> faSadTear
     } else {
-      return faMeh; //a balanced expence
+      face = (
+        <FontAwesomeIcon
+          className="even"
+          style={{ color: "rgba(129, 159,205, 1)" }}
+          icon={faMeh}
+          size="2x"
+          data-toggle="tooltip"
+          data-placement="left"
+          title="Zennnn... Your budget is balanced"
+        />
+      ); //a balanced expence
     }
+    return face;
   }
+  // toggleTextarea(event) {
+  //   let index = event.target.dataset.button;
+  //   let textareaVisible = this.state.textareaVisible;
+  //   // this.setState(state => {
+  //   //   textareaVisible[index] = !state.textareaVisible[index];
+  //   //   return {
+  //   //     textareaVisible
+  //   //   };
+  //   // });
+  //   console.log(this.state.textareaVisible);
+  // }
+
   handleAddingSelectExpense = event => {
     this.addSelectInnerRows(3);
   };
-  addExpenseDescription = (number, selected) => {
-    let DescriptionInnerRow = [];
-    if (number) {
-      console.log("from inner expense row" + selected[number - 1].notes);
-
-      while (number > 0) {
-        DescriptionInnerRow.push(
-          <Col className="input-group expense-description" key={number}>
-            <lable>
-              <i class="fas fa-pencil-alt prefix" />
-            </lable>
-            <textarea
-              size="small"
-              className="form-control"
-              aria-label="With textarea"
-              cols="5"
-              rows="3"
-              wrap="off"
-            >
-              {selected[number - 1].notes}
-            </textarea>
-          </Col>
-        );
-        number--;
-      }
-      return DescriptionInnerRow;
-    } else {
-      return <p>didn't find description</p>;
-    }
-  };
-  addInnerSelectRows = (number, selected) => {
+  addInnerAmountRows = (number, selected) => {
     let InnerRow = [];
     if (number) {
       while (number > 0) {
-        //console.log("from inner row" + selected[number - 1].expense_type);
         InnerRow.push(
           <React.Fragment key={number}>
-            <Col md={12}>
-              <SelectExpense
-                onChange={this.expenseTypeSelect}
-                onClick={this.addInnerSelectRows}
-                defaultValue={selected[number - 1].expense_type}
-              />
-            </Col>
-            <FontAwesomeIcon
-              className="budget"
-              icon={faPencilAlt}
-              size="0.5x"
-            />
+            <Row className="expenses">
+              <Col md={10} size="auto">
+                <p>Planned: {selected[number - 1].amount_planned}</p>
+                <p>Spend : {selected[number - 1].amount_spend}</p>
+              </Col>
+            </Row>
+            <br />
+            <Row
+              data-button={number - 1}
+              // className={
+              //   this.state.textareaVisible
+              //     ? "expense-description active"
+              //     : "expense-description"
+              // }
+            >
+              {/* <textarea
+                size="small"
+                className="form-control"
+                aria-label="With textarea"
+                cols="5"
+                rows="3"
+                wrap="off"
+              >
+                {selected[number - 1].amount}
+              </textarea> */}
+            </Row>
+
             <br />
           </React.Fragment>
         );
         number--;
       }
     }
+    // this.setState(prevState => ({
+    //   textareaVisible: textareaVisible
+    // }));
+    return InnerRow;
+  };
+
+  addInnerSelectRows = (number, selected) => {
+    let textareaVisible = [];
+    let InnerRow = [];
+    if (number) {
+      while (number > 0) {
+        //console.log("from inner row" + selected[number - 1].expense_type);
+
+        InnerRow.push(
+          <React.Fragment key={number}>
+            <Row className="expenses">
+              <Col md={8} size="auto">
+                <SelectExpense
+                  onChange={this.expenseTypeSelect}
+                  onClick={this.addInnerSelectRows}
+                  defaultValue={selected[number - 1].expense_type}
+                />
+              </Col>
+              <Col md={1}>
+                <Button
+                  className="expenses "
+                  data-button={number - 1}
+                  onClick={this.toggleTextarea}
+                >
+                  <FontAwesomeIcon
+                    className="budget"
+                    icon={faPencilAlt}
+                    size="0.5x"
+                  />
+                </Button>
+              </Col>
+            </Row>
+            <br />
+            <Row
+              data-button={number - 1}
+              // className={
+              //   this.state.textareaVisible
+              //     ? "expense-description active"
+              //     : "expense-description"
+              // }
+            >
+              <textarea
+                size="small"
+                className="form-control"
+                aria-label="With textarea"
+                cols="3"
+                rows="3"
+                wrap="off"
+              >
+                {selected[number - 1].notes}
+              </textarea>
+            </Row>
+
+            <br />
+          </React.Fragment>
+        );
+        number--;
+      }
+    }
+    // this.setState(prevState => ({
+    //   textareaVisible: textareaVisible
+    // }));
     return InnerRow;
   };
   addRows = table => {
@@ -124,11 +226,13 @@ class ManageExpenses extends Component {
           <td>
             {this.addInnerSelectRows(value.expenses.length, value.expenses)}
           </td>
+
           <td>
-            {this.addExpenseDescription(value.expenses.length, value.expenses)}
+            {this.addInnerAmountRows(value.expenses.length, value.expenses)}
+            <p>Spend Total:{spenedInAday(value)}</p>
           </td>
-          <td>amount to spend</td>
-          <td>sum</td>
+
+          <td />
         </tr>
       );
     }
@@ -140,44 +244,37 @@ class ManageExpenses extends Component {
     for (let [key, value] of Object.entries(EXPENSE)) {
       //console.log(key + " is of table" + EXPENSE[key].tableName);
       tables.push(
-        <React.Fragment>
+        <React.Fragment key={EXPENSE[key].tableName}>
           <div className="expense-table">
             <h4>{EXPENSE[key].tableName}</h4>{" "}
             <Row>
               <Col sm={4}>
-                <InputGroup
-                  className="budget"
-                  onChange={alert("value has been change")}
-                >
-                  <InputGroupAddon addonType="prepend">Budget</InputGroupAddon>
+                <InputGroup className="budget">
+                  <p className="budget">Budget: </p>
                   <Input
                     placeholder="my budget"
                     value={EXPENSE[key].budget}
-                    onChange={alert("value has been change")}
+                    onChange={console.log("in input value has been change")}
                   />
-                  <FontAwesomeIcon
-                    className="budget"
-                    icon={faSmile}
-                    size="2x"
-                  />
+                  {this.renderFace(calculateSpendSum(key), EXPENSE[key].budget)}
                 </InputGroup>
-
-                <span>Start budget:</span>
+                <InputGroup className="budget">
+                  <p className="budget">Spend: {calculateSpendSum(key)}</p>
+                </InputGroup>
               </Col>
               <Col sm={{ size: 6, offset: 2 }}>
                 <Button color="light">Save</Button>{" "}
                 <Button color="light">New</Button>{" "}
                 <Button color="light">Delete</Button>
               </Col>
-              <Col sm={12}>
+              <Col sm={12} key={EXPENSE[key].tableName + "table"}>
                 <Table hover>
                   <thead>
                     <tr>
                       <th>Date</th>
                       <th>Expense Type</th>
-                      <th>Expense Description</th>
+
                       <th>Amount</th>
-                      <th>Sum</th>
                     </tr>
                   </thead>
                   <tbody>{this.addRows(key)}</tbody>
@@ -193,7 +290,7 @@ class ManageExpenses extends Component {
   };
 
   expenseTypeSelect = (name, value) => {
-    alert("the expense" + name + "was selected");
+    console.log("the expense" + name + "was selected");
   };
   render() {
     return (

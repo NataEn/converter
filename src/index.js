@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "bootstrap-social/bootstrap-social.css";
+import "popper.js/dist/popper.min.js";
 import "./index.css";
 import App from "./App";
 import "flag-icon-css/css/flag-icon.min.css";

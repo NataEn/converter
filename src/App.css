@@ -172,8 +172,9 @@ div.sidebar {
   line-height: 1.5;
 }
 .budget svg > path {
-  color: blue;
+  /* color: rgb(24, 34, 101); */
 }
+
 .budget svg {
   margin-left: 3%;
 }
@@ -182,8 +183,13 @@ div.budget.input-group {
   align-items: center !important;
   align-content: space-between;
 }
-div.expense-description {
-  /* display: none; */
+p.budget {
+  display: flex;
+  align-items: center !important;
+  margin-left: 10px;
+}
+div.expense-description.active {
+  display: none;
 }
 textarea.form-control {
   outline: none;
@@ -202,3 +208,29 @@ textarea.form-control {
   background: rgba(240, 236, 236, 0.712);
   border-radius: 10px 10px;
 }
+.expenses > .col-md-10 {
+  padding: none;
+}
+
+.expenses > .col-md-1 {
+  padding: none;
+  display: flex;
+}
+button.expenses {
+  border: rgba(225, 189, 94, 1);
+  border-radius: 50% 50% !important;
+  margin: 0px, auto;
+  background: rgba(86, 189, 162, 1) !important;
+  box-shadow: 4px 2px 5px -3px rgba(177, 176, 172, 0.959) !important;
+}
+button.expenses:hover {
+  /* color: rgba(225, 189, 94, 1); */
+  color: rgb(24, 34, 101);
+  background: none !important;
+  box-shadow: none !important;
+}
+/* button.expenses:focus {
+  box-shadow: inset 0px 0px 5px 1px rgb(190, 186, 186) !important;
+  background: rgba(54, 122, 104, 0.959) !important;
+  transition: all 0.5s ease-in;
+} */

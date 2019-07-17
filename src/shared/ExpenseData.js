@@ -1,8 +1,51 @@
+// export function calculateSum(tablKey) {
+//   for (let [key, value] of Object.entries(EXPENSE)) {
+//     let sum = EXPENSE[tablKey].rows.expenses.reduce(
+//       (accumulator, currentValue) => accumulator + currentValue.amount_spend,
+//       0
+//     );
+//     return sum;
+//   }
+// }
+export function spenedInAday(row) {
+  let sum = 0;
+  for (let [key, value] of Object.entries(row.expenses)) {
+    sum = sum + parseInt(value.amount_spend);
+  }
+  return sum;
+}
+export function calculateSpendSum(tablKey) {
+  let sum = 0;
+  if (tablKey) {
+    console.log(
+      "from expense data" + tablKey + JSON.stringify(EXPENSE[tablKey].rows)
+    );
+    for (let [key, value] of Object.entries(EXPENSE[tablKey].rows)) {
+      let row = value;
+      //
+      sum = sum + spenedInAday(value);
+      console.log(sum);
+    }
+    return sum;
+  } else {
+    return "tablKey not found";
+  }
+}
+export function calculatePlannedSum(tablKey) {
+  let sum = 0;
+  for (let [key, value] of Object.entries(EXPENSE[tablKey])) {
+    // EXPENSE[tablKey].rows.expenses.map(
+    //   item => sum + parseInt(item.amount_planned)
+  }
+
+  return sum;
+}
+
 export const EXPENSE = {
   table_A: {
     id: 0,
     tableName: "my first table",
-    budget: 100,
+    budget: 500,
     rows: [
       {
         date: "date 1",
@@ -12,7 +55,7 @@ export const EXPENSE = {
             expense_type: "Clothing",
             amount_planned: "300",
             currency: "USD",
-            amount_spend: "200",
+            amount_spend: "220",
             notes: "accomodations in Germany",
             date: "New Date()"
           },
@@ -21,7 +64,7 @@ export const EXPENSE = {
             expense_type: "Food",
             amount_planned: "90",
             currency: "USD",
-            amount_spend: "100",
+            amount_spend: "160",
             notes: "food in Germany",
             date: "New Date()"
           },
