@@ -216,21 +216,41 @@ textarea.form-control {
   padding: none;
   display: flex;
 }
-button.expenses {
+button.expenses:hover {
   border: rgba(225, 189, 94, 1);
   border-radius: 50% 50% !important;
   margin: 0px, auto;
   background: rgba(86, 189, 162, 1) !important;
   box-shadow: 4px 2px 5px -3px rgba(177, 176, 172, 0.959) !important;
 }
-button.expenses:hover {
+button.expenses {
   /* color: rgba(225, 189, 94, 1); */
   color: rgb(24, 34, 101);
   background: none !important;
-  box-shadow: none !important;
+  border: none;
 }
 /* button.expenses:focus {
   box-shadow: inset 0px 0px 5px 1px rgb(190, 186, 186) !important;
   background: rgba(54, 122, 104, 0.959) !important;
   transition: all 0.5s ease-in;
 } */
+.table-sm td,
+.table-sm th {
+  padding-right: 3% !important;
+  margin: none !important;
+  text-align: center;
+}
+
+.table td,
+.table th {
+  padding: none !important;
+  margin: none !important;
+  text-align: center;
+}
+.table thead th {
+  padding: none !important;
+  margin: none !important;
+}
+Table{
+  width:100%;
+}

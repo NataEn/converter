@@ -52,7 +52,7 @@ class ManageExpenses extends Component {
           className="good"
           style={{ color: "rgba(86, 169, 1825, 1)" }}
           icon={faSmile}
-          size="2x"
+          size="3x"
           data-toggle="tooltip"
           data-placement="left"
           title="Yey! You still have some money to spend!"
@@ -65,7 +65,7 @@ class ManageExpenses extends Component {
           className="bad"
           style={{ color: "rgba(221, 43,73, 1)" }}
           icon={faFrown}
-          size="2x"
+          size="3x"
           data-toggle="tooltip"
           data-placement="left"
           title="Oh No! You spend too much!"
@@ -77,7 +77,7 @@ class ManageExpenses extends Component {
           className="even"
           style={{ color: "rgba(129, 159,205, 1)" }}
           icon={faMeh}
-          size="2x"
+          size="3x"
           data-toggle="tooltip"
           data-placement="left"
           title="Zennnn... Your budget is balanced"
@@ -108,9 +108,43 @@ class ManageExpenses extends Component {
         InnerRow.push(
           <React.Fragment key={number}>
             <Row className="expenses">
-              <Col md={10} size="auto">
-                <p>Planned: {selected[number - 1].amount_planned}</p>
-                <p>Spend : {selected[number - 1].amount_spend}</p>
+              <Col md={8} size="auto">
+                <InputGroup className="budget input-group-sm">
+                  <p className="budget">Planned: </p>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      {selected[number - 1].currency}
+                    </span>
+                  </div>
+                  <Input
+                    type="number"
+                    max="1000"
+                    placeholder="my budget"
+                    value={selected[number - 1].amount_planned}
+                    onChange={console.log("in input value has been change")}
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                  </div>
+                </InputGroup>
+                <InputGroup className="budget input-group-sm">
+                  <p className="budget">Spend: </p>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      {selected[number - 1].currency}
+                    </span>
+                  </div>
+                  <Input
+                    type="number"
+                    max="1000"
+                    placeholder="my budget"
+                    value={selected[number - 1].amount_spend}
+                    onChange={console.log("in input value has been change")}
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                  </div>
+                </InputGroup>
               </Col>
             </Row>
             <br />
@@ -163,7 +197,7 @@ class ManageExpenses extends Component {
                   defaultValue={selected[number - 1].expense_type}
                 />
               </Col>
-              <Col md={1}>
+              <Col md={2} size="auto">
                 <Button
                   className="expenses "
                   data-button={number - 1}
@@ -216,24 +250,26 @@ class ManageExpenses extends Component {
       //console.log(`${key}: ${value}`);
       //console.log("from adding rows" + JSON.stringify(value.expenses));
       tablerows.push(
-        <tr key={value}>
-          <th scope="row">
-            {value.date}{" "}
-            <Button color="light" onClick={this.handleAddingSelectExpense}>
-              Add Expense
-            </Button>
-          </th>
-          <td>
-            {this.addInnerSelectRows(value.expenses.length, value.expenses)}
-          </td>
+        <React.Fragment>
+          <tr key={value}>
+            <th scope="row" width="20%">
+              {value.date}
+              <br />
+              <Button color="light" onClick={this.handleAddingSelectExpense}>
+                Add Expense
+              </Button>
+            </th>
+            <td width="30%">
+              {this.addInnerSelectRows(value.expenses.length, value.expenses)}
+            </td>
 
-          <td>
-            {this.addInnerAmountRows(value.expenses.length, value.expenses)}
-            <p>Spend Total:{spenedInAday(value)}</p>
-          </td>
+            <td width="55%">
+              {this.addInnerAmountRows(value.expenses.length, value.expenses)}
 
-          <td />
-        </tr>
+              <p>Spend Total:{spenedInAday(value)}</p>
+            </td>
+          </tr>
+        </React.Fragment>
       );
     }
 
@@ -249,8 +285,9 @@ class ManageExpenses extends Component {
             <h4>{EXPENSE[key].tableName}</h4>{" "}
             <Row>
               <Col sm={4}>
-                <InputGroup className="budget">
+                <InputGroup className="budget input-group-sm">
                   <p className="budget">Budget: </p>
+
                   <Input
                     placeholder="my budget"
                     value={EXPENSE[key].budget}
@@ -258,7 +295,7 @@ class ManageExpenses extends Component {
                   />
                   {this.renderFace(calculateSpendSum(key), EXPENSE[key].budget)}
                 </InputGroup>
-                <InputGroup className="budget">
+                <InputGroup className="budget input-group-sm">
                   <p className="budget">Spend: {calculateSpendSum(key)}</p>
                 </InputGroup>
               </Col>
@@ -268,12 +305,12 @@ class ManageExpenses extends Component {
                 <Button color="light">Delete</Button>
               </Col>
               <Col sm={12} key={EXPENSE[key].tableName + "table"}>
-                <Table hover>
+                <Table hover className="table-sm col-auto">
+                  <caption>List of expenses</caption>
                   <thead>
                     <tr>
                       <th>Date</th>
                       <th>Expense Type</th>
-
                       <th>Amount</th>
                     </tr>
                   </thead>
@@ -281,7 +318,7 @@ class ManageExpenses extends Component {
                 </Table>
               </Col>
             </Row>
-          </div>{" "}
+          </div>
           <br />
         </React.Fragment>
       );
