@@ -259,3 +259,6 @@ span.order .dropdown,
   color: black;
   background-color: #d93636;
 }
+table .row {
+  margin: none;
+}

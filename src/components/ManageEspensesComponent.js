@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Col,
   Row,
-  Table,
   Button,
   Input,
   InputGroup,
@@ -26,124 +25,8 @@ import SelectExpense from "./SelectExpenseComponent";
 import {
   EXPENSE,
   calculateSpendSum,
-  spenedInAday
+  spenedInATable
 } from "../shared/ExpenseData";
-import BootstrapTable, {
-  deleteRow,
-  insertRow
-} from "react-bootstrap-table-next";
-import cellEditFactory, {
-  Type,
-  selectFilter,
-  filterFactory
-} from "react-bootstrap-table2-editor";
-import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css";
-
-const { ExportCSVButton } = CSVExport;
-
-const columns = [
-  {
-    dataField: "id",
-    text: "ID",
-    footer: "",
-    sort: true
-  },
-  {
-    dataField: "date",
-    text: "Date",
-    formatter: cell => {
-      let dateObj = cell;
-      if (typeof cell !== "object") {
-        dateObj = new Date(cell);
-      }
-      return `${("0" + dateObj.getUTCDate()).slice(-2)}/${(
-        "0" +
-        (dateObj.getUTCMonth() + 1)
-      ).slice(-2)}/${dateObj.getUTCFullYear()}`;
-    },
-    editor: {
-      type: Type.DATE
-    },
-    footer: "",
-    sort: true
-  },
-  {
-    dataField: "expenseType",
-    text: "Choose Expense Type",
-
-    editor: {
-      type: Type.SELECT,
-      options: [
-        {
-          value: "A",
-          label: "A"
-        },
-        {
-          value: "B",
-          label: "B"
-        },
-        {
-          value: "C",
-          label: "C"
-        },
-        {
-          value: "D",
-          label: "D"
-        },
-        {
-          value: "E",
-          label: "E"
-        }
-      ]
-    },
-    footer: "",
-    sort: true
-  },
-  {
-    dataField: "notes",
-    text: "Note",
-    editor: {
-      type: Type.TEXTAREA
-    },
-    footer: ""
-  },
-  {
-    dataField: "amountPlanned",
-    text: "Amount Planned",
-    footer: columnData =>
-      columnData.reduce((acc, item) => acc + parseInt(item), 0),
-    sort: true
-  },
-  {
-    dataField: "amountSpaned",
-    text: "Amount Spend",
-    footer: columnData =>
-      columnData.reduce((acc, item) => acc + parseInt(item), 0),
-    sort: true
-  }
-];
-const data = [
-  {
-    id: "0",
-    date: "date",
-    expenseType: "sometype",
-    note: "",
-    amountPlanned: "100",
-    amountSpaned: "200",
-    currency: "$"
-  },
-  {
-    id: "1",
-    date: "date",
-    expenseType: "sometype",
-    amountPlanned: "10",
-    amountSpaned: "500",
-    note: "",
-    currency: "$"
-  }
-];
 
 class ManageExpenses extends Component {
   constructor(props) {
@@ -158,6 +41,20 @@ class ManageExpenses extends Component {
     this.renderExpenseTable = this.renderExpenseTable.bind(this);
     // this.toggleTextarea = this.toggleTextarea.bind(this);
   }
+  //buttons:
+  handleAddingRow = event => {
+    EXPENSE.table_A.rows.push({
+      id: 3,
+      expense_type: "Clothing",
+      amount_planned: "300",
+      currency: "USD",
+      amount_spend: "220",
+      notes: "Clothing in Germany",
+      date: "New Date()"
+    });
+    console.log("rows added:" + JSON.stringify(EXPENSE.table_A.rows));
+    this.renderExpenseTable();
+  };
 
   renderFace(sum, budget) {
     let face = {};
@@ -203,119 +100,53 @@ class ManageExpenses extends Component {
     return face;
   }
 
-  handleAddingSelectExpense = event => {
-    this.addSelectInnerRows(3);
-  };
-  addInnerAmountRows = (number, selected) => {
-    let InnerRow = [];
-    if (number) {
-      while (number > 0) {
-        InnerRow.push(
-          <React.Fragment key={number}>
-            <Row className="expenses">
-              <Col md={8} size="auto">
-                <InputGroup className="budget input-group-sm">
-                  <p className="budget">Planned: </p>
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      {selected[number - 1].currency}
-                    </span>
-                  </div>
-                  <Input
-                    type="number"
-                    max="1000"
-                    placeholder="my budget"
-                    value={selected[number - 1].amount_planned}
-                    onChange={console.log("in input value has been change")}
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
-                  </div>
-                </InputGroup>
-                <InputGroup className="budget input-group-sm">
-                  <p className="budget">Spend: </p>
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      {selected[number - 1].currency}
-                    </span>
-                  </div>
-                  <Input
-                    type="number"
-                    max="1000"
-                    placeholder="my budget"
-                    value={selected[number - 1].amount_spend}
-                    onChange={console.log("in input value has been change")}
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
-                  </div>
-                </InputGroup>
-              </Col>
-            </Row>
-            <br />
-            <Row data-button={number - 1} />
-
-            <br />
-          </React.Fragment>
-        );
-        number--;
-      }
-    }
-
-    return InnerRow;
+  addInnerAmountRows = (id, selected) => {
+    return (
+      <React.Fragment key={id}>
+        <InputGroup className="budget input-group-sm">
+          <p className="budget">Planned: </p>
+          <div className="input-group-prepend">
+            <span className="input-group-text">{selected.currency}</span>
+          </div>
+          <Input
+            type="number"
+            max="1000"
+            placeholder="my budget"
+            value={selected.amount_planned}
+            onChange={console.log("in input value has been change")}
+          />
+        </InputGroup>
+        <InputGroup className="budget input-group-sm">
+          <p className="budget">Spend: </p>
+          <div class="input-group-prepend">
+            <span class="input-group-text">{selected.currency}</span>
+          </div>
+          <Input
+            type="number"
+            max="1000"
+            placeholder="my budget"
+            value={selected.amount_spend}
+            onChange={console.log("in input value has been change")}
+          />
+        </InputGroup>
+      </React.Fragment>
+    );
   };
 
-  addInnerSelectRows = (number, selected) => {
-    let InnerRow = [];
-    if (number) {
-      while (number > 0) {
-        //console.log("from inner row" + selected[number - 1].expense_type);
-
-        InnerRow.push(
-          <React.Fragment key={number}>
-            <Row className="expenses">
-              <Col md={8} size="auto">
-                <SelectExpense
-                  onChange={this.expenseTypeSelect}
-                  onClick={this.addInnerSelectRows}
-                  defaultValue={selected[number - 1].expense_type}
-                />
-              </Col>
-              <Col md={2} size="auto">
-                <Button
-                  className="expenses "
-                  data-button={number - 1}
-                  onClick={this.toggleTextarea}
-                >
-                  <FontAwesomeIcon
-                    className="budget"
-                    icon={faPencilAlt}
-                    size="0.5x"
-                  />
-                </Button>
-              </Col>
-            </Row>
-            <br />
-            <Row data-button={number - 1}>
-              <textarea
-                size="small"
-                className="form-control"
-                aria-label="With textarea"
-                cols="3"
-                rows="3"
-                wrap="off"
-              >
-                {selected[number - 1].notes}
-              </textarea>
-            </Row>
-
-            <br />
-          </React.Fragment>
-        );
-        number--;
-      }
-    }
-    return <td>{InnerRow}</td>;
+  addInnerSelectRows = (id, selected) => {
+    return (
+      <React.Fragment key={id}>
+        <Row className="expenses">
+          <Col md={12} size="auto">
+            <SelectExpense
+              onChange={this.expenseTypeSelect}
+              onClick={this.addInnerSelectRows}
+              defaultValue={selected.expense_type}
+            />
+          </Col>
+        </Row>
+      </React.Fragment>
+    );
   };
   addRows = table => {
     let tablerows = [];
@@ -326,23 +157,27 @@ class ManageExpenses extends Component {
       tablerows.push(
         <React.Fragment>
           <tr key={value}>
-            <th scope="row" width="20%">
+            <th scope="row" width="10%">
               {value.date}
               <br />
-              <Button color="light" onClick={this.handleAddingSelectExpense}>
-                Add Expense
-              </Button>
             </th>
 
-            <div width="30%">
-              {this.addInnerSelectRows(value.expenses.length, value.expenses)}
-            </div>
-
-            <td width="55%">
-              {this.addInnerAmountRows(value.expenses.length, value.expenses)}
-
-              <p>Spend Total:{spenedInAday(value)}</p>
+            <td width="20%">{this.addInnerSelectRows(value.id, value)}</td>
+            <td width="20%">
+              <div data-button={value.id}>
+                <textarea
+                  size="small"
+                  className="form-control"
+                  aria-label="With textarea"
+                  cols="3"
+                  rows="3"
+                  wrap="off"
+                >
+                  {value.notes}
+                </textarea>
+              </div>
             </td>
+            <td width="20%">{this.addInnerAmountRows(value.id, value)}</td>
           </tr>
         </React.Fragment>
       );
@@ -375,74 +210,20 @@ class ManageExpenses extends Component {
                 </InputGroup>
               </Col>
               <Col sm={{ size: 6, offset: 2 }}>
-                <Button color="light">Save</Button>{" "}
-                <Button color="light">New</Button>{" "}
-                <Button color="light">Delete</Button>
+                <Button color="light">Save Table</Button>{" "}
+                <Button color="light" onClick={this.handleAddingRow}>
+                  Add Row
+                </Button>
+                <Button color="light">Delete Row</Button>
               </Col>
               <Col sm={12} key={EXPENSE[key].tableName + "table"}>
-                <ToolkitProvider
-                  keyField="id"
-                  bootstrap4="true"
-                  exportCSV={{
-                    fileName: "custom.csv",
-                    separator: "|",
-                    ignoreHeader: true,
-                    noAutoBOM: false
-                  }}
-                  data={[
-                    {
-                      id: "0",
-                      date: "date",
-                      expenseType: "sometype",
-                      note: "",
-                      amountPlanned: "100",
-                      amountSpaned: "80",
-                      currency: "$"
-                    },
-                    {
-                      id: "1",
-                      date: "date",
-                      expenseType: "sometype",
-                      amountPlanned: "10",
-                      amountSpaned: "500",
-                      note: "",
-                      currency: "$"
-                    }
-                  ]}
-                  columns={columns}
-                >
-                  {props => (
-                    <div>
-                      <ExportCSVButton
-                        className="btn btn-primary"
-                        {...props.csvProps}
-                      >
-                        Export CSV!!
-                      </ExportCSVButton>
-
-                      <BootstrapTable
-                        {...props.baseProps}
-                        cellEdit={cellEditFactory({
-                          mode: "click",
-                          blurToSave: true
-                        })}
-                        footerClasses="footer-class"
-                        deleteRow
-                        insertRow
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-                <table
-                  hover
-                  className="table table-sm col-auto"
-                  data-search={true}
-                >
+                <table className="table table-bordered table-sm col-auto">
                   <caption>List of expenses</caption>
                   <thead>
                     <tr>
                       <th>Date</th>
                       <th>Expense Type</th>
+                      <th>Notes</th>
                       <th>Amount</th>
                     </tr>
                   </thead>
@@ -465,6 +246,8 @@ class ManageExpenses extends Component {
     return (
       <div className="container">
         <h1>Manage Expenses</h1>
+        <Button color="light">New Table</Button>{" "}
+        <Button color="light">Delete Table</Button>{" "}
         <div className="tableContainer">
           {" "}
           <Row>
