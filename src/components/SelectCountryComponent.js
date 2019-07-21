@@ -16,7 +16,7 @@ const IconOption = props => {
           alt={props.data.lable}
         />{" "}
         {props.data.label}{" "}
-        <strong style={{ fontSize: "0.8em" }}>{props.data.currency}</strong>
+        <strong style={{ fontSize: "0.7em" }}>{props.data.currency}</strong>
       </div>
     </Option>
   );
@@ -38,13 +38,13 @@ const SingleValue = ({ ...props }) => (
 );
 
 const colourStyles = {
-  option: base => ({
+  option: (base, state) => ({
     ...base,
     borderRadius: 5,
     color: "black",
     background: "white",
     display: "flex",
-    "font-size": "1em",
+    "font-size": "0.7em",
     ":hover": { background: "#dde0d8" }
   })
 };
@@ -89,20 +89,22 @@ class SelectCountry extends Component {
       flagpath: opt.image
     }));
     return (
-      <Select
-        options={options}
-        components={{ Option: IconOption, SingleValue: SingleValue }}
-        placeholder="Select Country"
-        ratesObject={ratesObject}
-        getOptionValue={option => option["flagpath"]}
-        styles={colourStyles}
-        value={this.state.selectedOption}
-        onChange={this.handleChange}
-        isClearable
-        isMulti
-        // ref={this.selectName}
-        captureMenuScroll={true}
-      />
+      
+        <Select
+          options={options}
+          components={{ Option: IconOption, SingleValue: SingleValue }}
+          placeholder="Select Country"
+          ratesObject={ratesObject}
+          getOptionValue={option => option["flagpath"]}
+          styles={colourStyles}
+          value={this.state.selectedOption}
+          onChange={this.handleChange}
+          isClearable
+          //isMulti
+          // ref={this.selectName}
+          captureMenuScroll={true}
+        />
+      
     );
   }
 }

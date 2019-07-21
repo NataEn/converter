@@ -28,6 +28,122 @@ import {
   calculateSpendSum,
   spenedInAday
 } from "../shared/ExpenseData";
+import BootstrapTable, {
+  deleteRow,
+  insertRow
+} from "react-bootstrap-table-next";
+import cellEditFactory, {
+  Type,
+  selectFilter,
+  filterFactory
+} from "react-bootstrap-table2-editor";
+import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css";
+
+const { ExportCSVButton } = CSVExport;
+
+const columns = [
+  {
+    dataField: "id",
+    text: "ID",
+    footer: "",
+    sort: true
+  },
+  {
+    dataField: "date",
+    text: "Date",
+    formatter: cell => {
+      let dateObj = cell;
+      if (typeof cell !== "object") {
+        dateObj = new Date(cell);
+      }
+      return `${("0" + dateObj.getUTCDate()).slice(-2)}/${(
+        "0" +
+        (dateObj.getUTCMonth() + 1)
+      ).slice(-2)}/${dateObj.getUTCFullYear()}`;
+    },
+    editor: {
+      type: Type.DATE
+    },
+    footer: "",
+    sort: true
+  },
+  {
+    dataField: "expenseType",
+    text: "Choose Expense Type",
+
+    editor: {
+      type: Type.SELECT,
+      options: [
+        {
+          value: "A",
+          label: "A"
+        },
+        {
+          value: "B",
+          label: "B"
+        },
+        {
+          value: "C",
+          label: "C"
+        },
+        {
+          value: "D",
+          label: "D"
+        },
+        {
+          value: "E",
+          label: "E"
+        }
+      ]
+    },
+    footer: "",
+    sort: true
+  },
+  {
+    dataField: "notes",
+    text: "Note",
+    editor: {
+      type: Type.TEXTAREA
+    },
+    footer: ""
+  },
+  {
+    dataField: "amountPlanned",
+    text: "Amount Planned",
+    footer: columnData =>
+      columnData.reduce((acc, item) => acc + parseInt(item), 0),
+    sort: true
+  },
+  {
+    dataField: "amountSpaned",
+    text: "Amount Spend",
+    footer: columnData =>
+      columnData.reduce((acc, item) => acc + parseInt(item), 0),
+    sort: true
+  }
+];
+const data = [
+  {
+    id: "0",
+    date: "date",
+    expenseType: "sometype",
+    note: "",
+    amountPlanned: "100",
+    amountSpaned: "200",
+    currency: "$"
+  },
+  {
+    id: "1",
+    date: "date",
+    expenseType: "sometype",
+    amountPlanned: "10",
+    amountSpaned: "500",
+    note: "",
+    currency: "$"
+  }
+];
 
 class ManageExpenses extends Component {
   constructor(props) {
@@ -86,17 +202,6 @@ class ManageExpenses extends Component {
     }
     return face;
   }
-  // toggleTextarea(event) {
-  //   let index = event.target.dataset.button;
-  //   let textareaVisible = this.state.textareaVisible;
-  //   // this.setState(state => {
-  //   //   textareaVisible[index] = !state.textareaVisible[index];
-  //   //   return {
-  //   //     textareaVisible
-  //   //   };
-  //   // });
-  //   console.log(this.state.textareaVisible);
-  // }
 
   handleAddingSelectExpense = event => {
     this.addSelectInnerRows(3);
@@ -111,8 +216,8 @@ class ManageExpenses extends Component {
               <Col md={8} size="auto">
                 <InputGroup className="budget input-group-sm">
                   <p className="budget">Planned: </p>
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
                       {selected[number - 1].currency}
                     </span>
                   </div>
@@ -148,25 +253,7 @@ class ManageExpenses extends Component {
               </Col>
             </Row>
             <br />
-            <Row
-              data-button={number - 1}
-              // className={
-              //   this.state.textareaVisible
-              //     ? "expense-description active"
-              //     : "expense-description"
-              // }
-            >
-              {/* <textarea
-                size="small"
-                className="form-control"
-                aria-label="With textarea"
-                cols="5"
-                rows="3"
-                wrap="off"
-              >
-                {selected[number - 1].amount}
-              </textarea> */}
-            </Row>
+            <Row data-button={number - 1} />
 
             <br />
           </React.Fragment>
@@ -174,14 +261,11 @@ class ManageExpenses extends Component {
         number--;
       }
     }
-    // this.setState(prevState => ({
-    //   textareaVisible: textareaVisible
-    // }));
+
     return InnerRow;
   };
 
   addInnerSelectRows = (number, selected) => {
-    let textareaVisible = [];
     let InnerRow = [];
     if (number) {
       while (number > 0) {
@@ -212,14 +296,7 @@ class ManageExpenses extends Component {
               </Col>
             </Row>
             <br />
-            <Row
-              data-button={number - 1}
-              // className={
-              //   this.state.textareaVisible
-              //     ? "expense-description active"
-              //     : "expense-description"
-              // }
-            >
+            <Row data-button={number - 1}>
               <textarea
                 size="small"
                 className="form-control"
@@ -238,10 +315,7 @@ class ManageExpenses extends Component {
         number--;
       }
     }
-    // this.setState(prevState => ({
-    //   textareaVisible: textareaVisible
-    // }));
-    return InnerRow;
+    return <td>{InnerRow}</td>;
   };
   addRows = table => {
     let tablerows = [];
@@ -259,9 +333,10 @@ class ManageExpenses extends Component {
                 Add Expense
               </Button>
             </th>
-            <td width="30%">
+
+            <div width="30%">
               {this.addInnerSelectRows(value.expenses.length, value.expenses)}
-            </td>
+            </div>
 
             <td width="55%">
               {this.addInnerAmountRows(value.expenses.length, value.expenses)}
@@ -305,7 +380,64 @@ class ManageExpenses extends Component {
                 <Button color="light">Delete</Button>
               </Col>
               <Col sm={12} key={EXPENSE[key].tableName + "table"}>
-                <Table hover className="table-sm col-auto">
+                <ToolkitProvider
+                  keyField="id"
+                  bootstrap4="true"
+                  exportCSV={{
+                    fileName: "custom.csv",
+                    separator: "|",
+                    ignoreHeader: true,
+                    noAutoBOM: false
+                  }}
+                  data={[
+                    {
+                      id: "0",
+                      date: "date",
+                      expenseType: "sometype",
+                      note: "",
+                      amountPlanned: "100",
+                      amountSpaned: "80",
+                      currency: "$"
+                    },
+                    {
+                      id: "1",
+                      date: "date",
+                      expenseType: "sometype",
+                      amountPlanned: "10",
+                      amountSpaned: "500",
+                      note: "",
+                      currency: "$"
+                    }
+                  ]}
+                  columns={columns}
+                >
+                  {props => (
+                    <div>
+                      <ExportCSVButton
+                        className="btn btn-primary"
+                        {...props.csvProps}
+                      >
+                        Export CSV!!
+                      </ExportCSVButton>
+
+                      <BootstrapTable
+                        {...props.baseProps}
+                        cellEdit={cellEditFactory({
+                          mode: "click",
+                          blurToSave: true
+                        })}
+                        footerClasses="footer-class"
+                        deleteRow
+                        insertRow
+                      />
+                    </div>
+                  )}
+                </ToolkitProvider>
+                <table
+                  hover
+                  className="table table-sm col-auto"
+                  data-search={true}
+                >
                   <caption>List of expenses</caption>
                   <thead>
                     <tr>
@@ -315,7 +447,7 @@ class ManageExpenses extends Component {
                     </tr>
                   </thead>
                   <tbody>{this.addRows(key)}</tbody>
-                </Table>
+                </table>
               </Col>
             </Row>
           </div>

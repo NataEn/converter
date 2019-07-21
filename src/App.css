@@ -251,6 +251,11 @@ button.expenses {
   padding: none !important;
   margin: none !important;
 }
-Table{
-  width:100%;
+table {
+  width: 100%;
+}
+span.order .dropdown,
+.dropup > .caret {
+  color: black;
+  background-color: #d93636;
 }
