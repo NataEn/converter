@@ -224,7 +224,6 @@ button.expenses:hover {
   box-shadow: 4px 2px 5px -3px rgba(177, 176, 172, 0.959) !important;
 }
 button.expenses {
-  /* color: rgba(225, 189, 94, 1); */
   color: rgb(24, 34, 101);
   background: none !important;
   border: none;
@@ -261,4 +260,72 @@ span.order .dropdown,
 }
 table .row {
   margin: none;
+}
+select {
+  margin: none;
+  padding: 0px;
+  background: inherit;
+  border: 0px;
+  border-radius: 0.3rem !important;
+  width: 100%;
+  color: #495057;
+  box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
+}
+table select option {
+  background: rgba(240, 236, 236, 0.712);
+  font-weight: inherit;
+  display: block;
+  white-space: none;
+  min-height: 1em;
+  padding: 0px;
+  color: #495057;
+}
+table textarea {
+  background: inherit;
+  border: none;
+  width: 100%;
+  border-radius: 0.3rem !important;
+  box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
+}
+table .form-control {
+  display: block;
+  width: 100%;
+  height: none !important;
+  padding: none !important;
+  color: #495057;
+  background-color: none !important;
+  background-clip: padding-box;
+  border: 0px solid #ced4da;
+
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+table .input-group-sm > .form-control {
+  line-height: inherit;
+  border-radius: 0.3rem !important;
+  background-color: none !important;
+}
+
+textarea.form-control,
+input.form-control {
+  background: rgba(240, 236, 236, 0.712);
+  padding: none !important;
+  margin: none !important;
+  font-size: 0.8rem;
+  border-radius: 0.3rem !important;
+  border: none;
+  box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
+}
+input.form-control.budget {
+  background: rgba(240, 223, 178, 0.3);
+}
+span.input-group-text {
+  font-size: 0.6rem !important;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: none;
+  border-radius: 0.3rem !important;
+  border: none;
+  box-shadow: 1px 3px 2px -3px rgba(109, 108, 105, 0.959) !important;
+  padding: none !important;
+  margin: none !important;
 }

@@ -8,7 +8,8 @@ import "./index.css";
 import App from "./App";
 import "flag-icon-css/css/flag-icon.min.css";
 import * as serviceWorker from "./serviceWorker";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+
+//import * as i18n from "bootstrap-select/dist/js/i18n";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

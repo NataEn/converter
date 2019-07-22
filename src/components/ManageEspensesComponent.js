@@ -25,7 +25,8 @@ import SelectExpense from "./SelectExpenseComponent";
 import {
   EXPENSE,
   calculateSpendSum,
-  spenedInATable
+  spenedInATable,
+  addRow
 } from "../shared/ExpenseData";
 
 class ManageExpenses extends Component {
@@ -43,17 +44,9 @@ class ManageExpenses extends Component {
   }
   //buttons:
   handleAddingRow = event => {
-    EXPENSE.table_A.rows.push({
-      id: 3,
-      expense_type: "Clothing",
-      amount_planned: "300",
-      currency: "USD",
-      amount_spend: "220",
-      notes: "Clothing in Germany",
-      date: "New Date()"
-    });
+    console.log(event);
+    //addRow(tablKey);
     console.log("rows added:" + JSON.stringify(EXPENSE.table_A.rows));
-    this.renderExpenseTable();
   };
 
   renderFace(sum, budget) {
@@ -105,9 +98,7 @@ class ManageExpenses extends Component {
       <React.Fragment key={id}>
         <InputGroup className="budget input-group-sm">
           <p className="budget">Planned: </p>
-          <div className="input-group-prepend">
-            <span className="input-group-text">{selected.currency}</span>
-          </div>
+
           <Input
             type="number"
             max="1000"
@@ -115,12 +106,13 @@ class ManageExpenses extends Component {
             value={selected.amount_planned}
             onChange={console.log("in input value has been change")}
           />
+          <div className="input-group-prepend">
+            <span className="input-group-text">{selected.currency}</span>
+          </div>
         </InputGroup>
         <InputGroup className="budget input-group-sm">
           <p className="budget">Spend: </p>
-          <div class="input-group-prepend">
-            <span class="input-group-text">{selected.currency}</span>
-          </div>
+
           <Input
             type="number"
             max="1000"
@@ -128,6 +120,9 @@ class ManageExpenses extends Component {
             value={selected.amount_spend}
             onChange={console.log("in input value has been change")}
           />
+          <div class="input-group-prepend">
+            <span class="input-group-text">{selected.currency}</span>
+          </div>
         </InputGroup>
       </React.Fragment>
     );
@@ -170,7 +165,7 @@ class ManageExpenses extends Component {
                   className="form-control"
                   aria-label="With textarea"
                   cols="3"
-                  rows="3"
+                  rows="1"
                   wrap="off"
                 >
                   {value.notes}
@@ -199,6 +194,7 @@ class ManageExpenses extends Component {
                   <p className="budget">Budget: </p>
 
                   <Input
+                    className="budget"
                     placeholder="my budget"
                     value={EXPENSE[key].budget}
                     onChange={console.log("in input value has been change")}

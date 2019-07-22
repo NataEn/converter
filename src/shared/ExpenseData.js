@@ -34,6 +34,17 @@ export function calculatePlannedSum(tablKey) {
 
   return sum;
 }
+export function addRow(tablKey) {
+  EXPENSE[tablKey].rows.push({
+    id: EXPENSE[tablKey].rows.length,
+    expense_type: "Clothing",
+    amount_planned: "300",
+    currency: "USD",
+    amount_spend: "220",
+    notes: "Clothing in Germany",
+    date: "New Date()"
+  });
+}
 
 export const EXPENSE = {
   table_A: {

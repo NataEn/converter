@@ -13,6 +13,7 @@
     "axios-react": "^1.1.4",
     "bootstrap": "^4.3.1",
     "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-select": "^1.13.10",
     "bootstrap-social": "^5.1.1",
     "flag-icon-css": "^3.3.0",
     "google-map-react": "^1.1.4",
