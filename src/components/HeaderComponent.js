@@ -10,7 +10,6 @@ import {
   NavbarToggler
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 import { NavLink } from "react-router-dom";
 
 class Header extends Component {
@@ -31,7 +30,12 @@ class Header extends Component {
         <Navbar dark className="navbar" expand="md">
           <div className="container">
             <NavbarBrand className="mr-auto navbar-default" href="/">
-              <img src={Logo} height="30" width="30" alt="Converter" />{" "}
+              <img
+                src={this.props.logo.Logo}
+                height="30"
+                width="30"
+                alt="Converter"
+              />{" "}
               <strong>Coverter</strong>
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNav} />
@@ -69,7 +73,12 @@ class Header extends Component {
           <div className="container">
             <div className="row row-header row-no-gutters">
               <div className="col-2 offset-1">
-                <img src={Logo} height="80" width="80" alt="Converter" />
+                <img
+                  src={this.props.logo.Logo}
+                  height="80"
+                  width="80"
+                  alt="Converter"
+                />
               </div>
               <div className="col-6 col-sm-3 col-offset-right">
                 <h1 className="header-align-middle">Converter</h1>

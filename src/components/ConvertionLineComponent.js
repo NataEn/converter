@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CountryObject from "../shared/CountryObjectMaker";
 import Select, { components } from "react-select";
 
 const { Option } = components;
@@ -69,7 +68,7 @@ class SelectComponent extends Component {
   render() {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
-    const countryObject = CountryObject;
+    const countryObject = this.props.countryObject;
     let options = countryObject.map(opt => ({
       label: opt.country,
       value: opt.currencyCode,

@@ -22,5 +22,4 @@ const CountryObject = () => {
   return c;
 };
 
-const Country = CountryObject();
-export default Country;
+export const Country = CountryObject();

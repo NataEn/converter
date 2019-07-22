@@ -1,33 +1,8 @@
 import React, { Component } from "react";
-import {
-  Col,
-  Row,
-  Button,
-  Input,
-  InputGroup,
-  InputGroupAddon
-} from "reactstrap";
+import { Col, Row, Button, Input, InputGroup } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPiggyBank,
-  faMeh,
-  faFrown,
-  faSadTear,
-  faSadCry,
-  faSmileBeam,
-  faSmile,
-  faColumns,
-  faPenAlt,
-  faPen,
-  faPencilAlt
-} from "@fortawesome/free-solid-svg-icons";
+import { faMeh, faFrown, faSmile } from "@fortawesome/free-solid-svg-icons";
 import SelectExpense from "./SelectExpenseComponent";
-import {
-  EXPENSE,
-  calculateSpendSum,
-  spenedInATable,
-  addRow
-} from "../shared/ExpenseData";
 
 class ManageExpenses extends Component {
   constructor(props) {
@@ -41,14 +16,18 @@ class ManageExpenses extends Component {
     this.addRows = this.addRows.bind(this);
     this.renderExpenseTable = this.renderExpenseTable.bind(this);
     // this.toggleTextarea = this.toggleTextarea.bind(this);
+    this.spendSum = this.spendSum.bind(this);
   }
   //buttons:
   handleAddingRow = event => {
     console.log(event);
     //addRow(tablKey);
-    console.log("rows added:" + JSON.stringify(EXPENSE.table_A.rows));
+    console.log(
+      "rows added:" + JSON.stringify(this.props.expense.EXPENSE.table_A.rows)
+    );
   };
-
+  //functions
+  spendSum = this.props.calculateSpendSum;
   renderFace(sum, budget) {
     let face = {};
     console.log("from render face sum is" + sum + "budget is" + budget);
@@ -146,7 +125,9 @@ class ManageExpenses extends Component {
   addRows = table => {
     let tablerows = [];
 
-    for (let [key, value] of Object.entries(EXPENSE[table].rows)) {
+    for (let [key, value] of Object.entries(
+      this.props.expense.EXPENSE[table].rows
+    )) {
       //console.log(`${key}: ${value}`);
       //console.log("from adding rows" + JSON.stringify(value.expenses));
       tablerows.push(
@@ -182,12 +163,12 @@ class ManageExpenses extends Component {
   };
   renderExpenseTable = () => {
     let tables = [];
-    for (let [key, value] of Object.entries(EXPENSE)) {
+    for (let [key, value] of Object.entries(this.props.expense.EXPENSE)) {
       //console.log(key + " is of table" + EXPENSE[key].tableName);
       tables.push(
-        <React.Fragment key={EXPENSE[key].tableName}>
+        <React.Fragment key={this.props.expense.EXPENSE[key].tableName}>
           <div className="expense-table">
-            <h4>{EXPENSE[key].tableName}</h4>{" "}
+            <h4>{this.props.expense.EXPENSE[key].tableName}</h4>{" "}
             <Row>
               <Col sm={4}>
                 <InputGroup className="budget input-group-sm">
@@ -196,13 +177,16 @@ class ManageExpenses extends Component {
                   <Input
                     className="budget"
                     placeholder="my budget"
-                    value={EXPENSE[key].budget}
+                    value={this.props.expense.EXPENSE[key].budget}
                     onChange={console.log("in input value has been change")}
                   />
-                  {this.renderFace(calculateSpendSum(key), EXPENSE[key].budget)}
+                  {this.renderFace(
+                    this.spendSum(key),
+                    this.props.expense.EXPENSE[key].budget
+                  )}
                 </InputGroup>
                 <InputGroup className="budget input-group-sm">
-                  <p className="budget">Spend: {calculateSpendSum(key)}</p>
+                  <p className="budget">Spend: {this.spendSum(key)}</p>
                 </InputGroup>
               </Col>
               <Col sm={{ size: 6, offset: 2 }}>
@@ -212,7 +196,10 @@ class ManageExpenses extends Component {
                 </Button>
                 <Button color="light">Delete Row</Button>
               </Col>
-              <Col sm={12} key={EXPENSE[key].tableName + "table"}>
+              <Col
+                sm={12}
+                key={this.props.expense.EXPENSE[key].tableName + "table"}
+              >
                 <table className="table table-bordered table-sm col-auto">
                   <caption>List of expenses</caption>
                   <thead>

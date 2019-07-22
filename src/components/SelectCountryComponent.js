@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import CountryObject from "../shared/CountryObjectMaker";
 import Select, { components } from "react-select";
-
 const { Option } = components;
 
 const IconOption = props => {
@@ -81,30 +79,29 @@ class SelectCountry extends Component {
   render() {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
-    const countryObject = CountryObject;
-    let options = countryObject.map(opt => ({
+    const countryObject = this.props.country;
+
+    let options = countryObject.Country.map(opt => ({
       label: opt.country,
       value: opt.country,
       currency: opt.currencyCode,
       flagpath: opt.image
     }));
     return (
-      
-        <Select
-          options={options}
-          components={{ Option: IconOption, SingleValue: SingleValue }}
-          placeholder="Select Country"
-          ratesObject={ratesObject}
-          getOptionValue={option => option["flagpath"]}
-          styles={colourStyles}
-          value={this.state.selectedOption}
-          onChange={this.handleChange}
-          isClearable
-          //isMulti
-          // ref={this.selectName}
-          captureMenuScroll={true}
-        />
-      
+      <Select
+        options={options}
+        components={{ Option: IconOption, SingleValue: SingleValue }}
+        placeholder="Select Country"
+        ratesObject={ratesObject}
+        getOptionValue={option => option["flagpath"]}
+        styles={colourStyles}
+        value={this.state.selectedOption}
+        onChange={this.handleChange}
+        isClearable
+        isMulti
+        // ref={this.selectName}
+        captureMenuScroll={true}
+      />
     );
   }
 }

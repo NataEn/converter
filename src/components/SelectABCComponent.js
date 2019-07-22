@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import CountryObject from "../shared/CountryObjectMaker";
 import Select, { components } from "react-select";
-
 const { Option } = components;
 
 const IconOption = props => {

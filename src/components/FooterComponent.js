@@ -1,6 +1,4 @@
 import React from "react";
-import { SocialIcon } from "react-social-icons";
-import { Nav } from "react-social-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

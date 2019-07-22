@@ -1,22 +1,27 @@
 import React, { Component } from "react";
-//import PersonList from "./PersonListComponents";
 import axios from "axios";
+import { Container, Row, Col } from "reactstrap";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+//components
 import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
 import About from "./AboutComponent";
 import Contact from "./ContactComponent";
 import ManageExpenses from "./ManageEspensesComponent";
-import { Footer } from "./FooterComponent";
 import Currency from "./CurrencyComponent";
 import ImageDetail from "./ImageDetailComponent";
-import { SpiningRates } from "./SpiningRatesComponent";
+import { Footer } from "./FooterComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
-import { IMAGE } from "../shared/ImagesData";
-import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
-import { Container, Row, Col } from "reactstrap";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
+//databases
+import { Country } from "../shared/CountryObjectMaker";
+import Logo from "../shared/logo/Logo_for_page_title200x200.png";
+import { IMAGE } from "../shared/ImagesData";
+import { IMAGES } from "../shared/ImagesData.1";
+import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
+import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
 class Main extends Component {
   constructor(props) {
@@ -71,8 +76,7 @@ class Main extends Component {
       <Container>
         <Row className="main-spacer-header-hr">
           <Col sm={12}>
-            <Header />
-            
+            <Header logo={{ Logo }} />
           </Col>
         </Row>
         <Row>
@@ -100,16 +104,26 @@ class Main extends Component {
                 path="/gallery"
                 render={() => (
                   <ImageGallery
-                    images={{ IMAGE }}
+                    images={{ IMAGES }}
                     abcview={{ GalleryAccordingtoABC }}
                     rates={this.state.ratesCurrencies}
                     ratesObject={this.state.rates}
+                    country={{ Country }}
                   />
                 )}
               />
               <Route exact path="/gallery/:id" component={this.GalleryImage} />
               <Route exact path="/saving" render={() => <SavingTips />} />
-              <Route exact path="/manage" render={() => <ManageExpenses />} />
+              <Route
+                exact
+                path="/manage"
+                render={() => (
+                  <ManageExpenses
+                    expense={{ EXPENSE }}
+                    calculateSpendSum={calculateSpendSum}
+                  />
+                )}
+              />
 
               <Redirect to="/home" />
             </Switch>
