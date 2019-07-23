@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux"; //connects the main components to the store
 //components
 import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
@@ -16,26 +17,41 @@ import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
 //databases- now obtained from redux store- they are called from the reducer.js
-import { COUNTRY } from "../shared/CountryObjectMaker";
-import Logo from "../shared/logo/Logo_for_page_title200x200.png";
-import { IMAGE } from "../shared/ImagesData";
-import { IMAGES } from "../shared/ImagesData.1";
-import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
-import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
+// import { COUNTRY } from "../shared/CountryObjectMaker";
+// import Logo from "../shared/logo/Logo_for_page_title200x200.png";
+// import { IMAGE } from "../shared/ImagesData";
+// import { IMAGES } from "../shared/ImagesData.1";
+// import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
+//import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
+//a function that maps redux-store state to props that are passed down to the components:
+
+const mapStateToStore = state => {
+  return {
+    rates: state.rates,
+    ratesCurrencies: state.ratesCurrencies,
+    converterPanel: state.converterPanel,
+    country: state.country,
+    logo: state.logo,
+    images: state.images,
+    abcGallery: state.abcGallery,
+    expense: state.expense,
+    calculateSpendSum: state.calculateSpendSum
+  };
+};
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rates: {},
       ratesCurrencies: [],
-      converterPanel: [],
-      country: COUNTRY,
-      logo: Logo,
-      images: IMAGES,
-      abcGallery: GalleryAccordingtoABC,
-      expense: EXPENSE,
-      calculateSpendSum: calculateSpendSum
+      converterPanel: []
+      // country: COUNTRY,
+      // logo: Logo,
+      // images: IMAGES,
+      // abcGallery: GalleryAccordingtoABC,
+      // expense: EXPENSE,
+      // calculateSpendSum: calculateSpendSum
     };
 
     this.axios = axios.create({
@@ -43,6 +59,7 @@ class Main extends Component {
     });
     //console.log(JSON.stringify(this.state.rates));
     this.axiosConvert = this.axiosConvert.bind(this);
+    this.GalleryImage = this.GalleryImage.bind(this);
   }
   componentDidMount() {
     this.axios
@@ -52,7 +69,7 @@ class Main extends Component {
         }
       })
       .then(response => {
-        console.log("from response" + response.data);
+        //console.log("from response" + response.data);
         this.setState({ rates: response.data.rates });
         this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
         //console.log(this.state.ratesCurrencies);
@@ -70,11 +87,20 @@ class Main extends Component {
 
   //match object coming from the selected gallery image
   GalleryImage({ match }) {
-    let selectedImage = IMAGE.filter(
-      image => parseInt(match.params.id, 10) === image.id
-    );
+    console.log("from matching image" + JSON.stringify(match.params));
+    let selectedLetter = match.params.letter;
+    let selectedCountry = match.params.country;
+    // let selectedCountry = Object.keys(this.props.images[selectedLetter]).filter(
+    //   image => match.params.country === image
+
+    let selectedImage = this.props.images[selectedLetter][
+      selectedCountry
+    ].filter(image => parseInt(match.params.id, 10) === image.id);
     return (
-      <ImageDetail key={parseInt(match.params.id, 10)} image={selectedImage} />
+      <ImageDetail
+        key={match.params.country + parseInt(match.params.id, 10)}
+        image={selectedImage[0]}
+      />
     );
   }
   render() {
@@ -82,7 +108,7 @@ class Main extends Component {
       <Container>
         <Row className="main-spacer-header-hr">
           <Col sm={12}>
-            <Header logo={this.state.logo} />
+            <Header logo={this.props.logo} />
           </Col>
         </Row>
         <Row>
@@ -97,10 +123,10 @@ class Main extends Component {
                 render={() => (
                   <Currency
                     {...this.props}
-                    rates={this.state.ratesCurrencies}
-                    ratesObject={this.state.rates}
+                    rates={this.props.ratesCurrencies}
+                    ratesObject={this.props.rates}
                     axiosConvert={this.axiosConvert}
-                    country={this.state.country}
+                    country={this.props.country}
                   />
                 )}
               />
@@ -111,32 +137,36 @@ class Main extends Component {
                 path="/gallery"
                 render={() => (
                   <ImageGallery
-                    images={this.state.images}
-                    abcview={this.state.abcGallery}
-                    rates={this.state.ratesCurrencies}
-                    ratesObject={this.state.rates}
-                    country={this.state.country}
+                    images={this.props.images}
+                    abcview={this.props.abcGallery}
+                    rates={this.props.ratesCurrencies}
+                    ratesObject={this.props.rates}
+                    country={this.props.country}
                   />
                 )}
               />
-              <Route exact path="/gallery/:id" component={this.GalleryImage} />
+              <Route
+                strict
+                path="/gallery/:letter/:country/:id"
+                component={this.GalleryImage}
+              />
               <Route exact path="/saving" render={() => <SavingTips />} />
               <Route
                 exact
                 path="/manage"
                 render={() => (
                   <ManageExpenses
-                    expense={this.state.expense}
-                    calculateSpendSum={this.state.calculateSpendSum}
+                    expense={this.props.expense}
+                    calculateSpendSum={this.props.calculateSpendSum}
                   />
                 )}
               />
 
-              <Redirect to="/home" />
+              {/* <Redirect to="/home" /> */}
             </Switch>
 
             <MyMap />
-            <SpiningRates ratesObject={this.state.rates} />
+            <SpiningRates ratesObject={this.props.rates} />
           </Col>
           <Col sm={12}>
             <Footer />
@@ -146,4 +176,4 @@ class Main extends Component {
     );
   }
 }
-export default withRouter(Main);
+export default withRouter(connect(mapStateToStore)(Main));

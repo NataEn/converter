@@ -22,10 +22,11 @@ import { Link } from "react-router-dom";
 import SelectCountry from "./SelectCountryComponent";
 import SelectLetter from "./SelectABCComponent";
 
-function RenderCurrencyImage({ image }) {
+function RenderCurrencyImage({ image, letter, country }) {
+  console.log("from gallery" + JSON.stringify(image), letter, country);
   return (
     <Card>
-      <Link to={`/gallery/${image.id}`}>
+      <Link to={`/gallery/${letter}/${country}/${image.id}`}>
         <CardImg
           className="currency_image"
           src={image.image_url}
@@ -63,7 +64,11 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
                   {images[letter][country].map(image => {
                     return (
                       <Col key={image.id} sm="4" className="col-12 m-1">
-                        <RenderCurrencyImage image={image} />
+                        <RenderCurrencyImage
+                          image={image}
+                          letter={letter}
+                          country={country}
+                        />
                       </Col>
                     );
                   })}
@@ -89,7 +94,11 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
                   {images[value][country].map(image => {
                     return (
                       <Col key={image.id} sm="4" className="col-12 m-1">
-                        <RenderCurrencyImage image={image} />
+                        <RenderCurrencyImage
+                          image={image}
+                          letter={value}
+                          country={country}
+                        />
                       </Col>
                     );
                   })}
@@ -118,7 +127,11 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
                 if (images[value[0]][value].length !== 0) {
                   return (
                     <Col key={image.id} sm="4" className="col-12 m-1">
-                      <RenderCurrencyImage image={image} />
+                      <RenderCurrencyImage
+                        image={image}
+                        letter={value[0]}
+                        country={value}
+                      />
                     </Col>
                   );
                 } else {

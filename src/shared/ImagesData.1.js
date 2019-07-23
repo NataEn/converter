@@ -38,7 +38,7 @@ export const IMAGES = {
         date: "New Date()"
       },
       {
-        id: 1,
+        id: 2,
         name: "euro",
         type: "bill",
         value: "5,10,20,50,100,200,",

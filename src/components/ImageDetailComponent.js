@@ -30,29 +30,27 @@ class ImageDetail extends Component {
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
               <BreadcrumbItem>
-                <Link to="#">Image {this.props.image[0].name}</Link>
+                <Link to="#">Image {this.props.image.name}</Link>
               </BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
-        <Card key={this.props.image[0].id}>
+        <Card key={this.props.image.id}>
           <CardImg
             top
             width="80%"
-            src={this.props.image[0].image_url}
-            alt={this.props.image[0].image_alt}
+            src={this.props.image.image_url}
+            alt={this.props.image.image_alt}
           />
-          <small> attribute: {this.props.image[0].attribution}</small>
+          <small> attribute: {this.props.image.attribution}</small>
           <CardBody>
-            <CardTitle>{this.props.image[0].name}</CardTitle>
+            <CardTitle>{this.props.image.name}</CardTitle>
             <ListGroup>
-              <ListGroupItem>type: {this.props.image[0].type}</ListGroupItem>
-              <ListGroupItem>value: {this.props.image[0].value}</ListGroupItem>
+              <ListGroupItem>type: {this.props.image.type}</ListGroupItem>
+              <ListGroupItem>value: {this.props.image.value}</ListGroupItem>
               <ListGroupItem>
                 <ListGroupItemHeading>History</ListGroupItemHeading>
-                <ListGroupItemText>
-                  {this.props.image[0].notes}
-                </ListGroupItemText>
+                <ListGroupItemText>{this.props.image.notes}</ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
           </CardBody>
@@ -67,7 +65,7 @@ class ImageDetail extends Component {
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
               <BreadcrumbItem active>
-                <Link to="#">Image {this.props.image[0].name}</Link>
+                <Link to="#">Image {this.props.image.name}</Link>
               </BreadcrumbItem>
             </Breadcrumb>
           </Col>
