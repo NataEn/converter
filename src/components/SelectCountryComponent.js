@@ -81,7 +81,7 @@ class SelectCountry extends Component {
     const ratesObject = this.props.ratesObject;
     const countryObject = this.props.country;
 
-    let options = countryObject.Country.map(opt => ({
+    let options = countryObject.map(opt => ({
       label: opt.country,
       value: opt.country,
       currency: opt.currencyCode,

@@ -31,7 +31,7 @@ class Header extends Component {
           <div className="container">
             <NavbarBrand className="mr-auto navbar-default" href="/">
               <img
-                src={this.props.logo.Logo}
+                src={this.props.logo}
                 height="30"
                 width="30"
                 alt="Converter"
@@ -74,7 +74,7 @@ class Header extends Component {
             <div className="row row-header row-no-gutters">
               <div className="col-2 offset-1">
                 <img
-                  src={this.props.logo.Logo}
+                  src={this.props.logo}
                   height="80"
                   width="80"
                   alt="Converter"

@@ -23,7 +23,7 @@ class ManageExpenses extends Component {
     console.log(event);
     //addRow(tablKey);
     console.log(
-      "rows added:" + JSON.stringify(this.props.expense.EXPENSE.table_A.rows)
+      "rows added:" + JSON.stringify(this.props.expense.table_A.rows)
     );
   };
   //functions
@@ -99,8 +99,8 @@ class ManageExpenses extends Component {
             value={selected.amount_spend}
             onChange={console.log("in input value has been change")}
           />
-          <div class="input-group-prepend">
-            <span class="input-group-text">{selected.currency}</span>
+          <div className="input-group-prepend">
+            <span className="input-group-text">{selected.currency}</span>
           </div>
         </InputGroup>
       </React.Fragment>
@@ -125,14 +125,12 @@ class ManageExpenses extends Component {
   addRows = table => {
     let tablerows = [];
 
-    for (let [key, value] of Object.entries(
-      this.props.expense.EXPENSE[table].rows
-    )) {
+    for (let [key, value] of Object.entries(this.props.expense[table].rows)) {
       //console.log(`${key}: ${value}`);
       //console.log("from adding rows" + JSON.stringify(value.expenses));
       tablerows.push(
         <React.Fragment>
-          <tr key={value}>
+          <tr key={`${table + value.id}`}>
             <th scope="row" width="10%">
               {value.date}
               <br />
@@ -163,12 +161,12 @@ class ManageExpenses extends Component {
   };
   renderExpenseTable = () => {
     let tables = [];
-    for (let [key, value] of Object.entries(this.props.expense.EXPENSE)) {
+    for (let [key, value] of Object.entries(this.props.expense)) {
       //console.log(key + " is of table" + EXPENSE[key].tableName);
       tables.push(
-        <React.Fragment key={this.props.expense.EXPENSE[key].tableName}>
+        <React.Fragment key={this.props.expense[key].tableName}>
           <div className="expense-table">
-            <h4>{this.props.expense.EXPENSE[key].tableName}</h4>{" "}
+            <h4>{this.props.expense[key].tableName}</h4>{" "}
             <Row>
               <Col sm={4}>
                 <InputGroup className="budget input-group-sm">
@@ -177,12 +175,12 @@ class ManageExpenses extends Component {
                   <Input
                     className="budget"
                     placeholder="my budget"
-                    value={this.props.expense.EXPENSE[key].budget}
+                    value={this.props.expense[key].budget}
                     onChange={console.log("in input value has been change")}
                   />
                   {this.renderFace(
                     this.spendSum(key),
-                    this.props.expense.EXPENSE[key].budget
+                    this.props.expense[key].budget
                   )}
                 </InputGroup>
                 <InputGroup className="budget input-group-sm">
@@ -196,10 +194,7 @@ class ManageExpenses extends Component {
                 </Button>
                 <Button color="light">Delete Row</Button>
               </Col>
-              <Col
-                sm={12}
-                key={this.props.expense.EXPENSE[key].tableName + "table"}
-              >
+              <Col sm={12} key={this.props.expense[key].tableName + "table"}>
                 <table className="table table-bordered table-sm col-auto">
                   <caption>List of expenses</caption>
                   <thead>

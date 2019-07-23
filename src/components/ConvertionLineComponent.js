@@ -69,7 +69,7 @@ class SelectComponent extends Component {
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
     const countryObject = this.props.country;
-    let options = countryObject.COUNTRY.map(opt => ({
+    let options = countryObject.map(opt => ({
       label: opt.country,
       value: opt.currencyCode,
       currency: opt.currencyCode,

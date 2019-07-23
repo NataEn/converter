@@ -91,7 +91,7 @@ class SelectExpense extends Component {
     return (
       <select title="Choose type...">
         {options.map(opt => {
-          return <option>{opt.value}</option>;
+          return <option key={opt.label}>{opt.value}</option>;
         })}
       </select>
     );

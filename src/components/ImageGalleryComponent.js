@@ -243,7 +243,7 @@ class ImageGallery extends Component {
         selectedViewType={this.state.selectedViewType}
         value={this.state.selectedValue}
         handleFunction={this.handleSelectChange}
-        images={this.props.images.IMAGES}
+        images={this.props.images}
       /> //end of return
     ); //end of gallery
 

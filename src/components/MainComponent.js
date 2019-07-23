@@ -15,7 +15,7 @@ import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
-//databases
+//databases- now obtained from redux store- they are called from the reducer.js
 import { COUNTRY } from "../shared/CountryObjectMaker";
 import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 import { IMAGE } from "../shared/ImagesData";
@@ -29,7 +29,13 @@ class Main extends Component {
     this.state = {
       rates: {},
       ratesCurrencies: [],
-      converterPanel: []
+      converterPanel: [],
+      country: COUNTRY,
+      logo: Logo,
+      images: IMAGES,
+      abcGallery: GalleryAccordingtoABC,
+      expense: EXPENSE,
+      calculateSpendSum: calculateSpendSum
     };
 
     this.axios = axios.create({
@@ -76,7 +82,7 @@ class Main extends Component {
       <Container>
         <Row className="main-spacer-header-hr">
           <Col sm={12}>
-            <Header logo={{ Logo }} />
+            <Header logo={this.state.logo} />
           </Col>
         </Row>
         <Row>
@@ -94,7 +100,7 @@ class Main extends Component {
                     rates={this.state.ratesCurrencies}
                     ratesObject={this.state.rates}
                     axiosConvert={this.axiosConvert}
-                    country={{ COUNTRY }}
+                    country={this.state.country}
                   />
                 )}
               />
@@ -105,11 +111,11 @@ class Main extends Component {
                 path="/gallery"
                 render={() => (
                   <ImageGallery
-                    images={{ IMAGES }}
-                    abcview={{ GalleryAccordingtoABC }}
+                    images={this.state.images}
+                    abcview={this.state.abcGallery}
                     rates={this.state.ratesCurrencies}
                     ratesObject={this.state.rates}
-                    country={{ COUNTRY }}
+                    country={this.state.country}
                   />
                 )}
               />
@@ -120,8 +126,8 @@ class Main extends Component {
                 path="/manage"
                 render={() => (
                   <ManageExpenses
-                    expense={{ EXPENSE }}
-                    calculateSpendSum={calculateSpendSum}
+                    expense={this.state.expense}
+                    calculateSpendSum={this.state.calculateSpendSum}
                   />
                 )}
               />
