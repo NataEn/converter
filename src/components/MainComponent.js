@@ -16,7 +16,7 @@ import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
 //databases
-import { Country } from "../shared/CountryObjectMaker";
+import { COUNTRY } from "../shared/CountryObjectMaker";
 import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 import { IMAGE } from "../shared/ImagesData";
 import { IMAGES } from "../shared/ImagesData.1";
@@ -94,6 +94,7 @@ class Main extends Component {
                     rates={this.state.ratesCurrencies}
                     ratesObject={this.state.rates}
                     axiosConvert={this.axiosConvert}
+                    country={{ COUNTRY }}
                   />
                 )}
               />
@@ -108,7 +109,7 @@ class Main extends Component {
                     abcview={{ GalleryAccordingtoABC }}
                     rates={this.state.ratesCurrencies}
                     ratesObject={this.state.rates}
-                    country={{ Country }}
+                    country={{ COUNTRY }}
                   />
                 )}
               />

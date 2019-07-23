@@ -22,4 +22,4 @@ const CountryObject = () => {
   return c;
 };
 
-export const Country = CountryObject();
+export const COUNTRY = CountryObject();
