@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
-import { Button, Input } from "reactstrap";
+import { Button, Input, Card, CardLink, CardImg, Row, Col } from "reactstrap";
 
 class Currency extends Component {
   constructor(props) {
@@ -74,14 +74,14 @@ class Currency extends Component {
   }
   renderAnswer() {
     if (this.state.changed) {
-      return <React.Fragment>{`${this.state.message}`}</React.Fragment>;
+      return <span>{`${this.state.message}`}</span>;
     } else {
       return (
-        <React.Fragment>
+        <span className="conversion-answer">
           {`${this.state.baseAmount} ${this.state.baseRate} to ${
             this.state.toRate
           } is ${this.state.converted} ${this.state.toRate}`}
-        </React.Fragment>
+        </span>
       );
     }
   }
@@ -124,8 +124,12 @@ class Currency extends Component {
             min="0"
             max="100000000"
             onChange={this.handleInputChange}
+            onBlure={alert("you touched the input" + this.state.baseAmount)}
             id="baseAmount"
             name="baseAmount"
+            placeholder="How much?"
+            valid={this.state.baseAmount !== ""}
+            invalid={this.state.baseAmount === ""}
           />
         </div>
       </div>
@@ -142,9 +146,22 @@ class Currency extends Component {
           {this.renderConvertionContainer()}
           {/* end of convertion container */}
           <div className="row d-flex justify-content-around align-items-center">
-            <span className="converted-amount">
-              <this.renderAnswer />
-            </span>
+            <Row className="converted-amount">
+              <Col md={2}>
+                <Card key={this.props.image.id} className="smallBill">
+                  <CardImg
+                    top
+                    src={this.props.image.image_url}
+                    alt={this.props.image.image_alt}
+                  />
+
+                  <CardLink href="#">More Bills</CardLink>
+                </Card>
+              </Col>
+              <Col md={10} className="conversion-answer">
+                <this.renderAnswer />
+              </Col>
+            </Row>
             <Button
               className="btn btn-outline-success"
               type="submit"

@@ -61,17 +61,19 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
               return (
                 <div key={country}>
                   <h5>{country.charAt(0).toUpperCase() + country.slice(1)}</h5>
-                  {images[letter][country].map(image => {
-                    return (
-                      <Col key={image.id} sm="4" className="col-12 m-1">
-                        <RenderCurrencyImage
-                          image={image}
-                          letter={letter}
-                          country={country}
-                        />
-                      </Col>
-                    );
-                  })}
+                  <Row>
+                    {images[letter][country].map(image => {
+                      return (
+                        <Col key={image.id} sm={{ size: 4 }} className="m-1">
+                          <RenderCurrencyImage
+                            image={image}
+                            letter={letter}
+                            country={country}
+                          />
+                        </Col>
+                      );
+                    })}
+                  </Row>
                 </div>
               );
             })}
@@ -332,7 +334,7 @@ class ImageGallery extends Component {
           <div className="col-3 col-auto">{stateSelect}</div>
           <div className="col-3 col-auto">{selectLetter}</div>
           <div className="col-3 col-auto">
-            <Button size="sm" onClick={this.toggleModal}>
+            <Button className="addImage" size="sm" onClick={this.toggleModal}>
               Add Image
             </Button>
           </div>
@@ -351,7 +353,6 @@ class ImageGallery extends Component {
         </Row>
         {AddCurrency}
         {galleryView}
-
         <Row>
           <Col>
             <Breadcrumb>

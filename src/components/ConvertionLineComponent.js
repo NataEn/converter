@@ -66,6 +66,7 @@ class SelectComponent extends Component {
     return this.props.onChange(value, name);
   };
   render() {
+    //in here we put code that we want to run every time the component is reredndered!!
     //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
     const countryObject = this.props.country;
