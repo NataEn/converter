@@ -16,13 +16,17 @@ import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
+
 //databases- now obtained from redux store- they are called from the reducer.js
 // import { COUNTRY } from "../shared/CountryObjectMaker";
-// import Logo from "../shared/logo/Logo_for_page_title200x200.png";
+import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 // import { IMAGE } from "../shared/ImagesData";
 // import { IMAGES } from "../shared/ImagesData.1";
 // import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
 //import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
+
+//importing actionCreators
+import { addExpense } from "../redux/ActionCreators";
 
 //a function that maps redux-store state to props that are passed down to the components:
 
@@ -32,13 +36,33 @@ const mapStateToStore = state => {
     ratesCurrencies: state.ratesCurrencies,
     converterPanel: state.converterPanel,
     country: state.country,
-    logo: state.logo,
+    logo: Logo,
     images: state.images,
     abcGallery: state.abcGallery,
-    expense: state.expense,
-    calculateSpendSum: state.calculateSpendSum
+    expense: state.expense
   };
 };
+//recieves the dispatch as one of the parameters from the dispatch function in the store
+const mapDispatchToProps = dispatch => ({
+  addExpense: (
+    tableName,
+    expense_type,
+    amount_planned,
+    currency,
+    amount_spend,
+    notes
+  ) =>
+    dispatch(
+      addExpense(
+        tableName,
+        expense_type,
+        amount_planned,
+        currency,
+        amount_spend,
+        notes
+      )
+    )
+});
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -158,7 +182,7 @@ class Main extends Component {
                 render={() => (
                   <ManageExpenses
                     expense={this.props.expense}
-                    calculateSpendSum={this.props.calculateSpendSum}
+                    addExpense={this.props.addExpense}
                   />
                 )}
               />
@@ -177,4 +201,9 @@ class Main extends Component {
     );
   }
 }
-export default withRouter(connect(mapStateToStore)(Main));
+export default withRouter(
+  connect(
+    mapStateToStore,
+    mapDispatchToProps
+  )(Main)
+);

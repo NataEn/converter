@@ -1,39 +1,3 @@
-// export function calculateSum(tablKey) {
-//   for (let [key, value] of Object.entries(EXPENSE)) {
-//     let sum = EXPENSE[tablKey].rows.expenses.reduce(
-//       (accumulator, currentValue) => accumulator + currentValue.amount_spend,
-//       0
-//     );
-//     return sum;
-//   }
-// }
-
-export function calculateSpendSum(tablKey) {
-  let sum = 0;
-  if (tablKey) {
-    console.log(
-      "from expense data" + tablKey + JSON.stringify(EXPENSE[tablKey].rows)
-    );
-    for (let [key, value] of Object.entries(EXPENSE[tablKey].rows)) {
-      let row = value;
-      //
-      sum = sum + parseInt(value.amount_spend);
-      console.log(sum);
-    }
-    return sum;
-  } else {
-    return "tablKey not found";
-  }
-}
-export function calculatePlannedSum(tablKey) {
-  let sum = 0;
-  for (let [key, value] of Object.entries(EXPENSE[tablKey])) {
-    // EXPENSE[tablKey].rows.expenses.map(
-    //   item => sum + parseInt(item.amount_planned)
-  }
-
-  return sum;
-}
 export function addRow(tablKey) {
   EXPENSE[tablKey].rows.push({
     id: EXPENSE[tablKey].rows.length,
