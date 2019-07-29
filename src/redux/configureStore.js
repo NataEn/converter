@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from "redux";
 import { Reducer, initialState } from "./reducer";
 import { Images } from "./imagesReducer";
-import { Expense } from "./expenseReducer";
+import { Expense } from "./expense";
 import { Country } from "./countryReducer";
 import { Comments } from "./comments";
 

@@ -173,9 +173,10 @@ const addRows = (expense, table) => {
 };
 
 function RenderExpenseTable({ expense, addExpense }) {
+  //addExpense("Housing", 200, "usd", 100, "nuthing");
   let tables = [];
   for (let [key, value] of Object.entries(expense)) {
-    //console.log(key + " is of table" + EXPENSE[key].tableName);
+    console.log(key + " is of table" + expense[key].tableName);
     tables.push(
       <React.Fragment key={expense[key].tableName}>
         <div className="expense-table">
@@ -388,7 +389,8 @@ class RenderNewExpense extends Component {
     );
   }
 }
-const ManageExpenses = props => {
+function ManageExpenses(props) {
+  console.log("from ManageExpenses the addExpense is: " + props.addExpense);
   //buttons:
   //handleNewRow recieves only the name of the table from RenderExpenseTable to open the modal
   const handleNewRow = table => {
@@ -418,6 +420,6 @@ const ManageExpenses = props => {
       </div>
     </div>
   );
-};
+}
 
 export default ManageExpenses;
