@@ -17,3 +17,10 @@ export const addExpense = (
     notes: notes
   }
 });
+export const addComment = (author, comment) => ({
+  type: ActionTypes.ADD_COMMENT,
+  payload: {
+    author: author,
+    comment: comment
+  }
+});

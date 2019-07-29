@@ -91,14 +91,14 @@ div.conversion-answer.col-md-10 {
   position: relative;
   box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
 }
-.card.smallBill:hover{
+.card.smallBill:hover {
   border-color: hsl(0, 0%, 70%);
   border-radius: 4px !important;
   border-width: 1px;
 }
 .card-img-top {
   width: 100% !important;
-  padding:none;
+  padding: none;
 }
 .form {
   background: rgb(231, 228, 228);
@@ -214,8 +214,7 @@ input.form-control.amount-to-convert:hover {
   border-radius: 4px !important;
   border-width: 1px;
 }
-/*how to make active state last as long as the curser is there?*/
-input.form-control.amount-to-convert:active {
+input.form-control.amount-to-convert:focus {
   border-color: #2684ff;
   border-radius: 4px !important;
   border-width: 1px;
@@ -229,18 +228,17 @@ input.form-control.amount-to-convert:active {
   text-align: left;
   line-height: 1.5;
 }
-.budget svg > path {
-  /* color: rgb(24, 34, 101); */
-}
 
 .budget svg {
   margin-left: 3%;
 }
-div.budget.input-group {
+div.budget.input-group.form-control {
   display: flex !important;
   align-items: center !important;
   align-content: space-between;
+  width: 60%;
 }
+
 p.budget {
   display: flex;
   align-items: center !important;
@@ -286,11 +284,6 @@ button.expenses {
   background: none !important;
   border: none;
 }
-/* button.expenses:focus {
-  box-shadow: inset 0px 0px 5px 1px rgb(190, 186, 186) !important;
-  background: rgba(54, 122, 104, 0.959) !important;
-  transition: all 0.5s ease-in;
-} */
 .table-sm td,
 .table-sm th {
   padding-right: 3% !important;
@@ -364,7 +357,9 @@ table .input-group-sm > .form-control {
 }
 
 textarea.form-control,
-input.form-control {
+input.form-control,
+input.expenseInput.form-control,
+form > div > select {
   background: rgba(240, 236, 236, 0.712);
   padding: none !important;
   margin: none !important;
@@ -386,4 +381,34 @@ span.input-group-text {
   box-shadow: 1px 3px 2px -3px rgba(109, 108, 105, 0.959) !important;
   padding: none !important;
   margin: none !important;
+}
+
+input.expenseInput.form-control,
+form > div > select {
+  width: 55% !important;
+  font-size: 1rem;
+  color: hsl(0, 0%, 50%);
+  font-weight: 400;
+  display: block;
+  line-height: 1.4;
+  padding: 0.375rem 0.75rem;
+}
+input.expenseInput.form-control:focus {
+  background-color: #fff !important;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+form > div > label {
+  font-size: 1rem;
+  color: black;
+  font-weight: 400;
+}
+form > div > select:focus,
+form > div > select > option {
+  border: 1px solid #ced4da;
+  border-radius: 4px !important;
+  border-width: 1px;
+  box-shadow: none !important;
 }

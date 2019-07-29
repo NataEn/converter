@@ -14,6 +14,7 @@ import {
   FormGroup,
   FormText
 } from "reactstrap";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMeh, faFrown, faSmile } from "@fortawesome/free-solid-svg-icons";
 import SelectExpense from "./SelectExpenseComponent";
@@ -28,7 +29,7 @@ function spendSum(expenses, tablKey) {
       let row = value;
       //
       sum = sum + parseInt(value.amount_spend);
-      console.log(sum);
+      //console.log(sum);
     }
     return sum;
   } else {
@@ -89,7 +90,7 @@ const addAmountCell = (id, selected) => {
           type="number"
           max="1000"
           placeholder="my budget"
-          value={selected.amount_planned}
+          defaultValue={selected.amount_planned}
           onChange={console.log("in input value has been change")}
         />
         <div className="input-group-prepend">
@@ -103,7 +104,7 @@ const addAmountCell = (id, selected) => {
           type="number"
           max="1000"
           placeholder="my budget"
-          value={selected.amount_spend}
+          defaultValue={selected.amount_spend}
           onChange={console.log("in input value has been change")}
         />
         <div className="input-group-prepend">
@@ -117,24 +118,28 @@ const expenseTypeSelect = (name, value) => {
   //console.log("the expense" + name + "was selected");
 };
 const addSelectCell = (id, selected) => {
+  console.log("the expense" + selected.expense_type + "was selected");
   return (
     <React.Fragment key={id}>
       <Row className="expenses">
         <Col md={12} size="auto">
           <SelectExpense
             onChange={expenseTypeSelect}
-            onClick={addSelectCell}
-            defaultValue={selected.expense_type}
+            //onClick={addSelectCell}
+
+            defaultValue={`${selected.expense_type}`}
+            type="text"
+            //ref={this}
           />
         </Col>
       </Row>
     </React.Fragment>
   );
 };
-const addRows = (props, table) => {
+const addRows = (expense, table) => {
   let tablerows = [];
 
-  for (let [key, value] of Object.entries(props.expense[table].rows)) {
+  for (let [key, value] of Object.entries(expense[table].rows)) {
     tablerows.push(
       <React.Fragment>
         <tr key={`${table + value.id}`}>
@@ -167,18 +172,80 @@ const addRows = (props, table) => {
   return tablerows;
 };
 
-class ManageExpenses extends Component {
+function RenderExpenseTable({ expense, addExpense }) {
+  let tables = [];
+  for (let [key, value] of Object.entries(expense)) {
+    //console.log(key + " is of table" + EXPENSE[key].tableName);
+    tables.push(
+      <React.Fragment key={expense[key].tableName}>
+        <div className="expense-table">
+          <h4>{expense[key].tableName}</h4>{" "}
+          <Row>
+            <Col sm={4}>
+              <InputGroup className="budget input-group-sm">
+                <p className="budget">Budget: </p>
+
+                <Input
+                  className="budget"
+                  placeholder="my budget"
+                  value={expense[key].budget}
+                  onChange={console.log(
+                    "in budget planned has been change to" + expense[key].budget
+                  )}
+                />
+                {renderFace(spendSum(expense, key), expense[key].budget)}
+              </InputGroup>
+              <InputGroup className="budget input-group-sm">
+                <p className="budget">Spend:</p>
+                <Input
+                  className="budget spened"
+                  placeholder="my budget"
+                  value={spendSum(expense, key)}
+                  onChange={console.log("in spened value has been change to")}
+                />
+              </InputGroup>
+            </Col>
+            <Col sm={{ size: 6, offset: 2 }}>
+              <Button color="light">Save Table</Button>{" "}
+              <RenderNewExpense table={key} addExpense={addExpense} />
+              <Button color="light">Delete Row</Button>
+            </Col>
+            <Col sm={12} key={expense[key].tableName + "table"}>
+              <table className="table table-bordered table-sm col-auto">
+                <caption>List of expenses</caption>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Expense Type</th>
+                    <th>Notes</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>{addRows(expense, key)}</tbody>
+              </table>
+            </Col>
+          </Row>
+        </div>
+        <br />
+      </React.Fragment>
+    );
+  }
+
+  return tables;
+}
+//modal validatores
+const required = val => val && val.length;
+const maxLength = len => val => !val || val.length <= len;
+const minLength = len => val => val && val.length >= len;
+
+class RenderNewExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tablerows: 2,
-      tableColumns: 4,
-      textareaVisible: [],
-      modal: false,
-      table: ""
+      modal: false
     };
-    this.renderExpenseTable = this.renderExpenseTable.bind(this);
-    this.handleNewRow = this.handleNewRow.bind(this);
+    //this.renderExpenseTable = this.renderExpenseTable.bind(this);
+    this.handleSubmitExpense = this.handleSubmitExpense.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
   toggleModal() {
@@ -187,154 +254,170 @@ class ManageExpenses extends Component {
       modal: !prevState.modal
     }));
   }
-
-  //buttons:
-  handleNewRow = (table, props) => {
-    console.log(table);
-    //this.props.addExpense()
-    this.setState({ table: table });
+  handleSubmitExpense(values) {
     this.toggleModal();
-    //this.renderNewRow(this.props.expense[table], props.addExpense);
-  };
-  //functions
-
-  renderExpenseTable = () => {
-    let tables = [];
-    for (let [key, value] of Object.entries(this.props.expense)) {
-      //console.log(key + " is of table" + EXPENSE[key].tableName);
-      tables.push(
-        <React.Fragment key={this.props.expense[key].tableName}>
-          <div className="expense-table">
-            <h4>{this.props.expense[key].tableName}</h4>{" "}
-            <Row>
-              <Col sm={4}>
-                <InputGroup className="budget input-group-sm">
-                  <p className="budget">Budget: </p>
-
-                  <Input
-                    className="budget"
-                    placeholder="my budget"
-                    value={this.props.expense[key].budget}
-                    onChange={console.log("in input value has been change")}
-                  />
-                  {renderFace(
-                    spendSum(this.props.expense, key),
-                    this.props.expense[key].budget
-                  )}
-                </InputGroup>
-                <InputGroup className="budget input-group-sm">
-                  <p className="budget">
-                    Spend: {spendSum(this.props.expense, key)}
-                  </p>
-                </InputGroup>
-              </Col>
-              <Col sm={{ size: 6, offset: 2 }}>
-                <Button color="light">Save Table</Button>{" "}
-                <Button
-                  color="light"
-                  onClick={() => this.handleNewRow(key, this.props)}
-                >
-                  New Row
-                </Button>
-                <Button color="light">Delete Row</Button>
-              </Col>
-              <Col sm={12} key={this.props.expense[key].tableName + "table"}>
-                <table className="table table-bordered table-sm col-auto">
-                  <caption>List of expenses</caption>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Expense Type</th>
-                      <th>Notes</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>{addRows(this.props, key)}</tbody>
-                </table>
-              </Col>
-            </Row>
-          </div>
-          <br />
-        </React.Fragment>
-      );
-    }
-    return tables;
-  };
+    this.props.addExpense(
+      this.props.table,
+      values.currency,
+      values.amount_planned,
+      values.currency,
+      values.amount_spened,
+      values.notes
+    );
+  }
 
   render() {
-    const renderNewRow = (
-      <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
-        <ModalBody>
-          <ModalHeader>Add New Row in Table: {this.state.table}</ModalHeader>
-          <Form onSubmit={this.props.addExpense}>
-            <FormGroup>
-              <Label for="name">Currency Name</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="dollar/euro/pound/ etc."
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="state">Currency State</Label>
-              <Input
-                type="text"
-                name="state"
-                id="state"
-                placeholder="Unites States/Jermany/UK/etc."
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="type">Currency Type</Label>
-              <Input
-                type="text"
-                name="type"
-                id="type"
-                placeholder="coin/bill"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="value">Currency Value</Label>
-              <Input
-                type="text"
-                name="value"
-                id="value"
-                placeholder="1/10/20/50/etc."
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="imageFile">File</Label>
-              <Input type="file" name="file" id="imageFile" />
-              <FormText color="muted">Please add your image here.</FormText>
-            </FormGroup>
-            <ModalFooter>
-              Full Disclosure: we are counting on your personal integrity to
-              post authentic images and appropriate data.
-            </ModalFooter>
-            <Button>Submit</Button>
-
-            <Button color="secondary" onClick={this.toggleModal}>
-              close
-            </Button>
-          </Form>
-        </ModalBody>
-      </Modal>
-    );
     return (
-      <div className="container">
-        <h1>Manage Expenses</h1>
-        <Button color="light">New Table</Button>{" "}
-        <Button color="light">Delete Table</Button>{" "}
-        <div className="tableContainer">
-          {" "}
-          <Row>
-            <Col sm={{ size: 11, offset: 1 }}>{this.renderExpenseTable()}</Col>
-          </Row>
-          <Row>{renderNewRow}</Row>
-        </div>
-      </div>
+      <React.Fragment>
+        <Button color="light" onClick={this.toggleModal}>
+          New Row
+        </Button>
+        <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
+          <ModalBody>
+            <ModalHeader>Add New Row in Table: {this.props.table}</ModalHeader>
+            <LocalForm onSubmit={values => this.handleSubmitExpense(values)}>
+              <FormGroup>
+                <Label for="name">Expense Type</Label>
+
+                <SelectExpense
+                  name="expenseType"
+                  id="expenseType"
+                  onChange={expenseTypeSelect}
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="currency">Currency Name</Label>
+
+                <Control.text
+                  model=".currency"
+                  id="currency"
+                  name="currency"
+                  placeholder="dollar/euro/pound/ etc."
+                  className="expenseInput form-control"
+                  validators={{
+                    required,
+                    maxLength: maxLength(10),
+                    minLength: minLength(3)
+                  }}
+                />
+                <Errors
+                  className="text-danger"
+                  model=".currency"
+                  show="touched"
+                  messages={{
+                    required: "please state Currency type",
+                    minLength: " Currency should be 3 letters long",
+                    maxLength: " name should be less then 10 "
+                  }}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="amount_planned">Amount Planned</Label>
+
+                <Control.text
+                  type="number"
+                  model=".amount_planned"
+                  id="amount_planned"
+                  className="expenseInput form-control"
+                  placeholder="How much did I plan to spend?"
+                  required
+                  min={0}
+                  validateOn="blur"
+                />
+                <Errors
+                  className="errors"
+                  model=".amount_planed"
+                  show="touched"
+                  messages={{
+                    valueMissing: "Planned amount is required",
+                    typeMismatch: "Must be a number",
+                    rangeUnderflow: "Sorry, you must plan to spend at least 0"
+                  }}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="amount_spened">Amount Spend</Label>
+                <Control.text
+                  type="number"
+                  model=".amount_spened"
+                  id="amount_spened"
+                  className="expenseInput form-control"
+                  placeholder="How much did I spend?"
+                  required
+                  min={0}
+                  validateOn="blur"
+                />
+                <Errors
+                  className="errors"
+                  model=".amount_spened"
+                  show="touched"
+                  messages={{
+                    valueMissing: "Spened amount is required",
+                    typeMismatch: "Must be a number",
+                    rangeUnderflow: "Sorry, you must spend at least 0"
+                  }}
+                />
+              </FormGroup>
+
+              <FormGroup className="expenseInput">
+                <Label htmlFor="notes">Expense Descrioption</Label>
+                <Control.textarea
+                  size="small"
+                  className="expenseInput form-control"
+                  aria-label="With textarea"
+                  cols="3"
+                  rows="1"
+                  wrap="off"
+                  model=".notes"
+                />
+              </FormGroup>
+              <ModalFooter>
+                Full Disclosure: we are counting on your personal integrity to
+                post authentic images and appropriate data.
+              </ModalFooter>
+              <Button>Submit</Button>
+
+              <Button color="secondary" onClick={this.toggleModal}>
+                close
+              </Button>
+            </LocalForm>
+          </ModalBody>
+        </Modal>
+      </React.Fragment>
     );
   }
 }
+const ManageExpenses = props => {
+  //buttons:
+  //handleNewRow recieves only the name of the table from RenderExpenseTable to open the modal
+  const handleNewRow = table => {
+    //console.log(table);
+    console.log(props.expense[table].tableName);
+    //this.props.addExpense()
+
+    //this.renderNewRow(this.props.expense[table], props.addExpense);
+  };
+  return (
+    <div className="container">
+      <h1>Manage Expenses</h1>
+      <Button color="light">New Table</Button>{" "}
+      <Button color="light">Delete Table</Button>{" "}
+      <div className="tableContainer">
+        {" "}
+        <Row>
+          <Col sm={{ size: 11, offset: 1 }}>
+            <RenderExpenseTable
+              expense={props.expense}
+              addExpense={props.addExpense}
+              // props={props}
+              // handleNewRow={handleNewRow}
+            />
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+};
+
 export default ManageExpenses;

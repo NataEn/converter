@@ -26,7 +26,7 @@ import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 //import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
 //importing actionCreators
-import { addExpense } from "../redux/ActionCreators";
+import { addExpense, addComment } from "../redux/ActionCreators";
 
 //a function that maps redux-store state to props that are passed down to the components:
 
@@ -39,7 +39,8 @@ const mapStateToStore = state => {
     logo: Logo,
     images: state.images,
     abcGallery: state.abcGallery,
-    expense: state.expense
+    expense: state.expense,
+    comments: state.comments
   };
 };
 //recieves the dispatch as one of the parameters from the dispatch function in the store
@@ -51,7 +52,36 @@ const mapDispatchToProps = dispatch => ({
     currency,
     amount_spend,
     notes
-  ) =>
+  ) => {
+    console.log("from mapDispatch to props" + dispatch);
+    console.log(
+      "from mapDispatchToProps the addExpense: " +
+        JSON.stringify(
+          addExpense(
+            tableName,
+            expense_type,
+            amount_planned,
+            currency,
+            amount_spend,
+            notes
+          )
+        )
+    );
+    console.log(
+      "from mapDispatchToProps the Dispatch of addExpense: " +
+        JSON.stringify(
+          dispatch(
+            addExpense(
+              tableName,
+              expense_type,
+              amount_planned,
+              currency,
+              amount_spend,
+              notes
+            )
+          )
+        )
+    );
     dispatch(
       addExpense(
         tableName,
@@ -61,8 +91,11 @@ const mapDispatchToProps = dispatch => ({
         amount_spend,
         notes
       )
-    )
+    );
+  },
+  addComment: (author, comment) => dispatch(addComment(author, comment))
 });
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -175,12 +208,23 @@ class Main extends Component {
                 path="/gallery/:letter/:country/:id"
                 component={this.GalleryImage}
               />
-              <Route exact path="/saving" render={() => <SavingTips />} />
+              <Route
+                exact
+                path="/saving"
+                render={() => (
+                  <SavingTips
+                  {...this.props}
+                    comments={this.props.comments}
+                    addComment={this.props.addComment}
+                  />
+                )}
+              />
               <Route
                 exact
                 path="/manage"
                 render={() => (
                   <ManageExpenses
+                  {...this.props}
                     expense={this.props.expense}
                     addExpense={this.props.addExpense}
                   />

@@ -89,7 +89,7 @@ class SelectExpense extends Component {
     ];
 
     return (
-      <select title="Choose type...">
+      <select title="Choose type..." defaultValue={this.props.defaultValue}>
         {options.map(opt => {
           return <option key={opt.label}>{opt.value}</option>;
         })}
