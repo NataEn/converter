@@ -236,7 +236,8 @@ function RenderExpenseTable({ expenses_0, expenses_tables, addExpense }) {
             </Col>
             <Col sm={{ size: 6, offset: 2 }}>
               <Button color="light">Save Table</Button>{" "}
-              <RenderNewExpense
+              <RenderModal
+                modal={"tableRow"}
                 tableName={table.tableName}
                 addExpense={addExpense}
               />
@@ -270,7 +271,7 @@ const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
 
-class RenderNewExpense extends Component {
+class RenderModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -288,138 +289,219 @@ class RenderNewExpense extends Component {
   }
   handleSubmitExpense(values) {
     this.toggleModal();
-    this.props.addExpense(
-      this.props.tableName,
-      values.currency,
-      values.amount_planned,
-      values.currency,
-      values.amount_spened,
-      values.notes
-    );
+    if (this.props.modal === "tableRow") {
+      this.props.addExpense(
+        this.props.tableName,
+        values.currency,
+        values.amount_planned,
+        values.currency,
+        values.amount_spened,
+        values.notes
+      );
+    }
+    if (this.props.modal === "table") {
+      this.props.addTable(values.tableName, values.budget);
+    }
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <Button color="light" onClick={this.toggleModal}>
-          New Row
-        </Button>
-        <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
-          <ModalBody>
-            <ModalHeader>
-              Add New Row in Table: {this.props.tableName}
-            </ModalHeader>
-            <LocalForm onSubmit={values => this.handleSubmitExpense(values)}>
-              <FormGroup>
-                <Label for="name">Expense Type</Label>
+    if (this.props.modal === "tableRow") {
+      return (
+        <React.Fragment>
+          <Button color="light" onClick={this.toggleModal}>
+            New Row
+          </Button>
+          <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
+            <ModalBody>
+              <ModalHeader>
+                Add New Row in Table: {this.props.tableName}
+              </ModalHeader>
+              <LocalForm onSubmit={values => this.handleSubmitExpense(values)}>
+                <FormGroup>
+                  <Label for="name">Expense Type</Label>
 
-                <SelectExpense
-                  name="expenseType"
-                  id="expenseType"
-                  onChange={expenseTypeSelect}
-                  type="text"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="currency">Currency Name</Label>
+                  <SelectExpense
+                    name="expenseType"
+                    id="expenseType"
+                    onChange={expenseTypeSelect}
+                    type="text"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="currency">Currency Name</Label>
 
-                <Control.text
-                  model=".currency"
-                  id="currency"
-                  name="currency"
-                  placeholder="dollar/euro/pound/ etc."
-                  className="expenseInput form-control"
-                  validators={{
-                    required,
-                    maxLength: maxLength(10),
-                    minLength: minLength(3)
-                  }}
-                />
-                <Errors
-                  className="text-danger"
-                  model=".currency"
-                  show="touched"
-                  messages={{
-                    required: "please state Currency type",
-                    minLength: " Currency should be 3 letters long",
-                    maxLength: " name should be less then 10 "
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="amount_planned">Amount Planned</Label>
+                  <Control.text
+                    model=".currency"
+                    id="currency"
+                    name="currency"
+                    placeholder="dollar/euro/pound/ etc."
+                    className="expenseInput form-control"
+                    validators={{
+                      required,
+                      maxLength: maxLength(10),
+                      minLength: minLength(3)
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".currency"
+                    show="touched"
+                    messages={{
+                      required: "please state Currency type",
+                      minLength: " Currency should be 3 letters long",
+                      maxLength: " name should be less then 10 "
+                    }}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="amount_planned">Amount Planned</Label>
 
-                <Control.text
-                  type="number"
-                  model=".amount_planned"
-                  id="amount_planned"
-                  className="expenseInput form-control"
-                  placeholder="How much did I plan to spend?"
-                  required
-                  min={0}
-                  validateOn="blur"
-                />
-                <Errors
-                  className="errors"
-                  model=".amount_planed"
-                  show="touched"
-                  messages={{
-                    valueMissing: "Planned amount is required",
-                    typeMismatch: "Must be a number",
-                    rangeUnderflow: "Sorry, you must plan to spend at least 0"
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="amount_spened">Amount Spend</Label>
-                <Control.text
-                  type="number"
-                  model=".amount_spened"
-                  id="amount_spened"
-                  className="expenseInput form-control"
-                  placeholder="How much did I spend?"
-                  required
-                  min={0}
-                  validateOn="blur"
-                />
-                <Errors
-                  className="errors"
-                  model=".amount_spened"
-                  show="touched"
-                  messages={{
-                    valueMissing: "Spened amount is required",
-                    typeMismatch: "Must be a number",
-                    rangeUnderflow: "Sorry, you must spend at least 0"
-                  }}
-                />
-              </FormGroup>
+                  <Control.text
+                    type="number"
+                    model=".amount_planned"
+                    id="amount_planned"
+                    className="expenseInput form-control"
+                    placeholder="How much did I plan to spend?"
+                    required
+                    min={0}
+                    validateOn="blur"
+                  />
+                  <Errors
+                    className="errors"
+                    model=".amount_planed"
+                    show="touched"
+                    messages={{
+                      valueMissing: "Planned amount is required",
+                      typeMismatch: "Must be a number",
+                      rangeUnderflow: "Sorry, you must plan to spend at least 0"
+                    }}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="amount_spened">Amount Spend</Label>
+                  <Control.text
+                    type="number"
+                    model=".amount_spened"
+                    id="amount_spened"
+                    className="expenseInput form-control"
+                    placeholder="How much did I spend?"
+                    required
+                    min={0}
+                    validateOn="blur"
+                  />
+                  <Errors
+                    className="errors"
+                    model=".amount_spened"
+                    show="touched"
+                    messages={{
+                      valueMissing: "Spened amount is required",
+                      typeMismatch: "Must be a number",
+                      rangeUnderflow: "Sorry, you must spend at least 0"
+                    }}
+                  />
+                </FormGroup>
 
-              <FormGroup className="expenseInput">
-                <Label htmlFor="notes">Expense Descrioption</Label>
-                <Control.textarea
-                  size="small"
-                  className="expenseInput form-control"
-                  aria-label="With textarea"
-                  cols="3"
-                  rows="1"
-                  wrap="off"
-                  model=".notes"
-                />
-              </FormGroup>
-              <ModalFooter>
-                Full Disclosure: we are counting on your personal integrity to
-                post authentic images and appropriate data.
-              </ModalFooter>
-              <Button>Submit</Button>
+                <FormGroup className="expenseInput">
+                  <Label htmlFor="notes">Expense Descrioption</Label>
+                  <Control.textarea
+                    size="small"
+                    className="expenseInput form-control"
+                    aria-label="With textarea"
+                    cols="3"
+                    rows="1"
+                    wrap="off"
+                    model=".notes"
+                  />
+                </FormGroup>
+                <ModalFooter>
+                  Full Disclosure: we are counting on your personal integrity to
+                  post authentic images and appropriate data.
+                </ModalFooter>
+                <Button>Submit</Button>
 
-              <Button color="secondary" onClick={this.toggleModal}>
-                close
-              </Button>
-            </LocalForm>
-          </ModalBody>
-        </Modal>
-      </React.Fragment>
-    );
+                <Button color="secondary" onClick={this.toggleModal}>
+                  close
+                </Button>
+              </LocalForm>
+            </ModalBody>
+          </Modal>
+        </React.Fragment>
+      );
+    }
+
+    if (this.props.modal === "table") {
+      return (
+        <React.Fragment>
+          <Button color="light" onClick={this.toggleModal}>
+            New Table
+          </Button>
+          <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
+            <ModalBody>
+              <ModalHeader>Add a New Expense Table</ModalHeader>
+              <LocalForm onSubmit={values => this.handleSubmitExpense(values)}>
+                <FormGroup>
+                  <Label for="name">Table Name</Label>
+                  <Control.text
+                    model=".tableName"
+                    id="tableName"
+                    name="tableName"
+                    placeholder="table's name..."
+                    className="expenseInput  expenseTable form-control"
+                    validators={{
+                      required,
+                      maxLength: maxLength(10),
+                      minLength: minLength(3)
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".tableName"
+                    show="touched"
+                    messages={{
+                      required: "please state a proper name",
+                      minLength: "Name should be 3 letters long",
+                      maxLength: "Name should be less then 10 "
+                    }}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="budget">Budget</Label>
+                  <Control.text
+                    type="number"
+                    model=".budget"
+                    id="budget"
+                    className="expenseInput expenseTable form-control"
+                    placeholder="How much can I afford to spend?"
+                    required
+                    min={0}
+                    validateOn="blur"
+                  />
+                  <Errors
+                    className="errors"
+                    model=".budget"
+                    show="touched"
+                    messages={{
+                      valueMissing: "Budget amount is required",
+                      typeMismatch: "Must be a number",
+                      rangeUnderflow: "Sorry, you must plan to spend at least 0"
+                    }}
+                  />
+                </FormGroup>
+                <ModalFooter>
+                  Full Disclosure: You are fully responsible for this data.
+                  Enter it wisely
+                </ModalFooter>
+                <Button>Submit</Button>
+
+                <Button color="secondary" onClick={this.toggleModal}>
+                  close
+                </Button>
+              </LocalForm>
+            </ModalBody>
+          </Modal>
+        </React.Fragment>
+      );
+    }
   }
 }
 function ManageExpenses(props) {
@@ -433,7 +515,11 @@ function ManageExpenses(props) {
   return (
     <div className="container">
       <h1>Manage Expenses</h1>
-      <Button color="light">New Table</Button>{" "}
+      <RenderModal
+        modal={"table"}
+        expenses_tables={props.expenses_tables}
+        addTable={props.addTable}
+      />{" "}
       <Button color="light">Delete Table</Button>{" "}
       <div className="tableContainer">
         {" "}

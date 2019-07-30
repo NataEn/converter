@@ -65,6 +65,7 @@ const mapDispatchToProps = dispatch => ({
       )
     );
   },
+  addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
   addComment: (author, comment) => dispatch(addComment(author, comment))
 });
 
