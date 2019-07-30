@@ -26,7 +26,7 @@ import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 //import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
 //importing actionCreators
-import { addExpense, addComment } from "../redux/ActionCreators";
+import { addExpense, addTable, addComment } from "../redux/ActionCreators";
 
 //a function that maps redux-store state to props that are passed down to the components:
 
@@ -39,52 +39,24 @@ const mapStateToStore = state => {
     logo: Logo,
     images: state.images,
     abcGallery: state.abcGallery,
-    expense: state.expense,
+    expenses_0: state.expenses_0,
+    expenses_tables: state.expenses_tables,
     comments: state.comments
   };
 };
 //recieves the dispatch as one of the parameters from the dispatch function in the store
 const mapDispatchToProps = dispatch => ({
   addExpense: (
-    tableName,
+    tableId,
     expense_type,
     amount_planned,
     currency,
     amount_spend,
     notes
   ) => {
-    console.log("from mapDispatch to props" + dispatch);
-    console.log(
-      "from mapDispatchToProps the addExpense: " +
-        JSON.stringify(
-          addExpense(
-            tableName,
-            expense_type,
-            amount_planned,
-            currency,
-            amount_spend,
-            notes
-          )
-        )
-    );
-    console.log(
-      "from mapDispatchToProps the Dispatch of addExpense: " +
-        JSON.stringify(
-          dispatch(
-            addExpense(
-              tableName,
-              expense_type,
-              amount_planned,
-              currency,
-              amount_spend,
-              notes
-            )
-          )
-        )
-    );
     dispatch(
       addExpense(
-        tableName,
+        tableId,
         expense_type,
         amount_planned,
         currency,
@@ -213,7 +185,7 @@ class Main extends Component {
                 path="/saving"
                 render={() => (
                   <SavingTips
-                  {...this.props}
+                    {...this.props}
                     comments={this.props.comments}
                     addComment={this.props.addComment}
                   />
@@ -224,9 +196,11 @@ class Main extends Component {
                 path="/manage"
                 render={() => (
                   <ManageExpenses
-                  {...this.props}
-                    expense={this.props.expense}
+                    {...this.props}
+                    expenses_0={this.props.expenses_0}
+                    expenses_tables={this.props.expenses_tables}
                     addExpense={this.props.addExpense}
+                    addTable={this.props.addTable}
                   />
                 )}
               />

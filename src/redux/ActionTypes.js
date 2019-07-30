@@ -1,2 +1,3 @@
 export const ADD_EXPENSE = "ADD_EXPENSE";
-export const ADD_COMMENT = "ADD_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENTS";
+export const ADD_EXPENSE_TABLE = "ADD_EXPENSE_TABLE";

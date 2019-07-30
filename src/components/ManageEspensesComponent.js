@@ -19,21 +19,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMeh, faFrown, faSmile } from "@fortawesome/free-solid-svg-icons";
 import SelectExpense from "./SelectExpenseComponent";
 
-function spendSum(expenses, tablKey) {
+function spendSum(expenses_0, tableName) {
   let sum = 0;
-  if (tablKey) {
+  if (tableName) {
     // console.log(
     //   "from expense data" + tablKey + JSON.stringify(expenses[tablKey].rows)
     // );
-    for (let [key, value] of Object.entries(expenses[tablKey].rows)) {
-      let row = value;
-      //
-      sum = sum + parseInt(value.amount_spend);
+    for (let expense of expenses_0) {
+      if (expense.tableName === tableName) {
+        sum = sum + parseInt(expense.amount_spend);
+      }
+
       //console.log(sum);
     }
     return sum;
   } else {
-    return "tablKey not found";
+    return " tableName not found";
   }
 }
 function renderFace(sum, budget) {
@@ -85,7 +86,6 @@ const addAmountCell = (id, selected) => {
     <React.Fragment key={id}>
       <InputGroup className="budget input-group-sm">
         <p className="budget">Planned: </p>
-
         <Input
           type="number"
           max="1000"
@@ -125,62 +125,87 @@ const addSelectCell = (id, selected) => {
         <Col md={12} size="auto">
           <SelectExpense
             onChange={expenseTypeSelect}
-            //onClick={addSelectCell}
-
             defaultValue={`${selected.expense_type}`}
             type="text"
-            //ref={this}
           />
         </Col>
       </Row>
     </React.Fragment>
   );
 };
-const addRows = (expense, table) => {
-  let tablerows = [];
-
-  for (let [key, value] of Object.entries(expense[table].rows)) {
-    tablerows.push(
-      <React.Fragment>
-        <tr key={`${table + value.id}`}>
-          <th scope="row" width="10%">
-            {value.date}
-            <br />
-          </th>
-
-          <td width="20%">{addSelectCell(value.id, value)}</td>
-          <td width="20%">
-            <div data-button={value.id}>
-              <textarea
-                size="small"
-                className="form-control"
-                aria-label="With textarea"
-                cols="3"
-                rows="1"
-                wrap="off"
-              >
-                {value.notes}
-              </textarea>
-            </div>
-          </td>
-          <td width="20%">{addAmountCell(value.id, value)}</td>
-        </tr>
-      </React.Fragment>
-    );
-  }
-
-  return tablerows;
+const renderTableRows = (expenses_0, tableName) => {
+  let expenses = expenses_0.filter(expense => expense.tableName === tableName);
+  return (
+    <React.Fragment>
+      {expenses.map(expense => {
+        return (
+          <React.Fragment>
+            <tr key={`${expense.tableName + expense.id}`}>
+              <th scope="row" width="10%">
+                {expenses_0.date}
+                <br />
+              </th>
+              <td width="20%">{addSelectCell(expense.id, expense)}</td>
+              <td width="20%">
+                <div data-button={expense.id}>
+                  <textarea
+                    size="small"
+                    className="form-control"
+                    aria-label="With textarea"
+                    cols="3"
+                    rows="1"
+                    wrap="off"
+                  >
+                    {expense.notes}
+                  </textarea>
+                </div>
+              </td>
+              <td width="20%">{addAmountCell(expense.id, expense)}</td>
+            </tr>
+          </React.Fragment>
+        );
+      })}
+    </React.Fragment>
+  );
+  //let tablerows = [];
+  // for (let expense of expenses) {
+  //     tablerows.push(
+  //       <React.Fragment>
+  //         <tr key={`${expense.tableId + expense.id}`}>
+  //           <th scope="row" width="10%">
+  //             {expenses_0.date}
+  //             <br />
+  //           </th>
+  //           <td width="20%">{addSelectCell(expense.id, expense)}</td>
+  //           <td width="20%">
+  //             <div data-button={expense.id}>
+  //               <textarea
+  //                 size="small"
+  //                 className="form-control"
+  //                 aria-label="With textarea"
+  //                 cols="3"
+  //                 rows="1"
+  //                 wrap="off"
+  //               >
+  //                 {expense.notes}
+  //               </textarea>
+  //             </div>
+  //           </td>
+  //           <td width="20%">{addAmountCell(expense.id, expense)}</td>
+  //         </tr>
+  //       </React.Fragment>
+  //     )
+  //   }
+  // return tablerows;
 };
 
-function RenderExpenseTable({ expense, addExpense }) {
-  //addExpense("Housing", 200, "usd", 100, "nuthing");
+function RenderExpenseTable({ expenses_0, expenses_tables, addExpense }) {
   let tables = [];
-  for (let [key, value] of Object.entries(expense)) {
-    console.log(key + " is of table" + expense[key].tableName);
+  for (let table of expenses_tables) {
     tables.push(
-      <React.Fragment key={expense[key].tableName}>
+      <React.Fragment key={table.tableName}>
         <div className="expense-table">
-          <h4>{expense[key].tableName}</h4>{" "}
+          <h4>{table.tableName}</h4>{" "}
           <Row>
             <Col sm={4}>
               <InputGroup className="budget input-group-sm">
@@ -189,29 +214,35 @@ function RenderExpenseTable({ expense, addExpense }) {
                 <Input
                   className="budget"
                   placeholder="my budget"
-                  value={expense[key].budget}
+                  defaultValue={table.budget}
                   onChange={console.log(
-                    "in budget planned has been change to" + expense[key].budget
+                    "in budget planned has been change to" + table.budget
                   )}
                 />
-                {renderFace(spendSum(expense, key), expense[key].budget)}
+                {renderFace(
+                  spendSum(expenses_0, table.tableName),
+                  table.budget
+                )}
               </InputGroup>
               <InputGroup className="budget input-group-sm">
                 <p className="budget">Spend:</p>
                 <Input
                   className="budget spened"
                   placeholder="my budget"
-                  value={spendSum(expense, key)}
+                  defaultValue={spendSum(expenses_0, table.tableName)}
                   onChange={console.log("in spened value has been change to")}
                 />
               </InputGroup>
             </Col>
             <Col sm={{ size: 6, offset: 2 }}>
               <Button color="light">Save Table</Button>{" "}
-              <RenderNewExpense table={key} addExpense={addExpense} />
+              <RenderNewExpense
+                tableName={table.tableName}
+                addExpense={addExpense}
+              />
               <Button color="light">Delete Row</Button>
             </Col>
-            <Col sm={12} key={expense[key].tableName + "table"}>
+            <Col sm={12} key={table.tableName + "table"}>
               <table className="table table-bordered table-sm col-auto">
                 <caption>List of expenses</caption>
                 <thead>
@@ -222,7 +253,7 @@ function RenderExpenseTable({ expense, addExpense }) {
                     <th>Amount</th>
                   </tr>
                 </thead>
-                <tbody>{addRows(expense, key)}</tbody>
+                <tbody>{renderTableRows(expenses_0, table.tableName)}</tbody>
               </table>
             </Col>
           </Row>
@@ -258,7 +289,7 @@ class RenderNewExpense extends Component {
   handleSubmitExpense(values) {
     this.toggleModal();
     this.props.addExpense(
-      this.props.table,
+      this.props.tableName,
       values.currency,
       values.amount_planned,
       values.currency,
@@ -275,7 +306,9 @@ class RenderNewExpense extends Component {
         </Button>
         <Modal toggle={this.state.toggleModal} isOpen={this.state.modal}>
           <ModalBody>
-            <ModalHeader>Add New Row in Table: {this.props.table}</ModalHeader>
+            <ModalHeader>
+              Add New Row in Table: {this.props.tableName}
+            </ModalHeader>
             <LocalForm onSubmit={values => this.handleSubmitExpense(values)}>
               <FormGroup>
                 <Label for="name">Expense Type</Label>
@@ -390,14 +423,11 @@ class RenderNewExpense extends Component {
   }
 }
 function ManageExpenses(props) {
-  console.log("from ManageExpenses the addExpense is: " + props.addExpense);
   //buttons:
   //handleNewRow recieves only the name of the table from RenderExpenseTable to open the modal
   const handleNewRow = table => {
     //console.log(table);
-    console.log(props.expense[table].tableName);
     //this.props.addExpense()
-
     //this.renderNewRow(this.props.expense[table], props.addExpense);
   };
   return (
@@ -410,10 +440,9 @@ function ManageExpenses(props) {
         <Row>
           <Col sm={{ size: 11, offset: 1 }}>
             <RenderExpenseTable
-              expense={props.expense}
+              expenses_0={props.expenses_0}
+              expenses_tables={props.expenses_tables}
               addExpense={props.addExpense}
-              // props={props}
-              // handleNewRow={handleNewRow}
             />
           </Col>
         </Row>

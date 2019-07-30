@@ -1,6 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 export const addExpense = (
-  tableKey,
+  tableName,
   expense_type,
   amount_planned,
   currency,
@@ -9,12 +9,19 @@ export const addExpense = (
 ) => ({
   type: ActionTypes.ADD_EXPENSE,
   payload: {
-    tableKey: tableKey,
+    tableName: tableName,
     expense_type: expense_type,
     amount_planned: amount_planned,
     currency: currency,
     amount_spend: amount_spend,
     notes: notes
+  }
+});
+export const addTable = (tableName, budget) => ({
+  type: ActionTypes.ADD_EXPENSE_TABLE,
+  payload: {
+    tableName: tableName,
+    budget: budget
   }
 });
 export const addComment = (author, comment) => ({
