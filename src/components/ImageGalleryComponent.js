@@ -330,7 +330,8 @@ class ImageGallery extends Component {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="buttonPanel">
+          <div ></div>
           <div className="col-3 col-auto">{stateSelect}</div>
           <div className="col-3 col-auto">{selectLetter}</div>
           <div className="col-3 col-auto">
@@ -352,7 +353,9 @@ class ImageGallery extends Component {
           </Col>
         </Row>
         {AddCurrency}
-        {galleryView}
+        <div className="imageGallery"> {galleryView}
+        </div>
+       
         <Row>
           <Col>
             <Breadcrumb>

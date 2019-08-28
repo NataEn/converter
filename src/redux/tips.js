@@ -1,10 +1,10 @@
-import { COMMENTS } from "../shared/comments";
+import { TIPS } from "../shared/tips";
 
 import * as ActionTypes from "./ActionTypes";
 
-export const Comments = (state = COMMENTS, action) => {
+export const Tips = (state = TIPS, action) => {
   switch (action.type) {
-    case ActionTypes.ADD_COMMENT:
+    case ActionTypes.ADD_TIP:
       var comment = action.payload;
       comment.id = state.length;
       comment.date = new Date().toISOString();

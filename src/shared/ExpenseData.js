@@ -23,7 +23,7 @@ export const EXPENSE = {
         currency: "USD",
         amount_spend: "220",
         notes: "Clothing in Germany",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       },
       {
         id: 1,
@@ -32,7 +32,7 @@ export const EXPENSE = {
         currency: "USD",
         amount_spend: "160",
         notes: "food in Germany",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       },
       {
         id: 2,
@@ -41,7 +41,7 @@ export const EXPENSE = {
         currency: "USD",
         amount_spend: "100",
         notes: "Housing in Germany",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       }
     ]
   },

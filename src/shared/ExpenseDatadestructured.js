@@ -25,7 +25,7 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "220",
     notes: "Clothing in Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   },
   {
     id: 1,
@@ -37,7 +37,7 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "160",
     notes: "food in Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "100",
     notes: "Housing in Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   },
   {
     id: 3,
@@ -60,7 +60,7 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "10",
     notes: "Flight to Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   },
   {
     id: 4,
@@ -71,7 +71,7 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "20",
     notes: "Transportation in Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   },
   {
     id: 5,
@@ -82,6 +82,6 @@ export const EXPENSES_0 = [
     currency: "USD",
     amount_spend: "20",
     notes: "Transportation in Germany",
-    date: "New Date()"
+    date: "2019-07-02T17:57:28.556094Z"
   }
 ];

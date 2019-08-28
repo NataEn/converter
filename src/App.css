@@ -1,26 +1,58 @@
+html {
+  padding: 0px 0px;
+  margin: 0px 0px;
+  min-height: 100%;
+  min-width: 100%;
+}
 body {
-  font-family: "Roboto Slab", serif !important;
+  font-family: "Rubik", sans-serif !important;
   font-size: 0.7em;
   line-height: 1;
+  font-weight: 700 !important;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+ margin-right: 0px !important;
+  margin-left: 0px !important;
+  min-height: 100%;
+  min-width: 100%;
 }
 .App {
   text-align: center;
-  margin: 0px 0px;
-  padding: 0px 0px;
+  margin: none !important;
+  padding: none !important;
+  box-sizing: none !important;
   font-size: 1.25em;
   line-height: 1.4;
+  /* min-height: 100%;
+  min-width: 100%; */
 }
-p {
-  margin: 0px;
+h1{
+  margin-top:4%;
+  margin-bottom:4%;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+h1,
+h2,
+h3 {
+  font-family: "Roboto Slab", serif !important;
+}
+div > div > div.main-spacer-header-hr.row > div,
+#root > div > div > div.container.mw-100.mh-100.row,
+#root > div > div > div:nth-child(1),
+#root > div > div > div:nth-child(3),
+#root > div > div > div:nth-child(3) > div,
+#root > div > div > div:nth-child(3) > div > div > div.align-items-left.row,
+#root > div > div > div:nth-child(3) > div > div > div:nth-child(3) {
+  padding: 0px 0px;
+  margin: 0px 0px;
 }
 .container {
-  margin: 0px 0px;
-  padding: 0px 0px;
-  max-width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  box-sizing: none !important;
 }
-.container.footer {
-  background-color: rgb(24, 34, 101);
-}
+
 .main-spacer-header-hr {
   box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
 }
@@ -50,8 +82,13 @@ a.nav-link.header:hover {
   background: none;
 }
 
+.backgroundImage{
+  background-image: url(../src/shared/jumbotron/main.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 .jumbotron {
-  padding: 10px 15px 10px 15px;
+  /* padding: 10px 15px 10px 15px; */
 
   color: floralwhite;
   margin: 0px auto;
@@ -60,17 +97,17 @@ a.nav-link.header:hover {
   border-top: 1px solid rgba(225, 189, 94, 0.8);
   border-bottom: 1px solid rgba(225, 189, 94, 0.8);
   /*background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);*/
-  background: rgb(36, 148, 162);
+  
+  /* background: rgb(36, 148, 162); */
 }
 .jumbotron .col-offset-right {
-  margin-left: -6%;
   align-self: center;
 }
 .footer {
   background: rgb(24, 34, 101);
   color: floralwhite;
-  margin: 0px auto;
-  padding: 0px auto;
+  /* position: relative; */
+  bottom: 0%;
 }
 div.converted-amount.row {
   display: flex;
@@ -100,24 +137,37 @@ div.conversion-answer.col-md-10 {
   width: 100% !important;
   padding: none;
 }
-.form {
-  background: rgb(231, 228, 228);
+.form, .imageGallery {
+  background:rgba(228, 226, 226, 0.800);
   color: black;
   border: 2px solid #463cb041;
   border-radius: 15px;
-  max-width: 90%;
+  /* max-width: 90%; */
   margin: 1% auto;
   padding: 1%;
+  margin-top:5%;
+  margin-bottom:30%;
+}
+.buttonPanel{
+  margin-bottom:2%;
+}
+div.container.footer {
+  text-align: left;
 }
 .terms,
 .terms:hover {
   color: inherit;
   background: rgba(86, 189, 162, 0.8);
   border: 1px solid rgb(24, 34, 101);
-  border-radius: 10% 2% !important;
-  padding: 0px auto;
-  margin: 0px auto;
+  border-radius: 4px 4px !important;
   font-size: 1em;
+}
+
+hr.footer {
+  background: white;
+}
+.rights {
+  text-align: center;
 }
 
 .row-header {
@@ -150,12 +200,15 @@ div .Select-value {
   margin: 1%;
 }
 div.sidebar {
-  background: rgba(228, 226, 226, 0.363);
-  margin-right: 0.5%;
-  padding-left: 3%;
+  background: none;
+  /* margin-right: 0.5%; */
+  /* padding-left: 3%; */
   /* border-right: 1px solid rgb(192, 192, 197); */
   box-shadow: 3px 1px 8px -5px rgba(0, 0, 0, 0.38);
   text-align: left;
+  font-weight: 800;
+  padding:5% 3% !important;
+  
 }
 .row div.col {
   margin: 0px;
@@ -178,18 +231,19 @@ div.sidebar {
   color: rgba(225, 189, 94, 1);
   background: none;
   border-radius: 5px;
-  margin-left: 15%;
+  margin-left: 20%;
   margin-right: 2%;
-  padding: 0px 10px;
   margin-top: 10%;
+  padding: 10px 10px;
 }
 .nav-link-sidebar {
   border-radius: 5px;
-  margin-left: 15%;
+  margin-left: 20%;
   margin-right: 2%;
   margin-top: 10%;
-  padding: 0px 10px;
+  padding: 10px 10px;
   color: rgb(24, 34, 101);
+  background: rgba(228, 226, 226, 0.600);
 }
 .currency_image {
   width: 100%;
@@ -243,6 +297,10 @@ p.budget {
   display: flex;
   align-items: center !important;
   margin-left: 10px;
+}
+td.budgetface {
+  display: flex;
+  align-content: center;
 }
 div.expense-description.active {
   display: none;
@@ -360,7 +418,7 @@ textarea.form-control,
 input.form-control,
 input.expenseInput.form-control,
 form > div > select {
-  background: rgba(240, 236, 236, 0.712);
+  background:rgba(228, 226, 226, 0.600);
   padding: none !important;
   margin: none !important;
   font-size: 0.8rem;

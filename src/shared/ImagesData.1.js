@@ -14,7 +14,7 @@ export const IMAGES = {
         attribution:
           "PawełMM [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)]",
         notes: "some history or notes on the currency",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       }
     ],
     albania: [],
@@ -35,7 +35,7 @@ export const IMAGES = {
         attribution:
           "PawełMM [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)]",
         notes: "some history or notes on the currency",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       },
       {
         id: 2,
@@ -50,7 +50,7 @@ export const IMAGES = {
         attribution:
           "PawełMM [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)]",
         notes: "some history or notes on the currency",
-        date: "New Date()"
+        date: "2019-07-02T17:57:28.556094Z"
       }
     ]
   },

@@ -89,7 +89,7 @@ class Currency extends Component {
   renderConvertionContainer = props => {
     const convertionPanel = (
       <div className="row d-flex justify-content-center align-items-center">
-        <div className="col-4 col-auto select-div">
+        <div className="col-3 col-auto select-div">
           <span>I have:</span>
           <SelectComponent
             className="select-span"
@@ -100,7 +100,7 @@ class Currency extends Component {
             onChange={this.handleSelectChange}
           />
         </div>
-        <div className="col-4 col-auto">
+        <div className="col-3 col-auto">
           <span>I want:</span>
           <SelectComponent
             className="select-span"
@@ -111,7 +111,7 @@ class Currency extends Component {
             onChange={this.handleSelectChange}
           />
         </div>
-        <div className="col-4 col-auto">
+        <div className="col-3 col-auto">
           {" "}
           <label className="input-label" htmlFor="baseAmount">
             Amount:{" "}
@@ -142,7 +142,8 @@ class Currency extends Component {
   render() {
     return (
       <div className="container">
-        <form className="form" onSubmit={values => this.onFormSubmit(values)}>
+        <h1>Converter</h1>
+        <form className="form ml-1" onSubmit={values => this.onFormSubmit(values)}>
           {this.renderConvertionContainer()}
           {/* end of convertion container */}
           <div className="row d-flex justify-content-around align-items-center">

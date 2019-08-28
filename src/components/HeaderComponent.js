@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {
+  Row,
+  Col,
   Navbar,
   NavbarBrand,
   Nav,
@@ -27,7 +29,7 @@ class Header extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar dark className="navbar" expand="md">
+        <Navbar dark className="navbar sticky-top" expand="md">
           <div className="container">
             <NavbarBrand className="mr-auto navbar-default" href="/">
               <img
@@ -69,23 +71,21 @@ class Header extends Component {
             </Collapse>
           </div>
         </Navbar>
-        <Jumbotron>
+        {/* <Jumbotron className="pr-0">
           <div className="container">
-            <div className="row row-header row-no-gutters">
-              <div className="col-2 offset-1">
+            <Row>
+              <Col sm={2} className="p-0 m-0">
                 <img
                   src={this.props.logo}
                   height="80"
                   width="80"
                   alt="Converter"
                 />
-              </div>
-              <div className="col-6 col-sm-3 col-offset-right">
-                <h1 className="header-align-middle">Converter</h1>
-              </div>
-            </div>
+                <strong>Converter</strong>
+              </Col>
+            </Row>
           </div>
-        </Jumbotron>
+        </Jumbotron> */}
       </React.Fragment>
     );
   }
