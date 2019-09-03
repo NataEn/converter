@@ -39,22 +39,29 @@ class Contact extends Component {
   render() {
     //in here we put code that we want to run every time the component is reredndered!!
     return (
-      <div className="container">
-        <div className="row">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/home">Home</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
-          </Breadcrumb>
-          <Row className="row row-content">
-            <Col sm={12}>
-              <h1>Lets Keep in Touch!</h1>
-              <hr />
+      <div className="container mr-0 ml-0 pr-0 pl-0">
+        <h1>Lets Keep in Touch!</h1>
+        
+              
+              <Row>
+                <Col sm={12}>
+                  <Breadcrumb>
+                    <BreadcrumbItem>
+                      <Link to="/home">Home</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+                  </Breadcrumb>
+                </Col>
+                </Row>
+              
+                <div className="form">
+          <Row className="row-content">
+            <Col sm={2}></Col>
+            <Col sm={8}>
               <p>At Converter we believe in good and open communication.</p>
-              <p>New opinions and feedbacks constantly improve our service.</p>
-              <p>
-                We are greatful for all those who help us in becoming the
+             <p> New opinions and feedbacks constantly improve our service.</p>
+              
+                <p>We are greatful for all those who help us in becoming the
                 wonderful company that we are!
               </p>
               <br />
@@ -63,11 +70,12 @@ class Contact extends Component {
                 have!
               </p>
             </Col>
+            <Col sm={2}></Col>
           </Row>
-        </div>
-        <div className="row row-content">
+      
+        <Row className="row-content">
           <div className="col-12">
-            <h3>Our Contact Information</h3>
+            <h2>Our Contact Information</h2>
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
             <address>
@@ -80,7 +88,7 @@ class Contact extends Component {
             </address>
           </div>
 
-          <div className="col-12 col-sm-11 offset-sm-1">
+          <Col className="col-sm-11 offset-sm-1">
             <div className="btn-group" role="group">
               <a
                 role="button"
@@ -100,11 +108,11 @@ class Contact extends Component {
                 <i className="fa fa-envelope-o" /> Email
               </a>
             </div>
-          </div>
-        </div>
-        <div className="row row-content">
+          </Col>
+        </Row>
+        <Row className="row-content">
           <div className="col-12">
-            <h3>Send Us Your Feedback</h3>
+            <h2>Send Us Your Feedback</h2>
           </div>
           <div className="col-12 col-md-9" />
           <Form
@@ -113,9 +121,10 @@ class Contact extends Component {
             onSubmit={values => this.handleSubmit(values)}
           >
             <Row className="form-group">
-              <Label htmlFor="firstname" md={2}>
+              {/* <Label htmlFor="firstname" md={2}>
                 First Name
-              </Label>
+              </Label> */}
+              
               <Col md={10}>
                 <Control.text
                   model=".firstname"
@@ -142,9 +151,9 @@ class Contact extends Component {
               </Col>
             </Row>
             <Row className="form-group">
-              <Label htmlFor="lastname" md={2}>
+              {/* <Label htmlFor="lastname" md={2}>
                 Last Name
-              </Label>
+              </Label> */}
               <Col md={10}>
                 <Control.text
                   model=".lastname"
@@ -171,40 +180,9 @@ class Contact extends Component {
               </Col>
             </Row>
             <Row className="form-group">
-              <Label htmlFor="telnum" md={2}>
-                Contact Tel.
-              </Label>
-              <Col md={10}>
-                <Control.text
-                  model=".telnum"
-                  className="form-control"
-                  id="telnum"
-                  name="telnum"
-                  placeholder="Telephone Num."
-                  validators={{
-                    required,
-                    minLength: minLength(10),
-                    maxLength: maxLength(15),
-                    isNumber
-                  }}
-                />{" "}
-                <Errors
-                  className="text-danger"
-                  model=".telnum"
-                  show="touched"
-                  messages={{
-                    required: "Required",
-                    minLength: "Must be greater than 9 numbers",
-                    maxLength: "Must be 15 numbers or less",
-                    isNumber: "Please enter numbers only"
-                  }}
-                />
-              </Col>
-            </Row>
-            <Row className="form-group">
-              <Label htmlFor="email" md={2}>
+              {/* <Label htmlFor="email" md={2}>
                 Email
-              </Label>
+              </Label> */}
               <Col md={10}>
                 <Control.text
                   model=".email"
@@ -228,35 +206,11 @@ class Contact extends Component {
                 />
               </Col>
             </Row>
+           
             <Row className="form-group">
-              <Col md={{ size: 6, offset: 2 }}>
-                <div className="form-check">
-                  <Label check>
-                    <Control.checkbox
-                      model=".agree"
-                      name="agree"
-                      className="form-check-input"
-                      // checked={this.state.agree}
-                    />
-                    {""} <strong>May we contact you?</strong>
-                  </Label>
-                </div>
-              </Col>
-              <Col md={{ size: 3, offset: 1 }}>
-                <Control.select
-                  model=".contactType"
-                  name="contactType"
-                  className="form-control"
-                >
-                  <option>Tel.</option>
-                  <option>Email</option>
-                </Control.select>
-              </Col>
-            </Row>
-            <Row className="form-group">
-              <Label htmlFor="message" md={2}>
+              {/* <Label htmlFor="message" md={2}>
                 Your Feedback
-              </Label>
+              </Label> */}
               <Col md={10}>
                 <Control.textarea
                   model=".message"
@@ -275,7 +229,18 @@ class Contact extends Component {
               </Col>
             </Row>
           </Form>
+        </Row> {/*end of feedback*/}
         </div>
+        <Row>
+            <Col sm={12}>
+              <Breadcrumb>
+                <BreadcrumbItem>
+                  <Link to="/home">Home</Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+              </Breadcrumb>
+            </Col>
+            </Row>
       </div> //end of container
     ); //end of return
   } //end of render

@@ -4,6 +4,9 @@ html {
   min-height: 100%;
   min-width: 100%;
 }
+@media (max-width: 780px){
+  body { font-weight: 500 !important;}
+}
 body {
   font-family: "Rubik", sans-serif !important;
   font-size: 0.7em;
@@ -21,7 +24,7 @@ body {
   margin: none !important;
   padding: none !important;
   box-sizing: none !important;
-  font-size: 1.25em;
+  font-size: 1.5em;
   line-height: 1.4;
   /* min-height: 100%;
   min-width: 100%; */
@@ -32,29 +35,36 @@ h1{
   font-weight: 800;
   letter-spacing: 2px;
 }
+h2{
+  font-weight: 700;
+  margin-top:4%;
+  margin-bottom:4%;
+}
 h1,
 h2,
 h3 {
   font-family: "Roboto Slab", serif !important;
 }
-div > div > div.main-spacer-header-hr.row > div,
-#root > div > div > div.container.mw-100.mh-100.row,
-#root > div > div > div:nth-child(1),
-#root > div > div > div:nth-child(3),
-#root > div > div > div:nth-child(3) > div,
-#root > div > div > div:nth-child(3) > div > div > div.align-items-left.row,
-#root > div > div > div:nth-child(3) > div > div > div:nth-child(3) {
-  padding: 0px 0px;
-  margin: 0px 0px;
+p{
+  text-align: left;
+  word-spacing: 5px;
+  font-size: 1.5em;
 }
 .container {
   min-width: 100%;
   min-height: 100%;
-  box-sizing: none !important;
+  /* box-sizing: none !important; */
 }
 
 .main-spacer-header-hr {
   box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
+}
+#root > div > div > div.container.main-spacer-header-hr.row{
+  margin:0px !important;
+}
+nav.sidebar.navbar button span{
+  background-color:none !important;
+ 
 }
 .navbar {
   background-color: rgb(24, 34, 101);
@@ -63,6 +73,7 @@ div > div > div.main-spacer-header-hr.row > div,
   padding: 0px 10px;
   border-bottom: 1px solid #1335033b;
 }
+
 .nav {
   color: floralwhite;
   margin: 0px auto;
@@ -87,26 +98,9 @@ a.nav-link.header:hover {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.jumbotron {
-  /* padding: 10px 15px 10px 15px; */
-
-  color: floralwhite;
-  margin: 0px auto;
-  padding: 0px auto;
-  border-radius: 0%;
-  border-top: 1px solid rgba(225, 189, 94, 0.8);
-  border-bottom: 1px solid rgba(225, 189, 94, 0.8);
-  /*background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);*/
-  
-  /* background: rgb(36, 148, 162); */
-}
-.jumbotron .col-offset-right {
-  align-self: center;
-}
 .footer {
   background: rgb(24, 34, 101);
   color: floralwhite;
-  /* position: relative; */
   bottom: 0%;
 }
 div.converted-amount.row {
@@ -199,17 +193,18 @@ div .Select-value {
 .btn-outline-success {
   margin: 1%;
 }
+
+
+
+/* For desktop: */
 div.sidebar {
   background: none;
-  /* margin-right: 0.5%; */
-  /* padding-left: 3%; */
-  /* border-right: 1px solid rgb(192, 192, 197); */
   box-shadow: 3px 1px 8px -5px rgba(0, 0, 0, 0.38);
   text-align: left;
   font-weight: 800;
   padding:5% 3% !important;
-  
 }
+
 .row div.col {
   margin: 0px;
   padding: 0px;
@@ -231,20 +226,28 @@ div.sidebar {
   color: rgba(225, 189, 94, 1);
   background: none;
   border-radius: 5px;
-  margin-left: 20%;
-  margin-right: 2%;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-top: 10%;
   padding: 10px 10px;
+  min-width:100% !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.5);
 }
 .nav-link-sidebar {
   border-radius: 5px;
-  margin-left: 20%;
-  margin-right: 2%;
+  margin-left: 20px;
+  margin-right: 20px;
+  min-width:100% !important;
   margin-top: 10%;
   padding: 10px 10px;
   color: rgb(24, 34, 101);
-  background: rgba(228, 226, 226, 0.600);
+  background: rgba(228, 226, 226, 0.550);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.5);
 }
+/* div.sidebar> ul > li>a{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.5);
+} */
+
 .currency_image {
   width: 100%;
   height: 100%;

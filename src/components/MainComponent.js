@@ -173,18 +173,18 @@ class Main extends Component {
   }
   render() {
     return (
-      <div>
-        <Row className="main-spacer-header-hr">
-          <Col sm={12}>
-            <Header logo={this.props.logo} />
+      <Row>
+        <Row className="container main-spacer-header-hr">
+          <Col sm={12} className="ml-0 mr-0 pl-0 pr-0">
+            <Header className="ml-0 mr-0 pl-0 pr-0" logo={this.props.logo} />
           </Col>
         </Row>
 
         <Row className="container mr-0 pr-0 ml-0 pl-0 backgroundImage">
-          <Col className="sidebar" sm={{size:2,order:1}}>
+          <Col className="sidebar" md={{size:2,order:1}} sm={12}>
             <Sidebar />
           </Col>
-          <Col sm={{size:9, order:2}}>
+          <Col md={{size:9, order:2}}sm={12}>
             <Col sm={12} >
               <Switch>
                 <Route
@@ -271,12 +271,12 @@ class Main extends Component {
             </Col> */}
           </Col>
         </Row>
-        <Row className="main-spacer-header-hr">
-          <Col sm={12}>
+        <Row className="container ml-0 mr-0 pl-0 pr-0">
+          <Col md={12} className="ml-0 mr-0 pl-0 pr-0">
             <Footer />
           </Col>
         </Row>
-      </div>
+      </Row>
     );
   }
 }
