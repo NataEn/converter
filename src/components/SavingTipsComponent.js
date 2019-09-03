@@ -10,17 +10,19 @@ import {
   ModalHeader,
   Label,
   Row,
-  Col
+  Col,Breadcrumb,BreadcrumbItem
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import { Control, LocalForm, Errors } from "react-redux-form";
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
+
 function RenderTip({ tips, addTip }) {
   if (tips != null) {
     return (
-      <div className="col-md-7 col-sm-12">
+      <Col md={10} sm={12}>
         <h4>Tips</h4>
         <ul className="list-unstyled">
           {tips.map(tip => {
@@ -35,7 +37,7 @@ function RenderTip({ tips, addTip }) {
           })}
         </ul>
         <TipForm addTip={addTip} />
-      </div>
+      </Col>
     );
   } else {
     return (
@@ -46,6 +48,7 @@ function RenderTip({ tips, addTip }) {
     );
   }
 } //end of RenderTip function-component
+
 class TipForm extends Component {
   constructor(props) {
     super(props);
@@ -155,7 +158,19 @@ const SavingTips = props => {
   console.log("from saving tips the addTip is: " + props.addTip);
   return (
     <div className="container">
+     
       <h1>Saving Tips</h1>
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+        </Row>
+      <Row className="form">
       <p className="textLeft">
         Saving money is all about making a new life routine. Say you already
         have one, but do you stick to it? <br />A well planned routine embraces
@@ -164,13 +179,13 @@ const SavingTips = props => {
         Follow these next tips to gradually build a new routine and decrease
         your expenses.
       </p>
-      <ListGroup>
+      <ListGroup >
         <ListGroupItem>
           <ListGroupItemHeading> Life Tips</ListGroupItemHeading>
           <ListGroupItemText>
             <ul className="textLeft">
               <li>
-                <h6>Record Your Expenses</h6>
+                <h5>Record Your Expenses</h5>
                 <p>Some explanation</p>
               </li>
               <br />
@@ -200,6 +215,17 @@ const SavingTips = props => {
           <ListGroupItemHeading> Tips on the Spot</ListGroupItemHeading>
         </ListGroupItem>
       </ListGroup>
+      </Row>
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+        </Row>
     </div>
   );
 };

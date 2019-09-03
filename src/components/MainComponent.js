@@ -271,10 +271,8 @@ class Main extends Component {
             </Col> */}
           </Col>
         </Row>
-        <Row className="container ml-0 mr-0 pl-0 pr-0">
-          <Col md={12} className="ml-0 mr-0 pl-0 pr-0">
+        <Row className="container ml-0 mr-0 pl-0">
             <Footer />
-          </Col>
         </Row>
       </Row>
     );
