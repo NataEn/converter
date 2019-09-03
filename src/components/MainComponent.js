@@ -3,6 +3,7 @@ import axios from "axios";
 import { Container, Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux"; //connects the main components to the store
+import { actions } from "react-redux-form";
 //components
 import Sidebar from "./SidebarComponent";
 import Header from "./HeaderComponent";
@@ -16,6 +17,7 @@ import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
+import { Loading } from "./LoadingComponent";
 
 //databases- now obtained from redux store- they are called from the reducer.js
 // import { COUNTRY } from "../shared/CountryObjectMaker";
@@ -26,7 +28,13 @@ import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 //import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
 //importing actionCreators
-import { addExpense, addTable, addComment } from "../redux/ActionCreators";
+import {
+  addExpense,
+  addExpenses,
+  fetchExpenses,
+  addTable,
+  addTip
+} from "../redux/ActionCreators";
 
 //a function that maps redux-store state to props that are passed down to the components:
 
@@ -41,11 +49,14 @@ const mapStateToStore = state => {
     abcGallery: state.abcGallery,
     expenses_0: state.expenses_0,
     expenses_tables: state.expenses_tables,
-    comments: state.comments
+    tips: state.tips
   };
 };
 //recieves the dispatch as one of the parameters from the dispatch function in the store
 const mapDispatchToProps = dispatch => ({
+  fetchExpenses: () => {
+    dispatch(fetchExpenses());
+  },
   addExpense: (
     tableId,
     expense_type,
@@ -66,7 +77,31 @@ const mapDispatchToProps = dispatch => ({
     );
   },
   addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
-  addComment: (author, comment) => dispatch(addComment(author, comment))
+  addTip: (author, tip) => dispatch(addTip(author, tip)),
+  resetFeedbackForm: () => {
+    dispatch(actions.reset("feedback"));
+  }
+  // postFeedback: (
+  //   firstName,
+  //   lastName,
+  //   telnum,
+  //   email,
+  //   agree,
+  //   contactType,
+  //   message
+  // ) => {
+  //   dispatch(
+  //     postFeedback(
+  //       firstName,
+  //       lastName,
+  //       telnum,
+  //       email,
+  //       agree,
+  //       contactType,
+  //       message
+  //     )
+  //   );
+  // }
 });
 
 class Main extends Component {
@@ -92,6 +127,7 @@ class Main extends Component {
     this.GalleryImage = this.GalleryImage.bind(this);
   }
   componentDidMount() {
+    this.props.fetchExpenses();
     this.axios
       .get("latest", {
         params: {
@@ -130,6 +166,7 @@ class Main extends Component {
       <ImageDetail
         key={match.params.country + parseInt(match.params.id, 10)}
         image={selectedImage[0]}
+        imagesLoading={this.props.loading}
       />
     );
   }
@@ -141,77 +178,90 @@ class Main extends Component {
             <Header logo={this.props.logo} />
           </Col>
         </Row>
-        <Row>
-          <Col sm={2} className="sidebar">
+
+        <Row className="container mw-100 mh-100 ">
+          <Col sm={2} className="sidebar pt-3">
             <Sidebar />
           </Col>
-
           <Col sm={8}>
-            <Switch className="mainContainer">
-              <Route
-                path="/home"
-                render={() => (
-                  <Currency
-                    {...this.props}
-                    rates={this.props.ratesCurrencies}
-                    ratesObject={this.props.rates}
-                    axiosConvert={this.axiosConvert}
-                    country={this.props.country}
-                    image={this.props.images.a.algeria[0]}
-                  />
-                )}
-              />
-              <Route exact path="/about" render={() => <About />} />
-              <Route exact path="/contact" render={() => <Contact />} />
-              <Route
-                exact
-                path="/gallery"
-                render={() => (
-                  <ImageGallery
-                    images={this.props.images}
-                    abcview={this.props.abcGallery}
-                    rates={this.props.ratesCurrencies}
-                    ratesObject={this.props.rates}
-                    country={this.props.country}
-                  />
-                )}
-              />
-              <Route
-                strict
-                path="/gallery/:letter/:country/:id"
-                component={this.GalleryImage}
-              />
-              <Route
-                exact
-                path="/saving"
-                render={() => (
-                  <SavingTips
-                    {...this.props}
-                    comments={this.props.comments}
-                    addComment={this.props.addComment}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/manage"
-                render={() => (
-                  <ManageExpenses
-                    {...this.props}
-                    expenses_0={this.props.expenses_0}
-                    expenses_tables={this.props.expenses_tables}
-                    addExpense={this.props.addExpense}
-                    addTable={this.props.addTable}
-                  />
-                )}
-              />
+            <Col sm={12} className="pt-3 pb-3">
+              <Switch>
+                <Route
+                  path="/home"
+                  render={() => (
+                    <Currency
+                      {...this.props}
+                      rates={this.props.ratesCurrencies}
+                      ratesObject={this.props.rates}
+                      axiosConvert={this.axiosConvert}
+                      country={this.props.country}
+                      image={this.props.images.a.algeria[0]}
+                    />
+                  )}
+                />
+                <Route exact path="/about" render={() => <About />} />
+                <Route
+                  exact
+                  path="/contact"
+                  render={() => (
+                    <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/gallery"
+                  render={() => (
+                    <ImageGallery
+                      images={this.props.images}
+                      abcview={this.props.abcGallery}
+                      rates={this.props.ratesCurrencies}
+                      ratesObject={this.props.rates}
+                      country={this.props.country}
+                    />
+                  )}
+                />
+                <Route
+                  strict
+                  path="/gallery/:letter/:country/:id"
+                  component={this.GalleryImage}
+                />
+                <Route
+                  exact
+                  path="/saving"
+                  render={() => (
+                    <SavingTips
+                      {...this.props}
+                      tips={this.props.tips}
+                      addTip={this.props.addTip}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/manage"
+                  render={() => (
+                    <ManageExpenses
+                      {...this.props}
+                      expenses_0={this.props.expenses_0}
+                      expenses_tables={this.props.expenses_tables}
+                      addExpense={this.props.addExpense}
+                      expensesLoading={this.props.expenses_0.isLoading}
+                      expensesErrMess={this.props.expenses_0.errMess}
+                      addTable={this.props.addTable}
+                    />
+                  )}
+                />
 
-              {/* <Redirect to="/home" /> */}
-            </Switch>
-
-            <MyMap />
-            <SpiningRates ratesObject={this.props.rates} />
+                {/* <Redirect to="/home" /> */}
+              </Switch>
+            </Col>
+            <Col sm={12}>
+              <MyMap />
+              <SpiningRates ratesObject={this.props.rates} />
+            </Col>
           </Col>
+        </Row>
+        <Row className="main-spacer-header-hr">
           <Col sm={12}>
             <Footer />
           </Col>

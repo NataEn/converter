@@ -17,34 +17,36 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
-function RenderComment({ comments, addComment }) {
-  if (comments != null) {
+function RenderTip({ tips, addTip }) {
+  if (tips != null) {
     return (
       <div className="col-md-7 col-sm-12">
-        <h4>Comments</h4>
+        <h4>Tips</h4>
         <ul className="list-unstyled">
-          {comments.map(comment => {
+          {tips.map(tip => {
             return (
-              <li className="list-unstyled" key={comment.id}>
-                <p>{comment.comment}</p>
-                <p>--{comment.author}</p>
+              <li className="list-unstyled" key={tip.id}>
+                <p>{tip.tip}</p>
+                <p>
+                  --{tip.author} {tip.date}
+                </p>
               </li>
             );
           })}
         </ul>
-        <CommentForm addComment={addComment} />
+        <TipForm addTip={addTip} />
       </div>
     );
   } else {
     return (
       <div>
-        <h4>No Comments Available</h4>
-        <CommentForm addComment={addComment} />
+        <h4>No Tips Available</h4>
+        <TipForm addTip={addTip} />
       </div>
     );
   }
-} //end of RenderComment function-component
-class CommentForm extends Component {
+} //end of RenderTip function-component
+class TipForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,14 +54,14 @@ class CommentForm extends Component {
     };
 
     this.toggleModal = this.toggleModal.bind(this);
-    this.handleSubmitComment = this.handleSubmitComment.bind(this);
+    this.handleSubmitTip = this.handleSubmitTip.bind(this);
   }
   toggleModal() {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
-  handleSubmitComment(values) {
+  handleSubmitTip(values) {
     this.toggleModal();
-    this.props.addComment(values.author, values.comment);
+    this.props.addTip(values.author, values.tip);
   }
   render() {
     return (
@@ -73,12 +75,12 @@ class CommentForm extends Component {
           </Col>
         </Row>
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>Share Your Tips</ModalHeader>
           <ModalBody>
-            <LocalForm onSubmit={values => this.handleSubmitComment(values)}>
-              {/* <Row className="form-group">
+            <LocalForm onSubmit={values => this.handleSubmitTip(values)}>
+              <Row className="form-group">
                 <Col md={10}>
-                  <Label htmlFor="rating">Rating</Label>
+                  <Label htmlFor="rating">Rate the addTip</Label>
                   <Control.select
                     model=".rating"
                     name="rating"
@@ -91,7 +93,7 @@ class CommentForm extends Component {
                     <option>5</option>
                   </Control.select>
                 </Col>
-              </Row> */}
+              </Row>
 
               <Row className="form-group">
                 <Col md={10}>
@@ -100,7 +102,7 @@ class CommentForm extends Component {
                     model=".name"
                     id="name"
                     name="name"
-                    placeholder="Your Name"
+                    placeholder="My Name is . . ."
                     className="form-control"
                     validators={{
                       required,
@@ -123,15 +125,16 @@ class CommentForm extends Component {
 
               <Row className="form-group">
                 <Col md={10}>
-                  <Label htmlFor="comment" className="col-12">
-                    Comment
+                  <Label htmlFor="tip" className="col-12">
+                    Your Tip
                   </Label>
                   <Control.textarea
-                    model=".comment"
-                    id="comment"
-                    name="comment"
+                    model=".tip"
+                    id="tip"
+                    name="tip"
                     row="12"
                     className="form-control"
+                    placeholder="My Tip . . ."
                   />
                 </Col>
               </Row>
@@ -145,63 +148,59 @@ class CommentForm extends Component {
         </Modal>
       </div>
     );
-  }}
+  }
+}
 
-const SavingTips = (props)=>{
- console.log('from saving tips the addComment is: '+ props.addComment)
-    return (
-      <div className="container">
-        <h1>Saving Tips</h1>
-        <p className="textLeft">
-          Saving money is all about making a new life routine. Say you already
-          have one, but do you stick to it? <br />A well planned routine
-          embraces simple and realistic steps that easily become part of your
-          life- without even noticing them. <br />
-          Follow these next tips to gradually build a new routine and decrease
-          your expenses.
-        </p>
-        <ListGroup>
-          <ListGroupItem>
-            <ListGroupItemHeading> Life Tips</ListGroupItemHeading>
-            <ListGroupItemText>
-              <ul className="textLeft">
-                <li>
-                  <h6>Record Your Expenses</h6>
-                  <p>Some explanation</p>
-                </li>
-                <br />
-                <li>
-                  <h6>Make a Budget</h6>
-                  <p>Some explanation</p>
-                </li>
-                <br />
-                <li>Identify Nonessential Expenses</li>
-                <li>Set a Goal/s to Save </li>
-                <li>
-                  Set the time span of your Goal- short or long term goal?
-                </li>
-                <li> Prioritize your Goals </li>
-                <li>
-                  Can you Automate your Saving? look for (free) tools or bank
-                  services
-                </li>
-                <li>Check your Saving progress</li>
-              </ul>
-            </ListGroupItemText>
-            <Button>Add a Life Tip</Button>
-            <RenderComment
-              comments={props.comments}
-              addComment={props.addComment}
-            />
-          </ListGroupItem>
-          <ListGroupItem>
-            <ListGroupItemHeading> Traveling Tips</ListGroupItemHeading>
-          </ListGroupItem>
-          <ListGroupItem>
-            <ListGroupItemHeading> Tips on the Spot</ListGroupItemHeading>
-          </ListGroupItem>
-        </ListGroup>
-      </div>
-      );
-    };
+const SavingTips = props => {
+  console.log("from saving tips the addTip is: " + props.addTip);
+  return (
+    <div className="container">
+      <h1>Saving Tips</h1>
+      <p className="textLeft">
+        Saving money is all about making a new life routine. Say you already
+        have one, but do you stick to it? <br />A well planned routine embraces
+        simple and realistic steps that easily become part of your life- without
+        even noticing them. <br />
+        Follow these next tips to gradually build a new routine and decrease
+        your expenses.
+      </p>
+      <ListGroup>
+        <ListGroupItem>
+          <ListGroupItemHeading> Life Tips</ListGroupItemHeading>
+          <ListGroupItemText>
+            <ul className="textLeft">
+              <li>
+                <h6>Record Your Expenses</h6>
+                <p>Some explanation</p>
+              </li>
+              <br />
+              <li>
+                <h6>Make a Budget</h6>
+                <p>Some explanation</p>
+              </li>
+              <br />
+              <li>Identify Nonessential Expenses</li>
+              <li>Set a Goal/s to Save </li>
+              <li>Set the time span of your Goal- short or long term goal?</li>
+              <li> Prioritize your Goals </li>
+              <li>
+                Can you Automate your Saving? look for (free) tools or bank
+                services
+              </li>
+              <li>Check your Saving progress</li>
+            </ul>
+          </ListGroupItemText>
+
+          <RenderTip tips={props.tips} addTip={props.addTip} />
+        </ListGroupItem>
+        <ListGroupItem>
+          <ListGroupItemHeading> Traveling Tips</ListGroupItemHeading>
+        </ListGroupItem>
+        <ListGroupItem>
+          <ListGroupItemHeading> Tips on the Spot</ListGroupItemHeading>
+        </ListGroupItem>
+      </ListGroup>
+    </div>
+  );
+};
 export default SavingTips;

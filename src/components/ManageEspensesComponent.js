@@ -25,6 +25,7 @@ function spendSum(expenses_0, tableName) {
     // console.log(
     //   "from expense data" + tablKey + JSON.stringify(expenses[tablKey].rows)
     // );
+    console.log("from spend sum expenses_0 is: " + JSON.stringify(expenses_0));
     for (let expense of expenses_0) {
       if (expense.tableName === tableName) {
         sum = sum + parseInt(expense.amount_spend);
@@ -205,34 +206,48 @@ function RenderExpenseTable({ expenses_0, expenses_tables, addExpense }) {
     tables.push(
       <React.Fragment key={table.tableName}>
         <div className="expense-table">
-          <h4>{table.tableName}</h4>{" "}
+          <h4 className="pt-3">{table.tableName}</h4>{" "}
           <Row>
-            <Col sm={4}>
-              <InputGroup className="budget input-group-sm">
-                <p className="budget">Budget: </p>
+            <Col sm={3}>
+              <table className="table table-borderless table-responsive">
+                <tr>
+                  <td>
+                    <InputGroup className="budget input-group-sm">
+                      <p className="budget">Budget: </p>
 
-                <Input
-                  className="budget"
-                  placeholder="my budget"
-                  defaultValue={table.budget}
-                  onChange={console.log(
-                    "in budget planned has been change to" + table.budget
-                  )}
-                />
-                {renderFace(
-                  spendSum(expenses_0, table.tableName),
-                  table.budget
-                )}
-              </InputGroup>
-              <InputGroup className="budget input-group-sm">
-                <p className="budget">Spend:</p>
-                <Input
-                  className="budget spened"
-                  placeholder="my budget"
-                  defaultValue={spendSum(expenses_0, table.tableName)}
-                  onChange={console.log("in spened value has been change to")}
-                />
-              </InputGroup>
+                      <Input
+                        className="budget"
+                        placeholder="my budget"
+                        defaultValue={table.budget}
+                        onChange={console.log(
+                          "in budget planned has been change to" + table.budget
+                        )}
+                      />
+                    </InputGroup>
+                  </td>
+                  <td className="budgetface" rowspan="2">
+                    {renderFace(
+                      spendSum(expenses_0, table.tableName),
+                      table.budget
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <InputGroup className="budget input-group-sm">
+                      <p className="budget">Spend:</p>
+                      <Input
+                        className="budget spened"
+                        placeholder="my budget"
+                        defaultValue={spendSum(expenses_0, table.tableName)}
+                        onChange={console.log(
+                          "in spened value has been change to"
+                        )}
+                      />
+                    </InputGroup>
+                  </td>
+                </tr>
+              </table>
             </Col>
             <Col sm={{ size: 6, offset: 2 }}>
               <Button color="light">Save Table</Button>{" "}
@@ -526,7 +541,7 @@ function ManageExpenses(props) {
         <Row>
           <Col sm={{ size: 11, offset: 1 }}>
             <RenderExpenseTable
-              expenses_0={props.expenses_0}
+              expenses_0={props.expenses_0.expenses_0}
               expenses_tables={props.expenses_tables}
               addExpense={props.addExpense}
             />

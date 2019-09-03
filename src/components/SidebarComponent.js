@@ -6,7 +6,8 @@ import {
   faHandHoldingUsd,
   faTh,
   faMapMarkedAlt,
-  faSyncAlt
+  faSyncAlt,
+  faCalculator
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
@@ -34,6 +35,11 @@ class Sidebar extends Component {
         <NavItem>
           <NavLink className="nav-link nav-link-sidebar" to="/saving">
             <FontAwesomeIcon icon={faPiggyBank} /> <span>Saving Tips</span>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="nav-link nav-link-sidebar" to="/tripCalculator">
+            <FontAwesomeIcon icon={faCalculator} /> <span>Trip Calculator</span>
           </NavLink>
         </NavItem>
         <NavItem>

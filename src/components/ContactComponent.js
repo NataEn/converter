@@ -25,15 +25,15 @@ class Contact extends Component {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
     this.props.resetFeedbackForm();
-    this.props.postFeedback(
-      values.firstName,
-      values.lastName,
-      values.telnum,
-      values.email,
-      values.agree,
-      values.contactType,
-      values.message
-    );
+    // this.props.postFeedback(
+    //   values.firstName,
+    //   values.lastName,
+    //   values.telnum,
+    //   values.email,
+    //   values.agree,
+    //   values.contactType,
+    //   values.message
+    // );
     // event.preventDefault();
   }
   render() {
@@ -47,30 +47,36 @@ class Contact extends Component {
             </BreadcrumbItem>
             <BreadcrumbItem active>Contact Us</BreadcrumbItem>
           </Breadcrumb>
-          <div className="col-12">
-            <h3>Lets Keep in Touch!</h3>
-            <hr />
-          </div>
+          <Row className="row row-content">
+            <Col sm={12}>
+              <h1>Lets Keep in Touch!</h1>
+              <hr />
+              <p>At Converter we believe in good and open communication.</p>
+              <p>New opinions and feedbacks constantly improve our service.</p>
+              <p>
+                We are greatful for all those who help us in becoming the
+                wonderful company that we are!
+              </p>
+              <br />
+              <p>
+                We would love to hear your opinion or answer any question you
+                have!
+              </p>
+            </Col>
+          </Row>
         </div>
         <div className="row row-content">
           <div className="col-12">
-            <h3>Location Information- see where are we!</h3>
+            <h3>Our Contact Information</h3>
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
-            <h5>Our Address</h5>
             <address>
-              121, Clear Water Bay Road
+              <i className="fa fa-phone" />: +972 1234 5678
               <br />
-              Clear Water Bay, Kowloon
-              <br />
-              HONG KONG
-              <br />
-              <i className="fa fa-phone" />: +852 1234 5678
-              <br />
-              <i className="fa fa-fax" />: +852 8765 4321
+              <i className="fa fa-fax" />: +972 1234 5678
               <br />
               <i className="fa fa-envelope" />:{" "}
-              <a href="mailto:confusion@food.net">confusion@food.net</a>
+              <a href="mailto:converter@gmail.com">converter@gmail.com</a>
             </address>
           </div>
 
@@ -79,7 +85,7 @@ class Contact extends Component {
               <a
                 role="button"
                 className="btn btn-primary"
-                href="tel:+85212345678"
+                href="tel:+97212345678"
               >
                 <i className="fa fa-phone" /> Call
               </a>
@@ -89,7 +95,7 @@ class Contact extends Component {
               <a
                 role="button"
                 className="btn btn-success"
-                href="mailto:confusion@food.net"
+                href="mailto:converter@gmail.com"
               >
                 <i className="fa fa-envelope-o" /> Email
               </a>
@@ -103,7 +109,7 @@ class Contact extends Component {
           <div className="col-12 col-md-9" />
           <Form
             model="feedback"
-            className="col-12 col-md-9"
+            className="col-12 col-md-9 offset-sm-1"
             onSubmit={values => this.handleSubmit(values)}
           >
             <Row className="form-group">
