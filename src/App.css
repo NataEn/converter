@@ -4,18 +4,24 @@ html {
   min-height: 100%;
   min-width: 100%;
 }
+<<<<<<< HEAD
 @media (max-width: 780px){
   body { font-weight: 500 !important;}
 }
+=======
+>>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
 body {
   font-family: "Rubik", sans-serif !important;
   font-size: 0.7em;
   line-height: 1;
+<<<<<<< HEAD
   font-weight: 700 !important;
   padding-right: 0px !important;
   padding-left: 0px !important;
  margin-right: 0px !important;
   margin-left: 0px !important;
+=======
+>>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
   min-height: 100%;
   min-width: 100%;
 }
@@ -26,6 +32,7 @@ body {
   box-sizing: none !important;
   font-size: 1.5em;
   line-height: 1.4;
+<<<<<<< HEAD
   /* min-height: 100%;
   min-width: 100%; */
 }
@@ -54,6 +61,32 @@ p{
   min-width: 100%;
   min-height: 100%;
   /* box-sizing: none !important; */
+=======
+  height: 100%;
+  width: 100%;
+}
+h1,
+h2,
+h3 {
+  font-family: "Roboto Slab", serif !important;
+}
+div > div > div.main-spacer-header-hr.row > div,
+#root > div > div > div.container.mw-100.mh-100.row,
+#root > div > div > div:nth-child(1),
+#root > div > div > div:nth-child(3),
+#root > div > div > div:nth-child(3) > div,
+#root > div > div > div:nth-child(3) > div > div > div.align-items-left.row,
+#root > div > div > div:nth-child(3) > div > div > div:nth-child(3) {
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
+.container {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  min-width: 100%;
+  min-height: 100%;
+  box-sizing: content-box;
+>>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
 }
 
 .main-spacer-header-hr {
@@ -93,14 +126,35 @@ a.nav-link.header:hover {
   background: none;
 }
 
+<<<<<<< HEAD
 .backgroundImage{
   background-image: url(../src/shared/jumbotron/main.jpg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
+=======
+.jumbotron {
+  padding: 10px 15px 10px 15px;
+
+  color: floralwhite;
+  margin: 0px auto;
+  padding: 0px auto;
+  border-radius: 0%;
+  border-top: 1px solid rgba(225, 189, 94, 0.8);
+  border-bottom: 1px solid rgba(225, 189, 94, 0.8);
+  /*background-image: linear-gradient(110deg, #ffcc26c4 30%, #463cb0 100%);*/
+  background: rgb(36, 148, 162);
+}
+.jumbotron .col-offset-right {
+  align-self: center;
+>>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
 }
 .footer {
   background: rgb(24, 34, 101);
   color: floralwhite;
+<<<<<<< HEAD
+=======
+  /* position: relative; */
+>>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
   bottom: 0%;
 }
 div.converted-amount.row {
@@ -144,6 +198,9 @@ div.conversion-answer.col-md-10 {
 }
 .buttonPanel{
   margin-bottom:2%;
+}
+div.container.footer {
+  text-align: left;
 }
 div.container.footer {
   text-align: left;
