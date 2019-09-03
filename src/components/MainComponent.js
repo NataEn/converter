@@ -17,10 +17,7 @@ import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
-<<<<<<< HEAD
 import Calculator from "./CalculatorComponent";
-=======
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
 import { Loading } from "./LoadingComponent";
 
 //databases- now obtained from redux store- they are called from the reducer.js
@@ -183,21 +180,12 @@ class Main extends Component {
           </Col>
         </Row>
 
-<<<<<<< HEAD
         <Row className="container mr-0 pr-0 ml-0 pl-0 backgroundImage">
           <Col className="sidebar" md={{size:2,order:1}} sm={12}>
             <Sidebar />
           </Col>
           <Col md={{size:9, order:2}}sm={12}>
             <Col sm={12} >
-=======
-        <Row className="container mw-100 mh-100 ">
-          <Col sm={2} className="sidebar pt-3">
-            <Sidebar />
-          </Col>
-          <Col sm={8}>
-            <Col sm={12} className="pt-3 pb-3">
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
               <Switch>
                 <Route
                   path="/home"
@@ -251,7 +239,6 @@ class Main extends Component {
                 />
                 <Route
                   exact
-<<<<<<< HEAD
                   path="/tripCalculator"
                   render={() => (
                     <Calculator
@@ -261,8 +248,6 @@ class Main extends Component {
                 />
                 <Route
                   exact
-=======
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
                   path="/manage"
                   render={() => (
                     <ManageExpenses
@@ -280,7 +265,6 @@ class Main extends Component {
                 {/* <Redirect to="/home" /> */}
               </Switch>
             </Col>
-<<<<<<< HEAD
             {/* <Col sm={12}>
               <MyMap />
               <SpiningRates ratesObject={this.props.rates} />
@@ -289,16 +273,6 @@ class Main extends Component {
         </Row>
         <Row className="container ml-0 mr-0 pl-0 pr-0">
           <Col md={12} className="ml-0 mr-0 pl-0 pr-0">
-=======
-            <Col sm={12}>
-              <MyMap />
-              <SpiningRates ratesObject={this.props.rates} />
-            </Col>
-          </Col>
-        </Row>
-        <Row className="main-spacer-header-hr">
-          <Col sm={12}>
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
             <Footer />
           </Col>
         </Row>

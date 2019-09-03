@@ -39,7 +39,6 @@ class Contact extends Component {
   render() {
     //in here we put code that we want to run every time the component is reredndered!!
     return (
-<<<<<<< HEAD
       <div className="container mr-0 ml-0 pr-0 pl-0">
         <h1>Lets Keep in Touch!</h1>
         
@@ -63,24 +62,6 @@ class Contact extends Component {
              <p> New opinions and feedbacks constantly improve our service.</p>
               
                 <p>We are greatful for all those who help us in becoming the
-=======
-      <div className="container">
-        <div className="row">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/home">Home</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
-          </Breadcrumb>
-          <Row className="row row-content">
-            <Col sm={12}>
-              <h1>Lets Keep in Touch!</h1>
-              <hr />
-              <p>At Converter we believe in good and open communication.</p>
-              <p>New opinions and feedbacks constantly improve our service.</p>
-              <p>
-                We are greatful for all those who help us in becoming the
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
                 wonderful company that we are!
               </p>
               <br />
@@ -89,20 +70,12 @@ class Contact extends Component {
                 have!
               </p>
             </Col>
-<<<<<<< HEAD
             <Col sm={2}></Col>
           </Row>
       
         <Row className="row-content">
           <div className="col-12">
             <h2>Our Contact Information</h2>
-=======
-          </Row>
-        </div>
-        <div className="row row-content">
-          <div className="col-12">
-            <h3>Our Contact Information</h3>
->>>>>>> 15df259f670468f1a4a99f5eefda5768b56ffef7
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
             <address>
