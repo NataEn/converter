@@ -88,8 +88,8 @@ class Currency extends Component {
 
   renderConvertionContainer = props => {
     const convertionPanel = (
-      <div className="row d-flex justify-content-center align-items-center">
-        <div className="col-3 col-auto select-div">
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col xs={12} sm={4} md={3} className="col-auto select-div">
           <span>I have:</span>
           <SelectComponent
             className="select-span"
@@ -99,8 +99,8 @@ class Currency extends Component {
             name="baseRate"
             onChange={this.handleSelectChange}
           />
-        </div>
-        <div className="col-3 col-auto">
+        </Col>
+        <Col xs={12} sm={4} md={3} className="col-auto">
           <span>I want:</span>
           <SelectComponent
             className="select-span"
@@ -110,8 +110,8 @@ class Currency extends Component {
             name="toRate"
             onChange={this.handleSelectChange}
           />
-        </div>
-        <div className="col-3 col-auto">
+        </Col>
+        <Col xs={12} sm={4} md={3} className="col-auto">
           {" "}
           <label className="input-label" htmlFor="baseAmount">
             Amount:{" "}
@@ -131,8 +131,8 @@ class Currency extends Component {
             valid={this.state.baseAmount !== ""}
             invalid={this.state.baseAmount === ""}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
     this.setState.ConvertionPanel = convertionPanel;
     this.state.ConvertionContainerArray[0] = convertionPanel;
@@ -143,12 +143,16 @@ class Currency extends Component {
     return (
       <div className="container">
         <h1>Converter</h1>
-        <form className="form ml-1" onSubmit={values => this.onFormSubmit(values)}>
+        <form
+          className="form ml-1"
+          onSubmit={values => this.onFormSubmit(values)}
+        >
           {this.renderConvertionContainer()}
           {/* end of convertion container */}
           <div className="row d-flex justify-content-around align-items-center">
             <Row className="converted-amount">
-              <Col md={2}>
+              <Col xs={1} sm={0} />
+              <Col xs={10} sm={4} md={3}>
                 <Card key={this.props.image.id} className="smallBill">
                   <CardImg
                     top
@@ -159,7 +163,8 @@ class Currency extends Component {
                   <CardLink href="#">More Bills</CardLink>
                 </Card>
               </Col>
-              <Col md={10} className="conversion-answer">
+
+              <Col xs={12} sm={6} md={8} className="conversion-answer">
                 <this.renderAnswer />
               </Col>
             </Row>
@@ -173,9 +178,9 @@ class Currency extends Component {
           </div>
         </form>
 
-        <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
+        {/* <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
           google map
-        </a>
+        </a> */}
       </div>
     );
   }

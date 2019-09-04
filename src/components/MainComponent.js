@@ -181,11 +181,11 @@ class Main extends Component {
         </Row>
 
         <Row className="container mr-0 pr-0 ml-0 pl-0 backgroundImage">
-          <Col className="sidebar" md={{size:2,order:1}} sm={12}>
+          <Col className="sidebar" md={{ size: 2, order: 1 }} sm={12}>
             <Sidebar />
           </Col>
-          <Col md={{size:9, order:2}}sm={12}>
-            <Col sm={12} >
+          <Col md={{ size: 9, order: 2 }} sm={12}>
+            <Col sm={12}>
               <Switch>
                 <Route
                   path="/home"
@@ -240,11 +240,7 @@ class Main extends Component {
                 <Route
                   exact
                   path="/tripCalculator"
-                  render={() => (
-                    <Calculator
-                      {...this.props}
-                    />
-                  )}
+                  render={() => <Calculator {...this.props} />}
                 />
                 <Route
                   exact
@@ -272,7 +268,7 @@ class Main extends Component {
           </Col>
         </Row>
         <Row className="container ml-0 mr-0 pl-0">
-            <Footer />
+          <Footer />
         </Row>
       </Row>
     );
