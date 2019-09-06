@@ -60,7 +60,9 @@ class SelectComponent extends Component {
 
   handleChange = selectedOption => {
     this.setState({ selectedOption: selectedOption });
-    console.log(`Option selected:`, selectedOption.value);
+    if (selectedOption === null) {
+      return;
+    }
     const value = selectedOption.value;
     const name = this.props.name;
     return this.props.onChange(value, name);
@@ -86,7 +88,7 @@ class SelectComponent extends Component {
         styles={colourStyles}
         value={this.state.selectedOption}
         onChange={this.handleChange}
-        // isClearable
+        isClearable
         // ref={this.selectName}
         captureMenuScroll={true}
       />

@@ -69,8 +69,13 @@ class Currency extends Component {
   handleSelectChange(value, name) {
     //console.log("from handleselectchange" + JSON.stringify(value));
     //console.log("from handleselectchange" + JSON.stringify(name));
-    this.setState({ [name]: value });
-    this.setState({ changed: true });
+    if (value !== null) {
+      this.setState({ [name]: value });
+      this.setState({ changed: true });
+    } else {
+      this.setState({ [name]: undefined });
+      this.setState({ changed: true });
+    }
   }
   renderAnswer() {
     if (this.state.changed) {
@@ -78,9 +83,7 @@ class Currency extends Component {
     } else {
       return (
         <span className="conversion-answer">
-          {`${this.state.baseAmount} ${this.state.baseRate} to ${
-            this.state.toRate
-          } is ${this.state.converted} ${this.state.toRate}`}
+          {`${this.state.baseAmount} ${this.state.baseRate} to ${this.state.toRate} is ${this.state.converted} ${this.state.toRate}`}
         </span>
       );
     }
@@ -88,7 +91,7 @@ class Currency extends Component {
 
   renderConvertionContainer = props => {
     const convertionPanel = (
-      <Row className="d-flex justify-content-center align-items-center">
+      <Row className="d-flex justify-content-center align-items-center pt-2">
         <Col xs={12} sm={4} md={3} className="col-auto select-div">
           <span>I have:</span>
           <SelectComponent
@@ -169,7 +172,7 @@ class Currency extends Component {
               </Col>
             </Row>
             <Button
-              className="btn btn-outline-success"
+              className="btn btn-outline-success calculate"
               type="submit"
               onClick={this.onFormSubmit}
             >

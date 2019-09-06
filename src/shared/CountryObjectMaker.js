@@ -7,7 +7,7 @@ const codes = Object.keys(COUNTRY_BY_NAME[0]);
 const names = Object.values(COUNTRY_BY_NAME[0]);
 const currency = Object.values(COUNTRY_BY_CORRENCY[0]);
 const CountryObject = () => {
-  for (var i = 0; i <= names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     // eslint-disable-next-line no-new-object
     b = new Object();
     b.id = i;

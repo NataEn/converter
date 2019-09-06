@@ -330,32 +330,33 @@ class ImageGallery extends Component {
           </Col>
         </Row>
 
-        <Row className="buttonPanel">
-          <div ></div>
-          <div className="col-3 col-auto">{stateSelect}</div>
-          <div className="col-3 col-auto">{selectLetter}</div>
-          <div className="col-3 col-auto">
-            <Button className="addImage" size="sm" onClick={this.toggleModal}>
-              Add Image
-            </Button>
-          </div>
-        </Row>
         <Row>
           <Col>
             <Breadcrumb>
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem active>
-                <Link to="#">Currency Image Gallery</Link>
-              </BreadcrumbItem>
+              <BreadcrumbItem active>Currency Image Gallery</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
-        {AddCurrency}
-        <div className="imageGallery"> {galleryView}
-        </div>
-       
+
+        <Row className="buttonPanel form mt-2">
+          <Col xs={12} sm={4} className="col-auto pb-1">
+            {stateSelect}
+          </Col>
+          <Col xs={12} sm={4} className="col-auto pb-1">
+            {selectLetter}
+          </Col>
+          <Col xs={12} sm={4} className="col-auto pb-1">
+            <Button className="addImage" size="sm" onClick={this.toggleModal}>
+              Add Image
+            </Button>
+          </Col>
+          {AddCurrency}
+          <div className="imageGallery innerForm"> {galleryView}</div>
+        </Row>
+
         <Row>
           <Col>
             <Breadcrumb>
