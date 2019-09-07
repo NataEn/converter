@@ -12,9 +12,9 @@ import { Row, Col } from "reactstrap";
 
 export const Footer = props => {
   return (
-    <Col className="container footer">
-      <Row className="footer-xs pt-2 pl-3">
-       <Col xs={0} sm={1} ></Col>
+    <React.Fragment className="container-fluid mr-0 footer">
+      <Row className="footer-xs">
+        <Col xs={0} sm={1}></Col>
         <Col xs={12} sm={3} className="pt-2">
           <Row>
             <h4>Navigate</h4>
@@ -43,7 +43,7 @@ export const Footer = props => {
             </ul>
           </Row>
         </Col>
-        <Col xs={12} sm={{size:4, order:3}}>
+        <Col xs={12} sm={{ size: 4, order: 3 }}>
           <Row>
             <h4>Useful Links</h4>
             <br />
@@ -74,7 +74,7 @@ export const Footer = props => {
             </ul>
           </Row>
         </Col>
-        <Col xs={12} sm={{size:3, order:4}}>
+        <Col xs={12} sm={{ size: 3, order: 4 }}>
           <Row>
             <h4>Contact Us</h4>
             <br />
@@ -113,11 +113,11 @@ export const Footer = props => {
       </Row>
       <hr className="footer" />
       <Row>
-      <Col xs={{size:1, order:1}}></Col>
-        <Col xs={{size:11, order:2}} className="rights">
+        <Col xs={{ size: 1, order: 1 }}></Col>
+        <Col xs={{ size: 11, order: 2 }} className="rights">
           <p>© All rights reserved to Converter 2019</p>
         </Col>
       </Row>
-    </Col>
+    </React.Fragment>
   );
 };

@@ -205,7 +205,7 @@ function RenderExpenseTable({ expenses_0, expenses_tables, addExpense }) {
   for (let table of expenses_tables) {
     tables.push(
       <React.Fragment key={table.tableName}>
-        <div className="expense-table">
+        <div className="container-fluid expense-table">
           <h4 className="pt-3">{table.tableName}</h4>{" "}
           <Row>
             <Col sm={3}>
@@ -322,7 +322,7 @@ class RenderModal extends Component {
   render() {
     if (this.props.modal === "tableRow") {
       return (
-        <React.Fragment >
+        <React.Fragment>
           <Button color="light" onClick={this.toggleModal}>
             New Row
           </Button>
@@ -531,18 +531,23 @@ function ManageExpenses(props) {
     <div className="container">
       <h1>Manage Expenses</h1>
       <Row className="buttonPanel">
-        <Col> <RenderModal
-        modal={"table"}
-        expenses_tables={props.expenses_tables}
-        addTable={props.addTable}
-      /></Col>
-       
-      <Col><Button color="light">Delete Table</Button></Col>
+        <Col>
+          {" "}
+          <RenderModal
+            modal={"table"}
+            expenses_tables={props.expenses_tables}
+            addTable={props.addTable}
+          />
+        </Col>
+
+        <Col>
+          <Button color="light">Delete Table</Button>
+        </Col>
       </Row>
-      
+
       <div className="tableContainer">
         <Row>
-          <Col sm={{ size: 12}}>
+          <Col sm={{ size: 12 }}>
             <RenderExpenseTable
               expenses_0={props.expenses_0.expenses_0}
               expenses_tables={props.expenses_tables}

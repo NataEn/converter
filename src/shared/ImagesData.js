@@ -19,7 +19,7 @@ export const IMAGE = [
     name: "aeuro",
     country: "Germany",
     type: "bill",
-    value: "5,10,20,50,100,200,",
+    value: "5,10,20,50,100,200",
     inuse: true,
     image_url:
       "https://upload.wikimedia.org/wikipedia/commons/0/0b/Euro_Series_Banknotes_%282019%29.jpg",

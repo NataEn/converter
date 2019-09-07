@@ -19,7 +19,7 @@ class ImageDetail extends Component {
   render() {
     console.log("from currency detail" + JSON.stringify(this.props.image));
     return (
-      <React.Fragment>
+      <React.Fragment className="container">
         <Row>
           <Col>
             <Breadcrumb>
@@ -29,27 +29,49 @@ class ImageDetail extends Component {
               <BreadcrumbItem>
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>
-                <Link to="#">Image {this.props.image.name}</Link>
-              </BreadcrumbItem>
+              <BreadcrumbItem>Image {this.props.image.name}</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
         <Card key={this.props.image.id}>
-          <CardImg
-            top
-            width="80%"
-            src={this.props.image.image_url}
-            alt={this.props.image.image_alt}
-          />
-          <small> attribute: {this.props.image.attribution}</small>
+          {this.props.image.image_url_1 ? (
+            <React.Fragment>
+              <CardImg
+                top
+                src={this.props.image.image_url_1}
+                alt={this.props.image.image_alt_1}
+              />
+              <CardImg
+                top
+                src={this.props.image.image_url_2}
+                alt={this.props.image.image_alt_2}
+              />
+            </React.Fragment>
+          ) : (
+            <CardImg
+              top
+              src={this.props.image.image_url}
+              alt={this.props.image.image_alt}
+            />
+          )}
+          <small> Attribute: {this.props.image.attribution}</small>
           <CardBody>
             <CardTitle>{this.props.image.name}</CardTitle>
             <ListGroup>
-              <ListGroupItem>type: {this.props.image.type}</ListGroupItem>
-              <ListGroupItem>value: {this.props.image.value}</ListGroupItem>
               <ListGroupItem>
-                <ListGroupItemHeading>History</ListGroupItemHeading>
+                <ListGroupItemHeading>
+                  Type: {this.props.image.type}
+                </ListGroupItemHeading>
+              </ListGroupItem>
+              <ListGroupItem>
+                <ListGroupItemHeading>
+                  Value: {this.props.image.value}
+                </ListGroupItemHeading>
+              </ListGroupItem>
+              <ListGroupItem>
+                <ListGroupItemHeading className="font-weight-bold">
+                  History
+                </ListGroupItemHeading>
                 <ListGroupItemText>{this.props.image.notes}</ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
@@ -65,7 +87,7 @@ class ImageDetail extends Component {
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
               <BreadcrumbItem active>
-                <Link to="#">Image {this.props.image.name}</Link>
+                Image {this.props.image.name}
               </BreadcrumbItem>
             </Breadcrumb>
           </Col>

@@ -173,14 +173,14 @@ class Main extends Component {
   }
   render() {
     return (
-      <Row>
-        <Row className="container main-spacer-header-hr">
-          <Col sm={12} className="ml-0 mr-0 pl-0 pr-0">
-            <Header className="ml-0 mr-0 pl-0 pr-0" logo={this.props.logo} />
+      <div className="container-fluid">
+        <Row className="main-spacer-header-hr">
+          <Col xs={12} className="ml-0 mr-0 pl-0 pr-0">
+            <Header logo={this.props.logo} />
           </Col>
         </Row>
 
-        <Row className="container mr-0 pr-0 ml-0 pl-0 backgroundImage">
+        <Row className="backgroundImage">
           <Col className="sidebar" md={{ size: 2, order: 1 }} sm={12}>
             <Sidebar />
           </Col>
@@ -267,10 +267,12 @@ class Main extends Component {
             </Col> */}
           </Col>
         </Row>
-        <Row className="container ml-0 mr-0 pl-0">
-          <Footer />
+        <Row className="main-spacer-header-hr">
+          <Col xs={12}>
+            <Footer />
+          </Col>
         </Row>
-      </Row>
+      </div>
     );
   }
 }

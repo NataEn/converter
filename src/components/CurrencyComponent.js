@@ -144,7 +144,7 @@ class Currency extends Component {
   // ratesObject- object that contains the rates object from promise
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>Converter</h1>
         <form
           className="form ml-1"
@@ -157,12 +157,23 @@ class Currency extends Component {
               <Col xs={1} sm={0} />
               <Col xs={10} sm={4} md={3}>
                 <Card key={this.props.image.id} className="smallBill">
-                  <CardImg
-                    top
-                    src={this.props.image.image_url}
-                    alt={this.props.image.image_alt}
-                  />
-
+                  {this.props.image.image_url_1 ? (
+                    <React.Fragment>
+                      <CardImg
+                        top
+                        width="100%"
+                        src={this.props.image.image_url_1}
+                        alt={this.props.image.image_alt_1}
+                      />
+                    </React.Fragment>
+                  ) : (
+                    <CardImg
+                      top
+                      width="100%"
+                      src={this.props.image.image_url}
+                      alt={this.props.image.image_alt}
+                    />
+                  )}
                   <CardLink href="#">More Bills</CardLink>
                 </Card>
               </Col>

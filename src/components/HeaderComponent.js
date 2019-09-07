@@ -28,7 +28,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <React.Fragment className="mr-0 ml-0 pr-0 pl-0">
+      <React.Fragment className="container-fluid">
         <Navbar dark className="navbar sticky-top" expand="md">
           <div className="container">
             <NavbarBrand className="mr-auto navbar-default" href="/">

@@ -1,32 +1,20 @@
-html {
-  padding: 0px 0px !important;
-  margin: 0px 0px !important;
-  min-height: 100%;
+/* *:not(h1) {
+  margin: 0px !important;
+  padding: 0px !important;
+} */
+/* .footer-xs {
+  padding-left: 10%;
+} */
+body {
+  font-family: "Rubik", sans-serif !important;
+  line-height: 1;
   min-width: 100%;
 }
 
-.footer-xs {
-  padding-left: 10%;
-}
-body {
-  font-family: "Rubik", sans-serif !important;
-  /* font-size: 0.7em; */
-  line-height: 1;
-  padding-right: 0px !important;
-  padding-left: 0px !important;
-  margin-right: 0px !important;
-  margin-left: 0px !important;
-  min-height: 100%;
-  min-width: 100% !important;
-}
 .App {
   text-align: center;
-  margin: 0px 0px !important;
-  padding: 0px 0px !important;
-  box-sizing: none !important;
   font-size: 1.5em;
   line-height: 1.4;
-  width: 100% !important;
 }
 h1 {
   margin-top: 4%;
@@ -59,19 +47,10 @@ div.container.main-spacer-header-hr.row > div > nav {
   margin: 0px 0px !important;
 }
 
-.container {
-  min-width: 100%;
-  min-height: 100%;
-  box-sizing: none !important;
-  padding: 0px 0px !important;
-}
-
 .main-spacer-header-hr {
   box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
 }
-#root > div > div > div.container.main-spacer-header-hr.row {
-  margin: 0px 0px !important;
-}
+
 nav.sidebar.navbar button span {
   background-color: none !important;
 }
@@ -120,7 +99,7 @@ a.nav-link.header:hover {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.footer {
+#root > div > div > div:nth-child(3) > div {
   background: rgb(24, 34, 101);
   color: floralwhite;
   bottom: 0%;
@@ -155,15 +134,16 @@ div.conversion-answer {
   border-width: 1px;
 }
 .card-img-top {
-  width: 100% !important;
+  width: 50% !important;
   padding: none;
+  margin: 3% auto;
 }
 .form {
   background: rgba(228, 226, 226, 0.8);
   color: black;
   border: 2px solid #463cb041;
   border-radius: 15px;
-  /* max-width: 90%; */
+  max-width: 90%;
   margin: 1% auto;
   padding: 1%;
   margin-top: 5%;
@@ -177,12 +157,10 @@ div.conversion-answer {
 .buttonPanel {
   margin-bottom: 2%;
 }
-div.container.footer {
+.footer {
   text-align: left;
 }
-div.container.footer {
-  text-align: left;
-}
+
 .terms,
 .terms:hover {
   color: inherit;
@@ -228,8 +206,10 @@ div .Select-value {
 .btn-outline-success {
   margin: 1%;
 }
+.list-group-item {
+  text-align: left;
+}
 
-/* For mobile: */
 div.sidebar {
   background: none;
   box-shadow: 3px 1px 8px -5px rgba(0, 0, 0, 0.38);
@@ -275,9 +255,9 @@ div.sidebar {
   background: rgba(228, 226, 226, 0.55);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.5);
 }
-/* div.sidebar> ul > li>a{
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.5);
-} */
+div.sidebar > ul > li > a {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.5);
+}
 
 .currency_image {
   width: 100%;
@@ -517,7 +497,7 @@ form > div > select > option {
 @media screen and (min-width: 370px) {
   body {
     font-weight: 300 !important;
-    background-color: rgba(205, 205, 221, 0.815);
+    min-width: 100%;
   }
   p {
     font-weight: 600 !important;

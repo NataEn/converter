@@ -10,7 +10,9 @@ import {
   ModalHeader,
   Label,
   Row,
-  Col,Breadcrumb,BreadcrumbItem
+  Col,
+  Breadcrumb,
+  BreadcrumbItem
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -68,7 +70,7 @@ class TipForm extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <Row className="form-group">
           <Col md={{ size: 6, offset: 2 }}>
             <Button outline onClick={this.toggleModal}>
@@ -158,7 +160,6 @@ const SavingTips = props => {
   console.log("from saving tips the addTip is: " + props.addTip);
   return (
     <div className="container">
-     
       <h1>Saving Tips</h1>
       <Row>
         <Col sm={12}>
@@ -169,52 +170,54 @@ const SavingTips = props => {
             <BreadcrumbItem active>Contact Us</BreadcrumbItem>
           </Breadcrumb>
         </Col>
-        </Row>
+      </Row>
       <Row className="form">
-      <p className="textLeft">
-        Saving money is all about making a new life routine. Say you already
-        have one, but do you stick to it? <br />A well planned routine embraces
-        simple and realistic steps that easily become part of your life- without
-        even noticing them. <br />
-        Follow these next tips to gradually build a new routine and decrease
-        your expenses.
-      </p>
-      <ListGroup >
-        <ListGroupItem>
-          <ListGroupItemHeading> Life Tips</ListGroupItemHeading>
-          <ListGroupItemText>
-            <ul className="textLeft">
-              <li>
-                <h5>Record Your Expenses</h5>
-                <p>Some explanation</p>
-              </li>
-              <br />
-              <li>
-                <h6>Make a Budget</h6>
-                <p>Some explanation</p>
-              </li>
-              <br />
-              <li>Identify Nonessential Expenses</li>
-              <li>Set a Goal/s to Save </li>
-              <li>Set the time span of your Goal- short or long term goal?</li>
-              <li> Prioritize your Goals </li>
-              <li>
-                Can you Automate your Saving? look for (free) tools or bank
-                services
-              </li>
-              <li>Check your Saving progress</li>
-            </ul>
-          </ListGroupItemText>
+        <p className="textLeft">
+          Saving money is all about making a new life routine. Say you already
+          have one, but do you stick to it? <br />A well planned routine
+          embraces simple and realistic steps that easily become part of your
+          life- without even noticing them. <br />
+          Follow these next tips to gradually build a new routine and decrease
+          your expenses.
+        </p>
+        <ListGroup>
+          <ListGroupItem>
+            <ListGroupItemHeading> Life Tips</ListGroupItemHeading>
+            <ListGroupItemText>
+              <ul className="textLeft">
+                <li>
+                  <h5>Record Your Expenses</h5>
+                  <p>Some explanation</p>
+                </li>
+                <br />
+                <li>
+                  <h6>Make a Budget</h6>
+                  <p>Some explanation</p>
+                </li>
+                <br />
+                <li>Identify Nonessential Expenses</li>
+                <li>Set a Goal/s to Save </li>
+                <li>
+                  Set the time span of your Goal- short or long term goal?
+                </li>
+                <li> Prioritize your Goals </li>
+                <li>
+                  Can you Automate your Saving? look for (free) tools or bank
+                  services
+                </li>
+                <li>Check your Saving progress</li>
+              </ul>
+            </ListGroupItemText>
 
-          <RenderTip tips={props.tips} addTip={props.addTip} />
-        </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading> Traveling Tips</ListGroupItemHeading>
-        </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading> Tips on the Spot</ListGroupItemHeading>
-        </ListGroupItem>
-      </ListGroup>
+            <RenderTip tips={props.tips} addTip={props.addTip} />
+          </ListGroupItem>
+          <ListGroupItem>
+            <ListGroupItemHeading> Traveling Tips</ListGroupItemHeading>
+          </ListGroupItem>
+          <ListGroupItem>
+            <ListGroupItemHeading> Tips on the Spot</ListGroupItemHeading>
+          </ListGroupItem>
+        </ListGroup>
       </Row>
       <Row>
         <Col sm={12}>
@@ -225,7 +228,7 @@ const SavingTips = props => {
             <BreadcrumbItem active>Contact Us</BreadcrumbItem>
           </Breadcrumb>
         </Col>
-        </Row>
+      </Row>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import "./App.css";
 import Main from "./components/MainComponent";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux"; //with the provider the store is available to all the components in the app
-import {ConfigureStore} from "../src/redux/configureStore";
+import { ConfigureStore } from "../src/redux/configureStore";
 const store = ConfigureStore();
 class App extends Component {
   render() {

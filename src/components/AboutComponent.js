@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Breadcrumb,BreadcrumbItem } from "reactstrap";
+import { Row, Col, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class About extends Component {
@@ -11,7 +11,7 @@ class About extends Component {
             <h1>About Converter</h1>
           </Col>
         </Row>
-       
+
         <Row>
           <Col sm={12}>
             <Breadcrumb>
@@ -22,16 +22,15 @@ class About extends Component {
             </Breadcrumb>
           </Col>
         </Row>
-                
-     
-          <Row className="form">
-          <Col xs={12} >
+
+        <Row className="form">
+          <Col xs={12}>
             <p className="text-justify">
-              Converter is a web application developed for setting and managing costs of activities.
-              Wether you are planing an indoor or outdoor activity this is a good application to calculate its cost.
+              Converter is a web application developed for setting and managing
+              costs of activities. Wether you are planing an indoor or outdoor
+              activity this is a good application to calculate its cost.
             </p>
           </Col>
-         
         </Row>
 
         <Row>

@@ -27,6 +27,26 @@ function RenderCurrencyImage({ image, letter, country }) {
   return (
     <Card>
       <Link to={`/gallery/${letter}/${country}/${image.id}`}>
+        {/* {this.props.image.image_url_1 ? (
+          <React.Fragment>
+            <CardImg
+              top
+              src={this.props.image.image_url_1}
+              alt={this.props.image.image_alt_1}
+            />
+            <CardImg
+              top
+              src={this.props.image.image_url_2}
+              alt={this.props.image.image_alt_2}
+            />
+          </React.Fragment>
+        ) : (
+          <CardImg
+            top
+            src={this.props.image.image_url}
+            alt={this.props.image.image_alt}
+          />
+        )} */}
         <CardImg
           className="currency_image"
           src={image.image_url}
@@ -323,7 +343,7 @@ class ImageGallery extends Component {
     );
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <Row>
           <Col>
             <h1>Currency Gallery</h1>
@@ -363,9 +383,7 @@ class ImageGallery extends Component {
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem active>
-                <Link to="#">Currency Image Gallery</Link>
-              </BreadcrumbItem>
+              <BreadcrumbItem active>Currency Image Gallery</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
