@@ -1,10 +1,4 @@
-/* *:not(h1) {
-  margin: 0px !important;
-  padding: 0px !important;
-} */
-/* .footer-xs {
-  padding-left: 10%;
-} */
+/* Extra small devices (portrait phones, less than 576px) */
 body {
   font-family: "Rubik", sans-serif !important;
   line-height: 1;
@@ -39,8 +33,12 @@ h4 {
 p {
   text-align: left;
   word-spacing: 5px;
-  font-size: 1.2em !important;
+  font-size: 1em !important;
   padding: 0px 1% !important;
+}
+li.contactinfo {
+  list-style-type: none;
+  text-align: left;
 }
 div.container.main-spacer-header-hr.row > div > nav {
   padding: 0px 4% !important;
@@ -117,8 +115,14 @@ div.conversion-answer {
   align-items: center;
 }
 
+div > img .bigBill {
+  max-width: 15em;
+  min-width: 5em;
+}
+
 .card.smallBill {
-  width: 70%;
+  max-width: 15em;
+  min-width: 5em;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 4px;
   font-size: 0.7em;
@@ -137,6 +141,10 @@ div.conversion-answer {
   width: 50% !important;
   padding: none;
   margin: 3% auto;
+}
+.imageattribute {
+  font-size: 70%;
+  color: gray;
 }
 .form {
   background: rgba(228, 226, 226, 0.8);
@@ -494,24 +502,18 @@ form > div > select > option {
   border-width: 1px;
   box-shadow: none !important;
 }
-@media screen and (min-width: 370px) {
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
   body {
-    font-weight: 300 !important;
-    min-width: 100%;
   }
   p {
-    font-weight: 600 !important;
-    font-size: 1.5em;
   }
 }
-@media screen and (min-width: 780px) {
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
   body {
-    font-weight: 600 !important;
-    font-size: 0.7em;
   }
   p {
-    font-weight: 500 !important;
-    font-size: 1.2em;
   }
   div.sidebar.col-sm-12.col-md-2.order-md-1 > ul > div > li > a > span {
     display: inline-block !important;
@@ -524,7 +526,7 @@ form > div > select > option {
     background: none;
     box-shadow: 3px 1px 8px -5px rgba(0, 0, 0, 0.38);
     text-align: left;
-    font-weight: 800;
+    font-weight: 600;
     padding: 5% 2% !important;
   }
   div.sidebar.col-sm-12.col-md-2.order-md-1 > ul > div > li > a > svg {
@@ -537,9 +539,8 @@ form > div > select > option {
     background-repeat: no-repeat;
   }
 }
-@media screen and (min-width: 1500px) {
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
   body {
-    font-weight: 600 !important;
-    font-size: 0.8em;
   }
 }

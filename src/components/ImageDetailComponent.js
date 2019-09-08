@@ -19,7 +19,7 @@ class ImageDetail extends Component {
   render() {
     console.log("from currency detail" + JSON.stringify(this.props.image));
     return (
-      <React.Fragment className="container">
+      <div className="container">
         <Row>
           <Col>
             <Breadcrumb>
@@ -29,50 +29,69 @@ class ImageDetail extends Component {
               <BreadcrumbItem>
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>Image {this.props.image.name}</BreadcrumbItem>
+              <BreadcrumbItem>{this.props.image.name}</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
-        <Card key={this.props.image.id}>
-          {this.props.image.image_url_1 ? (
-            <React.Fragment>
+        <Card
+          key={this.props.image.id}
+          className="form p-3 d-flex flex-row justify-content-between"
+        >
+          <div className="col col-sm-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+            {this.props.image.image_url_1 ? (
+              <div>
+                <CardImg
+                  className="bigBill"
+                  src={this.props.image.image_url_1}
+                  alt={this.props.image.image_alt_1}
+                />
+                <footer>
+                  <small> {this.props.image.image_alt_1}</small>
+                </footer>
+                <CardImg
+                  className="bigBill"
+                  src={this.props.image.image_url_2}
+                  alt={this.props.image.image_alt_2}
+                />
+                <footer>
+                  <small> {this.props.image.image_alt_2}</small>
+                </footer>
+              </div>
+            ) : (
               <CardImg
-                top
-                src={this.props.image.image_url_1}
-                alt={this.props.image.image_alt_1}
+                className="bigBill"
+                src={this.props.image.image_url}
+                alt={this.props.image.image_alt}
               />
-              <CardImg
-                top
-                src={this.props.image.image_url_2}
-                alt={this.props.image.image_alt_2}
-              />
-            </React.Fragment>
-          ) : (
-            <CardImg
-              top
-              src={this.props.image.image_url}
-              alt={this.props.image.image_alt}
-            />
-          )}
-          <small> Attribute: {this.props.image.attribution}</small>
-          <CardBody>
+            )}
+
+            <footer>
+              <small className="imageattribute">
+                Attribute:
+                {this.props.image.attribution}
+              </small>
+            </footer>
+          </div>
+          <CardBody className="col col-sm-12 col-md-6 d-flex p-3 flex-column justify-content-center">
             <CardTitle>{this.props.image.name}</CardTitle>
             <ListGroup>
-              <ListGroupItem>
+              <ListGroupItem className="border bg-light">
                 <ListGroupItemHeading>
-                  Type: {this.props.image.type}
+                  <strong>Type:</strong> {this.props.image.type}
                 </ListGroupItemHeading>
               </ListGroupItem>
-              <ListGroupItem>
+              <ListGroupItem className="border bg-light">
                 <ListGroupItemHeading>
-                  Value: {this.props.image.value}
+                  <strong>Value:</strong> {this.props.image.value}
                 </ListGroupItemHeading>
               </ListGroupItem>
-              <ListGroupItem>
+              <ListGroupItem className="border bg-light">
                 <ListGroupItemHeading className="font-weight-bold">
                   History
                 </ListGroupItemHeading>
-                <ListGroupItemText>{this.props.image.notes}</ListGroupItemText>
+                <ListGroupItemText>
+                  <p>{this.props.image.notes}</p>
+                </ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
           </CardBody>
@@ -86,13 +105,11 @@ class ImageDetail extends Component {
               <BreadcrumbItem>
                 <Link to="/gallery">Currency Image Gallery</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem active>
-                Image {this.props.image.name}
-              </BreadcrumbItem>
+              <BreadcrumbItem active>{this.props.image.name}</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
-      </React.Fragment>
+      </div>
     );
   }
 }

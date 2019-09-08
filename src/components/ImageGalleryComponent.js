@@ -23,37 +23,20 @@ import SelectCountry from "./SelectCountryComponent";
 import SelectLetter from "./SelectABCComponent";
 
 function RenderCurrencyImage({ image, letter, country }) {
-  console.log("from gallery" + JSON.stringify(image), letter, country);
   return (
     <Card>
       <Link to={`/gallery/${letter}/${country}/${image.id}`}>
-        {/* {this.props.image.image_url_1 ? (
-          <React.Fragment>
-            <CardImg
-              top
-              src={this.props.image.image_url_1}
-              alt={this.props.image.image_alt_1}
-            />
-            <CardImg
-              top
-              src={this.props.image.image_url_2}
-              alt={this.props.image.image_alt_2}
-            />
-          </React.Fragment>
+        {image.image_url_1 ? (
+          <div>
+            <CardImg top src={image.image_url_1} alt={image.image_alt_1} />
+            <CardTitle>{image.image_alt_1}</CardTitle>
+          </div>
         ) : (
-          <CardImg
-            top
-            src={this.props.image.image_url}
-            alt={this.props.image.image_alt}
-          />
-        )} */}
-        <CardImg
-          className="currency_image"
-          src={image.image_url}
-          alt={image.image_alt}
-        />
-
-        <CardTitle>{image.image_alt}</CardTitle>
+          <div>
+            <CardImg top src={image.image_url} alt={image.image_alt} />{" "}
+            <CardTitle>{image.image_alt}</CardTitle>
+          </div>
+        )}
       </Link>
     </Card>
   );
@@ -77,14 +60,15 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
         return (
           <div key={letter}>
             <h4>{letter.toUpperCase()}</h4>
+
             {Object.keys(images[letter]).map(country => {
               return (
                 <div key={country}>
                   <h5>{country.charAt(0).toUpperCase() + country.slice(1)}</h5>
-                  <Row>
+                  <Row className="m-1 d-flex flex-row justify-content-around">
                     {images[letter][country].map(image => {
                       return (
-                        <Col key={image.id} sm={{ size: 4 }} className="m-1">
+                        <Col key={image.id} sm={4} xs={12}>
                           <RenderCurrencyImage
                             image={image}
                             letter={letter}
@@ -113,17 +97,20 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
               return (
                 <div key={country}>
                   <h5>{country.charAt(0).toUpperCase() + country.slice(1)}</h5>
-                  {images[value][country].map(image => {
-                    return (
-                      <Col key={image.id} sm="4" className="col-12 m-1">
-                        <RenderCurrencyImage
-                          image={image}
-                          letter={value}
-                          country={country}
-                        />
-                      </Col>
-                    );
-                  })}
+                  <div className="m-1 d-flex flex-row justify-content-around">
+                    {" "}
+                    {images[value][country].map(image => {
+                      return (
+                        <Col key={image.id} sm={4} xs={12}>
+                          <RenderCurrencyImage
+                            image={image}
+                            letter={value}
+                            country={country}
+                          />
+                        </Col>
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })}
@@ -144,26 +131,27 @@ function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
           return (
             <div key={value}>
               <h4>{value}</h4>
-
-              {images[value[0]][value].map(image => {
-                if (images[value[0]][value].length !== 0) {
-                  return (
-                    <Col key={image.id} sm="4" className="col-12 m-1">
-                      <RenderCurrencyImage
-                        image={image}
-                        letter={value[0]}
-                        country={value}
-                      />
-                    </Col>
-                  );
-                } else {
-                  return (
-                    <Col>
-                      <h6>No images for {value}</h6>
-                    </Col>
-                  );
-                }
-              })}
+              <div className="m-1 d-flex flex-row justify-content-around">
+                {images[value[0]][value].map(image => {
+                  if (images[value[0]][value].length !== 0) {
+                    return (
+                      <Col key={image.id} sm={4} xs={12}>
+                        <RenderCurrencyImage
+                          image={image}
+                          letter={value[0]}
+                          country={value}
+                        />
+                      </Col>
+                    );
+                  } else {
+                    return (
+                      <Col>
+                        <h6>No images for {value}</h6>
+                      </Col>
+                    );
+                  }
+                })}
+              </div>
             </div>
           );
         } else {

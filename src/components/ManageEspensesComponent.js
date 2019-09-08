@@ -12,8 +12,11 @@ import {
   Form,
   Label,
   FormGroup,
-  FormText
+  FormText,
+  Breadcrumb,
+  BreadcrumbItem
 } from "reactstrap";
+import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMeh, faFrown, faSmile } from "@fortawesome/free-solid-svg-icons";
@@ -530,7 +533,22 @@ function ManageExpenses(props) {
   return (
     <div className="container">
       <h1>Manage Expenses</h1>
-      <Row className="buttonPanel">
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Manage Expenses</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+      </Row>
+      <Row className="form">
+        <Col>
+          <p>This section is in production</p>
+        </Col>
+      </Row>
+      {/* <Row className="buttonPanel">
         <Col>
           {" "}
           <RenderModal
@@ -555,7 +573,17 @@ function ManageExpenses(props) {
             />
           </Col>
         </Row>
-      </div>
+      </div> */}
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Manage Expenses</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+      </Row>
     </div>
   );
 }

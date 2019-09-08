@@ -28,7 +28,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <React.Fragment className="container-fluid">
+      <React.Fragment>
         <Navbar dark className="navbar sticky-top" expand="md">
           <div className="container">
             <NavbarBrand className="mr-auto navbar-default" href="/">
@@ -62,11 +62,11 @@ class Header extends Component {
                     <span> Contact</span>
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem> 
                   <Button className="login" outline>
                     <span className="fa fa-sign-in fa-lg" /> Login
                   </Button>
-                </NavItem>
+                </NavItem> */}
               </Nav>
             </Collapse>
           </div>

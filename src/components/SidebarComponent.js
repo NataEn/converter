@@ -14,8 +14,8 @@ import { NavLink } from "react-router-dom";
 class Sidebar extends Component {
   render() {
     return (
-      <Nav className="sidebar row">
-        <Col className="sidebarCol">
+      <Nav className="sidebar row ">
+        <Col className="flex-md-column d-flex justify-content-center">
           <NavItem>
             <NavLink className="nav-link nav-link-sidebar" to="/home">
               <FontAwesomeIcon icon={faSyncAlt} />{" "}
@@ -43,13 +43,13 @@ class Sidebar extends Component {
           <NavItem>
             <NavLink className="nav-link nav-link-sidebar" to="/tripCalculator">
               <FontAwesomeIcon icon={faCalculator} />{" "}
-              <span className="sidebarSpan">Trip Calculator</span>
+              <span className="sidebarSpan">Calculator</span>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink className="nav-link nav-link-sidebar" to="/manage">
               <FontAwesomeIcon icon={faHandHoldingUsd} />{" "}
-              <span className="sidebarSpan">My Expenses</span>
+              <span className="sidebarSpan">Expenses</span>
             </NavLink>
           </NavItem>
         </Col>
