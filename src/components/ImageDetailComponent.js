@@ -27,7 +27,7 @@ class ImageDetail extends Component {
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
               <BreadcrumbItem>
-                <Link to="/gallery">Currency Image Gallery</Link>
+                <Link to="/gallery">Currency Gallery</Link>
               </BreadcrumbItem>
               <BreadcrumbItem>{this.props.image.name}</BreadcrumbItem>
             </Breadcrumb>
@@ -93,7 +93,7 @@ class ImageDetail extends Component {
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
               <BreadcrumbItem>
-                <Link to="/gallery">Currency Image Gallery</Link>
+                <Link to="/gallery">Currency Gallery</Link>
               </BreadcrumbItem>
               <BreadcrumbItem active>{this.props.image.name}</BreadcrumbItem>
             </Breadcrumb>

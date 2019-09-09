@@ -335,7 +335,7 @@ class ImageGallery extends Component {
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem active>Currency Image Gallery</BreadcrumbItem>
+              <BreadcrumbItem active>Currency Gallery</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>
@@ -362,7 +362,7 @@ class ImageGallery extends Component {
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem active>Currency Image Gallery</BreadcrumbItem>
+              <BreadcrumbItem active>Currency Gallery</BreadcrumbItem>
             </Breadcrumb>
           </Col>
         </Row>

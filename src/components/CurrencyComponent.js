@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
 import { Button, Input, Card, CardLink, CardImg, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 class Currency extends Component {
   constructor(props) {
@@ -157,9 +158,15 @@ class Currency extends Component {
     ) {
       let letter = this.state.toRateCountry.slice(0, 1);
       if (letter !== undefined) {
-        let countryObject = this.props.images[letter][this.state.toRateCountry];
-        if (countryObject !== undefined && countryObject !== null) {
-          countryImage = this.props.images[letter][this.state.toRateCountry][0];
+        if (this.props.images[letter] !== undefined) {
+          let countryObject = this.props.images[letter][
+            this.state.toRateCountry
+          ];
+          if (countryObject !== undefined && countryObject !== null) {
+            countryImage = this.props.images[letter][
+              this.state.toRateCountry
+            ][0];
+          }
         }
       }
     }
@@ -177,23 +184,24 @@ class Currency extends Component {
             <Row className="converted-amount">
               <Col xs={1} sm={0} />
               <Col xs={10} sm={4} md={3}>
-                <Card key={this.props.images.id} className="smallBill">
+                <Card>
                   {this.state.toRate !== undefined &&
                   this.state.toRate !== "" ? (
                     countryImage !== undefined && countryImage !== "" ? (
-                      <CardImg
-                        top
-                        width="100%"
-                        src={countryImage.image_url_1}
-                        alt={countryImage.image_alt_1}
-                      />
+                      <Link to={`/gallery`}>
+                        <CardImg
+                          className="smallBill"
+                          width="100%"
+                          src={countryImage.image_url_1}
+                          alt={countryImage.image_alt_1}
+                        />{" "}
+                      </Link>
                     ) : (
                       <p>No image available</p>
                     )
                   ) : (
                     <p>No image available</p>
                   )}
-                  <CardLink href="#">More Bills</CardLink>
                 </Card>
               </Col>
 

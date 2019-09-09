@@ -121,13 +121,14 @@ div > img .bigBill {
 }
 
 .card.smallBill {
-  max-width: 15em;
+  max-width: 100%;
   min-width: 5em;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 4px;
   font-size: 0.7em;
   font-weight: 600;
-  margin: none !important;
+  margin: 0px 0px !important;
+  padding: 0px 0px !important;
   position: relative;
 
   box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
