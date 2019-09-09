@@ -184,8 +184,8 @@ class Currency extends Component {
                       <CardImg
                         top
                         width="100%"
-                        src={countryImage.image_url}
-                        alt={countryImage.image_alt}
+                        src={countryImage.image_url_1}
+                        alt={countryImage.image_alt_1}
                       />
                     ) : (
                       <p>No image available</p>

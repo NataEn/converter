@@ -8,9 +8,9 @@ export const IMAGES = {
         type: "bill",
         value: "50",
         inuse: true,
-        image_url:
+        image_url_1:
           "https://upload.wikimedia.org/wikipedia/commons/8/80/Dinar50.jpg",
-        image_alt: "50 Algerian dinars",
+        image_alt_1: "50 Algerian dinars",
         image_origin: "Wikipedia",
         attribution:
           "By Ilyesghezzal - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=52326926",
@@ -25,9 +25,9 @@ export const IMAGES = {
         type: "bill",
         value: "100",
         inuse: true,
-        image_url:
+        image_url_1:
           "https://upload.wikimedia.org/wikipedia/commons/4/4f/ALGERIA_-134F_-_100_DINARS_1983_copy.jpg",
-        image_alt: "100 Algerian dinars",
+        image_alt_1: "100 Algerian dinars",
         image_origin: "Wikipedia",
         attribution:
           "By Ilyesghezzal - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=52326926",
@@ -152,9 +152,9 @@ export const IMAGES = {
         type: "bill",
         value: "2000",
         inuse: true,
-        image_url:
+        image_url_1:
           "https://upload.wikimedia.org/wikipedia/commons/a/a0/2000_rubles_2017_obverse.jpg",
-        image_alt: "2000-russian bill (2017) side-1",
+        image_alt_1: "2000-russian bill (2017) side-1",
         image_origin: "Wikipedia",
         attribution:
           "https://www.monetnik.ru/banknoty/rossiya/2017/2000-rublej-2017-74958/",

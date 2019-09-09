@@ -38,32 +38,22 @@ class ImageDetail extends Component {
           className="form p-3 d-flex flex-row justify-content-between"
         >
           <div className="col col-sm-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
-            {this.props.image.image_url_1 ? (
-              <div>
-                <CardImg
-                  className="bigBill"
-                  src={this.props.image.image_url_1}
-                  alt={this.props.image.image_alt_1}
-                />
-                <footer>
-                  <small> {this.props.image.image_alt_1}</small>
-                </footer>
-                <CardImg
-                  className="bigBill"
-                  src={this.props.image.image_url_2}
-                  alt={this.props.image.image_alt_2}
-                />
-                <footer>
-                  <small> {this.props.image.image_alt_2}</small>
-                </footer>
-              </div>
-            ) : (
-              <CardImg
-                className="bigBill"
-                src={this.props.image.image_url}
-                alt={this.props.image.image_alt}
-              />
-            )}
+            <CardImg
+              className="bigBill"
+              src={this.props.image.image_url_1}
+              alt={this.props.image.image_alt_1}
+            />
+            <footer>
+              <small> {this.props.image.image_alt_1}</small>
+            </footer>
+            <CardImg
+              className="bigBill"
+              src={this.props.image.image_url_2}
+              alt={this.props.image.image_alt_2}
+            />
+            <footer>
+              <small> {this.props.image.image_alt_2}</small>
+            </footer>
 
             <footer>
               <small className="imageattribute">

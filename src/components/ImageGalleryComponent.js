@@ -26,17 +26,8 @@ function RenderCurrencyImage({ image, letter, country }) {
   return (
     <Card>
       <Link to={`/gallery/${letter}/${country}/${image.id}`}>
-        {image.image_url_1 ? (
-          <div>
-            <CardImg top src={image.image_url_1} alt={image.image_alt_1} />
-            <CardTitle>{image.image_alt_1}</CardTitle>
-          </div>
-        ) : (
-          <div>
-            <CardImg top src={image.image_url} alt={image.image_alt} />{" "}
-            <CardTitle>{image.image_alt}</CardTitle>
-          </div>
-        )}
+        <CardImg top src={image.image_url_1} alt={image.image_alt_1} />
+        <CardTitle>{image.image_alt_1}</CardTitle>
       </Link>
     </Card>
   );
