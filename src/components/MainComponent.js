@@ -196,7 +196,7 @@ class Main extends Component {
                       ratesObject={this.props.rates}
                       axiosConvert={this.axiosConvert}
                       country={this.props.country}
-                      image={this.props.images.a.algeria[0]}
+                      images={this.props.images}
                     />
                   )}
                 />

@@ -3,6 +3,7 @@ export const IMAGES = {
     algeria: [
       {
         id: 1,
+        code: "DZD",
         name: "Algerian dinar (DZD)",
         type: "bill",
         value: "50",
@@ -19,6 +20,7 @@ export const IMAGES = {
       },
       {
         id: 2,
+        code: "DZD",
         name: "Algerian dinar (DZD)",
         type: "bill",
         value: "100",
@@ -35,6 +37,7 @@ export const IMAGES = {
       },
       {
         id: 3,
+        code: "DZD",
         name: "Algerian dinar (DZD)",
         type: "bill",
         value: "200",
@@ -56,6 +59,7 @@ export const IMAGES = {
     albania: [
       {
         id: 1,
+        code: "ALL",
         name: "Albanian lek (ALL)",
         type: "coin",
         value: "1",
@@ -75,6 +79,7 @@ export const IMAGES = {
       },
       {
         id: 2,
+        code: "ALL",
         name: "Albanian lek (ALL)",
         type: "bill",
         value: "1000",
@@ -98,6 +103,7 @@ export const IMAGES = {
     bolivia: [
       {
         id: 1,
+        code: "BOB",
         name: "boliviano (sign: Bs, code: BOB)",
         type: "coin",
         value: "5",
@@ -121,6 +127,7 @@ export const IMAGES = {
     russia: [
       {
         id: 1,
+        code: "RUB",
         name: "Russian ruble (sign: ₽,code: RUB)",
         type: "coin",
         value: "5",
@@ -140,6 +147,7 @@ export const IMAGES = {
       },
       {
         id: 2,
+        code: "RUB",
         name: "Russian ruble (sign: ₽,code: RUB)",
         type: "bill",
         value: "2000",

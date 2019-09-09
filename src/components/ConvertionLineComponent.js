@@ -65,7 +65,8 @@ class SelectComponent extends Component {
     }
     const value = selectedOption.value;
     const name = this.props.name;
-    return this.props.onChange(value, name);
+    const country = selectedOption.label;
+    return this.props.onChange(value, name, country);
   };
   render() {
     //in here we put code that we want to run every time the component is reredndered!!

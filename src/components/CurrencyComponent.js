@@ -9,6 +9,7 @@ class Currency extends Component {
       baseRate: "",
       baseAmount: "",
       toRate: "",
+      toRateCountry: "",
       converted: "",
       changed: true,
       message: "Please select convertion values",
@@ -21,6 +22,7 @@ class Currency extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.renderAnswer = this.renderAnswer.bind(this);
   }
+
   addConvertingLine = e => {
     let panel = new Object();
     panel = this.state.ConvertionPanel;
@@ -66,17 +68,22 @@ class Currency extends Component {
     this.setState({ changed: true });
     //console.log("amount" + this.state.baseAmount);
   }
-  handleSelectChange(value, name) {
-    //console.log("from handleselectchange" + JSON.stringify(value));
-    //console.log("from handleselectchange" + JSON.stringify(name));
+  handleSelectChange(value, name, country) {
+    console.log("from handleselectchange" + JSON.stringify(value));
+    console.log("from handleselectchange" + JSON.stringify(name));
+    console.log("from handleselectchange" + JSON.stringify(country));
     if (value !== null) {
       this.setState({ [name]: value });
       this.setState({ changed: true });
+      this.setState({ toRateCountry: country.toLowerCase() });
+      console.log(`${this.state.toRateCountry}`);
     } else {
       this.setState({ [name]: undefined });
       this.setState({ changed: true });
+      this.setState({ toRateCountry: undefined });
     }
   }
+
   renderAnswer() {
     if (this.state.changed) {
       return <span>{`${this.state.message}`}</span>;
@@ -143,6 +150,20 @@ class Currency extends Component {
   };
   // ratesObject- object that contains the rates object from promise
   render() {
+    let countryImage;
+    if (
+      this.state.toRateCountry !== undefined &&
+      this.state.toRateCountry !== ""
+    ) {
+      let letter = this.state.toRateCountry.slice(0, 1);
+      if (letter !== undefined) {
+        let countryObject = this.props.images[letter][this.state.toRateCountry];
+        if (countryObject !== undefined && countryObject !== null) {
+          countryImage = this.props.images[letter][this.state.toRateCountry][0];
+        }
+      }
+    }
+
     return (
       <div className="container-fluid">
         <h1>Converter</h1>
@@ -156,23 +177,21 @@ class Currency extends Component {
             <Row className="converted-amount">
               <Col xs={1} sm={0} />
               <Col xs={10} sm={4} md={3}>
-                <Card key={this.props.image.id} className="smallBill">
-                  {this.props.image.image_url_1 ? (
-                    <React.Fragment>
+                <Card key={this.props.images.id} className="smallBill">
+                  {this.state.toRate !== undefined &&
+                  this.state.toRate !== "" ? (
+                    countryImage !== undefined && countryImage !== "" ? (
                       <CardImg
                         top
                         width="100%"
-                        src={this.props.image.image_url_1}
-                        alt={this.props.image.image_alt_1}
+                        src={countryImage.image_url}
+                        alt={countryImage.image_alt}
                       />
-                    </React.Fragment>
+                    ) : (
+                      <p>No image available</p>
+                    )
                   ) : (
-                    <CardImg
-                      top
-                      width="100%"
-                      src={this.props.image.image_url}
-                      alt={this.props.image.image_alt}
-                    />
+                    <p>No image available</p>
                   )}
                   <CardLink href="#">More Bills</CardLink>
                 </Card>
