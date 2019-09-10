@@ -1,8 +1,18 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
-import { Button, Input, Card, CardLink, CardImg, Row, Col } from "reactstrap";
+import {
+  Button,
+  Input,
+  Card,
+  CardLink,
+  CardImg,
+  Row,
+  Col,
+  CardBody
+} from "reactstrap";
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoneyBillAlt } from "@fortawesome/free-solid-svg-icons";
 class Currency extends Component {
   constructor(props) {
     super(props);
@@ -184,7 +194,7 @@ class Currency extends Component {
             <Row className="converted-amount">
               <Col xs={1} sm={0} />
               <Col xs={10} sm={4} md={3}>
-                <Card>
+                <div>
                   {this.state.toRate !== undefined &&
                   this.state.toRate !== "" ? (
                     countryImage !== undefined && countryImage !== "" ? (
@@ -194,15 +204,22 @@ class Currency extends Component {
                           width="100%"
                           src={countryImage.image_url_1}
                           alt={countryImage.image_alt_1}
-                        />{" "}
+                        />
                       </Link>
                     ) : (
-                      <p>No image available</p>
+                      <FontAwesomeIcon
+                        className="fa-3x p-2 bg-warning smallBill"
+                        icon={faMoneyBillAlt}
+                      />
                     )
                   ) : (
-                    <p>No image available</p>
+                    <FontAwesomeIcon
+                      className="fa-3x p-2 bg-warning"
+                      width="100%"
+                      icon={faMoneyBillAlt}
+                    />
                   )}
-                </Card>
+                </div>
               </Col>
 
               <Col xs={12} sm={6} md={8} className="conversion-answer">
