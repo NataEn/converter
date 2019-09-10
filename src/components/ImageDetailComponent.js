@@ -4,6 +4,8 @@ import {
   Col,
   Card,
   CardTitle,
+  CardHeader,
+  CardFooter,
   CardBody,
   CardImg,
   ListGroup,
@@ -55,15 +57,13 @@ class ImageDetail extends Component {
               <small> {this.props.image.image_alt_2}</small>
             </footer>
 
-            <footer>
-              <small className="imageattribute">
-                Attribute:
-                {this.props.image.attribution}
-              </small>
-            </footer>
+            <small className="p-2 imageattribute font-italic  text-secondary  text-left">
+              ATTRIBUTE:
+              {this.props.image.attribution}
+            </small>
           </div>
           <CardBody className="col col-sm-12 col-md-6 d-flex p-3 flex-column justify-content-center">
-            <CardTitle>{this.props.image.name}</CardTitle>
+            <CardHeader tag="h3">{this.props.image.name}</CardHeader>
             <ListGroup>
               <ListGroupItem className="border bg-light">
                 <ListGroupItemHeading>

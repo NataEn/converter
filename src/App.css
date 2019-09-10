@@ -7,7 +7,7 @@ body {
 
 .App {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   line-height: 1.4;
 }
 h1 {
@@ -88,7 +88,7 @@ button.login:hover {
   box-shadow: 3px 5px 3px -5px rgba(240, 202, 100, 0.5);
 }
 a.nav-link.header:hover {
-  color: rgba(86, 189, 162, 1);
+  color: rgba(225, 189, 94, 1);
   background: none;
 }
 
@@ -144,9 +144,9 @@ div > img .bigBill {
   margin: 3% auto;
 }
 .imageattribute {
-  font-size: 70%;
-  color: gray;
+  font-size: 50%;
 }
+
 .form {
   background: rgba(228, 226, 226, 0.8);
   color: black;
