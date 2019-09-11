@@ -188,6 +188,20 @@ class Main extends Component {
             <Col sm={12}>
               <Switch>
                 <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <Currency
+                      {...this.props}
+                      rates={this.props.ratesCurrencies}
+                      ratesObject={this.props.rates}
+                      axiosConvert={this.axiosConvert}
+                      country={this.props.country}
+                      images={this.props.images}
+                    />
+                  )}
+                />
+                <Route
                   path="/home"
                   render={() => (
                     <Currency

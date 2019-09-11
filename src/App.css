@@ -121,7 +121,6 @@ div > img .bigBill {
 }
 svg.smallBill {
   margin: 0px 0px !important;
-  
 }
 
 .card.smallBill {
@@ -206,6 +205,10 @@ div .SelectComponent span .select-span {
   color: 22520cc0;
   font-size: 0.7em;
 }
+ul > li > img.tipimage {
+  width: "50%" !important;
+}
+/*in select currency or country*/
 .option-image {
   border: 1px solid rgb(24, 34, 101);
   border-radius: 2px 2px;
@@ -512,6 +515,9 @@ form > div > select > option {
   body {
   }
   p {
+  }
+  img .tipimage {
+    width: "40%";
   }
 }
 /* Medium devices (tablets, 768px and up) */

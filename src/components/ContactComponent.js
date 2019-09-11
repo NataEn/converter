@@ -118,10 +118,9 @@ class Contact extends Component {
             </Col>
 
             <Form
-              netlify
               model="feedback"
               className="col-12 col-md-9 offset-sm-1"
-              // onSubmit={values => this.handleSubmit(values)}
+              onSubmit={values => this.handleSubmit(values)}
             >
               <Row className="form-group ">
                 <Col md={10}>

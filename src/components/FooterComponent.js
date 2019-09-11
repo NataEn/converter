@@ -13,23 +13,27 @@ import { Row, Col } from "reactstrap";
 export const Footer = props => {
   return (
     <React.Fragment className="container mr-0 footer ">
-      <Row className="footer-xs d-flex justify-content-around mt-2 pt-2">
-        <Col xs={12} sm={4} md={3}>
+      <Row className="footer-xs d-flex justify-content-center mt-2">
+        <Col
+          xs={12}
+          sm={4}
+          md={3}
+          className="d-flex flex-column justify-content-center"
+        >
           <h4>Navigate</h4>
-          <br />
           <ul className="list-unstyled ">
-            <li className="d-flex justify-content-around">
+            <li>
               <Link className="nav-link " to="/home">
                 <FontAwesomeIcon icon={faHome} /> {"  "}Home
               </Link>
             </li>
-            <li className="d-flex justify-content-around">
+            <li>
               <Link className="nav-link " to="/about">
                 <FontAwesomeIcon icon={faInfo} />
                 {"  "} About
               </Link>
             </li>
-            <li className="d-flex justify-content-around">
+            <li>
               <Link className="nav-link " to="/contact">
                 <FontAwesomeIcon icon={faAddressCard} />
                 {"  "}
@@ -44,24 +48,24 @@ export const Footer = props => {
           md={3}
           className="d-flex flex-column justify-content-center"
         >
-          <h4 className="footer">Useful Links</h4>
-          <br />
+          <h4 className="footer align-self-center">Useful Links</h4>
+
           <ul className="list-unstyled">
-            <li className="d-flex justify-content-start">
+            <li>
               <Link className="nav-link" to="/contact">
                 <FontAwesomeIcon icon={faCheck} />
                 {"  "}
                 Traveling
               </Link>
             </li>
-            <li className="d-flex justify-content-start">
+            <li>
               <Link className="nav-link" to="/contact">
                 <FontAwesomeIcon icon={faCheck} />
                 {"  "}
                 Finance
               </Link>
             </li>
-            <li className="d-flex justify-content-start">
+            <li>
               <Link className="nav-link" to="/contact">
                 <FontAwesomeIcon icon={faCheck} />
                 {"  "}
@@ -70,11 +74,16 @@ export const Footer = props => {
             </li>
           </ul>
         </Col>
-        <Col xs={12} sm={4} md={3}>
-          <h4 className="footer">Contact Us</h4>
-          <br />
+        <Col
+          xs={12}
+          sm={4}
+          md={3}
+          className="d-flex flex-column justify-content-center"
+        >
+          <h4 className="footer align-self-center">Contact Us</h4>
+
           <ul className="list-unstyled ">
-            <li className="d-flex justify-content-start">
+            <li>
               <a
                 className="btn btn-social-icon btn-google"
                 href="mailto:converter@example.com"
@@ -100,9 +109,9 @@ export const Footer = props => {
                 <i className="fa fa-facebook" />
               </a>
             </li>
-            <br />
-            <li className="d-flex justify-content-start">
-              <button className="btn terms">Terms Of Use</button>
+
+            <li className="d-flex pt-2 justify-content-center">
+              <button className="btn terms ">Terms Of Use</button>
             </li>
           </ul>
         </Col>

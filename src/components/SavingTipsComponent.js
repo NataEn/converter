@@ -34,12 +34,14 @@ function RenderTip({ tips, addTip }) {
       <React.Fragment>
         {tips.map(tip => {
           return (
-            <Col sm={6} xs={12} md={4} className="p-4">
-              <div className="bg-info rounded">
-                {" "}
-                <Toast className="p-2 rounded">
-                  <ToastHeader className="text-center rounded" tag="h3">
-                    {tip.title}
+            <Col xs={12} md={6} lg={4} className="p-4">
+              <div className="bg-info rounded d-flex justify-content-center">
+                <Toast className="p-2 m-2 rounded">
+                  <ToastHeader
+                    className="text-center rounded font-weight-bold"
+                    tag="h4"
+                  >
+                    {tip.title}{" "}
                   </ToastHeader>
                   <ToastBody className="my-2 text-justify">{tip.tip}</ToastBody>
                   <CardFooter className="font-italic font-weight-light text-secondary text-right">
@@ -179,7 +181,7 @@ const SavingTips = props => {
       <div className="form">
         <Row>
           <Col xs={12}>
-            <p className=" p-4">
+            <p className="p-4">
               Saving money is all about making a new life routine. <br />
               Say you already have one, but do you stick to it? <br /> A well
               planned routine embraces simple and realistic steps that easily
@@ -195,12 +197,15 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Record Your Expenses
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
+
               <ListGroupItemText className="text-left">
                 When writting down what you spend on you become aware of your
                 expenses and lifestyle. This is the starting point that helps
@@ -214,12 +219,14 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Make a Budget
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/1288483/pexels-photo-1288483.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/1288483/pexels-photo-1288483.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
               <ListGroupItemText>
                 decide how much are you willing to spend on your vacation.
                 Make-up a list of all the expected expenses (activities,
@@ -233,13 +240,16 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Nonessential Expenses-OUT!
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+              <Col xs={12} sm={6}>
+                {" "}
+                <img
+                  src="https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
                 0"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
               <ListGroupItemText>
                 Identifing nonessentioal expenses is very helpfull. At this
                 point you should ask yourself "What is not so important to
@@ -255,12 +265,14 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Set a Goal/s to Save
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/70459/darts-dart-board-bull-s-eye-game-70459.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/70459/darts-dart-board-bull-s-eye-game-70459.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
               <ListGroupItemText>
                 A vacation trip is an example of an excellent goal! It gets even
                 better if it is a serprise trip for someone's birthday...
@@ -273,13 +285,15 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Set a Time Span for Every Goal
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/1178683/pexels-photo-1178683.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/1178683/pexels-photo-1178683.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
                 0"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
 
               <ListGroupItemText>
                 Set the time span of your Goal- short or long term goal? keep
@@ -291,12 +305,14 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Prioritize Your Goals
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/1204652/pexels-photo-1204652.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/1204652/pexels-photo-1204652.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
               <ListGroupItemText>
                 Basically, it is best to have your short-term goals with higher
                 priority, since they are usually much easier to track and
@@ -307,12 +323,14 @@ const SavingTips = props => {
               <ListGroupItemHeading tag="h4">
                 Regularly Check Your Saving Progress
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/1893527/pexels-photo-1893527.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                width="40%"
-                alt="record image"
-                class="rounded float-left pr-2 mr-2"
-              />
+              <Col xs={12} sm={6}>
+                <img
+                  src="https://images.pexels.com/photos/1893527/pexels-photo-1893527.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
               <ListGroupItemText>
                 Schedule to check your saving progress according to the time
                 span of your goal. But don't make it hard on yourself! Use
@@ -327,12 +345,14 @@ const SavingTips = props => {
               >
                 Enjoy Your Vacation! You Earned It!
               </ListGroupItemHeading>
-              <img
-                src="https://images.pexels.com/photos/1537168/pexels-photo-1537168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                width="70%"
-                alt="record image"
-                class="rounded mx-auto d-block"
-              />
+              <Col xs={12}>
+                <img
+                  src="https://images.pexels.com/photos/1537168/pexels-photo-1537168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                  width="100%"
+                  alt="record image"
+                  class="img-fluid rounded float-left mr-2"
+                />
+              </Col>
             </ListGroupItem>
           </ListGroup>
         </Row>
