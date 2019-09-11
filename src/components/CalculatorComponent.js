@@ -15,6 +15,25 @@ import {
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 const { ExportCSVButton } = CSVExport;
 
+function RenderTExpenseRowToTable({ expenses, addExpenseRow }) {
+  if (expenses != null) {
+    return (
+      <React.Fragment>
+        {expenses.map(expense => {
+          return <Col xs={12} md={6} lg={4} className="p-4"></Col>;
+        })}
+        <AddRowButton addExpenseRow={addExpenseRow} />
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <div>
+        <h4>No Expenses Available</h4>
+        <AddRowButton addExpenseRow={addExpenseRow} />
+      </div>
+    );
+  }
+} //end of RenderTip function-component
 class Calculator extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +41,13 @@ class Calculator extends Component {
       isModalOpen: false
     };
 
-    this.handleAdd = this.handleAdd.bind(this);
+    this.handleAddExpenseRow = this.handleAddExpenseRow.bind(this);
     // this.handleDelete = this.handleDelete.bind(this);
     this.handleCalculate = this.handleCalculate.bind(this);
   }
-  handleAdd() {
+  handleAddExpenseRow() {
     console.log("used handleAdd function");
+    this.props.addExpenseRow(" ", " ");
   }
   handleCalculate() {
     console.log("used handleCalculate function");
