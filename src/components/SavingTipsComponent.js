@@ -191,7 +191,7 @@ const SavingTips = props => {
             </p>
           </Col>
 
-          <ListGroup className="d-flex align-items-center p-4">
+          <ListGroup className="d-flex align-items-center p-2">
             <h3 className="font-weight-bold ">Lets Start Saving!</h3>
             <ListGroupItem className="rounded">
               <ListGroupItemHeading tag="h4">

@@ -12,7 +12,7 @@ import Contact from "./ContactComponent";
 import ManageExpenses from "./ManageEspensesComponent";
 import Currency from "./CurrencyComponent";
 import ImageDetail from "./ImageDetailComponent";
-import { Footer } from "./FooterComponent";
+import Footer from "./FooterComponent";
 import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
 import { SpiningRates } from "./SpiningRatesComponent";
