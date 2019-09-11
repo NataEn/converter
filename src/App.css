@@ -213,6 +213,9 @@ ul > li > img.tipimage {
   border: 1px solid rgb(24, 34, 101);
   border-radius: 2px 2px;
 }
+.option-image-country {
+  display: hidden;
+}
 div .Select-value {
   border: 1px solid rgb(231, 228, 228) !important;
 }
@@ -518,6 +521,9 @@ form > div > select > option {
   }
   img .tipimage {
     width: "40%";
+  }
+  .option-image-country {
+    display: inline-block;
   }
 }
 /* Medium devices (tablets, 768px and up) */

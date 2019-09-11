@@ -29,7 +29,7 @@ const SingleValue = ({ ...props }) => (
         height={20}
         alt={props.data.lable}
       />
-      <span>{" " + props.data.label}</span>
+      <span className="option-image-country" >{" " + props.data.label}</span>
     </span>
     <strong>{" " + props.data.currency}</strong>
   </components.SingleValue>

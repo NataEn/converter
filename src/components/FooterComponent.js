@@ -135,7 +135,7 @@ class Footer extends Component {
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
               <ModalHeader
                 toggle={this.toggleModal}
-                className="bg-primary text-light font-wheight-bold"
+                className=" font-wheight-bold"
               >
                 <h3>Term of Use</h3>
               </ModalHeader>
