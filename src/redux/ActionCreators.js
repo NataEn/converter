@@ -43,6 +43,13 @@ export const addTable = (tableName, budget) => ({
     budget: budget
   }
 });
+export const addExpenseToTable = (expense, price) => ({
+  type: ActionTypes.ADD_EXPENSE_TO_TABLE,
+  payload: {
+    expense: expense,
+    price: price
+  }
+});
 export const addTip = (author, tip) => ({
   type: ActionTypes.ADD_TIP,
   payload: {

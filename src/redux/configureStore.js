@@ -5,6 +5,7 @@ import { Images } from "./imagesReducer";
 import { Expenses_0, Expenses_tables } from "./expense";
 import { Country } from "./countryReducer";
 import { Tips } from "./tips";
+import { ExpenseTable } from "./expenseTable";
 import { InitialFeedback } from "./forms";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
@@ -15,6 +16,7 @@ export const ConfigureStore = () => {
       images: Images,
       expenses_0: Expenses_0,
       expenses_tables: Expenses_tables,
+      expense_table: ExpenseTable,
       // Expense_1: Expenses_1,
       country: Country,
       initialState: Reducer,

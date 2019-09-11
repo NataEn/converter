@@ -34,6 +34,7 @@ import {
   addExpenses,
   fetchExpenses,
   addTable,
+  addExpenseToTable,
   addTip
 } from "../redux/ActionCreators";
 
@@ -50,7 +51,8 @@ const mapStateToStore = state => {
     abcGallery: state.abcGallery,
     expenses_0: state.expenses_0,
     expenses_tables: state.expenses_tables,
-    tips: state.tips
+    tips: state.tips,
+    expenseTable: state.expenseTable
   };
 };
 //recieves the dispatch as one of the parameters from the dispatch function in the store
@@ -78,6 +80,8 @@ const mapDispatchToProps = dispatch => ({
     );
   },
   addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
+  addExpenseToTable: (expense, price) =>
+    dispatch(addExpenseToTable(expense, price)),
   addTip: (author, tip) => dispatch(addTip(author, tip)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -254,7 +258,13 @@ class Main extends Component {
                 <Route
                   exact
                   path="/tripCalculator"
-                  render={() => <Calculator {...this.props} />}
+                  render={() => (
+                    <Calculator
+                      {...this.props}
+                      expenseTable={this.props.expenseTable}
+                      addExpense={this.props.addExpenseToTable}
+                    />
+                  )}
                 />
                 <Route
                   exact

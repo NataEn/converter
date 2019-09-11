@@ -6,67 +6,90 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faCalculator } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faCalculator,
+  faTrashAlt,
+  faTrashRestoreAlt
+} from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 const { ExportCSVButton } = CSVExport;
-const products = [
-  {
-    id: 1,
-    name: "Flight",
-    price: 100
-  },
-  {
-    id: 2,
-    name: "Housing",
-    price: 100
-  },
-  {
-    id: 3,
-    name: "Food",
-    price: 100
-  }
-];
-const columns = [
-  {
-    dataField: "id",
-    text: "#"
-  },
-  {
-    dataField: "name",
-    text: "Expense Name"
-  },
-  {
-    dataField: "price",
-    text: "Expense Price"
-  },
-  {
-    dataField: "databasePkey",
-    text: "",
-    formatter: (cell, row) => {
-      if (row)
-        return (
-          <Button
-            className="btn btn-danger btn-xs border-secondary rounded"
-            onClick={() => this.handleDelete(row.databasePkey)}
-          >
-            Delete Row
-          </Button>
-        );
-      return null;
-    }
-  }
-];
-const selectRow = {
-  mode: "checkbox",
-  clickToSelect: true,
-  clickToEdit: true
-};
 
 class Calculator extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isModalOpen: false
+    };
+
+    this.handleAdd = this.handleAdd.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
+    this.handleCalculate = this.handleCalculate.bind(this);
   }
+  handleAdd() {
+    console.log("used handleAdd function");
+  }
+  handleCalculate() {
+    console.log("used handleCalculate function");
+  }
+  handleDelete(row) {
+    console.log("row:" + JSON.stringify(row));
+  }
+
   render() {
+    let sum = 10;
+    const products = [
+      {
+        id: 1,
+        name: "Flight",
+        price: 100
+      },
+      {
+        id: 2,
+        name: "Housing",
+        price: 100
+      },
+      {
+        id: 3,
+        name: "Food",
+        price: 100
+      }
+    ];
+    const columns = [
+      {
+        dataField: "id",
+        text: "#"
+      },
+      {
+        dataField: "name",
+        text: "Expense Name"
+      },
+      {
+        dataField: "price",
+        text: "Expense Price"
+      },
+      {
+        dataField: "databasePkey",
+        text: "",
+        formatter: (cell, row) => {
+          if (row)
+            return (
+              <Button
+                className="btn btn-danger btn-xs border-secondary rounded"
+                onClick={() => this.handleDelete(row)}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} /> Delete Row
+              </Button>
+            );
+          return null;
+        }
+      }
+    ];
+    const selectRow = {
+      mode: "checkbox",
+      clickToSelect: true,
+      clickToEdit: true
+    };
     return (
       <div className="container">
         <h1>Trip Calculator</h1>
@@ -81,7 +104,7 @@ class Calculator extends Component {
           </Col>
         </Row>
         <Row className="form">
-          <Col>
+          <Col xs={12}>
             <ToolkitProvider
               keyField="id"
               data={products}
@@ -99,7 +122,7 @@ class Calculator extends Component {
                     </ExportCSVButton>
                     <Button
                       className="btn bg-success text-light rounded"
-                      onClick={() => this.handleAdd()}
+                      onClick={() => this.handleCalculate()}
                     >
                       <FontAwesomeIcon icon={faCalculator} /> Calculate
                     </Button>{" "}
@@ -108,6 +131,14 @@ class Calculator extends Component {
                       onClick={() => this.handleAdd()}
                     >
                       <FontAwesomeIcon icon={faPlus} /> Add Row
+                    </Button>
+                    <Button
+                      className="btn bg-success text-light rounded"
+                      onClick={() =>
+                        alert("to reset the table please refresh the page")
+                      }
+                    >
+                      <FontAwesomeIcon icon={faTrashRestoreAlt} /> Reset
                     </Button>
                   </div>
 
@@ -121,7 +152,23 @@ class Calculator extends Component {
                     cellEdit={cellEditFactory({
                       mode: "click",
                       onStartEdit: (row, column, rowIndex, columnIndex) => {
-                        console.log("start to edit row!!" + row);
+                        console.log(
+                          "start to edit row!!" +
+                            rowIndex +
+                            "columnIndex" +
+                            columnIndex
+                        );
+                        if (columnIndex === 3) {
+                          console.log(
+                            "deleted row of:" +
+                              JSON.stringify(
+                                products.splice(rowIndex, rowIndex + 1)
+                              )
+                          );
+                          console.log(
+                            "total rows are:" + JSON.stringify(products)
+                          );
+                        }
                       },
                       beforeSaveCell: (oldValue, newValue, row, column) => {
                         alert("Before Saving new value Cell!!" + newValue);
@@ -137,6 +184,14 @@ class Calculator extends Component {
                 </div>
               )}
             </ToolkitProvider>
+          </Col>
+          <Col className="col-auto d-block mx-auto">
+            <div className="bg-warning mx-auto p-2 rounded">
+              <div className="mx-auto rounded p-2 bg-light">
+                <h4>Total Expense</h4>
+                <h1 className="my-2 text-center">{sum}</h1>
+              </div>
+            </div>
           </Col>
         </Row>
         <Row>
