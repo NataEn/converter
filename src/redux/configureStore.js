@@ -16,7 +16,7 @@ export const ConfigureStore = () => {
       images: Images,
       expenses_0: Expenses_0,
       expenses_tables: Expenses_tables,
-      expense_table: ExpenseTable,
+      expenseTable: ExpenseTable,
       // Expense_1: Expenses_1,
       country: Country,
       initialState: Reducer,

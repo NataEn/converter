@@ -22,24 +22,33 @@ function RenderTExpenseRowToTable({ expenses, addExpenseRow }) {
         {expenses.map(expense => {
           return <Col xs={12} md={6} lg={4} className="p-4"></Col>;
         })}
-        <AddRowButton addExpenseRow={addExpenseRow} />
+        <Calculator addExpenseRow={addExpenseRow} />
       </React.Fragment>
     );
   } else {
     return (
       <div>
         <h4>No Expenses Available</h4>
-        <AddRowButton addExpenseRow={addExpenseRow} />
+        <Calculator addExpenseRow={addExpenseRow} />
       </div>
     );
   }
-} //end of RenderTip function-component
-class Calculator extends Component {
+} //end of RenderExpwnse function-component
+
+class ExpenseTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isModalOpen: false
-    };
+    this.state = {};
+  }
+  render() {
+    return;
+  }
+}
+
+class RenderExpenseTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
 
     this.handleAddExpenseRow = this.handleAddExpenseRow.bind(this);
     // this.handleDelete = this.handleDelete.bind(this);
@@ -58,30 +67,13 @@ class Calculator extends Component {
 
   render() {
     let sum = 10;
-    const products = [
-      {
-        id: 1,
-        name: "Flight",
-        price: 100
-      },
-      {
-        id: 2,
-        name: "Housing",
-        price: 100
-      },
-      {
-        id: 3,
-        name: "Food",
-        price: 100
-      }
-    ];
     const columns = [
       {
         dataField: "id",
         text: "#"
       },
       {
-        dataField: "name",
+        dataField: "expense",
         text: "Expense Name"
       },
       {
@@ -110,24 +102,18 @@ class Calculator extends Component {
       clickToSelect: true,
       clickToEdit: true
     };
+    let expenseTable = this.props.expenseTable;
+    console.log(
+      "from table class the expenseTable is " +
+        JSON.stringify(this.props.expenseTable)
+    );
     return (
       <div className="container">
-        <h1>Trip Calculator</h1>
-        <Row>
-          <Col sm={12}>
-            <Breadcrumb>
-              <BreadcrumbItem>
-                <Link to="/home">Home</Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem active>Trip Calculator</BreadcrumbItem>
-            </Breadcrumb>
-          </Col>
-        </Row>
         <Row className="form">
           <Col xs={12}>
             <ToolkitProvider
               keyField="id"
-              data={products}
+              data={expenseTable}
               columns={columns}
               exportCSV
             >
@@ -142,7 +128,11 @@ class Calculator extends Component {
                     </ExportCSVButton>
                     <Button
                       className="btn bg-success text-light rounded"
-                      onClick={() => this.handleCalculate()}
+                      onClick={() =>
+                        this.handleCalculate(
+                          console.log("the data inside the table is")
+                        )
+                      }
                     >
                       <FontAwesomeIcon icon={faCalculator} /> Calculate
                     </Button>{" "}
@@ -166,7 +156,7 @@ class Calculator extends Component {
                     {...props.baseProps}
                     className="table-condensed"
                     keyField="id"
-                    data={products}
+                    data={expenseTable}
                     table-condensed={true}
                     columns={columns}
                     cellEdit={cellEditFactory({
@@ -182,11 +172,11 @@ class Calculator extends Component {
                           console.log(
                             "deleted row of:" +
                               JSON.stringify(
-                                products.splice(rowIndex, rowIndex + 1)
+                                expenseTable.splice(rowIndex, rowIndex + 1)
                               )
                           );
                           console.log(
-                            "total rows are:" + JSON.stringify(products)
+                            "total rows are:" + JSON.stringify(expenseTable)
                           );
                         }
                       },
@@ -205,27 +195,47 @@ class Calculator extends Component {
               )}
             </ToolkitProvider>
           </Col>
-          <Col className="col-auto d-block mx-auto">
-            <div className="bg-warning mx-auto p-2 rounded">
-              <div className="mx-auto rounded p-2 bg-light">
-                <h4>Total Expense</h4>
-                <h1 className="my-2 text-center">{sum}</h1>
-              </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>
-            <Breadcrumb>
-              <BreadcrumbItem>
-                <Link to="/home">Home</Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem active>Trip Calculator</BreadcrumbItem>
-            </Breadcrumb>
-          </Col>
         </Row>
       </div>
     );
   }
 }
+const Calculator = props => {
+  return (
+    <div className="container">
+      <h1>Trip Calculator</h1>
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Trip Calculator</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+      </Row>
+      <Row>
+        <RenderExpenseTable expenseTable={props.expenseTable} />
+        <Col className="col-auto d-block mx-auto">
+          <div className="bg-warning mx-auto p-2 rounded">
+            <div className="mx-auto rounded p-2 bg-light">
+              <h4>Total Expense</h4>
+              <h1 className="my-2 text-center">10</h1>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={12}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Trip Calculator</BreadcrumbItem>
+          </Breadcrumb>
+        </Col>
+      </Row>
+    </div>
+  );
+};
 export default Calculator;
