@@ -37,7 +37,8 @@ import {
   addRowToTable,
   deleteRowFromTable,
   resetTable,
-  addTip
+  addTip,
+  calculateExpensesSum
 } from "../redux/ActionCreators";
 
 //a function that maps redux-store state to props that are passed down to the components:
@@ -85,6 +86,8 @@ const mapDispatchToProps = dispatch => ({
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
   resetTable: () => dispatch(resetTable()),
+  calculateExpensesSum: expensesArray =>
+    dispatch(calculateExpensesSum(expensesArray)),
   addTip: (author, tip) => dispatch(addTip(author, tip)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -269,6 +272,7 @@ class Main extends Component {
                       addRowToTable={this.props.addRowToTable}
                       deleteRowFromTable={this.props.deleteRowFromTable}
                       resetTable={this.props.resetTable}
+                      calculateExpensesSum={this.props.calculateExpensesSum}
                     />
                   )}
                 />

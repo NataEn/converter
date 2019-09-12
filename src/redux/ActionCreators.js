@@ -1,6 +1,7 @@
 import * as ActionTypes from "./ActionTypes";
 import { EXPENSES_0 } from "../shared/ExpenseDatadestructured";
 
+//Action Creators for Manage Expense component
 export const fetchExpenses = () => dispatch => {
   dispatch(expensesLoading(true));
   setTimeout(() => {
@@ -43,6 +44,8 @@ export const addTable = (tableName, budget) => ({
     budget: budget
   }
 });
+
+//Action Creators for Calculator component
 export const addRowToTable = (expense, price) => ({
   type: ActionTypes.ADD_ROW_TO_TABLE,
   payload: {
@@ -59,6 +62,14 @@ export const deleteRowFromTable = rowExpense => ({
 export const resetTable = () => ({
   type: ActionTypes.RESET_TABLE
 });
+export const calculateExpensesSum = expensesArray => ({
+  type: ActionTypes.CALCULATE_EXPENSES_SUM,
+  payload: {
+    expensesArray: expensesArray
+  }
+});
+
+//Action Creators for Saving Tips component
 export const addTip = (author, tip) => ({
   type: ActionTypes.ADD_TIP,
   payload: {
@@ -66,6 +77,7 @@ export const addTip = (author, tip) => ({
     tip: tip
   }
 });
+//Action Creators for Contact component
 export const addFeedback = message => ({
   type: ActionTypes.ADD_FEEDBACK,
   payload: message

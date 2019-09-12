@@ -36,6 +36,7 @@ const RenderTable = props => {
         },
         afterSaveCell: (oldValue, newValue, row, column) => {
           console.log("After Saving Cell!! the oldValue is gone" + oldValue);
+          props.calculateExpensesSum(newValue);
         }
       })}
       // selectRow={selectRow}
@@ -60,8 +61,8 @@ class RenderExpenseTable extends Component {
     alert("to reset the table please refresh the page");
     this.props.resetTable();
   }
-  handleCalculate() {
-    console.log("used handleCalculate function");
+  handleCalculate(data) {
+    this.props.calculateExpensesSum(data);
   }
   handleDeleteRowFromTable(row) {
     console.log("row to delete:" + JSON.stringify(row));
@@ -132,11 +133,7 @@ class RenderExpenseTable extends Component {
                     </ExportCSVButton>
                     <Button
                       className="btn bg-success text-light rounded"
-                      onClick={() =>
-                        this.handleCalculate(
-                          console.log("the data inside the table is")
-                        )
-                      }
+                      onClick={() => this.handleCalculate(props.baseProps.data)}
                     >
                       <FontAwesomeIcon icon={faCalculator} /> Calculate
                     </Button>{" "}
@@ -158,6 +155,7 @@ class RenderExpenseTable extends Component {
                     {...props.baseProps}
                     columns={columns}
                     expenseTable={expenseTable}
+                    calculateExpensesSum={this.props.handleCalculate}
                   />
                 </div>
               )}
@@ -188,6 +186,7 @@ const Calculator = props => {
           addRowToTable={props.addRowToTable}
           deleteRowFromTable={props.deleteRowFromTable}
           resetTable={props.resetTable}
+          calculateExpensesSum={props.calculateExpensesSum}
         />
         <Col className="col-auto d-block mx-auto">
           <div className="bg-warning mx-auto p-2 rounded">
