@@ -13,65 +13,64 @@ import {
   faTrashRestoreAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
+import { parseWithOptions } from "date-fns/esm/fp";
 const { ExportCSVButton } = CSVExport;
 
-function RenderTExpenseRowToTable({ expenses, addExpenseRow }) {
-  if (expenses != null) {
-    return (
-      <React.Fragment>
-        {expenses.map(expense => {
-          return <Col xs={12} md={6} lg={4} className="p-4"></Col>;
-        })}
-        <Calculator addExpenseRow={addExpenseRow} />
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <div>
-        <h4>No Expenses Available</h4>
-        <Calculator addExpenseRow={addExpenseRow} />
-      </div>
-    );
-  }
-} //end of RenderExpwnse function-component
-
-class ExpenseTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return;
-  }
-}
+const RenderTable = props => {
+  return (
+    <BootstrapTable
+      className="table-condensed"
+      keyField="id"
+      data={props.expenseTable}
+      table-condensed={true}
+      columns={props.columns}
+      cellEdit={cellEditFactory({
+        mode: "click",
+        onStartEdit: (row, column, rowIndex, columnIndex) => {
+          console.log(
+            "start to edit row!!" + rowIndex + "columnIndex" + columnIndex
+          );
+        },
+        beforeSaveCell: (oldValue, newValue, row, column) => {
+          alert("Before Saving new value Cell!!" + newValue);
+        },
+        afterSaveCell: (oldValue, newValue, row, column) => {
+          console.log("After Saving Cell!! the oldValue is gone" + oldValue);
+        }
+      })}
+      // selectRow={selectRow}
+    />
+  );
+}; //end of RenderExpwnse function-component
 
 class RenderExpenseTable extends Component {
   constructor(props) {
     super(props);
     this.state = {};
 
-    this.handleAddExpenseRow = this.handleAddExpenseRow.bind(this);
-    // this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
+    this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
     this.handleCalculate = this.handleCalculate.bind(this);
   }
-  handleAddExpenseRow() {
+  handleAddRowToTable() {
     console.log("used handleAdd function");
-    this.props.addExpenseRow(" ", " ");
+    this.props.addRowToTable(this.props.expenseTable.length + 1, " ");
+  }
+  handleResetTable() {
+    alert("to reset the table please refresh the page");
+    this.props.resetTable();
   }
   handleCalculate() {
     console.log("used handleCalculate function");
   }
-  handleDelete(row) {
-    console.log("row:" + JSON.stringify(row));
+  handleDeleteRowFromTable(row) {
+    console.log("row to delete:" + JSON.stringify(row));
+    this.props.deleteRowFromTable(row);
   }
 
   render() {
     let sum = 10;
     const columns = [
-      {
-        dataField: "id",
-        text: "#"
-      },
       {
         dataField: "expense",
         text: "Expense Name"
@@ -83,12 +82,16 @@ class RenderExpenseTable extends Component {
       {
         dataField: "databasePkey",
         text: "",
+        editable: false,
         formatter: (cell, row) => {
           if (row)
             return (
               <Button
                 className="btn btn-danger btn-xs border-secondary rounded"
-                onClick={() => this.handleDelete(row)}
+                onClick={() => {
+                  console.log("row to be deleted: " + JSON.stringify(row));
+                  this.handleDeleteRowFromTable(row.expense);
+                }}
               >
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete Row
               </Button>
@@ -103,6 +106,7 @@ class RenderExpenseTable extends Component {
       clickToEdit: true
     };
     let expenseTable = this.props.expenseTable;
+
     console.log(
       "from table class the expenseTable is " +
         JSON.stringify(this.props.expenseTable)
@@ -138,58 +142,22 @@ class RenderExpenseTable extends Component {
                     </Button>{" "}
                     <Button
                       className="btn bg-success text-light rounded"
-                      onClick={() => this.handleAdd()}
+                      onClick={() => this.handleAddRowToTable()}
                     >
                       <FontAwesomeIcon icon={faPlus} /> Add Row
                     </Button>
                     <Button
                       className="btn bg-success text-light rounded"
-                      onClick={() =>
-                        alert("to reset the table please refresh the page")
-                      }
+                      onClick={() => this.handleResetTable()}
                     >
                       <FontAwesomeIcon icon={faTrashRestoreAlt} /> Reset
                     </Button>
                   </div>
 
-                  <BootstrapTable
+                  <RenderTable
                     {...props.baseProps}
-                    className="table-condensed"
-                    keyField="id"
-                    data={expenseTable}
-                    table-condensed={true}
                     columns={columns}
-                    cellEdit={cellEditFactory({
-                      mode: "click",
-                      onStartEdit: (row, column, rowIndex, columnIndex) => {
-                        console.log(
-                          "start to edit row!!" +
-                            rowIndex +
-                            "columnIndex" +
-                            columnIndex
-                        );
-                        if (columnIndex === 3) {
-                          console.log(
-                            "deleted row of:" +
-                              JSON.stringify(
-                                expenseTable.splice(rowIndex, rowIndex + 1)
-                              )
-                          );
-                          console.log(
-                            "total rows are:" + JSON.stringify(expenseTable)
-                          );
-                        }
-                      },
-                      beforeSaveCell: (oldValue, newValue, row, column) => {
-                        alert("Before Saving new value Cell!!" + newValue);
-                      },
-                      afterSaveCell: (oldValue, newValue, row, column) => {
-                        console.log(
-                          "After Saving Cell!! the oldValue is gone" + oldValue
-                        );
-                      }
-                    })}
-                    // selectRow={selectRow}
+                    expenseTable={expenseTable}
                   />
                 </div>
               )}
@@ -215,7 +183,12 @@ const Calculator = props => {
         </Col>
       </Row>
       <Row>
-        <RenderExpenseTable expenseTable={props.expenseTable} />
+        <RenderExpenseTable
+          expenseTable={props.expenseTable}
+          addRowToTable={props.addRowToTable}
+          deleteRowFromTable={props.deleteRowFromTable}
+          resetTable={props.resetTable}
+        />
         <Col className="col-auto d-block mx-auto">
           <div className="bg-warning mx-auto p-2 rounded">
             <div className="mx-auto rounded p-2 bg-light">

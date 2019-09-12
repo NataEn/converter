@@ -43,12 +43,21 @@ export const addTable = (tableName, budget) => ({
     budget: budget
   }
 });
-export const addExpenseToTable = (expense, price) => ({
-  type: ActionTypes.ADD_EXPENSE_TO_TABLE,
+export const addRowToTable = (expense, price) => ({
+  type: ActionTypes.ADD_ROW_TO_TABLE,
   payload: {
     expense: expense,
     price: price
   }
+});
+export const deleteRowFromTable = rowExpense => ({
+  type: ActionTypes.DELETE_ROW_FROM_TABLE,
+  payload: {
+    rowExpense: rowExpense
+  }
+});
+export const resetTable = () => ({
+  type: ActionTypes.RESET_TABLE
 });
 export const addTip = (author, tip) => ({
   type: ActionTypes.ADD_TIP,

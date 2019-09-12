@@ -34,7 +34,9 @@ import {
   addExpenses,
   fetchExpenses,
   addTable,
-  addExpenseToTable,
+  addRowToTable,
+  deleteRowFromTable,
+  resetTable,
   addTip
 } from "../redux/ActionCreators";
 
@@ -80,8 +82,9 @@ const mapDispatchToProps = dispatch => ({
   //   );
   // },
   // addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
-  addExpenseToTable: (expense, price) =>
-    dispatch(addExpenseToTable(expense, price)),
+  addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
+  deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
+  resetTable: () => dispatch(resetTable()),
   addTip: (author, tip) => dispatch(addTip(author, tip)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -263,7 +266,9 @@ class Main extends Component {
                     <Calculator
                       {...this.props}
                       expenseTable={this.props.expenseTable}
-                      addExpense={this.props.addExpenseToTable}
+                      addRowToTable={this.props.addRowToTable}
+                      deleteRowFromTable={this.props.deleteRowFromTable}
+                      resetTable={this.props.resetTable}
                     />
                   )}
                 />
