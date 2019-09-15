@@ -16,42 +16,41 @@ import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 import { parseWithOptions } from "date-fns/esm/fp";
 const { ExportCSVButton } = CSVExport;
 
-const RenderTable = props => {
-  return (
-    <BootstrapTable
-      className="table-condensed"
-      keyField="id"
-      data={props.expenseTable}
-      table-condensed={true}
-      columns={props.columns}
-      cellEdit={cellEditFactory({
-        mode: "click",
-        onStartEdit: (row, column, rowIndex, columnIndex) => {
-          console.log(
-            "start to edit row!!" + rowIndex + "columnIndex" + columnIndex
-          );
-        },
-        beforeSaveCell: (oldValue, newValue, row, column) => {
-          alert("Before Saving new value Cell!!" + newValue);
-        },
-        afterSaveCell: (oldValue, newValue, row, column) => {
-          console.log("After Saving Cell!! the oldValue is gone" + oldValue);
-          props.calculateExpensesSum(newValue);
-        }
-      })}
-      // selectRow={selectRow}
-    />
-  );
-}; //end of RenderExpwnse function-component
+// const RenderTable = props => {
+//   return (
+//     <BootstrapTable
+//       className="table-condensed"
+//       keyField="id"
+//       data={props.expenseTable}
+//       table-condensed={true}
+//       columns={props.columns}
+//       cellEdit={cellEditFactory({
+//         mode: "click",
+//         onStartEdit: (row, column, rowIndex, columnIndex) => {
+//           console.log(
+//             "start to edit row!!" + rowIndex + "columnIndex" + columnIndex
+//           );
+//         },
+//         // beforeSaveCell: (oldValue, newValue, row, column) => {
+//         //   alert("Before Saving new value Cell!!" + newValue);
+//         // },
+//         afterSaveCell: (oldValue, newValue, row, column) => {
+//           document.getElementById("calculateExpensesSum").click();
+//         }
+//       })}
+//       // selectRow={selectRow}
+//     />
+//   );
+// }; //end of RenderExpwnse function-component
 
 class RenderExpenseTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-
     this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
     this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
-    this.handleCalculate = this.handleCalculate.bind(this);
+    this.handleCalculateExpensesSum = this.handleCalculateExpensesSum.bind(
+      this
+    );
   }
   handleAddRowToTable() {
     console.log("used handleAdd function");
@@ -61,8 +60,19 @@ class RenderExpenseTable extends Component {
     alert("to reset the table please refresh the page");
     this.props.resetTable();
   }
-  handleCalculate(data) {
-    this.props.calculateExpensesSum(data);
+  handleCalculateExpensesSum(newTable) {
+    console.log(
+      "entered handle calculate function in RenderExpense Table class Component"
+    );
+    console.log(
+      "from clicking the calculate button the new data is: " +
+        JSON.stringify(newTable)
+    );
+    let sum = newTable.reduce((firstRow, secondRow) => ({
+      price: parseInt(firstRow.price) + parseInt(secondRow.price)
+    }));
+    console.log("the sum is:" + sum.price);
+    this.props.calculateExpensesSum(sum);
   }
   handleDeleteRowFromTable(row) {
     console.log("row to delete:" + JSON.stringify(row));
@@ -70,7 +80,6 @@ class RenderExpenseTable extends Component {
   }
 
   render() {
-    let sum = 10;
     const columns = [
       {
         dataField: "expense",
@@ -101,11 +110,11 @@ class RenderExpenseTable extends Component {
         }
       }
     ];
-    const selectRow = {
-      mode: "checkbox",
-      clickToSelect: true,
-      clickToEdit: true
-    };
+    // const selectRow = {
+    //   mode: "checkbox",
+    //   clickToSelect: true,
+    //   clickToEdit: true
+    // };
     let expenseTable = this.props.expenseTable;
 
     console.log(
@@ -132,8 +141,11 @@ class RenderExpenseTable extends Component {
                       <FontAwesomeIcon icon={faFileAlt} /> Export CSV
                     </ExportCSVButton>
                     <Button
+                      id="calculateExpensesSum"
                       className="btn bg-success text-light rounded"
-                      onClick={() => this.handleCalculate(props.baseProps.data)}
+                      onClick={() =>
+                        this.handleCalculateExpensesSum(props.baseProps.data)
+                      }
                     >
                       <FontAwesomeIcon icon={faCalculator} /> Calculate
                     </Button>{" "}
@@ -151,11 +163,35 @@ class RenderExpenseTable extends Component {
                     </Button>
                   </div>
 
-                  <RenderTable
+                  {/* <RenderTable
                     {...props.baseProps}
                     columns={columns}
                     expenseTable={expenseTable}
-                    calculateExpensesSum={this.props.handleCalculate}
+                  /> */}
+                  <BootstrapTable
+                    className="table-condensed"
+                    keyField="id"
+                    data={expenseTable}
+                    table-condensed={true}
+                    columns={columns}
+                    cellEdit={cellEditFactory({
+                      mode: "click",
+                      onStartEdit: (row, column, rowIndex, columnIndex) => {
+                        console.log(
+                          "start to edit row!!" +
+                            rowIndex +
+                            "columnIndex" +
+                            columnIndex
+                        );
+                      },
+                      // beforeSaveCell: (oldValue, newValue, row, column) => {
+                      //   alert("Before Saving new value Cell!!" + newValue);
+                      // },
+                      afterSaveCell: (oldValue, newValue, row, column) => {
+                        document.getElementById("calculateExpensesSum").click();
+                      }
+                    })}
+                    // selectRow={selectRow}
                   />
                 </div>
               )}
@@ -187,12 +223,15 @@ const Calculator = props => {
           deleteRowFromTable={props.deleteRowFromTable}
           resetTable={props.resetTable}
           calculateExpensesSum={props.calculateExpensesSum}
+          editEepenseTable={props.editEepenseTable}
         />
         <Col className="col-auto d-block mx-auto">
           <div className="bg-warning mx-auto p-2 rounded">
             <div className="mx-auto rounded p-2 bg-light">
               <h4>Total Expense</h4>
-              <h1 className="my-2 text-center">10</h1>
+              <h1 className="my-2 text-center">
+                {props.expensesSum[`${props.expensesSum.length - 1}`].price}
+              </h1>
             </div>
           </div>
         </Col>

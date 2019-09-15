@@ -3,3 +3,4 @@ export const EXPENSE_TABLE = [
   { expense: "Housing", price: 10, date: "" },
   { expense: "Food", price: 10, date: "" }
 ];
+export const SUM = [{ price: 30 }];

@@ -38,6 +38,7 @@ import {
   deleteRowFromTable,
   resetTable,
   addTip,
+  editExpenseTable,
   calculateExpensesSum
 } from "../redux/ActionCreators";
 
@@ -55,7 +56,8 @@ const mapStateToStore = state => {
     expenses_0: state.expenses_0,
     expenses_tables: state.expenses_tables,
     tips: state.tips,
-    expenseTable: state.expenseTable
+    expenseTable: state.expenseTable,
+    expensesSum: state.expensesSum
   };
 };
 //recieves the dispatch as one of the parameters from the dispatch function in the store
@@ -86,8 +88,8 @@ const mapDispatchToProps = dispatch => ({
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
   resetTable: () => dispatch(resetTable()),
-  calculateExpensesSum: expensesArray =>
-    dispatch(calculateExpensesSum(expensesArray)),
+  editExpenseTable: newTable => dispatch(editExpenseTable(newTable)),
+  calculateExpensesSum: newSum => dispatch(calculateExpensesSum(newSum)),
   addTip: (author, tip) => dispatch(addTip(author, tip)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -272,7 +274,9 @@ class Main extends Component {
                       addRowToTable={this.props.addRowToTable}
                       deleteRowFromTable={this.props.deleteRowFromTable}
                       resetTable={this.props.resetTable}
+                      editExpenseTable={this.props.editExpenseTable}
                       calculateExpensesSum={this.props.calculateExpensesSum}
+                      expensesSum={this.props.expensesSum}
                     />
                   )}
                 />

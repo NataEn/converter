@@ -62,10 +62,16 @@ export const deleteRowFromTable = rowExpense => ({
 export const resetTable = () => ({
   type: ActionTypes.RESET_TABLE
 });
-export const calculateExpensesSum = expensesArray => ({
+export const editExpenseTable = newTable => ({
+  type: ActionTypes.EDIT_EXPENSE_TABLE,
+  payload: {
+    newTable: newTable
+  }
+});
+export const calculateExpensesSum = newSum => ({
   type: ActionTypes.CALCULATE_EXPENSES_SUM,
   payload: {
-    expensesArray: expensesArray
+    newSum: newSum
   }
 });
 
