@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 import { parseWithOptions } from "date-fns/esm/fp";
+import { Control, Form, Errors, actions } from "react-redux-form";
 const { ExportCSVButton } = CSVExport;
 
 // const RenderTable = props => {
@@ -162,13 +163,8 @@ class RenderExpenseTable extends Component {
                       <FontAwesomeIcon icon={faTrashRestoreAlt} /> Reset
                     </Button>
                   </div>
-
-                  {/* <RenderTable
-                    {...props.baseProps}
-                    columns={columns}
-                    expenseTable={expenseTable}
-                  /> */}
                   <BootstrapTable
+                    {...props.baseProps}
                     className="table-condensed"
                     keyField="id"
                     data={expenseTable}
@@ -176,22 +172,20 @@ class RenderExpenseTable extends Component {
                     columns={columns}
                     cellEdit={cellEditFactory({
                       mode: "click",
-                      onStartEdit: (row, column, rowIndex, columnIndex) => {
-                        console.log(
-                          "start to edit row!!" +
-                            rowIndex +
-                            "columnIndex" +
-                            columnIndex
-                        );
+                      onStartEdit: (row, column, rowIndex, columnIndex) => {},
+                      beforeSaveCell: (oldValue, newValue, row, column) => {
+                        if (isNaN(Number(newValue))) {
+                          alert(
+                            "You entered " +
+                              newValue +
+                              " Please Enter numbers Only!!"
+                          );
+                        }
                       },
-                      // beforeSaveCell: (oldValue, newValue, row, column) => {
-                      //   alert("Before Saving new value Cell!!" + newValue);
-                      // },
                       afterSaveCell: (oldValue, newValue, row, column) => {
                         document.getElementById("calculateExpensesSum").click();
                       }
                     })}
-                    // selectRow={selectRow}
                   />
                 </div>
               )}
