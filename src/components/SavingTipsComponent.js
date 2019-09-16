@@ -219,7 +219,7 @@ const SavingTips = props => {
                 <img
                   src="https://images.pexels.com/photos/1288483/pexels-photo-1288483.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                   width="100%"
-                  alt="record_image"
+                  alt="dividing_money_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -242,7 +242,7 @@ const SavingTips = props => {
                   src="https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
                 0"
                   width="100%"
-                  alt="record_image"
+                  alt="garbage_can_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -265,7 +265,7 @@ const SavingTips = props => {
                 <img
                   src="https://images.pexels.com/photos/70459/darts-dart-board-bull-s-eye-game-70459.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   width="100%"
-                  alt="record_image"
+                  alt="darts_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -286,7 +286,7 @@ const SavingTips = props => {
                   src="https://images.pexels.com/photos/1178683/pexels-photo-1178683.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
                 0"
                   width="100%"
-                  alt="record_image"
+                  alt="sand_clock_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -305,7 +305,7 @@ const SavingTips = props => {
                 <img
                   src="https://images.pexels.com/photos/1204652/pexels-photo-1204652.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   width="100%"
-                  alt="record_image"
+                  alt="setting_goals_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -323,7 +323,7 @@ const SavingTips = props => {
                 <img
                   src="https://images.pexels.com/photos/1893527/pexels-photo-1893527.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   width="100%"
-                  alt="record_image"
+                  alt="timing_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
@@ -345,7 +345,7 @@ const SavingTips = props => {
                 <img
                   src="https://images.pexels.com/photos/1537168/pexels-photo-1537168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   width="100%"
-                  alt="record_image"
+                  alt="relief_image"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
