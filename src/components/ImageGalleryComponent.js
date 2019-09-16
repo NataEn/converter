@@ -358,7 +358,7 @@ class ImageGallery extends Component {
 
         <Row>
           <Col>
-            <Breadcrumb>
+            <Breadcrumb className="mt-4">
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>

@@ -88,7 +88,7 @@ class ImageDetail extends Component {
         </Card>
         <Row>
           <Col>
-            <Breadcrumb>
+            <Breadcrumb className="mt-4">
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>

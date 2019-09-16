@@ -35,7 +35,7 @@ class About extends Component {
 
         <Row>
           <Col sm={12}>
-            <Breadcrumb>
+            <Breadcrumb className="mt-4">
               <BreadcrumbItem>
                 <Link to="/home">Home</Link>
               </BreadcrumbItem>

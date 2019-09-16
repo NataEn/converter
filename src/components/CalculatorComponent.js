@@ -104,7 +104,7 @@ class RenderExpenseTable extends Component {
                   this.handleDeleteRowFromTable(row.expense);
                 }}
               >
-                <FontAwesomeIcon icon={faTrashAlt} /> Delete Row
+                <FontAwesomeIcon icon={faTrashAlt} /> <span>Delete Row</span>
               </Button>
             );
           return null;
@@ -123,76 +123,74 @@ class RenderExpenseTable extends Component {
         JSON.stringify(this.props.expenseTable)
     );
     return (
-      <div className="container">
-        <Row className="form">
-          <Col xs={12}>
-            <ToolkitProvider
-              keyField="id"
-              data={expenseTable}
-              columns={columns}
-              exportCSV
-            >
-              {props => (
-                <div>
-                  <div className="d-flex justify-content-around p-2">
-                    <ExportCSVButton
-                      className="text-light btn bg-success border-secondary rounded"
-                      {...props.csvProps}
-                    >
-                      <FontAwesomeIcon icon={faFileAlt} /> Export CSV
-                    </ExportCSVButton>
-                    <Button
-                      id="calculateExpensesSum"
-                      className="btn bg-success text-light rounded"
-                      onClick={() =>
-                        this.handleCalculateExpensesSum(props.baseProps.data)
-                      }
-                    >
-                      <FontAwesomeIcon icon={faCalculator} /> Calculate
-                    </Button>{" "}
-                    <Button
-                      className="btn bg-success text-light rounded"
-                      onClick={() => this.handleAddRowToTable()}
-                    >
-                      <FontAwesomeIcon icon={faPlus} /> Add Row
-                    </Button>
-                    <Button
-                      className="btn bg-success text-light rounded"
-                      onClick={() => this.handleResetTable()}
-                    >
-                      <FontAwesomeIcon icon={faTrashRestoreAlt} /> Reset
-                    </Button>
-                  </div>
-                  <BootstrapTable
-                    {...props.baseProps}
-                    className="table-condensed"
-                    keyField="id"
-                    data={expenseTable}
-                    table-condensed={true}
-                    columns={columns}
-                    cellEdit={cellEditFactory({
-                      mode: "click",
-                      onStartEdit: (row, column, rowIndex, columnIndex) => {},
-                      beforeSaveCell: (oldValue, newValue, row, column) => {
-                        if (isNaN(Number(newValue))) {
-                          alert(
-                            "You entered " +
-                              newValue +
-                              " Please Enter numbers Only!!"
-                          );
-                        }
-                      },
-                      afterSaveCell: (oldValue, newValue, row, column) => {
-                        document.getElementById("calculateExpensesSum").click();
-                      }
-                    })}
-                  />
-                </div>
-              )}
-            </ToolkitProvider>
-          </Col>
-        </Row>
-      </div>
+      <Col xs={12} className="form">
+        <ToolkitProvider
+          keyField="id"
+          data={expenseTable}
+          columns={columns}
+          exportCSV
+        >
+          {props => (
+            <div>
+              <div className="d-flex justify-content-around p-2">
+                <ExportCSVButton
+                  className="text-light btn bg-success border-secondary rounded"
+                  {...props.csvProps}
+                >
+                  <FontAwesomeIcon icon={faFileAlt} /> <span>Export CSV</span>
+                </ExportCSVButton>
+                <Button
+                  id="calculateExpensesSum"
+                  className="btn bg-success text-light rounded"
+                  onClick={() =>
+                    this.handleCalculateExpensesSum(props.baseProps.data)
+                  }
+                >
+                  <FontAwesomeIcon icon={faCalculator} /> <span>Calculate</span>
+                </Button>{" "}
+                <Button
+                  className="btn bg-success text-light rounded"
+                  onClick={() => this.handleAddRowToTable()}
+                >
+                  <FontAwesomeIcon icon={faPlus} /> <span>Add Row</span>
+                </Button>
+                <Button
+                  className="btn bg-success text-light rounded"
+                  onClick={() => this.handleResetTable()}
+                >
+                  <FontAwesomeIcon icon={faTrashRestoreAlt} />{" "}
+                  <span>Reset</span>
+                </Button>
+              </div>
+              <BootstrapTable
+                wrapperClasses="table-responsive"
+                {...props.baseProps}
+                className="table-condensed"
+                keyField="id"
+                data={expenseTable}
+                table-condensed={true}
+                columns={columns}
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  onStartEdit: (row, column, rowIndex, columnIndex) => {},
+                  beforeSaveCell: (oldValue, newValue, row, column) => {
+                    if (isNaN(Number(newValue))) {
+                      alert(
+                        "You entered " +
+                          newValue +
+                          " Please Enter numbers Only!!"
+                      );
+                    }
+                  },
+                  afterSaveCell: (oldValue, newValue, row, column) => {
+                    document.getElementById("calculateExpensesSum").click();
+                  }
+                })}
+              />
+            </div>
+          )}
+        </ToolkitProvider>
+      </Col>
     );
   }
 }
@@ -221,7 +219,7 @@ const Calculator = props => {
         />
         <Col className="col-auto d-block mx-auto">
           <div className="bg-warning mx-auto p-2 rounded">
-            <div className="mx-auto rounded p-2 bg-light">
+            <div className="rounded p-2 bg-light">
               <h4>Total Expense</h4>
               <h1 className="my-2 text-center">
                 {props.expensesSum[`${props.expensesSum.length - 1}`].price}
@@ -232,7 +230,7 @@ const Calculator = props => {
       </Row>
       <Row>
         <Col sm={12}>
-          <Breadcrumb>
+          <Breadcrumb className="mt-4">
             <BreadcrumbItem>
               <Link to="/home">Home</Link>
             </BreadcrumbItem>
