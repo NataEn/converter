@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "reactstrap";
+import {Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux"; //connects the main components to the store
 import { actions } from "react-redux-form";
@@ -13,12 +13,10 @@ import ManageExpenses from "./ManageEspensesComponent";
 import Currency from "./CurrencyComponent";
 import ImageDetail from "./ImageDetailComponent";
 import Footer from "./FooterComponent";
-import MyMap from "./googleMapComponent";
 import SavingTips from "./SavingTipsComponent";
-import { SpiningRates } from "./SpiningRatesComponent";
 import ImageGallery from "./ImageGalleryComponent";
 import Calculator from "./CalculatorComponent";
-import { Loading } from "./LoadingComponent";
+//import { Loading } from "./LoadingComponent";
 
 //databases- now obtained from redux store- they are called from the reducer.js
 // import { COUNTRY } from "../shared/CountryObjectMaker";
@@ -30,10 +28,10 @@ import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 
 //importing actionCreators
 import {
-  addExpense,
-  addExpenses,
-  fetchExpenses,
-  addTable,
+  // addExpense,
+  // addExpenses,
+  // fetchExpenses,
+  // addTable,
   addRowToTable,
   deleteRowFromTable,
   resetTable,
@@ -163,7 +161,6 @@ class Main extends Component {
 
   //match object coming from the selected gallery image
   GalleryImage({ match }) {
-    console.log("from matching image" + JSON.stringify(match.params));
     let selectedLetter = match.params.letter;
     let selectedCountry = match.params.country;
     // let selectedCountry = Object.keys(this.props.images[selectedLetter]).filter(
@@ -181,10 +178,6 @@ class Main extends Component {
     );
   }
   render() {
-    console.log(
-      "from main component the expenseTable is " +
-        JSON.stringify(this.props.expenseTable)
-    );
     return (
       <div className="container-fluid">
         <Row className="main-spacer-header-hr">

@@ -1,5 +1,5 @@
 import { IMAGE } from "./ImagesData";
-import { IMAGES } from "./ImagesData.1";
+//import { IMAGES } from "./ImagesData.1";
 
 //makeup array with name startimg from the same letter
 export const ArrayAccordingtoLetterF = letter => {
@@ -17,10 +17,10 @@ export const ArrayAccordingtoLetterF = letter => {
 
 //arrange Gallery according to ABC
 const GalleryAccordingtoABCF = () => {
-  var abcArray = new Object();
+  var abcArray = {};
   var letter = "";
   for (var i = 0; i < 26; i++) {
-    let letterArray = new Array();
+    let letterArray = [];
     letter = String.fromCharCode(97 + i);
     letterArray = ArrayAccordingtoLetterF(letter);
     abcArray[letter] = letterArray;

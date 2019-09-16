@@ -222,15 +222,15 @@ class ImageGallery extends Component {
   }
 
   render() {
-    const abcd = () => {
-      let abc = [];
-      var letter = "";
-      for (var i = 0; i < 26; i++) {
-        letter = String.fromCharCode(65 + i);
-        abc.push(letter);
-      }
-      return abc;
-    };
+    // const abcd = () => {
+    //   let abc = [];
+    //   var letter = "";
+    //   for (var i = 0; i < 26; i++) {
+    //     letter = String.fromCharCode(65 + i);
+    //     abc.push(letter);
+    //   }
+    //   return abc;
+    // };
     const stateSelect = (
       <SelectCountry
         country={this.props.country}

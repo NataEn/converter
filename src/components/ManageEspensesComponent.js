@@ -9,10 +9,10 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter,
-  Form,
+  // Form,
   Label,
   FormGroup,
-  FormText,
+  //FormText,
   Breadcrumb,
   BreadcrumbItem
 } from "reactstrap";

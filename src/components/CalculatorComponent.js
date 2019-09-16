@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -13,36 +12,7 @@ import {
   faTrashRestoreAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
-import { parseWithOptions } from "date-fns/esm/fp";
-import { Control, Form, Errors, actions } from "react-redux-form";
 const { ExportCSVButton } = CSVExport;
-
-// const RenderTable = props => {
-//   return (
-//     <BootstrapTable
-//       className="table-condensed"
-//       keyField="id"
-//       data={props.expenseTable}
-//       table-condensed={true}
-//       columns={props.columns}
-//       cellEdit={cellEditFactory({
-//         mode: "click",
-//         onStartEdit: (row, column, rowIndex, columnIndex) => {
-//           console.log(
-//             "start to edit row!!" + rowIndex + "columnIndex" + columnIndex
-//           );
-//         },
-//         // beforeSaveCell: (oldValue, newValue, row, column) => {
-//         //   alert("Before Saving new value Cell!!" + newValue);
-//         // },
-//         afterSaveCell: (oldValue, newValue, row, column) => {
-//           document.getElementById("calculateExpensesSum").click();
-//         }
-//       })}
-//       // selectRow={selectRow}
-//     />
-//   );
-// }; //end of RenderExpwnse function-component
 
 class RenderExpenseTable extends Component {
   constructor(props) {
@@ -54,7 +24,7 @@ class RenderExpenseTable extends Component {
     );
   }
   handleAddRowToTable() {
-    console.log("used handleAdd function");
+    // console.log("used handleAdd function");
     this.props.addRowToTable(this.props.expenseTable.length + 1, " ");
   }
   handleResetTable() {
@@ -62,13 +32,13 @@ class RenderExpenseTable extends Component {
     this.props.resetTable();
   }
   handleCalculateExpensesSum(newTable) {
-    console.log(
-      "entered handle calculate function in RenderExpense Table class Component"
-    );
-    console.log(
-      "from clicking the calculate button the new data is: " +
-        JSON.stringify(newTable)
-    );
+    // console.log(
+    //   "entered handle calculate function in RenderExpense Table class Component"
+    // );
+    // console.log(
+    //   "from clicking the calculate button the new data is: " +
+    //     JSON.stringify(newTable)
+    // );
     let sum = newTable.reduce((firstRow, secondRow) => ({
       price: parseInt(firstRow.price) + parseInt(secondRow.price)
     }));
@@ -118,10 +88,6 @@ class RenderExpenseTable extends Component {
     // };
     let expenseTable = this.props.expenseTable;
 
-    console.log(
-      "from table class the expenseTable is " +
-        JSON.stringify(this.props.expenseTable)
-    );
     return (
       <Col xs={12} className="form">
         <ToolkitProvider

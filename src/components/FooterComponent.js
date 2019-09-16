@@ -7,7 +7,7 @@ import {
   faAddressCard,
   faCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { thumbsup } from "@fortawesome/free-regular-svg-icons";
+//import { thumbsup } from "@fortawesome/free-regular-svg-icons";
 import { Row, Col, Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 
 class Footer extends Component {
@@ -24,7 +24,7 @@ class Footer extends Component {
   }
   render() {
     return (
-      <React.Fragment className="container mr-0 footer ">
+      <div className="container-fluid mr-0 footer ">
         <Row className="footer-xs d-flex justify-content-center mt-2">
           <Col
             xs={12}
@@ -60,7 +60,7 @@ class Footer extends Component {
             md={3}
             className="d-flex flex-column justify-content-center"
           >
-            <h4 className="footer align-self-center">Useful Links</h4>
+            <h4 className="footer align-self-left">Useful Links</h4>
 
             <ul className="list-unstyled">
               <li>
@@ -92,7 +92,7 @@ class Footer extends Component {
             md={3}
             className="d-flex flex-column justify-content-center"
           >
-            <h4 className="footer align-self-center">Contact Us</h4>
+            <h4 className="footer align-self-left">Contact Us</h4>
 
             <ul className="list-unstyled ">
               <li>
@@ -122,7 +122,7 @@ class Footer extends Component {
                 </a>
               </li>
 
-              <li className="d-flex pt-2 justify-content-center">
+              <li className="d-flex pt-2 align-self-left">
                 <Button className="terms" onClick={this.toggleModal}>
                   Terms Of Use
                 </Button>
@@ -469,7 +469,7 @@ class Footer extends Component {
             <p>© All rights reserved to Converter 2019</p>
           </Col>
         </Row>
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import SelectComponent from "./ConvertionLineComponent";
-import {
-  Button,
-  Input,
-  Card,
-  CardLink,
-  CardImg,
-  Row,
-  Col,
-  CardBody
-} from "reactstrap";
+import { Button, Input, CardImg, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoneyBillAlt } from "@fortawesome/free-solid-svg-icons";
@@ -35,7 +26,7 @@ class Currency extends Component {
   }
 
   addConvertingLine = e => {
-    let panel = new Object();
+    let panel = {};
     panel = this.state.ConvertionPanel;
     this.state.ConvertionContainerArray.push(panel);
     console.log(e);
@@ -109,8 +100,11 @@ class Currency extends Component {
 
   renderConvertionContainer = props => {
     const convertionPanel = (
-      <Row className="d-flex justify-content-center align-items-center pt-2">
-        <Col xs={12} sm={6} md={4} className="select-div">
+      <Row
+        className="d-flex justify-content-center align-items-center pt-2"
+        key="convertionDataPanel"
+      >
+        <Col key="baseRate" xs={12} sm={6} md={4} className="select-div">
           <span>I have:</span>
           <SelectComponent
             className="select-span"
@@ -121,7 +115,7 @@ class Currency extends Component {
             onChange={this.handleSelectChange}
           />
         </Col>
-        <Col xs={12} sm={6} md={4}>
+        <Col xs={12} sm={6} md={4} key="toRate">
           <span>I want:</span>
           <SelectComponent
             className="select-span"
@@ -132,7 +126,7 @@ class Currency extends Component {
             onChange={this.handleSelectChange}
           />
         </Col>
-        <Col xs={12} sm={6} md={4}>
+        <Col xs={12} sm={6} md={4} key="baseAmount">
           {" "}
           <label className="input-label" htmlFor="baseAmount">
             Amount:{" "}
@@ -145,7 +139,7 @@ class Currency extends Component {
             min="0"
             max="100000000"
             onChange={this.handleInputChange}
-            onBlure={alert("you touched the input" + this.state.baseAmount)}
+            // onBlure={alert("you touched the input" + this.state.baseAmount)}
             id="baseAmount"
             name="baseAmount"
             placeholder="How much?"

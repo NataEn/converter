@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Button,
-  Row,
-  Col,
-  Label
-} from "reactstrap";
-import { Control, Form, Errors, actions } from "react-redux-form";
+import { Breadcrumb, BreadcrumbItem, Button, Row, Col } from "reactstrap";
+import { Control, Form, Errors } from "react-redux-form";
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
-const isNumber = val => !isNaN(Number(val));
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 class Contact extends Component {
   constructor(props) {
@@ -99,7 +91,11 @@ class Contact extends Component {
                 >
                   <i className="fa fa-phone" /> Call
                 </a>
-                <a role="button" className="btn btn-info">
+                <a
+                  role="button"
+                  className="btn btn-info"
+                  href="https://www.skype.com/he/"
+                >
                   <i className="fa fa-skype" /> Skype
                 </a>
                 <a

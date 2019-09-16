@@ -18,7 +18,7 @@ const CountryObject = () => {
     b.image = codes[i] + ".png";
     c.push(b);
   }
-  console.log(clientInformation);
+  // console.log(clientInformation);
   return c;
 };
 

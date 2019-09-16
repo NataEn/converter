@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import {
-  Row,
-  Col,
   Navbar,
   NavbarBrand,
   Nav,
   NavItem,
   Collapse,
-  Button,
-  Jumbotron,
   NavbarToggler
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";

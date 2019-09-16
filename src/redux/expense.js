@@ -1,7 +1,7 @@
-import { EXPENSE } from "../shared/ExpenseData";
+//import { EXPENSE } from "../shared/ExpenseData";
 import {
-  EXPENSES_0,
-  EXPENSES_1,
+  // EXPENSES_0,
+  // EXPENSES_1,
   EXPENSES_TABLES
 } from "../shared/ExpenseDatadestructured";
 import * as ActionTypes from "./ActionTypes";

@@ -5,7 +5,6 @@ import {
   faPiggyBank,
   faHandHoldingUsd,
   faTh,
-  faMapMarkedAlt,
   faSyncAlt,
   faCalculator
 } from "@fortawesome/free-solid-svg-icons";
