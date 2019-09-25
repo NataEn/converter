@@ -34,19 +34,10 @@ function RenderCurrencyImage({ image, letter, country }) {
 }
 
 function RenderGalleryViewIMAGES({ selectedViewType, value, images }) {
-  let selectedvalueArray;
-  if ((selectedViewType === "letter") | (selectedViewType === "ABC")) {
-    //console.log("value" + JSON.stringify(value[0].label));
-    selectedvalueArray = value.map(item => item.value.toLowerCase());
-  } else if (selectedViewType === "country") {
-    console.log(
-      "selectedViewType is country and value is " + JSON.stringify(value)
-    );
-    selectedvalueArray = value.map(item => item.value.toLowerCase());
-  }
+  let selectedvalueArray = value.map(item => item.value.toLowerCase());
 
   if (selectedViewType === "ABC") {
-    return selectedvalueArray.map(value => {
+    return selectedvalueArray.map(() => {
       return Object.keys(images).map(letter => {
         return (
           <div key={letter}>
@@ -178,7 +169,6 @@ class ImageGallery extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleDropdownABC = this.toggleDropdownABC.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.onLetterSelect = this.onLetterSelect.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
@@ -198,39 +188,13 @@ class ImageGallery extends Component {
     }));
   }
   handleSelectChange(value, name) {
-    console.log("entered handle change of select react");
     if (value || name) {
       this.setState({ selectedViewType: name });
       this.setState({ selectedValue: value });
-      console.log(
-        "from gallery component - handleSelectChange value and name are not null" +
-          JSON.stringify(this.state.selectedValue) +
-          JSON.stringify(this.state.selectedViewType)
-      );
     }
-  }
-  //handeling the source of the images
-  onLetterSelect(view) {
-    //console.log("view" + view);
-    this.setState({ selectedView: view });
-    if (view === "none") {
-      this.setState({ imagesSource: this.props.images.IMAGES });
-    } else {
-      this.setState({ imagesSource: this.props.images.IMAGES });
-    }
-    return;
   }
 
   render() {
-    // const abcd = () => {
-    //   let abc = [];
-    //   var letter = "";
-    //   for (var i = 0; i < 26; i++) {
-    //     letter = String.fromCharCode(65 + i);
-    //     abc.push(letter);
-    //   }
-    //   return abc;
-    // };
     const stateSelect = (
       <SelectCountry
         country={this.props.country}
@@ -249,6 +213,7 @@ class ImageGallery extends Component {
         name="letter"
         onChange={this.handleSelectChange}
         isMulti
+        ref={this.simulateClick}
       />
     );
 

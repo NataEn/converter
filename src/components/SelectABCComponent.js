@@ -36,7 +36,6 @@ class SelectABC extends Component {
   handleChange = selectedOption => {
     if (selectedOption) {
       this.setState({ selectedOption: selectedOption });
-      console.log(`Option selected array:`, selectedOption);
       const value = selectedOption;
       const name = this.props.name;
       if (value.length === 0) {
@@ -59,12 +58,10 @@ class SelectABC extends Component {
       }
       return abc;
     };
-    //console.log("this is the abc object" + JSON.stringify(abcObject));
     let options = abcd().map(opt => ({
       label: opt,
       value: opt
     }));
-    //options = ["none", "ABC", ...options];
     return (
       <Select
         isMulti

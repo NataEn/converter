@@ -32,13 +32,6 @@ class RenderExpenseTable extends Component {
     this.props.resetTable();
   }
   handleCalculateExpensesSum(newTable) {
-    // console.log(
-    //   "entered handle calculate function in RenderExpense Table class Component"
-    // );
-    // console.log(
-    //   "from clicking the calculate button the new data is: " +
-    //     JSON.stringify(newTable)
-    // );
     let sum = newTable.reduce((firstRow, secondRow) => ({
       price: parseInt(firstRow.price) + parseInt(secondRow.price)
     }));
@@ -70,7 +63,6 @@ class RenderExpenseTable extends Component {
               <Button
                 className="btn btn-danger btn-xs border-secondary rounded"
                 onClick={() => {
-                  console.log("row to be deleted: " + JSON.stringify(row));
                   this.handleDeleteRowFromTable(row.expense);
                 }}
               >
@@ -81,11 +73,7 @@ class RenderExpenseTable extends Component {
         }
       }
     ];
-    // const selectRow = {
-    //   mode: "checkbox",
-    //   clickToSelect: true,
-    //   clickToEdit: true
-    // };
+    
     let expenseTable = this.props.expenseTable;
 
     return (

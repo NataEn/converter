@@ -60,10 +60,6 @@ class SelectCountry extends Component {
   handleChange = selectedOption => {
     if (selectedOption) {
       this.setState({ selectedOption: selectedOption });
-      console.log(
-        `in country select country Option selected array:`,
-        selectedOption
-      );
       const value = selectedOption;
       const name = this.props.name;
       if (value.length === 0) {
@@ -77,7 +73,6 @@ class SelectCountry extends Component {
   };
   //
   render() {
-    //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
     const countryObject = this.props.country;
 
@@ -99,7 +94,6 @@ class SelectCountry extends Component {
         onChange={this.handleChange}
         isClearable
         isMulti
-        // ref={this.selectName}
         captureMenuScroll={true}
       />
     );
