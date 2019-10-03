@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux"; //connects the main components to the store
 import { actions } from "react-redux-form";
@@ -30,8 +30,9 @@ import Logo from "../shared/logo/Logo_for_page_title200x200.png";
 import {
   // addExpense,
   // addExpenses,
-  // fetchExpenses,
+  //fetchExpenses,
   // addTable,
+  fetchOldCurrencies,
   addRowToTable,
   deleteRowFromTable,
   resetTable,
@@ -44,9 +45,9 @@ import {
 
 const mapStateToStore = state => {
   return {
-    rates: state.rates,
-    ratesCurrencies: state.ratesCurrencies,
-    converterPanel: state.converterPanel,
+    rates: state.initialState.rates,
+    ratesCurrencies: state.initialState.ratesCurrencies,
+    //converterPanel: state.converterPanel,
     country: state.country,
     logo: Logo,
     images: state.images,
@@ -61,7 +62,7 @@ const mapStateToStore = state => {
 //recieves the dispatch as one of the parameters from the dispatch function in the store
 const mapDispatchToProps = dispatch => ({
   // fetchExpenses: () => {
-  //   dispatch(fetchExpenses());
+  //    dispatch(fetchExpenses());
   // },
   // addExpense: (
   //   tableId,
@@ -83,6 +84,7 @@ const mapDispatchToProps = dispatch => ({
   //   );
   // },
   // addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
+  fetchOldCurrencies: () => dispatch({ fetchOldCurrencies }),
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
   resetTable: () => dispatch(resetTable()),
@@ -119,9 +121,9 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rates: {},
-      ratesCurrencies: [],
-      converterPanel: []
+      rates: props.rates,
+      ratesCurrencies: props.ratesCurrencies
+      //converterPanel: []
       // country: COUNTRY,
       // logo: Logo,
       // images: IMAGES,
@@ -138,7 +140,13 @@ class Main extends Component {
     this.GalleryImage = this.GalleryImage.bind(this);
   }
   componentDidMount() {
-    // this.props.fetchExpenses();
+    // // this.props.fetchOldCurrencies();
+    // // this.setState({
+    // //   rates: this.props.fetchOldCurrencies().payload.data.rates
+    // // });
+    // // this.setState({ ratesCurrencies: Object.keys(this.state.rates) });
+    // // console.log(this.state.ratesCurrencies);
+    // // console.log(JSON.stringify(this.state.rates));
     // this.axios
     //   .get("latest", {
     //     params: {
@@ -149,11 +157,16 @@ class Main extends Component {
     //     //console.log("from response" + response.data);
     //     this.setState({ rates: response.data.rates });
     //     this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
-    //console.log(this.state.ratesCurrencies);
-    //console.log(JSON.stringify(this.state.rates));
     // });
   }
   axiosConvert(amount, fromRate, toRate) {
+    console.log(
+      "from axios convert",
+      amount,
+      fromRate,
+      this.state.rates,
+      toRate
+    );
     const fromRateValue = this.state.rates[fromRate];
     const toRateValue = this.state.rates[toRate];
     return amount * (toRateValue / fromRateValue);

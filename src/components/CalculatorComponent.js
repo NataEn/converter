@@ -24,8 +24,12 @@ class RenderExpenseTable extends Component {
     );
   }
   handleAddRowToTable() {
-    // console.log("used handleAdd function");
-    this.props.addRowToTable(this.props.expenseTable.length + 1, " ");
+    this.props.addRowToTable(
+      <span style={{ display: "none" }}>
+        this.props.expenseTable.length + 1
+      </span>,
+      " "
+    );
   }
   handleResetTable() {
     alert("to reset the table please refresh the page");
@@ -73,7 +77,7 @@ class RenderExpenseTable extends Component {
         }
       }
     ];
-    
+
     let expenseTable = this.props.expenseTable;
 
     return (
@@ -126,7 +130,6 @@ class RenderExpenseTable extends Component {
                 columns={columns}
                 cellEdit={cellEditFactory({
                   mode: "click",
-                  onStartEdit: (row, column, rowIndex, columnIndex) => {},
                   beforeSaveCell: (oldValue, newValue, row, column) => {
                     if (isNaN(Number(newValue))) {
                       alert(

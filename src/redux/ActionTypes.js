@@ -1,3 +1,6 @@
+//Action types for fetching currencies for conversion
+export const FETCH_OLD_CURRENCIES = "FETCH_OLD_CURRENCIES";
+
 //Action types for Calculator componenet
 export const ADD_EXPENSE_TABLE = "ADD_EXPENSE_TABLE";
 export const EXPENSE_TABLE_LOADING = "EXPENSES_TABLE_LOADING";

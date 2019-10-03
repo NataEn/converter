@@ -1,7 +1,13 @@
 import * as ActionTypes from "./ActionTypes";
 import { EXPENSES_0 } from "../shared/ExpenseDatadestructured";
+import { CURRENCIES } from "../shared/currencies";
 
 //Action Creators for Manage Expense component
+export const fetchOldCurrencies = () => ({
+  type: ActionTypes.FETCH_OLD_CURRENCIES,
+  payload: CURRENCIES
+});
+
 export const fetchExpenses = () => dispatch => {
   dispatch(expensesLoading(true));
   setTimeout(() => {

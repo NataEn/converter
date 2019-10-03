@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Reducer, initialState } from "./reducer";
+import { Reducer} from "./reducer";
 import { createForms } from "react-redux-form";
 import { Images } from "./imagesReducer";
 import { Expenses_0, Expenses_tables } from "./expense";
