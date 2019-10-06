@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Reducer} from "./reducer";
+import { Rates } from "./rates";
 import { createForms } from "react-redux-form";
 import { Images } from "./imagesReducer";
 import { Expenses_0, Expenses_tables } from "./expense";
@@ -18,9 +18,8 @@ export const ConfigureStore = () => {
       expenses_tables: Expenses_tables,
       expenseTable: ExpenseTable,
       expensesSum: ExpensesSum,
-      // Expense_1: Expenses_1,
       country: Country,
-      initialState: Reducer,
+      initialRates: Rates,
       tips: Tips,
       ...createForms({ feedback: InitialFeedback })
     }),

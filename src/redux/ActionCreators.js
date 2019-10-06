@@ -1,12 +1,32 @@
 import * as ActionTypes from "./ActionTypes";
 import { EXPENSES_0 } from "../shared/ExpenseDatadestructured";
-import { CURRENCIES } from "../shared/currencies";
+import axios from "axios";
 
 //Action Creators for Manage Expense component
-export const fetchOldCurrencies = () => ({
-  type: ActionTypes.FETCH_OLD_CURRENCIES,
-  payload: CURRENCIES
-});
+export const updateRates = () => dispatch => {
+  axios
+    .get("http://data.fixer.io/api/latest", {
+      params: {
+        access_key: `7213b9a7b8b59ce8e6087fe3ba8243c2`
+      }
+    })
+    .then(response => {
+      dispatch({
+        type: ActionTypes.UPDATE_RATES,
+        payload: {
+          rates: response.data.rates,
+          ratesCurrencies: Object.keys(response.data.rates),
+          ratesLastUpdate: response.data.date
+        }
+      });
+    })
+    .catch(error => {
+      if (error.error.code === 104) {
+        console.log(error);
+        return;
+      }
+    });
+};
 
 export const fetchExpenses = () => dispatch => {
   dispatch(expensesLoading(true));

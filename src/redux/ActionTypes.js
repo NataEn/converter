@@ -1,4 +1,5 @@
-//Action types for fetching currencies for conversion
+//Action types for updating rates for conversion
+export const UPDATE_RATES = "UPDATE_RATES";
 export const FETCH_OLD_CURRENCIES = "FETCH_OLD_CURRENCIES";
 
 //Action types for Calculator componenet

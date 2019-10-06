@@ -19,20 +19,11 @@ import Calculator from "./CalculatorComponent";
 //import { Loading } from "./LoadingComponent";
 
 //databases- now obtained from redux store- they are called from the reducer.js
-// import { COUNTRY } from "../shared/CountryObjectMaker";
 import Logo from "../shared/logo/Logo_for_page_title200x200.png";
-// import { IMAGE } from "../shared/ImagesData";
-// import { IMAGES } from "../shared/ImagesData.1";
-// import { GalleryAccordingtoABC } from "../shared/CurrencyGalleryArrange";
-//import { EXPENSE, calculateSpendSum } from "../shared/ExpenseData";
 
 //importing actionCreators
 import {
-  // addExpense,
-  // addExpenses,
-  //fetchExpenses,
-  // addTable,
-  fetchOldCurrencies,
+  updateRates,
   addRowToTable,
   deleteRowFromTable,
   resetTable,
@@ -40,14 +31,15 @@ import {
   editExpenseTable,
   calculateExpensesSum
 } from "../redux/ActionCreators";
+//import { thisExpression } from "@babel/types";
 
-//a function that maps redux-store state to props that are passed down to the components:
+//mapStateToStore function that maps redux-store state to props that are passed down to the components:
 
 const mapStateToStore = state => {
   return {
-    rates: state.initialState.rates,
-    ratesCurrencies: state.initialState.ratesCurrencies,
-    //converterPanel: state.converterPanel,
+    rates: state.initialRates.rates,
+    ratesCurrencies: state.initialRates.ratesCurrencies,
+    ratesLastUpdate: state.initialRates.ratesLastUpdate,
     country: state.country,
     logo: Logo,
     images: state.images,
@@ -84,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
   //   );
   // },
   // addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
-  fetchOldCurrencies: () => dispatch({ fetchOldCurrencies }),
+  updateRates: () => dispatch(updateRates()),
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
   resetTable: () => dispatch(resetTable()),
@@ -121,8 +113,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rates: props.rates,
-      ratesCurrencies: props.ratesCurrencies
+      requests: 2
       //converterPanel: []
       // country: COUNTRY,
       // logo: Logo,
@@ -135,41 +126,41 @@ class Main extends Component {
     this.axios = axios.create({
       // baseURL: "http://data.fixer.io/api/"
     });
-    //console.log(JSON.stringify(this.state.rates));
     this.axiosConvert = this.axiosConvert.bind(this);
     this.GalleryImage = this.GalleryImage.bind(this);
   }
-  componentDidMount() {
-    // // this.props.fetchOldCurrencies();
-    // // this.setState({
-    // //   rates: this.props.fetchOldCurrencies().payload.data.rates
-    // // });
-    // // this.setState({ ratesCurrencies: Object.keys(this.state.rates) });
-    // // console.log(this.state.ratesCurrencies);
-    // // console.log(JSON.stringify(this.state.rates));
-    // this.axios
-    //   .get("latest", {
-    //     params: {
-    //       access_key: `7213b9a7b8b59ce8e6087fe3ba8243c2`
-    //     }
-    //   })
-    //   .then(response => {
-    //     //console.log("from response" + response.data);
-    //     this.setState({ rates: response.data.rates });
-    //     this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
-    // });
+
+  componentWillMount() {
+    if (this.state.requests !== 0) {
+      this.props.updateRates();
+      // this.axios
+      //   .get("latest", {
+      //     params: {
+      //       access_key: `7213b9a7b8b59ce8e6087fe3ba8243c2`
+      //     }
+      //   })
+      //   .then(response => {
+      //     this.setState({ rates: response.data.rates });
+      //     this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
+      //   })
+      //   .catch(error => {
+      //     if (error.error.code === 104) console.log(error);
+      //   });
+      this.setState({ requests: this.state.requests - 1 });
+      console.log("from main" + this.props.ratesLastUpdate);
+    }
   }
   axiosConvert(amount, fromRate, toRate) {
     console.log(
       "from axios convert",
       amount,
       fromRate,
-      this.state.rates,
+      this.props.ratesLastUpdate,
       toRate
     );
-    const fromRateValue = this.state.rates[fromRate];
-    const toRateValue = this.state.rates[toRate];
-    return amount * (toRateValue / fromRateValue);
+    const fromRateValue = this.props.rates[fromRate];
+    const toRateValue = this.props.rates[toRate];
+    return Math.round(amount * (toRateValue / fromRateValue) * 100) / 100;
   }
 
   //match object coming from the selected gallery image
@@ -213,6 +204,7 @@ class Main extends Component {
                     <Currency
                       {...this.props}
                       rates={this.props.ratesCurrencies}
+                      ratesLastUpdate={this.props.ratesLastUpdate}
                       ratesObject={this.props.rates}
                       axiosConvert={this.axiosConvert}
                       country={this.props.country}
@@ -227,6 +219,7 @@ class Main extends Component {
                       {...this.props}
                       rates={this.props.ratesCurrencies}
                       ratesObject={this.props.rates}
+                      ratesLastUpdate={this.props.ratesLastUpdate}
                       axiosConvert={this.axiosConvert}
                       country={this.props.country}
                       images={this.props.images}

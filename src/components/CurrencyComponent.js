@@ -15,7 +15,6 @@ class Currency extends Component {
       converted: "",
       changed: true,
       message: "Please select convertion values",
-      rateState: "State",
       ConvertionPanel: "",
       ConvertionContainerArray: []
     };
@@ -68,7 +67,6 @@ class Currency extends Component {
     const name = target.name;
     this.setState({ [name]: value });
     this.setState({ changed: true });
-    //console.log("amount" + this.state.baseAmount);
   }
   handleSelectChange(value, name, country) {
     console.log("from handleselectchange" + JSON.stringify(value));
@@ -91,8 +89,15 @@ class Currency extends Component {
       return <span>{`${this.state.message}`}</span>;
     } else {
       return (
-        <span className="conversion-answer">
-          {`${this.state.baseAmount} ${this.state.baseRate} to ${this.state.toRate} is ${this.state.converted} ${this.state.toRate}`}
+        <span>
+          {" "}
+          <span className="conversion-answer">
+            {`${this.state.baseAmount} ${this.state.baseRate} to ${this.state.toRate} is ${this.state.converted} ${this.state.toRate}`}
+          </span>
+          <br />
+          <small>
+            <i>{` Last Update: ${this.props.ratesLastUpdate}`}</i>
+          </small>
         </span>
       );
     }
