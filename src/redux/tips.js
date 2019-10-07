@@ -1,5 +1,4 @@
 import { TIPS } from "../shared/tips";
-
 import * as ActionTypes from "./ActionTypes";
 
 export const Tips = (state = TIPS, action) => {

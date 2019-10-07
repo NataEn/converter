@@ -15,25 +15,22 @@ class Contact extends Component {
 
   handleSubmit(values) {
     console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    alert(
+      values.firstname[0].toUpperCase() +
+        values.firstname.slice(1) +
+        " " +
+        values.lastname[0].toUpperCase() +
+        values.lastname.slice(1) +
+        ", your feedback: " +
+        JSON.stringify(values.message) +
+        " is submited. Thank you!"
+    );
     this.props.resetFeedbackForm();
-    // this.props.postFeedback(
-    //   values.firstName,
-    //   values.lastName,
-    //   values.telnum,
-    //   values.email,
-    //   values.agree,
-    //   values.contactType,
-    //   values.message
-    // );
-    // event.preventDefault();
   }
   render() {
-    //in here we put code that we want to run every time the component is reredndered!!
     return (
       <div className="container-fluid">
         <h1>Lets Keep in Touch!</h1>
-
         <Row>
           <Col sm={12}>
             <Breadcrumb>
@@ -50,7 +47,6 @@ class Contact extends Component {
             <Col xs={12}>
               <p>At Converter we believe in good and open communication.</p>
               <p> New opinions and feedbacks constantly improve our service.</p>
-
               <p>
                 We are greatful for all those who help us in becoming the
                 wonderful company that we are!

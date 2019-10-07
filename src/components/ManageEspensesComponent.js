@@ -9,10 +9,8 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter,
-  // Form,
   Label,
   FormGroup,
-  //FormText,
   Breadcrumb,
   BreadcrumbItem
 } from "reactstrap";
@@ -25,16 +23,11 @@ import SelectExpense from "./SelectExpenseComponent";
 function spendSum(expenses_0, tableName) {
   let sum = 0;
   if (tableName) {
-    // console.log(
-    //   "from expense data" + tablKey + JSON.stringify(expenses[tablKey].rows)
-    // );
     console.log("from spend sum expenses_0 is: " + JSON.stringify(expenses_0));
     for (let expense of expenses_0) {
       if (expense.tableName === tableName) {
         sum = sum + parseInt(expense.amount_spend);
       }
-
-      //console.log(sum);
     }
     return sum;
   } else {

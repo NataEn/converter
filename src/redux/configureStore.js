@@ -28,4 +28,3 @@ export const ConfigureStore = () => {
 
   return store;
 };
-//after configuring the store- set the app to use it in the App.js

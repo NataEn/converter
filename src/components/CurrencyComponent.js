@@ -39,19 +39,17 @@ class Currency extends Component {
     const rate = this.state.toRate;
     const amount = this.state.baseAmount;
     let answer = "";
-    //console.log("from form:" + values);
     if (base === "" && rate === "" && amount === "") {
       return;
     } else if (base !== "" && rate === "" && amount !== "") {
-      answer = this.props.axiosConvert(amount, base, base);
+      answer = this.props.currencyConvert(amount, base, base);
     } else if (base === "" && rate !== "" && amount !== "") {
-      answer = this.props.axiosConvert(amount, rate, rate);
+      answer = this.props.currencyConvert(amount, rate, rate);
     } else if (base !== "" && rate !== "" && amount === "") {
-      answer = this.props.axiosConvert(1, base, rate);
+      answer = this.props.currencyConvert(1, base, rate);
     } else {
-      answer = this.props.axiosConvert(amount, base, rate);
+      answer = this.props.currencyConvert(amount, base, rate);
     }
-    //console.log("calculated currency is:" + answer);
     if (+answer < 0) {
       this.setState({ converted: "not a valid convertion" });
     } else {
@@ -158,7 +156,7 @@ class Currency extends Component {
     this.state.ConvertionContainerArray[0] = convertionPanel;
     return this.state.ConvertionContainerArray.map(panel => panel);
   };
-  // ratesObject- object that contains the rates object from promise
+  // ratesObject- object that contains the rates object that comes from the http request promise(or the js file if error)
   render() {
     let countryImage;
     if (
@@ -234,10 +232,6 @@ class Currency extends Component {
             </Button>{" "}
           </div>
         </form>
-
-        {/* <a href="https://www.google.com/maps/search/currency+exchange/@32.675339,35.2521005,13z/data=!3m1!4b1">
-          google map
-        </a> */}
       </div>
     );
   }

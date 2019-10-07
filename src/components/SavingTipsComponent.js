@@ -18,7 +18,6 @@ import {
   ToastBody
 } from "reactstrap";
 import { Link } from "react-router-dom";
-
 import { Control, LocalForm, Errors } from "react-redux-form";
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
@@ -67,7 +66,6 @@ class TipForm extends Component {
     this.state = {
       isModalOpen: false
     };
-
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmitTip = this.handleSubmitTip.bind(this);
   }

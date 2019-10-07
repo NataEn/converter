@@ -28,7 +28,6 @@ class SelectExpense extends Component {
   };
 
   render() {
-    //console.log("this is the abc object" + JSON.stringify(abcObject));
     let options = [
       {
         label: "Visa",

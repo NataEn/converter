@@ -21,11 +21,6 @@ class Sidebar extends Component {
               <span className="sidebarSpan">Converter</span>
             </NavLink>
           </NavItem>
-          {/* <NavItem>
-          <NavLink className="nav-link nav-link-sidebar" to="/map">
-            <FontAwesomeIcon icon={faMapMarkedAlt} /> <span className="sidebarSpan">Map</span>
-          </NavLink>
-        </NavItem> */}
           <NavItem>
             <NavLink className="nav-link nav-link-sidebar" to="/gallery">
               <FontAwesomeIcon icon={faTh} />

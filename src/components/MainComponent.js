@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Row, Col } from "reactstrap";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux"; //connects the main components to the store
@@ -31,9 +30,8 @@ import {
   editExpenseTable,
   calculateExpensesSum
 } from "../redux/ActionCreators";
-//import { thisExpression } from "@babel/types";
 
-//mapStateToStore function that maps redux-store state to props that are passed down to the components:
+// mapping redux-store state to props that are passed down to the components, using mapStateToStore function:
 
 const mapStateToStore = state => {
   return {
@@ -51,31 +49,33 @@ const mapStateToStore = state => {
     expensesSum: state.expensesSum
   };
 };
+
 //recieves the dispatch as one of the parameters from the dispatch function in the store
 const mapDispatchToProps = dispatch => ({
-  // fetchExpenses: () => {
-  //    dispatch(fetchExpenses());
-  // },
-  // addExpense: (
-  //   tableId,
-  //   expense_type,
-  //   amount_planned,
-  //   currency,
-  //   amount_spend,
-  //   notes
-  // ) => {
-  //   dispatch(
-  //     addExpense(
-  //       tableId,
-  //       expense_type,
-  //       amount_planned,
-  //       currency,
-  //       amount_spend,
-  //       notes
-  //     )
-  //   );
-  // },
-  // addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),
+  //commented Props are related to ManageExpenseComponent that is still in production
+  /*fetchExpenses: () => {
+      dispatch(fetchExpenses());
+   },
+   addExpense: (
+     tableId,
+     expense_type,
+     amount_planned,
+     currency,
+     amount_spend,
+     notes
+   ) => {
+     dispatch(
+       addExpense(
+         tableId,
+         expense_type,
+         amount_planned,
+         currency,
+         amount_spend,
+         notes
+       )
+     );
+   },
+  addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),*/
   updateRates: () => dispatch(updateRates()),
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
@@ -86,27 +86,6 @@ const mapDispatchToProps = dispatch => ({
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   }
-  // postFeedback: (
-  //   firstName,
-  //   lastName,
-  //   telnum,
-  //   email,
-  //   agree,
-  //   contactType,
-  //   message
-  // ) => {
-  //   dispatch(
-  //     postFeedback(
-  //       firstName,
-  //       lastName,
-  //       telnum,
-  //       email,
-  //       agree,
-  //       contactType,
-  //       message
-  //     )
-  //   );
-  // }
 });
 
 class Main extends Component {
@@ -114,19 +93,8 @@ class Main extends Component {
     super(props);
     this.state = {
       requests: 2
-      //converterPanel: []
-      // country: COUNTRY,
-      // logo: Logo,
-      // images: IMAGES,
-      // abcGallery: GalleryAccordingtoABC,
-      // expense: EXPENSE,
-      // calculateSpendSum: calculateSpendSum
     };
-
-    this.axios = axios.create({
-      // baseURL: "http://data.fixer.io/api/"
-    });
-    this.axiosConvert = this.axiosConvert.bind(this);
+    this.currencyConvert = this.currencyConvert.bind(this);
     this.GalleryImage = this.GalleryImage.bind(this);
   }
 
@@ -150,7 +118,7 @@ class Main extends Component {
       console.log("from main" + this.props.ratesLastUpdate);
     }
   }
-  axiosConvert(amount, fromRate, toRate) {
+  currencyConvert(amount, fromRate, toRate) {
     console.log(
       "from axios convert",
       amount,
@@ -163,13 +131,10 @@ class Main extends Component {
     return Math.round(amount * (toRateValue / fromRateValue) * 100) / 100;
   }
 
-  //match object coming from the selected gallery image
+  //returning match object that is coming from the selection/clicking a gallery image
   GalleryImage({ match }) {
     let selectedLetter = match.params.letter;
     let selectedCountry = match.params.country;
-    // let selectedCountry = Object.keys(this.props.images[selectedLetter]).filter(
-    //   image => match.params.country === image
-
     let selectedImage = this.props.images[selectedLetter][
       selectedCountry
     ].filter(image => parseInt(match.params.id, 10) === image.id);
@@ -206,7 +171,7 @@ class Main extends Component {
                       rates={this.props.ratesCurrencies}
                       ratesLastUpdate={this.props.ratesLastUpdate}
                       ratesObject={this.props.rates}
-                      axiosConvert={this.axiosConvert}
+                      currencyConvert={this.currencyConvert}
                       country={this.props.country}
                       images={this.props.images}
                     />
@@ -220,7 +185,7 @@ class Main extends Component {
                       rates={this.props.ratesCurrencies}
                       ratesObject={this.props.rates}
                       ratesLastUpdate={this.props.ratesLastUpdate}
-                      axiosConvert={this.axiosConvert}
+                      currencyConvert={this.currencyConvert}
                       country={this.props.country}
                       images={this.props.images}
                     />
@@ -295,13 +260,9 @@ class Main extends Component {
                   )}
                 />
 
-                {/* <Redirect to="/home" /> */}
+                {/* had som problemms with  <Redirect to="/home" /> */}
               </Switch>
             </Col>
-            {/* <Col sm={12}>
-              <MyMap />
-              <SpiningRates ratesObject={this.props.rates} />
-            </Col> */}
           </Col>
         </Row>
         <Row className="main-spacer-header-hr">

@@ -54,7 +54,6 @@ class ImageDetail extends Component {
             <footer>
               <small> {this.props.image.image_alt_2}</small>
             </footer>
-
             <small className="p-2 imageattribute font-italic  text-secondary  text-left">
               ATTRIBUTE:
               {this.props.image.attribution}

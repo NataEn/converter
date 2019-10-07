@@ -192,7 +192,6 @@ class ImageGallery extends Component {
       this.setState({ selectedViewType: name });
       this.setState({ selectedValue: value });
     }
-    
   }
 
   render() {

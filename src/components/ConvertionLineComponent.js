@@ -69,8 +69,6 @@ class SelectComponent extends Component {
     return this.props.onChange(value, name, country);
   };
   render() {
-    //in here we put code that we want to run every time the component is reredndered!!
-    //console.log("this is the country object" + JSON.stringify(CountryObject));
     const ratesObject = this.props.ratesObject;
     const countryObject = this.props.country;
     let options = countryObject.map(opt => ({
@@ -90,7 +88,6 @@ class SelectComponent extends Component {
         value={this.state.selectedOption}
         onChange={this.handleChange}
         isClearable
-        // ref={this.selectName}
         captureMenuScroll={true}
       />
     );

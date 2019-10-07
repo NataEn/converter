@@ -114,4 +114,3 @@ export const addFeedback = message => ({
   type: ActionTypes.ADD_FEEDBACK,
   payload: message
 });
-//export const postFeedback=feedback=>({alert(you posted a feedback!)})

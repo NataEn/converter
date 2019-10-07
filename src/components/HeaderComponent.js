@@ -18,7 +18,6 @@ class Header extends Component {
     };
     this.toggleNav = this.toggleNav.bind(this);
   }
-
   toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
   }
@@ -58,30 +57,10 @@ class Header extends Component {
                     <span> Contact</span>
                   </NavLink>
                 </NavItem>
-                {/* <NavItem> 
-                  <Button className="login" outline>
-                    <span className="fa fa-sign-in fa-lg" /> Login
-                  </Button>
-                </NavItem> */}
               </Nav>
             </Collapse>
           </div>
         </Navbar>
-        {/* <Jumbotron className="pr-0">
-          <div className="container">
-            <Row>
-              <Col sm={2} className="p-0 m-0">
-                <img
-                  src={this.props.logo}
-                  height="80"
-                  width="80"
-                  alt="Converter"
-                />
-                <strong>Converter</strong>
-              </Col>
-            </Row>
-          </div>
-        </Jumbotron> */}
       </React.Fragment>
     );
   }
