@@ -1,4 +1,4 @@
-import { EXPENSE_TABLE, SUM } from "../shared/ExpenseTable";
+import { EXPENSE_TABLE, SUM } from "../shared/ExpenseTableData";
 import * as ActionTypes from "./ActionTypes";
 
 export const ExpenseTable = (state = EXPENSE_TABLE, action) => {
