@@ -43,10 +43,12 @@ li.contactinfo {
 div.container.main-spacer-header-hr.row > div > nav {
   padding: 0px 4% !important;
   margin: 0px 0px !important;
+  display: block;
 }
 
 .main-spacer-header-hr {
   box-shadow: -1px 3px 0px 0px rgba(199, 198, 198, 0.38);
+  flex-shrink: 0 !important;
 }
 
 nav.sidebar.navbar button span {
@@ -58,7 +60,7 @@ table > tbody > tr > td > button > span,
 div > div.d-flex.justify-content-around.p-2 > button > span {
   display: none !important;
 }
-div.sidebar.col-sm-12.col-md-2.order-md-1 > ul > div > li {
+div.sidebar > ul > div > li {
   width: 10%;
   float: left;
   margin: 0% 2%;

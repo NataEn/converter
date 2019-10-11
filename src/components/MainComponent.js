@@ -148,14 +148,14 @@ class Main extends Component {
   }
   render() {
     return (
-      <div className="container-fluid">
-        <Row className="main-spacer-header-hr">
+      <div className="d-flex flex-column h-100">
+        <Row>
           <Col xs={12} className="ml-0 mr-0 pl-0 pr-0">
             <Header logo={this.props.logo} />
           </Col>
         </Row>
 
-        <Row className="backgroundImage">
+        <Row role="main" className="backgroundImage flex-grow-1">
           <Col className="sidebar" md={{ size: 2, order: 1 }} sm={12}>
             <Sidebar />
           </Col>
@@ -265,10 +265,8 @@ class Main extends Component {
             </Col>
           </Col>
         </Row>
-        <Row className="main-spacer-header-hr">
-          <Col xs={12}>
-            <Footer />
-          </Col>
+        <Row className="main-spacer-header-hr mt-auto">
+          <Footer />
         </Row>
       </div>
     );

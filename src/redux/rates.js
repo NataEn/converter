@@ -9,7 +9,6 @@ export const initialRates = {
 export const Rates = (state = initialRates, action) => {
   switch (action.type) {
     case ActionTypes.UPDATE_RATES: {
-      console.log("from UPDATE_RATES reducer" + JSON.stringify(action.payload));
       return {
         rates: action.payload.rates,
         ratesCurrencies: action.payload.ratesCurrencies,

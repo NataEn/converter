@@ -24,7 +24,7 @@ class Footer extends Component {
   }
   render() {
     return (
-      <div className="container-fluid mr-0 footer ">
+      <div className="container-fluid mr-0 footer">
         <Row className="footer-xs d-flex justify-content-center mt-2">
           <Col
             xs={12}
