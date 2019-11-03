@@ -7,8 +7,8 @@ body {
 
 .App {
   text-align: center;
-  font-size: 1.2em;
-  line-height: 1.4;
+  font-size: 1em;
+  line-height: 1.2;
 }
 h1 {
   margin-top: 4%;
@@ -532,13 +532,19 @@ form > div > select > option {
 }
 div.form.card {
   flex-direction: column;
+  padding: 0.5rem !important;
+}
+.card-body {
+  padding: 0px;
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  body {
+  .App {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.4;
   }
-  p {
-  }
+
   img .tipimage {
     width: "40%";
   }
@@ -553,10 +559,6 @@ div.form.card {
 }
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  body {
-  }
-  p {
-  }
   div.sidebar.col-sm-12.col-md-2.order-md-1 > ul > div > li > a > span,
   table > tbody > tr > td > button > span,
   div > div.d-flex.justify-content-around.p-2 > button > span {
@@ -584,6 +586,10 @@ div.form.card {
   }
   div.form.card {
     flex-direction: row;
+    padding: 1rem !important;
+  }
+  .card-body {
+    padding: 1rem !important;
   }
 }
 /* Large devices (desktops, 992px and up) */

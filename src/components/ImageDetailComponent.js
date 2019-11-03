@@ -35,7 +35,7 @@ class ImageDetail extends Component {
         </Row>
         <Card
           key={this.props.image.id}
-          className="form p-3 d-flex justify-content-between"
+          className="form d-flex justify-content-between"
         >
           <div className="col col-sm-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
             <CardImg
@@ -59,7 +59,7 @@ class ImageDetail extends Component {
               {this.props.image.attribution}
             </small>
           </div>
-          <CardBody className="col col-12 d-flex p-3 flex-column justify-content-center">
+          <CardBody className="col col-12 d-flex flex-column justify-content-center">
             <CardHeader tag="h3">{this.props.image.name}</CardHeader>
             <ListGroup>
               <ListGroupItem className="border bg-light">
