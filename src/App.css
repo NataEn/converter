@@ -530,6 +530,9 @@ form > div > select > option {
   border-width: 1px;
   box-shadow: none !important;
 }
+div.form.card {
+  flex-direction: column;
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   body {
@@ -578,6 +581,9 @@ form > div > select > option {
     background-image: url(../src/shared/jumbotron/main.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+  }
+  div.form.card {
+    flex-direction: row;
   }
 }
 /* Large devices (desktops, 992px and up) */
