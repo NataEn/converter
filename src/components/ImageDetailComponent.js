@@ -77,7 +77,7 @@ class ImageDetail extends Component {
                   History
                 </ListGroupItemHeading>
                 <ListGroupItemText>
-                  <p>{this.props.image.notes}</p>
+                  <p className="text-justify">{this.props.image.notes}</p>
                 </ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
