@@ -21,7 +21,7 @@ export const updateRates = () => dispatch => {
       });
     })
     .catch(error => {
-      if (error.error.code === 104) {
+      if (error.error) {
         console.log(error);
         return;
       }

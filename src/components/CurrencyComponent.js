@@ -28,7 +28,7 @@ class Currency extends Component {
     let panel = {};
     panel = this.state.ConvertionPanel;
     this.state.ConvertionContainerArray.push(panel);
-    console.log(e);
+    //console.log(e);
   };
   deleteConvertingLine = index => {
     this.state.ConvertionContainerArray.slice(index + 1);
@@ -67,14 +67,10 @@ class Currency extends Component {
     this.setState({ changed: true });
   }
   handleSelectChange(value, name, country) {
-    console.log("from handleselectchange" + JSON.stringify(value));
-    console.log("from handleselectchange" + JSON.stringify(name));
-    console.log("from handleselectchange" + JSON.stringify(country));
     if (value !== null) {
       this.setState({ [name]: value });
       this.setState({ changed: true });
       this.setState({ toRateCountry: country.toLowerCase() });
-      console.log(`${this.state.toRateCountry}`);
     } else {
       this.setState({ [name]: undefined });
       this.setState({ changed: true });
