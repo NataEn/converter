@@ -101,21 +101,7 @@ class Main extends Component {
   componentWillMount() {
     if (this.state.requests !== 0) {
       this.props.updateRates();
-      // this.axios
-      //   .get("latest", {
-      //     params: {
-      //       access_key: `7213b9a7b8b59ce8e6087fe3ba8243c2`
-      //     }
-      //   })
-      //   .then(response => {
-      //     this.setState({ rates: response.data.rates });
-      //     this.setState({ ratesCurrencies: Object.keys(response.data.rates) });
-      //   })
-      //   .catch(error => {
-      //     if (error.error.code === 104) console.log(error);
-      //   });
       this.setState({ requests: this.state.requests - 1 });
-      console.log("from main" + this.props.ratesLastUpdate);
     }
   }
   currencyConvert(amount, fromRate, toRate) {
