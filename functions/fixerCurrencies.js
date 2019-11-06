@@ -1,8 +1,7 @@
 const axios = require("axios");
 
 exports.handler = function fixerCurrencies(event, context, callback) {
-  const endpoint =
-    "https://converter.nata.enkin.dev/.netlify/functions/fixerCurrencies";
+  const endpoint = "http://data.fixer.io/api/latest";
   const token = process.env.FIXER_ACCESS_TOKEN;
 
   axios
