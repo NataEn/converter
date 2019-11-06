@@ -1,0 +1,37 @@
+$billSize: 50px;
+
+.card-img-top {
+  max-width: $billSize;
+  /* max-height: 10vh !important; */
+  padding: none;
+  margin: auto auto;
+}
+
+$images: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+
+
+
+// @mixin fit_size($height, $width) {
+//   padding: none;
+//   margin: auto auto;
+//   @each $image in $images {
+//     .data-img-size{
+//       display: inline-block;
+//       font-family: "Icon Font";
+//     }
+//   @if $height == 30 {
+//     height: 10px;
+//     width: 30px;
+//   } @else if $height == 30 {
+//     height: 10px;
+//     width: 30px;
+//   } @else {
+//     height: 10px;
+//     width: 30px;
+//   }
+// }
+
+// .card-img-top {
+//   @include fit_size($height, $width);
+// }
+

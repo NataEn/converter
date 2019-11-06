@@ -5,9 +5,7 @@ import axios from "axios";
 //Action Creators for Manage Expense component
 export const updateRates = () => dispatch => {
   axios
-    .get(
-      "http://data.fixer.io/api/latest?access_key=7213b9a7b8b59ce8e6087fe3ba8243c2"
-    ) //https://converter.nata.enkin.dev/.netlify/functions/fixerCurrencies
+    .get("https://converter.nata.enkin.dev/.netlify/functions/fixerCurrencies")
     .then(response => {
       dispatch({
         type: ActionTypes.UPDATE_RATES,

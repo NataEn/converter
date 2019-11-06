@@ -14,7 +14,7 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
+    //console.log("Current State is: " + JSON.stringify(values));
     alert(
       values.firstname[0].toUpperCase() +
         values.firstname.slice(1) +

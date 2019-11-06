@@ -2,7 +2,7 @@
 body {
   font-family: "Rubik", sans-serif !important;
   line-height: 1;
-  min-width: 100%;
+  max-width: 99%;
 }
 
 .App {
@@ -119,9 +119,8 @@ div.conversion-answer {
   align-items: center;
 }
 
-div > img .bigBill {
-  max-width: 15em;
-  min-width: 5em;
+.card-img.bigBill {
+  width: 100%;
 }
 svg.smallBill {
   margin: 0px 0px !important;
@@ -140,15 +139,23 @@ svg.smallBill {
 
   box-shadow: 1px 2px 3px -3px rgba(109, 108, 105, 0.959) !important;
 }
+.card {
+  width: 100%;
+  height: 100%;
+}
 .card.smallBill:hover {
   border-color: hsl(0, 0%, 70%);
   border-radius: 4px !important;
   border-width: 1px;
 }
 .card-img-top {
-  width: 50% !important;
   padding: none;
-  margin: 3% auto;
+  margin: auto auto;
+  object-fit: contain;
+}
+.card-img-top[data-img-type="coin"] {
+  width: 50%;
+  height: 50%;
 }
 .imageattribute {
   font-size: 50%;
@@ -163,7 +170,6 @@ svg.smallBill {
   margin: 1% auto;
   padding: 1%;
   margin-top: 5%;
-  /* margin-bottom: 30%; */
 }
 .innerForm {
   margin: 1% auto;
@@ -175,6 +181,9 @@ svg.smallBill {
 }
 .footer {
   text-align: left;
+}
+.footer-xs {
+  padding: 5%;
 }
 
 .terms,
@@ -556,6 +565,9 @@ div.form.card {
     padding: auto;
     font-size: inherit;
   }
+  .card-img.bigBill {
+    width: 80% !important;
+  }
 }
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -591,9 +603,13 @@ div.form.card {
   .card-body {
     padding: 1rem !important;
   }
+  .card-img.bigBill {
+    width: 70% !important;
+  }
 }
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  body {
+  .card-img.bigBill {
+    width: 60% !important;
   }
 }

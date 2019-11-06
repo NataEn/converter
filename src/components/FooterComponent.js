@@ -30,7 +30,7 @@ class Footer extends Component {
             xs={12}
             sm={4}
             md={3}
-            className="d-flex flex-column justify-content-center"
+            className="d-flex flex-column justify-content-around"
           >
             <h4>Navigate</h4>
             <ul className="list-unstyled ">

@@ -25,9 +25,18 @@ import SelectLetter from "./SelectABCComponent";
 function RenderCurrencyImage({ image, letter, country }) {
   return (
     <Card>
-      <Link to={`/gallery/${letter}/${country}/${image.id}`}>
-        <CardImg top src={image.image_url_1} alt={image.image_alt_1} />
-        <CardTitle>{image.image_alt_1}</CardTitle>
+      <Link
+        className="d-flex flex-column justify-content-around"
+        to={`/gallery/${letter}/${country}/${image.id}`}
+      >
+        <CardImg
+          top
+          src={image.image_url_1}
+          alt={image.image_alt_1}
+          data-img-type={image.type}
+          className="flex-grow-1"
+        />
+        <CardTitle className="text-center">{image.image_alt_1}</CardTitle>
       </Link>
     </Card>
   );
