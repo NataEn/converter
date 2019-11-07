@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 
 class ImageDetail extends Component {
   render() {
-    console.log("from currency detail" + JSON.stringify(this.props.image));
     return (
       <div className="container">
         <Row>
