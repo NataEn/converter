@@ -1,7 +1,4 @@
 # Redirects from what the browser requests to what we serve
-/home              https://converter.nata.enkin.dev
-/gallery          https://converter.nata.enkin.dev/gallery
-/saving           https://converter.nata.enkin.dev/saving 
-/tripCalculator   https://converter.nata.enkin.dev/tripCalculator
-/manage           https://converter.nata.enkin.dev/manage 
+/*              /index.html  200
+
 
