@@ -1,4 +1,4 @@
-## Converter- Front-End react Application
+## Converter- Front-End React Application
 This is a React application with state managment done by Redux architecture. 
 
 ## Available Scripts
