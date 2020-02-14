@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Converter- Front-End react Application
+This is a React application with state managment done by Redux architecture. 
 
 ## Available Scripts
 
