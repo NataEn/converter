@@ -18,6 +18,9 @@ const { ExportCSVButton } = CSVExport;
 class RenderExpenseTable extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      table: [...props.expenseTable],
+    };
     this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
     this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
     this.handleCalculateExpensesSum = this.handleCalculateExpensesSum.bind(
@@ -32,9 +35,8 @@ class RenderExpenseTable extends Component {
       " "
     );
   }
-  handleResetTable() {
-    alert("to reset the table please refresh the page");
-    this.props.resetTable();
+  handleResetTable(table) {
+    this.setState({ table: table });
   }
   handleCalculateExpensesSum(newTable) {
     const sum = newTable.reduce((firstRow, secondRow) => ({
@@ -54,6 +56,11 @@ class RenderExpenseTable extends Component {
   }
 
   render() {
+    const table = [
+      { expense: "Flight", price: 10, date: "" },
+      { expense: "Housing", price: 10, date: "" },
+      { expense: "Food", price: 10, date: "" },
+    ];
     const columns = [
       {
         dataField: "expense",
@@ -84,8 +91,7 @@ class RenderExpenseTable extends Component {
       },
     ];
 
-    let expenseTable = this.props.expenseTable;
-    console.log(expenseTable);
+    let expenseTable = this.state.table;
 
     return (
       <Col xs={12} className="form">
@@ -109,13 +115,6 @@ class RenderExpenseTable extends Component {
                   className="btn bg-info text-light rounded"
                   onClick={() => {
                     this.handleSaveTable(props.baseProps.data);
-                    console.log(
-                      "data saved to local storage",
-                      props.baseProps.data
-                    );
-                    // return this.handleCalculateExpensesSum(
-                    //   props.baseProps.data
-                    // );
                   }}
                 >
                   <FontAwesomeIcon icon={faSave} /> <span>Save</span>
@@ -139,7 +138,7 @@ class RenderExpenseTable extends Component {
                 </Button>
                 <Button
                   className="btn bg-success text-light rounded"
-                  onClick={() => this.handleResetTable()}
+                  onClick={() => this.handleResetTable(table)}
                 >
                   <FontAwesomeIcon icon={faTrashRestoreAlt} />{" "}
                   <span>Reset</span>
