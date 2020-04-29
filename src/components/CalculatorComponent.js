@@ -9,7 +9,8 @@ import {
   faPlus,
   faCalculator,
   faTrashAlt,
-  faTrashRestoreAlt
+  faTrashRestoreAlt,
+  faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 const { ExportCSVButton } = CSVExport;
@@ -36,26 +37,31 @@ class RenderExpenseTable extends Component {
     this.props.resetTable();
   }
   handleCalculateExpensesSum(newTable) {
-    let sum = newTable.reduce((firstRow, secondRow) => ({
-      price: parseInt(firstRow.price) + parseInt(secondRow.price)
+    const sum = newTable.reduce((firstRow, secondRow) => ({
+      price: parseInt(firstRow.price) + parseInt(secondRow.price),
     }));
-    console.log("the sum is:" + sum.price);
     this.props.calculateExpensesSum(sum);
   }
   handleDeleteRowFromTable(row) {
-    console.log("row to delete:" + JSON.stringify(row));
     this.props.deleteRowFromTable(row);
+  }
+  handleSaveTable(dataArray) {
+    const tableDataToArray = dataArray.map(
+      (item) => `${item.expense}_${item.price}`
+    );
+    //save to localStorage
+    localStorage.setItem(`table`, JSON.stringify(tableDataToArray));
   }
 
   render() {
     const columns = [
       {
         dataField: "expense",
-        text: "Expense Name"
+        text: "Expense Name",
       },
       {
         dataField: "price",
-        text: "Expense Price"
+        text: "Expense Price",
       },
       {
         dataField: "databasePkey",
@@ -74,11 +80,12 @@ class RenderExpenseTable extends Component {
               </Button>
             );
           return null;
-        }
-      }
+        },
+      },
     ];
 
     let expenseTable = this.props.expenseTable;
+    console.log(expenseTable);
 
     return (
       <Col xs={12} className="form">
@@ -88,7 +95,7 @@ class RenderExpenseTable extends Component {
           columns={columns}
           exportCSV
         >
-          {props => (
+          {(props) => (
             <div>
               <div className="d-flex justify-content-around p-2">
                 <ExportCSVButton
@@ -98,11 +105,29 @@ class RenderExpenseTable extends Component {
                   <FontAwesomeIcon icon={faFileAlt} /> <span>Export CSV</span>
                 </ExportCSVButton>
                 <Button
+                  id="saveExpenses"
+                  className="btn bg-info text-light rounded"
+                  onClick={() => {
+                    this.handleSaveTable(props.baseProps.data);
+                    console.log(
+                      "data saved to local storage",
+                      props.baseProps.data
+                    );
+                    // return this.handleCalculateExpensesSum(
+                    //   props.baseProps.data
+                    // );
+                  }}
+                >
+                  <FontAwesomeIcon icon={faSave} /> <span>Save</span>
+                </Button>
+                <Button
                   id="calculateExpensesSum"
                   className="btn bg-success text-light rounded"
-                  onClick={() =>
-                    this.handleCalculateExpensesSum(props.baseProps.data)
-                  }
+                  onClick={() => {
+                    return this.handleCalculateExpensesSum(
+                      props.baseProps.data
+                    );
+                  }}
                 >
                   <FontAwesomeIcon icon={faCalculator} /> <span>Calculate</span>
                 </Button>{" "}
@@ -141,7 +166,7 @@ class RenderExpenseTable extends Component {
                   },
                   afterSaveCell: (oldValue, newValue, row, column) => {
                     document.getElementById("calculateExpensesSum").click();
-                  }
+                  },
                 })}
               />
             </div>
@@ -151,7 +176,7 @@ class RenderExpenseTable extends Component {
     );
   }
 }
-const Calculator = props => {
+const Calculator = (props) => {
   return (
     <div className="container">
       <h1>Trip Calculator</h1>
