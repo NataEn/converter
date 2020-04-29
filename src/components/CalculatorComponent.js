@@ -18,9 +18,9 @@ const { ExportCSVButton } = CSVExport;
 class RenderExpenseTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      table: [...props.expenseTable],
-    };
+    // this.state = {
+    //   table: [...props.expenseTable],
+    // };
     this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
     this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
     this.handleCalculateExpensesSum = this.handleCalculateExpensesSum.bind(
@@ -91,7 +91,7 @@ class RenderExpenseTable extends Component {
       },
     ];
 
-    let expenseTable = this.state.table;
+    let expenseTable = this.props.expenseTable;
 
     return (
       <Col xs={12} className="form">
@@ -136,13 +136,13 @@ class RenderExpenseTable extends Component {
                 >
                   <FontAwesomeIcon icon={faPlus} /> <span>Add Row</span>
                 </Button>
-                <Button
+                {/* <Button
                   className="btn bg-success text-light rounded"
                   onClick={() => this.handleResetTable(table)}
                 >
                   <FontAwesomeIcon icon={faTrashRestoreAlt} />{" "}
                   <span>Reset</span>
-                </Button>
+                </Button> */}
               </div>
               <BootstrapTable
                 wrapperClasses="table-responsive"
