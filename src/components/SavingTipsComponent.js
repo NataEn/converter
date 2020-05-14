@@ -15,21 +15,22 @@ import {
   CardFooter,
   Toast,
   ToastHeader,
-  ToastBody
+  ToastBody,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
-const required = val => val && val.length;
-const maxLength = len => val => !val || val.length <= len;
-const minLength = len => val => val && val.length >= len;
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !val || val.length <= len;
+const minLength = (len) => (val) => val && val.length >= len;
 
 function RenderTip({ tips, addTip }) {
   if (tips != null) {
     return (
-      <React.Fragment>
-        {tips.map(tip => {
+      <>
+        {tips.map((tip) => {
+          console.log("got tip:", tip);
           return (
-            <Col xs={12} md={6} lg={4} className="p-4">
+            <Col xs={12} md={6} lg={4} className="p-4" key={tip.id}>
               <div className="bg-info rounded d-flex justify-content-center">
                 <Toast className="p-2 m-2 rounded">
                   <ToastHeader
@@ -48,14 +49,7 @@ function RenderTip({ tips, addTip }) {
           );
         })}
         <TipForm addTip={addTip} />
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <div>
-        <h4>No Tips Available</h4>
-        <TipForm addTip={addTip} />
-      </div>
+      </>
     );
   }
 } //end of RenderTip function-component
@@ -64,7 +58,7 @@ class TipForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalOpen: false
+      isModalOpen: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmitTip = this.handleSubmitTip.bind(this);
@@ -73,8 +67,9 @@ class TipForm extends Component {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
   handleSubmitTip(values) {
+    debugger;
     this.toggleModal();
-    this.props.addTip(values.author, values.tip);
+    this.props.addTip(values);
   }
   render() {
     return (
@@ -94,7 +89,7 @@ class TipForm extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Share Your Tips</ModalHeader>
           <ModalBody>
-            <LocalForm onSubmit={values => this.handleSubmitTip(values)}>
+            <LocalForm onSubmit={(values) => this.handleSubmitTip(values)}>
               <Row className="form-group">
                 <Col md={10}>
                   <Control.text
@@ -106,7 +101,7 @@ class TipForm extends Component {
                     validators={{
                       required,
                       maxLength: maxLength(10),
-                      minLength: minLength(3)
+                      minLength: minLength(3),
                     }}
                   />
                   <Errors
@@ -116,7 +111,7 @@ class TipForm extends Component {
                     messages={{
                       required: "please state your name",
                       minLength: " name should be greater then 3",
-                      maxLength: " name should be less then 10 "
+                      maxLength: " name should be less then 10 ",
                     }}
                   />
                 </Col>
@@ -124,9 +119,9 @@ class TipForm extends Component {
               <Row className="form-group">
                 <Col md={10}>
                   <Control.textarea
-                    model=".tip-title"
-                    id="tip-title"
-                    name="tip-title"
+                    model=".title"
+                    id="title"
+                    name="title"
                     row="1"
                     className="form-control"
                     placeholder="Title . . ."
@@ -158,7 +153,7 @@ class TipForm extends Component {
   }
 }
 
-const SavingTips = props => {
+const SavingTips = (props) => {
   return (
     <div className="container-fluid">
       <h1>Saving Tips</h1>

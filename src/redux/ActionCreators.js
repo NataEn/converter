@@ -3,20 +3,20 @@ import { EXPENSES_0 } from "../shared/ExpenseDatadestructured";
 import axios from "axios";
 
 //Action Creators for Manage Expense component
-export const updateRates = () => dispatch => {
+export const updateRates = () => (dispatch) => {
   axios
     .get("https://converter.nata.enkin.dev/.netlify/functions/fixerCurrencies")
-    .then(response => {
+    .then((response) => {
       dispatch({
         type: ActionTypes.UPDATE_RATES,
         payload: {
           rates: response.data.rates,
           ratesCurrencies: Object.keys(response.data.rates),
-          ratesLastUpdate: response.data.date
-        }
+          ratesLastUpdate: response.data.date,
+        },
       });
     })
-    .catch(error => {
+    .catch((error) => {
       if (error.error) {
         console.log(error);
         return;
@@ -24,22 +24,22 @@ export const updateRates = () => dispatch => {
     });
 };
 
-export const fetchExpenses = () => dispatch => {
+export const fetchExpenses = () => (dispatch) => {
   dispatch(expensesLoading(true));
   setTimeout(() => {
     dispatch(addExpenses(EXPENSES_0));
   }, 2000);
 };
 export const expensesLoading = () => ({
-  type: ActionTypes.EXPENSES_LOADING
+  type: ActionTypes.EXPENSES_LOADING,
 });
-export const expensesLoadingFailed = errmess => ({
+export const expensesLoadingFailed = (errmess) => ({
   type: ActionTypes.EXPENSES_LOADING_FAILED,
-  payload: errmess
+  payload: errmess,
 });
-export const addExpenses = expenses_0 => ({
+export const addExpenses = (expenses_0) => ({
   type: ActionTypes.ADD_EXPENSES,
-  payload: expenses_0
+  payload: expenses_0,
 });
 export const addExpense = (
   tableName,
@@ -56,15 +56,15 @@ export const addExpense = (
     amount_planned: amount_planned,
     currency: currency,
     amount_spend: amount_spend,
-    notes: notes
-  }
+    notes: notes,
+  },
 });
 export const addTable = (tableName, budget) => ({
   type: ActionTypes.ADD_EXPENSE_TABLE,
   payload: {
     tableName: tableName,
-    budget: budget
-  }
+    budget: budget,
+  },
 });
 
 //Action Creators for Calculator component
@@ -72,41 +72,42 @@ export const addRowToTable = (expense, price) => ({
   type: ActionTypes.ADD_ROW_TO_TABLE,
   payload: {
     expense: expense,
-    price: price
-  }
+    price: price,
+  },
 });
-export const deleteRowFromTable = rowExpense => ({
+export const deleteRowFromTable = (rowExpense) => ({
   type: ActionTypes.DELETE_ROW_FROM_TABLE,
   payload: {
-    rowExpense: rowExpense
-  }
+    rowExpense: rowExpense,
+  },
 });
 export const resetTable = () => ({
-  type: ActionTypes.RESET_TABLE
+  type: ActionTypes.RESET_TABLE,
 });
-export const editExpenseTable = newTable => ({
+export const editExpenseTable = (newTable) => ({
   type: ActionTypes.EDIT_EXPENSE_TABLE,
   payload: {
-    newTable: newTable
-  }
+    newTable: newTable,
+  },
 });
-export const calculateExpensesSum = newSum => ({
+export const calculateExpensesSum = (newSum) => ({
   type: ActionTypes.CALCULATE_EXPENSES_SUM,
   payload: {
-    newSum: newSum
-  }
+    newSum: newSum,
+  },
 });
 
 //Action Creators for Saving Tips component
-export const addTip = (author, tip) => ({
+export const addTip = (values) => ({
   type: ActionTypes.ADD_TIP,
   payload: {
-    author: author,
-    tip: tip
-  }
+    author: values.name,
+    title: values.title,
+    tip: values.tip,
+  },
 });
 //Action Creators for Contact component
-export const addFeedback = message => ({
+export const addFeedback = (message) => ({
   type: ActionTypes.ADD_FEEDBACK,
-  payload: message
+  payload: message,
 });

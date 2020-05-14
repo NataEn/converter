@@ -79,10 +79,9 @@ const mapDispatchToProps = (dispatch) => ({
   updateRates: () => dispatch(updateRates()),
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
   deleteRowFromTable: (row) => dispatch(deleteRowFromTable(row)),
-  resetTable: () => dispatch(resetTable()),
   editExpenseTable: (newTable) => dispatch(editExpenseTable(newTable)),
   calculateExpensesSum: (newSum) => dispatch(calculateExpensesSum(newSum)),
-  addTip: (author, tip) => dispatch(addTip(author, tip)),
+  addTip: (values) => dispatch(addTip(values)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
