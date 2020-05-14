@@ -18,9 +18,9 @@ const { ExportCSVButton } = CSVExport;
 class RenderExpenseTable extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   table: [...props.expenseTable],
-    // };
+    this.state = {
+      table: [...props.expenseTable],
+    };
     this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
     this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
     this.handleCalculateExpensesSum = this.handleCalculateExpensesSum.bind(
@@ -29,15 +29,16 @@ class RenderExpenseTable extends Component {
   }
   handleAddRowToTable() {
     this.props.addRowToTable(
-      <span style={{ display: "none" }}>
-        this.props.expenseTable.length + 1
+      <span
+        style={{ display: "none" }}
+        key={this.props.expenseTable.length + 1}
+      >
+        {/* this.props.expenseTable.length + 1 */}
       </span>,
       " "
     );
   }
-  handleResetTable(table) {
-    this.setState({ table: table });
-  }
+
   handleCalculateExpensesSum(newTable) {
     const sum = newTable.reduce((firstRow, secondRow) => ({
       price: parseInt(firstRow.price) + parseInt(secondRow.price),
@@ -56,11 +57,6 @@ class RenderExpenseTable extends Component {
   }
 
   render() {
-    const table = [
-      { expense: "Flight", price: 10, date: "" },
-      { expense: "Housing", price: 10, date: "" },
-      { expense: "Food", price: 10, date: "" },
-    ];
     const columns = [
       {
         dataField: "expense",
@@ -91,7 +87,8 @@ class RenderExpenseTable extends Component {
       },
     ];
 
-    let expenseTable = this.props.expenseTable;
+    const expenseTable = this.props.expenseTable;
+    const updateExpenseTable = this.props.editEepenseTable;
 
     return (
       <Col xs={12} className="form">
@@ -123,9 +120,11 @@ class RenderExpenseTable extends Component {
                   id="calculateExpensesSum"
                   className="btn bg-success text-light rounded"
                   onClick={() => {
-                    return this.handleCalculateExpensesSum(
+                    debugger;
+                    const sum = this.handleCalculateExpensesSum(
                       props.baseProps.data
                     );
+                    return sum;
                   }}
                 >
                   <FontAwesomeIcon icon={faCalculator} /> <span>Calculate</span>
@@ -155,15 +154,17 @@ class RenderExpenseTable extends Component {
                 cellEdit={cellEditFactory({
                   mode: "click",
                   beforeSaveCell: (oldValue, newValue, row, column) => {
-                    if (isNaN(Number(newValue))) {
+                    if (column.dataField === "price" && newValue !== newValue) {
                       alert(
                         "You entered " +
                           newValue +
                           " Please Enter numbers Only!!"
                       );
                     }
+                    document.getElementById("calculateExpensesSum").click();
                   },
                   afterSaveCell: (oldValue, newValue, row, column) => {
+                    debugger;
                     document.getElementById("calculateExpensesSum").click();
                   },
                 })}
@@ -194,7 +195,6 @@ const Calculator = (props) => {
           expenseTable={props.expenseTable}
           addRowToTable={props.addRowToTable}
           deleteRowFromTable={props.deleteRowFromTable}
-          resetTable={props.resetTable}
           calculateExpensesSum={props.calculateExpensesSum}
           editEepenseTable={props.editEepenseTable}
         />

@@ -28,12 +28,12 @@ import {
   resetTable,
   addTip,
   editExpenseTable,
-  calculateExpensesSum
+  calculateExpensesSum,
 } from "../redux/ActionCreators";
 
 // mapping redux-store state to props that are passed down to the components, using mapStateToStore function:
 
-const mapStateToStore = state => {
+const mapStateToStore = (state) => {
   return {
     rates: state.initialRates.rates,
     ratesCurrencies: state.initialRates.ratesCurrencies,
@@ -46,12 +46,12 @@ const mapStateToStore = state => {
     expenses_tables: state.expenses_tables,
     tips: state.tips,
     expenseTable: state.expenseTable,
-    expensesSum: state.expensesSum
+    expensesSum: state.expensesSum,
   };
 };
 
 //recieves the dispatch as one of the parameters from the dispatch function in the store
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   //commented Props are related to ManageExpenseComponent that is still in production
   /*fetchExpenses: () => {
       dispatch(fetchExpenses());
@@ -78,21 +78,21 @@ const mapDispatchToProps = dispatch => ({
   addTable: (tableName, budget) => dispatch(addTable(tableName, budget)),*/
   updateRates: () => dispatch(updateRates()),
   addRowToTable: (expense, price) => dispatch(addRowToTable(expense, price)),
-  deleteRowFromTable: row => dispatch(deleteRowFromTable(row)),
+  deleteRowFromTable: (row) => dispatch(deleteRowFromTable(row)),
   resetTable: () => dispatch(resetTable()),
-  editExpenseTable: newTable => dispatch(editExpenseTable(newTable)),
-  calculateExpensesSum: newSum => dispatch(calculateExpensesSum(newSum)),
+  editExpenseTable: (newTable) => dispatch(editExpenseTable(newTable)),
+  calculateExpensesSum: (newSum) => dispatch(calculateExpensesSum(newSum)),
   addTip: (author, tip) => dispatch(addTip(author, tip)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
-  }
+  },
 });
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requests: 2
+      requests: 2,
     };
     this.currencyConvert = this.currencyConvert.bind(this);
     this.GalleryImage = this.GalleryImage.bind(this);
@@ -123,7 +123,7 @@ class Main extends Component {
     let selectedCountry = match.params.country;
     let selectedImage = this.props.images[selectedLetter][
       selectedCountry
-    ].filter(image => parseInt(match.params.id, 10) === image.id);
+    ].filter((image) => parseInt(match.params.id, 10) === image.id);
     return (
       <ImageDetail
         key={match.params.country + parseInt(match.params.id, 10)}
@@ -245,8 +245,6 @@ class Main extends Component {
                     />
                   )}
                 />
-
-                {/* had som problemms with  <Redirect to="/home" /> */}
               </Switch>
             </Col>
           </Col>
@@ -258,9 +256,4 @@ class Main extends Component {
     );
   }
 }
-export default withRouter(
-  connect(
-    mapStateToStore,
-    mapDispatchToProps
-  )(Main)
-);
+export default withRouter(connect(mapStateToStore, mapDispatchToProps)(Main));
