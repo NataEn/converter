@@ -20,6 +20,7 @@ class RenderExpenseTable extends Component {
     super(props);
     this.state = {
       table: [...props.expenseTable],
+      editTable: props.editEepenseTable,
     };
     this.handleAddRowToTable = this.handleAddRowToTable.bind(this);
     this.handleDeleteRowFromTable = this.handleDeleteRowFromTable.bind(this);
@@ -65,6 +66,15 @@ class RenderExpenseTable extends Component {
       {
         dataField: "price",
         text: "Expense Price",
+        validator: (newValue, row, column) => {
+          if (isNaN(newValue)) {
+            return {
+              valid: false,
+              message: "Price should be numeric",
+            };
+          }
+          return true;
+        },
       },
       {
         dataField: "databasePkey",
@@ -88,7 +98,8 @@ class RenderExpenseTable extends Component {
     ];
 
     const expenseTable = this.props.expenseTable;
-    const updateExpenseTable = this.props.editEepenseTable;
+    const updateExpenseTable = this.props.editExpenseTable;
+    console.log(updateExpenseTable);
 
     return (
       <Col xs={12} className="form">
@@ -151,23 +162,28 @@ class RenderExpenseTable extends Component {
                 data={expenseTable}
                 table-condensed={true}
                 columns={columns}
-                cellEdit={cellEditFactory({
-                  mode: "click",
-                  beforeSaveCell: (oldValue, newValue, row, column) => {
-                    if (column.dataField === "price" && newValue !== newValue) {
-                      alert(
-                        "You entered " +
-                          newValue +
-                          " Please Enter numbers Only!!"
-                      );
-                    }
-                    document.getElementById("calculateExpensesSum").click();
-                  },
-                  afterSaveCell: (oldValue, newValue, row, column) => {
-                    debugger;
-                    document.getElementById("calculateExpensesSum").click();
-                  },
-                })}
+                // cellEdit={cellEditFactory({
+                //   mode: "click",
+                //   beforeSaveCell: (oldValue, newValue, row, column) => {
+                //     const newTable = expenseTable.map((item) => {
+                //       debugger;
+                //       if (
+                //         item.expense === row.expense &&
+                //         item.price === row.price
+                //       ) {
+                //         item[column.dataField] = newValue;
+                //         return item;
+                //       }
+                //       return item;
+                //     });
+
+                //     updateExpenseTable(newTable);
+                //   },
+                //   afterSaveCell: (oldValue, newValue, row, column) => {
+                //     document.getElementById("calculateExpensesSum").click();
+                //   },
+                // })}
+                cellEdit={cellEditFactory({ mode: "click" })}
               />
             </div>
           )}
@@ -196,7 +212,7 @@ const Calculator = (props) => {
           addRowToTable={props.addRowToTable}
           deleteRowFromTable={props.deleteRowFromTable}
           calculateExpensesSum={props.calculateExpensesSum}
-          editEepenseTable={props.editEepenseTable}
+          editExpenseTable={props.editExpenseTable}
         />
         <Col className="col-auto d-block mx-auto">
           <div className="bg-warning mx-auto p-2 rounded">

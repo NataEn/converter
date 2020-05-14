@@ -10,10 +10,10 @@ export const ExpenseTable = (state = EXPENSE_TABLE, action) => {
       return state.concat(expense);
     case ActionTypes.DELETE_ROW_FROM_TABLE:
       var rowExpense = action.payload.rowExpense;
-      return state.filter(row => row.expense !== rowExpense);
+      return state.filter((row) => row.expense !== rowExpense);
     case ActionTypes.EDIT_EXPENSE_TABLE:
       var newTable = action.payload.newTable;
-      return state.concat(newTable);
+      return newTable;
     case ActionTypes.RESET_TABLE:
       return state;
     default:
