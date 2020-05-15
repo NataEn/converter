@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import reliefImage from "../images/relief.jpg";
 import {
   ListGroup,
   ListGroupItem,
@@ -334,11 +335,14 @@ const SavingTips = (props) => {
               >
                 Enjoy Your Vacation! You Earned It!
               </ListGroupItemHeading>
-              <Col xs={12}>
+              <Col
+                xs={12}
+                className="d-flex justify-content-center align-items-center"
+              >
                 <img
-                  src="https://images.pexels.com/photos/1537168/pexels-photo-1537168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  width="100%"
-                  alt="relief_image"
+                  src={reliefImage}
+                  width="80%"
+                  alt="relief image by Radu Florin on Unsplash"
                   class="img-fluid rounded float-left mr-2"
                 />
               </Col>
