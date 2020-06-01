@@ -62,10 +62,12 @@ class RenderExpenseTable extends Component {
       {
         dataField: "expense",
         text: "Expense Name",
+        keyField: "id",
       },
       {
         dataField: "price",
         text: "Expense Price",
+        keyField: "id",
         validator: (newValue, row, column) => {
           if (isNaN(newValue)) {
             return {
@@ -80,6 +82,7 @@ class RenderExpenseTable extends Component {
         dataField: "databasePkey",
         text: "",
         editable: false,
+        keyField: "id",
         formatter: (cell, row) => {
           if (row)
             return (
@@ -162,28 +165,28 @@ class RenderExpenseTable extends Component {
                 data={expenseTable}
                 table-condensed={true}
                 columns={columns}
-                // cellEdit={cellEditFactory({
-                //   mode: "click",
-                //   beforeSaveCell: (oldValue, newValue, row, column) => {
-                //     const newTable = expenseTable.map((item) => {
-                //       debugger;
-                //       if (
-                //         item.expense === row.expense &&
-                //         item.price === row.price
-                //       ) {
-                //         item[column.dataField] = newValue;
-                //         return item;
-                //       }
-                //       return item;
-                //     });
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  beforeSaveCell: (oldValue, newValue, row, column) => {
+                    const newTable = expenseTable.map((item) => {
+                      debugger;
+                      if (
+                        item.expense === row.expense &&
+                        item.price === row.price
+                      ) {
+                        item[column.dataField] = newValue;
+                        return item;
+                      }
+                      return item;
+                    });
 
-                //     updateExpenseTable(newTable);
-                //   },
-                //   afterSaveCell: (oldValue, newValue, row, column) => {
-                //     document.getElementById("calculateExpensesSum").click();
-                //   },
-                // })}
-                cellEdit={cellEditFactory({ mode: "click" })}
+                    updateExpenseTable(newTable);
+                  },
+                  afterSaveCell: (oldValue, newValue, row, column) => {
+                    document.getElementById("calculateExpensesSum").click();
+                  },
+                })}
+                // cellEdit={cellEditFactory({ mode: "click" })}
               />
             </div>
           )}
