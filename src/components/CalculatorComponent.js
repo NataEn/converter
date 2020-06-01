@@ -29,15 +29,7 @@ class RenderExpenseTable extends Component {
     );
   }
   handleAddRowToTable() {
-    this.props.addRowToTable(
-      <span
-        style={{ display: "none" }}
-        key={this.props.expenseTable.length + 1}
-      >
-        {/* this.props.expenseTable.length + 1 */}
-      </span>,
-      " "
-    );
+    this.props.addRowToTable();
   }
 
   handleCalculateExpensesSum(newTable) {
@@ -89,7 +81,8 @@ class RenderExpenseTable extends Component {
               <Button
                 className="btn btn-danger btn-xs border-secondary rounded"
                 onClick={() => {
-                  this.handleDeleteRowFromTable(row.expense);
+                  debugger;
+                  this.handleDeleteRowFromTable(row.id);
                 }}
               >
                 <FontAwesomeIcon icon={faTrashAlt} /> <span>Delete Row</span>
@@ -134,7 +127,6 @@ class RenderExpenseTable extends Component {
                   id="calculateExpensesSum"
                   className="btn bg-success text-light rounded"
                   onClick={() => {
-                    debugger;
                     const sum = this.handleCalculateExpensesSum(
                       props.baseProps.data
                     );

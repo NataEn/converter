@@ -2,6 +2,7 @@ import { EXPENSE_TABLE, SUM } from "../shared/ExpenseTableData";
 import * as ActionTypes from "./ActionTypes";
 
 export const ExpenseTable = (state = EXPENSE_TABLE, action) => {
+  debugger;
   switch (action.type) {
     case ActionTypes.ADD_ROW_TO_TABLE:
       var expense = action.payload;
@@ -9,8 +10,8 @@ export const ExpenseTable = (state = EXPENSE_TABLE, action) => {
       expense.date = new Date().toISOString();
       return state.concat(expense);
     case ActionTypes.DELETE_ROW_FROM_TABLE:
-      var rowExpense = action.payload.rowExpense;
-      return state.filter((row) => row.expense !== rowExpense);
+      var expenseId = action.payload.expenseId;
+      return state.filter((row) => row.id !== expenseId);
     case ActionTypes.EDIT_EXPENSE_TABLE:
       var newTable = action.payload.newTable;
       return newTable;

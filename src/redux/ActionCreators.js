@@ -68,17 +68,17 @@ export const addTable = (tableName, budget) => ({
 });
 
 //Action Creators for Calculator component
-export const addRowToTable = (expense, price) => ({
+export const addRowToTable = (expense = "edit name...", price = 0) => ({
   type: ActionTypes.ADD_ROW_TO_TABLE,
   payload: {
     expense: expense,
     price: price,
   },
 });
-export const deleteRowFromTable = (rowExpense) => ({
+export const deleteRowFromTable = (expenseId) => ({
   type: ActionTypes.DELETE_ROW_FROM_TABLE,
   payload: {
-    rowExpense: rowExpense,
+    expenseId: expenseId,
   },
 });
 export const resetTable = () => ({
