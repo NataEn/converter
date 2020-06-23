@@ -48,7 +48,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -68,6 +70,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",
     "file-loader": "^4.2.0",
+    "gh-pages": "^3.1.0",
     "react-social-icons": "^4.1.0"
   }
 }
